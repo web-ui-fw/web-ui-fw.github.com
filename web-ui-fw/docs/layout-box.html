@@ -1,0 +1,141 @@
+<!DOCTYPE html>  <html> <head>   <title>layout-box.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               layout-box.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm"> * jQuery Mobile Widget @VERSION</span>
+<span class="cm"> *</span>
+<span class="cm"> * This software is licensed under the MIT licence (as defined by the OSI at</span>
+<span class="cm"> * http://www.opensource.org/licenses/mit-license.php)</span>
+<span class="cm"> * </span>
+<span class="cm"> * ***************************************************************************</span>
+<span class="cm"> * Copyright (C) 2011 by Intel Corporation Ltd.</span>
+<span class="cm"> * </span>
+<span class="cm"> * Permission is hereby granted, free of charge, to any person obtaining a</span>
+<span class="cm"> * copy of this software and associated documentation files (the &quot;Software&quot;),</span>
+<span class="cm"> * to deal in the Software without restriction, including without limitation</span>
+<span class="cm"> * the rights to use, copy, modify, merge, publish, distribute, sublicense,</span>
+<span class="cm"> * and/or sell copies of the Software, and to permit persons to whom the</span>
+<span class="cm"> * Software is furnished to do so, subject to the following conditions:</span>
+<span class="cm"> * </span>
+<span class="cm"> * The above copyright notice and this permission notice shall be included in</span>
+<span class="cm"> * all copies or substantial portions of the Software.</span>
+<span class="cm"> * </span>
+<span class="cm"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="cm"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="cm"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="cm"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="cm"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING</span>
+<span class="cm"> * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER</span>
+<span class="cm"> * DEALINGS IN THE SOFTWARE.</span>
+<span class="cm"> * ***************************************************************************</span>
+<span class="cm"> *</span>
+<span class="cm"> * Authors: Elliot Smith &lt;elliot.smith@intel.com&gt;</span>
+<span class="cm"> */</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Horizontal/vertical box layout extension.</p>
+
+<p>This will arrange the child elements of a container in a horizontal
+or vertical row. This only makes sense if your container is a div
+and contains children which are also divs; the children should
+also have a height and width set in CSS, otherwise the layout
+manager won't know what to do with them.</p>
+
+<p>Apply it by setting data-layout="hbox" or data-layout="vbox" (vertical
+on a container element or calling $(element).layouthbox() or
+$(element).layoutvbox().</p>
+
+<p>Usually, you would use a div as the container to get the right effect
+(an element with display:block).</p>
+
+<p>Options can be set programmatically:</p>
+
+<p>$(element).layouthbox('option', 'scrollable', false)
+  $(element).layoutvbox('option', 'scrollable', false)</p>
+
+<p>or via a data-layout-options attribute on the container:</p>
+
+<p><div data-layout="hbox" data-layout-options='{"hgap":5}'>
+      <div>child 1</div>
+      <div>child 2</div>
+  </div></p>
+
+<p><div data-layout="vbox" data-layout-options='{"vgap":5}'>
+      <div>child 1</div>
+      <div>child 2</div>
+  </div></p>
+
+<p>If you change any options after creating the widget, call
+$(element).layout*box('refresh') to have them picked up.
+However, note that it's currently not feasible to turn off scrolling
+once it's on (as calling scrollview('destroy') doesn't remove the
+scrollview custom mouse handlers).</p>
+
+<p>There is one major difference between the horizontal and
+vertical box layouts: if scrollable=false, the horizontal layout
+will clip children which overflow the edge of the parent container;
+by comparison, the vertical container will grow vertically to
+accommodate the height of its children. This mirrors the behaviour
+of jQuery Mobile, where elements only ever expand horizontally
+to fill the width of the window; but will expand vertically forever,
+unless the page height is artificially constrained.</p>
+
+<p>Options:</p>
+
+<p>{Integer} hgap (default=0)
+  Horizontal gap (in pixels) between the child elements. Only has
+  an effect on hbox.</p>
+
+<p>{Integer} vgap (default=0)
+  Vertical gap (in pixels) between the child elements. Only has
+  an effect on vbox.</p>
+
+<p>{Boolean} scrollable (default=true; can only be set at create time)
+  Set to true to enable a scrollview on the
+  container. If false, children will be clipped if
+  they fall outside the edges of the container after
+  layouting.</p>
+
+<p>{Boolean} showScrollBars (default=true)
+  Set to false to hide scrollbars on the container's scrollview.
+  Has no effect is scrollable=false</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>hbox</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">widget</span><span class="p">(</span><span class="s2">&quot;todons.layouthbox&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">jlayoutadaptor</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">fixed</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;flexGrid&#39;</span><span class="p">,</span>
+        <span class="nx">rows</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>
+        <span class="nx">initSelector</span><span class="o">:</span> <span class="s1">&#39;:jqmData(layout=&quot;hbox&quot;)&#39;</span>
+    <span class="p">},</span>
+
+    <span class="nx">_create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">hgap</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">hgap</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">jlayoutadaptor</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_create</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;pagecreate&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">layouthbox</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">fixed</span><span class="p">.</span><span class="nx">initSelector</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">not</span><span class="p">(</span><span class="s2">&quot;:jqmData(role=&#39;none&#39;), :jqmData(role=&#39;nojs&#39;)&quot;</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">layouthbox</span><span class="p">();</span>
+<span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>vbox</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">widget</span><span class="p">(</span><span class="s2">&quot;todons.layoutvbox&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">jlayoutadaptor</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">fixed</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;flexGrid&#39;</span><span class="p">,</span>
+        <span class="nx">columns</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">direction</span><span class="o">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+        <span class="nx">initSelector</span><span class="o">:</span> <span class="s1">&#39;:jqmData(layout=&quot;vbox&quot;)&#39;</span>
+    <span class="p">},</span>
+
+    <span class="nx">_create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">vgap</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">vgap</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">jlayoutadaptor</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_create</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;pagecreate&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">layoutvbox</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">fixed</span><span class="p">.</span><span class="nx">initSelector</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">not</span><span class="p">(</span><span class="s2">&quot;:jqmData(role=&#39;none&#39;), :jqmData(role=&#39;nojs&#39;)&quot;</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">layoutvbox</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>  <html> <head>   <title>range.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               range.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm"> *</span>
+<span class="cm"> * This software is licensed under the MIT licence (as defined by the OSI at</span>
+<span class="cm"> * http://www.opensource.org/licenses/mit-license.php)</span>
+<span class="cm"> * </span>
+<span class="cm"> * ***************************************************************************</span>
+<span class="cm"> * Copyright (C) 2011 by Intel Corporation Ltd.</span>
+<span class="cm"> * </span>
+<span class="cm"> * Permission is hereby granted, free of charge, to any person obtaining a</span>
+<span class="cm"> * copy of this software and associated documentation files (the &quot;Software&quot;),</span>
+<span class="cm"> * to deal in the Software without restriction, including without limitation</span>
+<span class="cm"> * the rights to use, copy, modify, merge, publish, distribute, sublicense,</span>
+<span class="cm"> * and/or sell copies of the Software, and to permit persons to whom the</span>
+<span class="cm"> * Software is furnished to do so, subject to the following conditions:</span>
+<span class="cm"> * </span>
+<span class="cm"> * The above copyright notice and this permission notice shall be included in</span>
+<span class="cm"> * all copies or substantial portions of the Software.</span>
+<span class="cm"> * </span>
+<span class="cm"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="cm"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="cm"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="cm"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="cm"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING</span>
+<span class="cm"> * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER</span>
+<span class="cm"> * DEALINGS IN THE SOFTWARE.</span>
+<span class="cm"> * ***************************************************************************</span>
+<span class="cm"> */</span>
+
+<span class="kd">function</span> <span class="nx">range</span> <span class="p">(</span><span class="nx">low</span><span class="p">,</span> <span class="nx">high</span><span class="p">,</span> <span class="nx">step</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Create an array containing the range of integers or characters
+from low to high (inclusive)  </p>
+
+<p>version: 1107.2516
+discuss at: http://phpjs.org/functions/range
++   original by: Waldo Malqui Silva
+*     example 1: range ( 0, 12 );
+*     returns 1: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+*     example 2: range( 0, 100, 10 );
+*     returns 2: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+*     example 3: range( 'a', 'i' );
+*     returns 3: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i']
+*     example 4: range( 'c', 'a' );
+*     returns 4: ['c', 'b', 'a']</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="kd">var</span> <span class="nx">matrix</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">var</span> <span class="nx">inival</span><span class="p">,</span> <span class="nx">endval</span><span class="p">,</span> <span class="nx">plus</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">walker</span> <span class="o">=</span> <span class="nx">step</span> <span class="o">||</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">chars</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+ 
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">low</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">high</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">inival</span> <span class="o">=</span> <span class="nx">low</span><span class="p">;</span>
+        <span class="nx">endval</span> <span class="o">=</span> <span class="nx">high</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">low</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nb">isNaN</span><span class="p">(</span><span class="nx">high</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">chars</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="nx">inival</span> <span class="o">=</span> <span class="nx">low</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="nx">endval</span> <span class="o">=</span> <span class="nx">high</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">inival</span> <span class="o">=</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">low</span><span class="p">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="nx">low</span><span class="p">);</span>
+        <span class="nx">endval</span> <span class="o">=</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">high</span><span class="p">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="nx">high</span><span class="p">);</span>
+    <span class="p">}</span>
+ 
+    <span class="nx">plus</span> <span class="o">=</span> <span class="p">((</span><span class="nx">inival</span> <span class="o">&gt;</span> <span class="nx">endval</span><span class="p">)</span> <span class="o">?</span> <span class="kc">false</span> <span class="o">:</span> <span class="kc">true</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">plus</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nx">inival</span> <span class="o">&lt;=</span> <span class="nx">endval</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">matrix</span><span class="p">.</span><span class="nx">push</span><span class="p">(((</span><span class="nx">chars</span><span class="p">)</span> <span class="o">?</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">inival</span><span class="p">)</span> <span class="o">:</span> <span class="nx">inival</span><span class="p">));</span>
+            <span class="nx">inival</span> <span class="o">+=</span> <span class="nx">walker</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nx">inival</span> <span class="o">&gt;=</span> <span class="nx">endval</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">matrix</span><span class="p">.</span><span class="nx">push</span><span class="p">(((</span><span class="nx">chars</span><span class="p">)</span> <span class="o">?</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span><span class="p">(</span><span class="nx">inival</span><span class="p">)</span> <span class="o">:</span> <span class="nx">inival</span><span class="p">));</span>
+            <span class="nx">inival</span> <span class="o">-=</span> <span class="nx">walker</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+ 
+    <span class="k">return</span> <span class="nx">matrix</span><span class="p">;</span>
+<span class="p">}</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

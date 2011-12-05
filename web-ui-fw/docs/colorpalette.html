@@ -1,0 +1,156 @@
+<!DOCTYPE html>  <html> <head>   <title>colorpalette.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               colorpalette.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm"> * jQuery Mobile Widget @VERSION</span>
+<span class="cm"> *</span>
+<span class="cm"> * This software is licensed under the MIT licence (as defined by the OSI at</span>
+<span class="cm"> * http://www.opensource.org/licenses/mit-license.php)</span>
+<span class="cm"> * </span>
+<span class="cm"> * ***************************************************************************</span>
+<span class="cm"> * Copyright (C) 2011 by Intel Corporation Ltd.</span>
+<span class="cm"> * </span>
+<span class="cm"> * Permission is hereby granted, free of charge, to any person obtaining a</span>
+<span class="cm"> * copy of this software and associated documentation files (the &quot;Software&quot;),</span>
+<span class="cm"> * to deal in the Software without restriction, including without limitation</span>
+<span class="cm"> * the rights to use, copy, modify, merge, publish, distribute, sublicense,</span>
+<span class="cm"> * and/or sell copies of the Software, and to permit persons to whom the</span>
+<span class="cm"> * Software is furnished to do so, subject to the following conditions:</span>
+<span class="cm"> * </span>
+<span class="cm"> * The above copyright notice and this permission notice shall be included in</span>
+<span class="cm"> * all copies or substantial portions of the Software.</span>
+<span class="cm"> * </span>
+<span class="cm"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="cm"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="cm"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="cm"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="cm"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING</span>
+<span class="cm"> * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER</span>
+<span class="cm"> * DEALINGS IN THE SOFTWARE.</span>
+<span class="cm"> * ***************************************************************************</span>
+<span class="cm"> *</span>
+<span class="cm"> * Authors: Gabriel Schulhof &lt;gabriel.schulhof@intel.com&gt;</span>
+<span class="cm"> */</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>It displays a grid two rows by five columns of colors.</p>
+
+<p>The colors are automatically computed based on the hue
+of the color set by the color attribute (see below).</p>
+
+<p>One of the displayed colors is the color attribute itself
+and the others are multiples of 360/10 away from that color;
+10 is the total number of colors displayed (2 rows by 5 columns).</p>
+
+<p>To apply, add the attribute data-role="colorpalette" to a <div>
+element inside a page. Alternatively, call colorpalette() on an
+element.</p>
+
+<p>Options:</p>
+
+<pre><code>color: String; initial color can be specified in html
+       using the data-color="#ff00ff" attribute or
+       when constructed in javascript, eg :
+           $("#mycolorpalette").colorpalette({ color: "#ff00ff" });
+       where the html might be :
+           &lt;div id="mycolorpalette"&gt;&lt;/div&gt;
+       The color can be changed post-construction like this :
+           $("#mycolorpalette").colorpalette("option", "color", "#ABCDEF");
+       Default: "#1a8039"
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">$</span><span class="p">,</span> <span class="kc">undefined</span> <span class="p">)</span> <span class="p">{</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">widget</span><span class="p">(</span> <span class="s2">&quot;todons.colorpalette&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">colorwidget</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">showPreview</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">initSelector</span><span class="o">:</span> <span class="s2">&quot;:jqmData(role=&#39;colorpalette&#39;)&quot;</span>
+    <span class="p">},</span>
+
+    <span class="nx">_htmlProto</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">ui</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">clrpalette</span><span class="o">:</span> <span class="s2">&quot;#colorpalette&quot;</span><span class="p">,</span>
+            <span class="nx">preview</span><span class="o">:</span> <span class="s2">&quot;#colorpalette-preview&quot;</span><span class="p">,</span>
+            <span class="nx">previewContainer</span><span class="o">:</span> <span class="s2">&quot;#colorpalette-preview-container&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+
+    <span class="nx">_create</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">clrpalette</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">clrpalette</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-colorpalette-choice]&quot;</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;vclick&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">clr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;background-color&quot;</span><span class="p">),</span>
+                <span class="nx">Nix</span><span class="p">,</span>
+                <span class="nx">nChoices</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">clrpalette</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;data-&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">ns</span> <span class="o">||</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;n-choices&quot;</span><span class="p">),</span>
+                <span class="nx">choiceId</span><span class="p">,</span> <span class="nx">rgbMatches</span><span class="p">;</span>
+
+            <span class="nx">rgbMatches</span> <span class="o">=</span> <span class="nx">clr</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/rgb\(([0-9]*), *([0-9]*), *([0-9]*)\)/</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">rgbMatches</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+                <span class="nx">clr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">colorwidget</span><span class="p">.</span><span class="nx">clrlib</span><span class="p">.</span><span class="nx">RGBToHTML</span><span class="p">([</span>
+                    <span class="nb">parseInt</span><span class="p">(</span><span class="nx">rgbMatches</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                    <span class="nb">parseInt</span><span class="p">(</span><span class="nx">rgbMatches</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span>
+                    <span class="nb">parseInt</span><span class="p">(</span><span class="nx">rgbMatches</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span><span class="p">]);</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="nx">Nix</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">Nix</span> <span class="o">&lt;</span> <span class="nx">nChoices</span> <span class="p">;</span> <span class="nx">Nix</span><span class="o">++</span><span class="p">)</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">clrpalette</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-colorpalette-choice=&quot;</span> <span class="o">+</span> <span class="nx">Nix</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;colorpalette-choice-active&quot;</span><span class="p">);</span>
+
+            <span class="nx">$</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;colorpalette-choice-active&quot;</span><span class="p">);</span>
+            <span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">colorwidget</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setColor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">clr</span><span class="p">);</span>
+            <span class="nx">self</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">preview</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;background&quot;</span><span class="p">,</span> <span class="nx">clr</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">},</span>
+
+    <span class="nx">_setShowPreview</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">show</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">show</span><span class="p">)</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">previewContainer</span><span class="p">.</span><span class="nx">removeAttr</span><span class="p">(</span><span class="s2">&quot;style&quot;</span><span class="p">);</span>
+        <span class="k">else</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">previewContainer</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;display&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;data-&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">ns</span> <span class="o">||</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;show-preview&quot;</span><span class="p">,</span> <span class="nx">show</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="nx">_setColor</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">clr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">colorwidget</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">_setColor</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">clr</span><span class="p">))</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">Nix</span><span class="p">,</span>
+                <span class="nx">activeIdx</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="nx">nChoices</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">clrpalette</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;data-&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">ns</span> <span class="o">||</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;n-choices&quot;</span><span class="p">),</span>
+                <span class="nx">hsl</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">colorwidget</span><span class="p">.</span><span class="nx">clrlib</span><span class="p">.</span><span class="nx">RGBToHSL</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">colorwidget</span><span class="p">.</span><span class="nx">clrlib</span><span class="p">.</span><span class="nx">HTMLToRGB</span><span class="p">(</span><span class="nx">clr</span><span class="p">)),</span>
+                <span class="nx">origHue</span> <span class="o">=</span> <span class="nx">hsl</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="nx">offset</span> <span class="o">=</span> <span class="nx">hsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">36</span><span class="p">,</span>
+                <span class="nx">theFloor</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">offset</span><span class="p">),</span>
+                <span class="nx">newClr</span><span class="p">;</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">preview</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;background&quot;</span><span class="p">,</span> <span class="nx">clr</span><span class="p">);</span>
+
+            <span class="nx">offset</span> <span class="o">=</span> <span class="p">(</span><span class="nx">offset</span> <span class="o">-</span> <span class="nx">theFloor</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span>
+                <span class="o">?</span> <span class="p">(</span><span class="nx">offset</span> <span class="o">-</span> <span class="nx">theFloor</span><span class="p">)</span>
+                <span class="o">:</span> <span class="p">(</span><span class="nx">offset</span> <span class="o">-</span> <span class="p">(</span><span class="nx">theFloor</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+
+            <span class="nx">offset</span> <span class="o">*=</span> <span class="mi">36</span><span class="p">;</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="nx">Nix</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="nx">Nix</span> <span class="o">&lt;</span> <span class="nx">nChoices</span> <span class="p">;</span> <span class="nx">Nix</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">hsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">Nix</span> <span class="o">*</span> <span class="mi">36</span> <span class="o">+</span> <span class="nx">offset</span><span class="p">;</span>
+                <span class="nx">hsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="nx">hsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nx">hsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">360</span><span class="p">)</span> <span class="o">:</span> <span class="p">((</span><span class="nx">hsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">360</span><span class="p">)</span> <span class="o">?</span> <span class="p">(</span><span class="nx">hsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">360</span><span class="p">)</span> <span class="o">:</span> <span class="nx">hsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]));</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">hsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="nx">origHue</span><span class="p">)</span>
+                    <span class="nx">activeIdx</span> <span class="o">=</span> <span class="nx">Nix</span><span class="p">;</span>
+
+                <span class="nx">newClr</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">colorwidget</span><span class="p">.</span><span class="nx">clrlib</span><span class="p">.</span><span class="nx">RGBToHTML</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">colorwidget</span><span class="p">.</span><span class="nx">clrlib</span><span class="p">.</span><span class="nx">HSLToRGB</span><span class="p">(</span><span class="nx">hsl</span><span class="p">));</span>
+
+                <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">clrpalette</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-colorpalette-choice=&quot;</span> <span class="o">+</span> <span class="nx">Nix</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;background-color&quot;</span><span class="p">,</span> <span class="nx">newClr</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nx">activeIdx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">currentlyActive</span> <span class="o">=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">clrpalette</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.colorpalette-choice-active&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;data-&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">ns</span> <span class="o">||</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;colorpalette-choice&quot;</span><span class="p">));</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">currentlyActive</span> <span class="o">!=</span> <span class="nx">activeIdx</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">clrpalette</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-colorpalette-choice=&quot;</span> <span class="o">+</span> <span class="nx">currentlyActive</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;colorpalette-choice-active&quot;</span><span class="p">);</span>
+                    <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">clrpalette</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;[data-colorpalette-choice=&quot;</span> <span class="o">+</span> <span class="nx">activeIdx</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;colorpalette-choice-active&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;pagecreate create&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">colorpalette</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">initSelector</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">not</span><span class="p">(</span><span class="s2">&quot;:jqmData(role=&#39;none&#39;), :jqmData(role=&#39;nojs&#39;)&quot;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">colorpalette</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="p">})(</span> <span class="nx">jQuery</span> <span class="p">);</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

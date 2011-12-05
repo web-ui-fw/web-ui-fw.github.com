@@ -1,0 +1,133 @@
+<!DOCTYPE html>  <html> <head>   <title>pagelist.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               pagelist.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm"> *</span>
+<span class="cm"> * This software is licensed under the MIT licence (as defined by the OSI at</span>
+<span class="cm"> * http://www.opensource.org/licenses/mit-license.php)</span>
+<span class="cm"> *</span>
+<span class="cm"> * ***************************************************************************</span>
+<span class="cm"> * Copyright (C) 2011 by Intel Corporation Ltd.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Permission is hereby granted, free of charge, to any person obtaining a</span>
+<span class="cm"> * copy of this software and associated documentation files (the &quot;Software&quot;),</span>
+<span class="cm"> * to deal in the Software without restriction, including without limitation</span>
+<span class="cm"> * the rights to use, copy, modify, merge, publish, distribute, sublicense,</span>
+<span class="cm"> * and/or sell copies of the Software, and to permit persons to whom the</span>
+<span class="cm"> * Software is furnished to do so, subject to the following conditions:</span>
+<span class="cm"> *</span>
+<span class="cm"> * The above copyright notice and this permission notice shall be included in</span>
+<span class="cm"> * all copies or substantial portions of the Software.</span>
+<span class="cm"> *</span>
+<span class="cm"> * THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="cm"> * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="cm"> * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="cm"> * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="cm"> * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING</span>
+<span class="cm"> * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER</span>
+<span class="cm"> * DEALINGS IN THE SOFTWARE.</span>
+<span class="cm"> * ***************************************************************************</span>
+<span class="cm"> */</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>pagelist widget</p>
+
+<p>Given an element, this widget collects all links contained in the descendants of the element and constructs
+a popupwindow widget containing numbered buttons for each encountered link.</p>
+
+<p>You can mark any one element in your document with "data-pagelist='true'" and a pagelist will be created that
+will allow the user to navigate between the pages linked to within the element.</p>
+
+<p>Currently, only one pagelist can exist in a document and, once created, it cannot be modified.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="nx">ensureNS</span><span class="p">(</span><span class="s2">&quot;jQuery.mobile.todons&quot;</span><span class="p">);</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">widget</span><span class="p">(</span><span class="s2">&quot;todons.pagelist&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">widgetex</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">_htmlProto</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">ui</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">pageList</span><span class="o">:</span> <span class="s2">&quot;#pagelist&quot;</span><span class="p">,</span>
+            <span class="nx">button</span><span class="o">:</span>   <span class="s2">&quot;#pagelist-button&quot;</span><span class="p">,</span>
+            <span class="nx">rowBreak</span><span class="o">:</span> <span class="s2">&quot;#pagelist-rowbreak&quot;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">_create</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+            <span class="nx">popPageList</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nx">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">button</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">rowBreak</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">pageList</span>
+            <span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">))</span>
+            <span class="p">.</span><span class="nx">popupwindow</span><span class="p">()</span>
+            <span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;vclick&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">popupwindow</span><span class="p">(</span><span class="s2">&quot;close&quot;</span><span class="p">);</span>
+            <span class="p">});</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;a[href]&quot;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">elemIdx</span><span class="p">,</span> <span class="nx">elem</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">idx</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="nx">idx</span> <span class="o">%</span> <span class="mi">10</span><span class="p">))</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">pageList</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">rowBreak</span><span class="p">.</span><span class="nx">clone</span><span class="p">());</span>
+
+            <span class="nx">self</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">button</span>
+                <span class="p">.</span><span class="nx">clone</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span> <span class="nx">$</span><span class="p">(</span><span class="nx">elem</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">))</span>
+                <span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="o">++</span><span class="nx">idx</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">pageList</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">buttonMarkup</span><span class="p">()</span>
+                <span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;vclick&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">self</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">pageList</span><span class="p">.</span><span class="nx">popupwindow</span><span class="p">(</span><span class="s2">&quot;close&quot;</span><span class="p">);</span> <span class="p">})</span>
+                <span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.ui-btn-inner&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="nx">css</span><span class="p">({</span><span class="nx">padding</span><span class="o">:</span> <span class="mi">2</span><span class="p">});</span>
+        <span class="p">});</span>
+
+        <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;keydown&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">popPageList</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">===</span> <span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">.</span><span class="nx">CONTROL</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;keyup&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">===</span> <span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">keyCode</span><span class="p">.</span><span class="nx">CONTROL</span> <span class="o">&amp;&amp;</span> <span class="nx">popPageList</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">maxDim</span> <span class="o">=</span> <span class="p">{</span><span class="nx">cx</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cy</span><span class="o">:</span> <span class="mi">0</span><span class="p">};</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">pageList</span><span class="p">.</span><span class="nx">popupwindow</span><span class="p">(</span><span class="s2">&quot;open&quot;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+                <span class="nx">self</span><span class="p">.</span><span class="nx">_ui</span><span class="p">.</span><span class="nx">pageList</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+                    <span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                        <span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">),</span>
+                            <span class="nx">dim</span> <span class="o">=</span> <span class="p">{</span>
+                                <span class="nx">cx</span><span class="o">:</span> <span class="nx">btn</span><span class="p">.</span><span class="nx">outerWidth</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+                                <span class="nx">cy</span><span class="o">:</span> <span class="nx">btn</span><span class="p">.</span><span class="nx">outerHeight</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+                            <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Make sure things will be even later, because padding cannot have decimals - apparently :-S</p>             </td>             <td class="code">               <div class="highlight"><pre>                        <span class="k">if</span> <span class="p">(</span><span class="nx">dim</span><span class="p">.</span><span class="nx">cx</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="nx">btn</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;padding-left&quot;</span><span class="p">,</span>   <span class="nb">parseInt</span><span class="p">(</span><span class="nx">btn</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;padding-left&quot;</span><span class="p">))</span>   <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">dim</span><span class="p">.</span><span class="nx">cy</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="nx">btn</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;padding-bottom&quot;</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">btn</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;padding-bottom&quot;</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+
+                        <span class="nx">maxDim</span><span class="p">.</span><span class="nx">cx</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">maxDim</span><span class="p">.</span><span class="nx">cx</span><span class="p">,</span> <span class="nx">dim</span><span class="p">.</span><span class="nx">cx</span><span class="p">);</span>
+                        <span class="nx">maxDim</span><span class="p">.</span><span class="nx">cy</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">maxDim</span><span class="p">.</span><span class="nx">cy</span><span class="p">,</span> <span class="nx">dim</span><span class="p">.</span><span class="nx">cy</span><span class="p">);</span>
+                    <span class="p">})</span>
+                    <span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                        <span class="kd">var</span> <span class="nx">padding</span> <span class="o">=</span> <span class="p">{</span>
+                                <span class="nx">h</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="nx">maxDim</span><span class="p">.</span><span class="nx">cx</span> <span class="o">-</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">outerWidth</span><span class="p">(</span><span class="kc">true</span><span class="p">))</span>  <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
+                                <span class="nx">v</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="nx">maxDim</span><span class="p">.</span><span class="nx">cy</span> <span class="o">-</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">outerHeight</span><span class="p">(</span><span class="kc">true</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+                            <span class="p">},</span>
+                            <span class="nx">btn</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">),</span>
+                            <span class="nx">inner</span> <span class="o">=</span> <span class="nx">btn</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.ui-btn-inner&quot;</span><span class="p">);</span>
+
+                        <span class="nx">inner</span><span class="p">.</span><span class="nx">css</span><span class="p">({</span>
+                            <span class="s2">&quot;padding-left&quot;</span>   <span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">inner</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;padding-left&quot;</span><span class="p">))</span>   <span class="o">+</span> <span class="nx">padding</span><span class="p">.</span><span class="nx">h</span><span class="p">,</span>
+                            <span class="s2">&quot;padding-top&quot;</span>    <span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">inner</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;padding-top&quot;</span><span class="p">))</span>    <span class="o">+</span> <span class="nx">padding</span><span class="p">.</span><span class="nx">v</span><span class="p">,</span>
+                            <span class="s2">&quot;padding-right&quot;</span>  <span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">inner</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;padding-right&quot;</span><span class="p">))</span>  <span class="o">+</span> <span class="nx">padding</span><span class="p">.</span><span class="nx">h</span><span class="p">,</span>
+                            <span class="s2">&quot;padding-bottom&quot;</span> <span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">inner</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;padding-bottom&quot;</span><span class="p">))</span> <span class="o">+</span> <span class="nx">padding</span><span class="p">.</span><span class="nx">v</span>
+                        <span class="p">});</span>
+                        <span class="nx">btn</span><span class="p">[((</span><span class="nx">btn</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span> <span class="o">===</span> <span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">activePage</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span> <span class="o">?</span> <span class="s2">&quot;addClass&quot;</span> <span class="o">:</span> <span class="s2">&quot;removeClass&quot;</span><span class="p">)](</span><span class="s2">&quot;ui-btn-active&quot;</span><span class="p">);</span>
+                    <span class="p">});</span>
+                <span class="nx">e</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
+                <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="nx">popPageList</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Look for an element marked as a pagelist and assign $.mobile.todons.pagelist with a newly created pagelist.
+If $.mobile.todons.pagelist is already assigned, ignore any new "data-pagelist='true'" designations.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s2">&quot;pagecreate create&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;:jqmData(pagelist=&#39;true&#39;)&quot;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">not</span><span class="p">(</span><span class="s2">&quot;:jqmData(role=&#39;none&#39;), :jqmData(role=&#39;nojs&#39;)&quot;</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">todons</span><span class="p">.</span><span class="nx">pagelist</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">todons</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="nx">pagelist</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">pagelist</span><span class="p">()</span>
+                <span class="p">});</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
