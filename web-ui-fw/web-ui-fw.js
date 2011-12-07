@@ -156,7 +156,7 @@ function getProtoPath() {
 
 $.widget("todons.widgetex", $.mobile.widget, {
     _createWidget: function() {
-        $.todons.widgetex.loadPrototype.call(this, this.__proto__.namespace + "." + this.__proto__.widgetName);
+        $.todons.widgetex.loadPrototype.call(this, this.namespace + "." + this.widgetName);
         $.mobile.widget.prototype._createWidget.apply(this, arguments);
     },
 
@@ -2282,7 +2282,7 @@ jQuery.extend( jQuery.easing,
 $(document).bind("pagecreate create", function(e) {
     $(":jqmData(role='label')", e.target).not(":jqmData(role='none'), :jqmData(role='nojs')").each(function() {
         $(this).addClass("jquery-mobile-ui-label")
-               .html($("<span>", {class: "jquery-mobile-ui-label-text"}).text($(this).text()));
+               .html($("<span>", {"class": "jquery-mobile-ui-label-text"}).text($(this).text()));
     });
 });
 
@@ -3676,7 +3676,7 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
                 var dataItems = {
                     0: ["year", this.data.year],
                     1: ["month", this.options.months[this.data.month]],
-                    2: ["day", this.data.day],
+                    2: ["day", this.data.day]
                 };
 
                 for (var data in dataItems)
@@ -3690,7 +3690,7 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
             var dataItems = {
                 0: ["hours", this._makeTwoDigitValue(this._clampHours(this.data.hours))],
                 1: ["separator", this.options.timeSeparator],
-                2: ["minutes", this._makeTwoDigitValue(this.data.minutes)],
+                2: ["minutes", this._makeTwoDigitValue(this.data.minutes)]
             };
 
             for (var data in dataItems)
@@ -4033,7 +4033,7 @@ $("<div><div id='datetimepicker' class='ui-datetimepicker'>" +
 
             $(input).css("display", "none");
             $(input).after(this._ui.container);
-            this._ui.triangle.triangle({"class" : "selector-triangle-color"});
+            this._ui.triangle.triangle({extraClass : "selector-triangle-color"});
             this.data.parentInput = input;
 
             // We must display either time or date: if the user set both to
@@ -5698,14 +5698,14 @@ $(document).bind("pagecreate create", function(e) {
                 list.append(currentListItem);
 
                 currentCheckbox
-                    .switch({"checked": false, theme: self.options.theme})
+                    .toggleswitch({"checked": false, theme: self.options.theme})
                     .data("Person", p)
                     .bind("changed", function(e, checked) {
                         var p = $(this).data("Person");
                         if (checked) {
                             if (!self.options.multipleSelection) {
                                 self._data.checked.forEach(function(item) {
-                                    item.switch("option", "checked", false);
+                                    item.toggleswitch("option", "checked", false);
                                 });
                                 self._data.checked.length = 0;
                             }
@@ -7874,20 +7874,20 @@ $(document).bind("pagecreate create", function(e) {
  *
  * This software is licensed under the MIT licence (as defined by the OSI at
  * http://www.opensource.org/licenses/mit-license.php)
- * 
+ *
  * ***************************************************************************
  * Copyright (C) 2011 by Intel Corporation Ltd.
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
  * to deal in the Software without restriction, including without limitation
  * the rights to use, copy, modify, merge, publish, distribute, sublicense,
  * and/or sell copies of the Software, and to permit persons to whom the
  * Software is furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -7944,11 +7944,15 @@ $(document).bind("pagecreate create", function(e) {
 // the touch events currently interfere with each other badly (e.g.
 // a swipe will work but cause a scroll as well).
 //
-// Theme: default is to use the parent theme (if set), or 'c' if not;
-// can be set explicitly with data-theme="X" or via
-// swipelist('option', 'theme', 'X') (though only at create time).
+// Theme: default is to use the theme on the target element,
+// theme passed in options, parent theme, or 'c' if none of the above.
 // If list items are themed individually, the cover will pick up the
 // theme of the list item which is its parent.
+//
+// Events:
+//
+//   animationComplete: Triggered by a cover when it finishes sliding
+//                      (to either the right or left).
 (function ($) {
 
 $.widget("todons.swipelist", $.mobile.widget, {
@@ -8028,9 +8032,9 @@ $.widget("todons.swipelist", $.mobile.widget, {
                 });
             }
 
-            cover.bind('swiperight', cover.data('animateRight'));
-
+            // bind to synthetic events
             item.bind('swipeleft', cover.data('animateLeft'));
+            cover.bind('swiperight', cover.data('animateRight'));
 
             // any clicks on buttons inside the item also trigger
             // the cover to slide back to the left
@@ -8053,6 +8057,7 @@ $.widget("todons.swipelist", $.mobile.widget, {
         covers.each(function () {
             var cover = $(this);
             var coverTheme = defaultCoverTheme;
+            var text, wrapper;
 
             // get the parent li element and add classes
             var item = cover.closest('li');
@@ -8075,7 +8080,16 @@ $.widget("todons.swipelist", $.mobile.widget, {
             cover.removeClass(coverTheme);
 
             // remove wrapper HTML
-            cover.find('.ui-swipelist-item-cover-inner').children().unwrap();
+            wrapper = cover.find('.ui-swipelist-item-cover-inner');
+
+            wrapper.children().unwrap();
+
+            text = wrapper.text()
+
+            if (text) {
+              cover.append(text);
+              wrapper.remove();
+            }
 
             // unbind swipe events
             if (cover.data('animateRight') && cover.data('animateLeft')) {
@@ -8094,10 +8108,26 @@ $.widget("todons.swipelist", $.mobile.widget, {
     // NB I tried to use CSS animations for this, but the performance
     // and appearance was terrible on Android 2.2 browser;
     // so I reverted to jQuery animations
+    //
+    // once the cover animation is done, the cover emits an
+    // animationComplete event
     _animateCover: function (cover, leftPercentage) {
+        var animationOptions = {
+          easing: 'linear',
+          duration: 'fast',
+          queue: true,
+          complete: function () {
+              cover.trigger('animationComplete');
+          }
+        };
+
         cover.stop();
         cover.clearQueue();
-        cover.animate({left: '' + leftPercentage + '%'}, 'fast', 'linear');
+        cover.animate({left: '' + leftPercentage + '%'}, animationOptions);
+    },
+
+    destroy: function () {
+      this._cleanupDom();
     }
 
 });
@@ -8144,7 +8174,7 @@ $(document).bind("pagecreate", function (e) {
 // element inside a page. Alternatively, call switch()
 // on an element, like this :
 //
-//     $("#myswitch").switch();
+//     $("#myswitch").toggleswitch();
 // where the html might be :
 //     <div id="myswitch"></div>
 //
@@ -8157,36 +8187,36 @@ $(document).bind("pagecreate", function (e) {
 
 (function($, undefined) {
 
-$.widget("todons.switch", $.todons.widgetex, {
+$.widget("todons.toggleswitch", $.todons.widgetex, {
     options: {
         checked: true,
-        initSelector: ":jqmData(role='switch')"
+        initSelector: ":jqmData(role='toggleswitch')"
     },
 
     _htmlProto: {
 source:
 
-$("<div><div id='switch' class='ui-switch'>" +
-  "    <div id='switch-inner-active' class='switch-inner-active ui-btn ui-btn-corner-all ui-shadow ui-btn-down-c ui-btn-active'>" +
-  "        <a href='#' class='switch-button-inside'></a>" +
-  "        <a href='#' class='switch-button-inside switch-button-transparent'></a>" +
+$("<div><div id='toggleswitch' class='ui-toggleswitch'>" +
+  "    <div id='toggleswitch-inner-active' class='toggleswitch-inner-active ui-btn ui-btn-corner-all ui-shadow ui-btn-down-c ui-btn-active'>" +
+  "        <a href='#' class='toggleswitch-button-inside'></a>" +
+  "        <a href='#' class='toggleswitch-button-inside toggleswitch-button-transparent'></a>" +
   "    </div>" +
-  "    <div id='switch-inner-normal' class='ui-btn ui-btn-corner-all ui-shadow ui-btn-down-c'>" +
-  "        <a id='switch-button-t' href='#' class='switch-button-inside switch-button-transparent'></a>" +
-  "        <a id='switch-button-f' href='#' class='switch-button-inside'></a>" +
+  "    <div id='toggleswitch-inner-normal' class='ui-btn ui-btn-corner-all ui-shadow ui-btn-down-c'>" +
+  "        <a id='toggleswitch-button-t' href='#' class='toggleswitch-button-inside toggleswitch-button-transparent'></a>" +
+  "        <a id='toggleswitch-button-f' href='#' class='toggleswitch-button-inside'></a>" +
   "    </div>" +
-  "    <a id='switch-button-outside-ref'  href='#' data-role='button' class='switch-button-outside switch-button-transparent'></a>" +
-  "    <a id='switch-button-outside-real' href='#' data-role='button' class='switch-button-outside switch-button-transparent'></a>" +
+  "    <a id='toggleswitch-button-outside-ref'  href='#' data-role='button' class='toggleswitch-button-outside toggleswitch-button-transparent'></a>" +
+  "    <a id='toggleswitch-button-outside-real' href='#' data-role='button' class='toggleswitch-button-outside toggleswitch-button-transparent'></a>" +
   "</div>" +
   "</div>")
 ,        ui: {
-            outer:            "#switch",
-            normalBackground: "#switch-inner-normal",
-            activeBackground: "#switch-inner-active",
-            tButton:          "#switch-button-t",
-            fButton:          "#switch-button-f",
-            realButton:       "#switch-button-outside-real",
-            refButton:        "#switch-button-outside-ref"
+            outer:            "#toggleswitch",
+            normalBackground: "#toggleswitch-inner-normal",
+            activeBackground: "#toggleswitch-inner-active",
+            tButton:          "#toggleswitch-button-t",
+            fButton:          "#toggleswitch-button-f",
+            realButton:       "#toggleswitch-button-outside-real",
+            refButton:        "#toggleswitch-button-outside-ref"
         }
     },
 
@@ -8203,7 +8233,7 @@ $("<div><div id='switch' class='ui-switch'>" +
         this._ui.outer.find("a").buttonMarkup({inline: true, corners: true});
 
         $.extend(this, {
-            _realized: false,
+            _realized: false
         });
 
         this._ui.realButton
@@ -8217,9 +8247,9 @@ $("<div><div id='switch' class='ui-switch'>" +
     _realize: function() {
         this._ui.realButton
             .offset(this._ui[(this.options.checked ? "t" : "f") + "Button"].offset())
-            .removeClass("switch-button-transparent");
-        this._ui.activeBackground.find("a").addClass("switch-button-transparent");
-        this._ui.normalBackground.find("a").addClass("switch-button-transparent");
+            .removeClass("toggleswitch-button-transparent");
+        this._ui.activeBackground.find("a").addClass("toggleswitch-button-transparent");
+        this._ui.normalBackground.find("a").addClass("toggleswitch-button-transparent");
         this._ui.normalBackground.css({"opacity": this.options.checked ? 0.0 : 1.0});
         this._ui.activeBackground.css({"opacity": this.options.checked ? 1.0 : 0.0});
 
@@ -8246,9 +8276,9 @@ $("<div><div id='switch' class='ui-switch'>" +
 });
 
 $(document).bind("pagecreate create", function(e) {
-    $($.todons.switch.prototype.options.initSelector, e.target)
+    $($.todons.toggleswitch.prototype.options.initSelector, e.target)
         .not(":jqmData(role='none'), :jqmData(role='nojs')")
-        .switch();
+        .toggleswitch();
 });
 
 })(jQuery);
@@ -8284,7 +8314,7 @@ $(document).bind("pagecreate create", function(e) {
 
 $.widget( "todons.triangle", $.todons.widgetex, {
     options: {
-        class: "",
+        extraClass: "",
         offset: 50,
         color: undefined,
         location: "top",
@@ -8292,7 +8322,7 @@ $.widget( "todons.triangle", $.todons.widgetex, {
     },
 
     _create: function() {
-        var triangle = $("<div></div>", {class: "ui-triangle"});
+        var triangle = $("<div></div>", {"class" : "ui-triangle"});
 
         $.extend(this, {
             _realized: false,
@@ -8339,10 +8369,10 @@ $.widget( "todons.triangle", $.todons.widgetex, {
         this.element.attr("data-" + ($.mobile.ns || "") + "offset", value);
     },
 
-    _setClass: function(value) {
+    _setExtraClass: function(value) {
         this._triangle.addClass(value);
-        this.options.class = value;
-        this.element.attr("data-" + ($.mobile.ns || "") + "class", value);
+        this.options.extraClass = value;
+        this.element.attr("data-" + ($.mobile.ns || "") + "extra-class", value);
     },
 
     _setColor: function(value) {
@@ -8448,12 +8478,15 @@ source:
 $("<div><div class='ui-volumecontrol ui-corner-all' id='volumecontrol'>" +
   "    <h1 id='volumecontrol-title'></h1>" +
   "    <div class='ui-volumecontrol-icon'></div>" +
-  "    <div id='volumecontrol-indicator' class='ui-volumecontrol-indicator'></div>" +
+  "    <div id='volumecontrol-indicator' class='ui-volumecontrol-indicator'>" +
+  "        <div id='volumecontrol-bar' class='ui-volumecontrol-level'></div>" +
+  "    </div>" +
   "</div>" +
   "</div>")
 ,        ui: {
             container: "#volumecontrol",
-            volumeImage: "#volumecontrol-indicator"
+            volumeImage: "#volumecontrol-indicator",
+            bar: "#volumecontrol-bar"
         }
     },
 
@@ -8474,6 +8507,7 @@ $("<div><div class='ui-volumecontrol ui-corner-all' id='volumecontrol'>" +
                 return coords.y;
             };
 
+          this._ui.bar.remove();
           this._ui.container.insertBefore(this.element)
                             .popupwindow({overlayTheme: "", fade: false, shadow: false});
           this.element.css("display", "none");
@@ -8594,15 +8628,16 @@ $("<div><div class='ui-volumecontrol ui-corner-all' id='volumecontrol'>" +
                 elem;
 
             for (var Nix = this._volumeElemStack.length; Nix < this._maxVolume() ; Nix++) {
-                elem = $("<div>", { class: "ui-volumecontrol-level"})
+                elem = this._ui.bar
+                    .clone()
                     .css({
                         left: (cx - (cxStart + Nix * cxInc)) / 2,
                         top:  yStart - Nix * 2 * cyElem,
                         width: cxStart + Nix * cxInc,
                         height: cyElem
-                    });
+                    })
+                    .appendTo(this._ui.volumeImage);
                 this._volumeElemStack.push(elem);
-                this._ui.volumeImage.append(elem);
             }
         }
         for (var Nix = 0 ; Nix < this._maxVolume() ; Nix++)
