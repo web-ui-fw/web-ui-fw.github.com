@@ -370,13 +370,9 @@ $.todons.colorwidget.clrlib = {
     HTMLToRGB: function(clr_str) {
         clr_str = (('#' == clr_str.charAt(0)) ? clr_str.substring(1) : clr_str);
 
-        return ([
-            clr_str.substring(0, 2),
-            clr_str.substring(2, 4),
-            clr_str.substring(4, 6)
-            ].map(function(val) {
-                return parseInt(val, 16) / 255.0;
-            }));
+        return [ parseInt(clr_str.substring(0, 2), 16) / 255.0,
+                 parseInt(clr_str.substring(2, 4), 16) / 255.0,
+                 parseInt(clr_str.substring(4, 6), 16) / 255.0 ];
     },
 
     // Converts rgb array to html color string.
@@ -388,16 +384,15 @@ $.todons.colorwidget.clrlib = {
     //
     // Returns: string of the form "#aabbcc"
     RGBToHTML: function(rgb) {
-        return ("#" +
-            rgb.map(function(val) {
-                      var ret = val * 255,
-                          theFloor = Math.floor(ret);
+        var ret = "#", val, theFloor;
+        for (var Nix in rgb) {
+            val = rgb[Nix] * 255;
+            theFloor = Math.floor(val);
+            val = ((val - theFloor > 0.5) ? (theFloor + 1) : theFloor);
+            ret = ret + (((val < 16) ? "0" : "") + (val & 0xff).toString(16));
+        }
 
-                      ret = ((ret - theFloor > 0.5) ? (theFloor + 1) : theFloor);
-                      ret = (((ret < 16) ? "0" : "") + (ret & 0xff).toString(16));
-                      return ret;
-                  })
-               .join(""));
+        return ret;
     },
 
     // Converts hsl to rgb.
@@ -1438,7 +1433,7 @@ $("<div><div id='colorpalette' class='ui-colorpalette jquery-mobile-ui-widget' d
 
             rgbMatches = clr.match(/rgb\(([0-9]*), *([0-9]*), *([0-9]*)\)/);
 
-            if (rgbMatches.length > 3)
+            if (rgbMatches && rgbMatches.length > 3)
                 clr = $.todons.colorwidget.clrlib.RGBToHTML([
                     parseInt(rgbMatches[1]) / 255,
                     parseInt(rgbMatches[2]) / 255,
@@ -6127,37 +6122,33 @@ $("<div><div>" +
     },
 
     _realSetTheme: function(dst, theme) {
-        var currentTheme = (dst.attr("class") || "")
-                .split(" ")
-                .filter(function(el, idx, ar) {
-	                return el.match(/^ui-body-[a-z]$/);
-                }),
+        var classes = (dst.attr("class") || "").split(" "),
             alreadyAdded = true,
-            ret = false;
+            currentTheme = null;
 
-
-        currentTheme = ((currentTheme.length > 0) ? currentTheme[0].match(/^ui-body-([a-z])/)[1] : null);
+        while (classes.length > 0) {
+            currentTheme = classes.pop();
+            if (currentTheme.match(/^ui-body-[a-z]$/))
+                break;
+            else
+                currentTheme = null;
+        }
 
         dst.removeClass("ui-body-" + currentTheme);
         if ((theme || "").match(/[a-z]/))
             dst.addClass("ui-body-" + theme);
-        ret = true;
-
-        return ret;
     },
 
     _setTheme: function(value) {
-        if (this._realSetTheme(this.element, value)) {
-            this.options.theme = value;
-            this.element.attr("data-" + ($.mobile.ns || "") + "theme", value);
-        }
+        this._realSetTheme(this.element, value);
+        this.options.theme = value;
+        this.element.attr("data-" + ($.mobile.ns || "") + "theme", value);
     },
 
     _setOverlayTheme: function(value) {
-        if (this._realSetTheme(this._ui.container, value)) {
-            this.options.overlayTheme = value;
-            this.element.attr("data-" + ($.mobile.ns || "") + "overlay-theme", value);
-        }
+        this._realSetTheme(this._ui.container, value);
+        this.options.overlayTheme = value;
+        this.element.attr("data-" + ($.mobile.ns || "") + "overlay-theme", value);
     },
 
     _setShadow: function(value) {
