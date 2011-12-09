@@ -385,6 +385,8 @@
   *display: inline;
 }
 .ui-cp-date-disabled {
+  margin-left: -1px;
+  margin-top: -1px;
   border: 1px solid transparent;
   color: #888;
 }
@@ -410,13 +412,12 @@
   display: none;
 }
 .ui-calendarbtncommon {
+  margin-left: -1px;
+  margin-top: -1px;
   border: 1px solid #B0B0B0;
   font-weight: bold;
   color: #000000;
   text-shadow: 0 1px 1px #f6f6f6;
-}
-.ui-btn-up-calendarbutton {
-  background: #E6E6E6;
 }
 .ui-btn-up-lastdaybutton {
   color: #0000FF;

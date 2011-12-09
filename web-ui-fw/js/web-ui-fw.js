@@ -1239,7 +1239,7 @@ $("<div><div class='ui-cp-container'>" +
   "      <div class='ui-cp-next ui-calendarbtncommon'><a href='#'></a></div>" +
   "      <div class='ui-cp-month'><h4>Uninitialized</h4></div>" +
   "  </div>" +
-  "  <div class='ui-cp-weekday'> </div>" +
+  "  <div class='ui-cp-weekday'></div>" +
   "</div>" +
   "</div>")
 ,            ui: {
