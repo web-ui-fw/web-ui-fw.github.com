@@ -162,14 +162,19 @@ $.widget("todons.widgetex", $.mobile.widget, {
 
     _init: function() {
         var page = this.element.closest(".ui-page"),
-            self = this;
+            self = this,
+            myOptions = {};
 
         if (page.is(":visible"))
             this._realize();
         else
             page.bind("pageshow", function() { self._realize(); });
 
-        this._setOptions(this.options);
+        $.extend(myOptions, this.options);
+
+        this.options = {};
+
+        this._setOptions(myOptions);
     },
 
     _getCreateOptions: function() {
@@ -350,6 +355,25 @@ $.widget("todons.colorwidget", $.todons.widgetex, {
         return false;
     }
 });
+
+// Crutches for IE: it is incapable of multi-stop gradients, so add multiple divs inside the given div, each with a two-
+// point gradient
+if ($.mobile.browser.ie)
+    $.todons.colorwidget.hueGradient = function(div) {
+        var rainbow = ["#ff0000", "#ffff00", "#00ff00", "#00ffff", "#0000ff", "#ff00ff", "#ff0000"];
+        for (var Nix = 0 ; Nix < 6 ; Nix++) {
+            $("<div></div>")
+                .css({
+                    position: "absolute",
+                    width: (100 / 6) + "%",
+                    height: "100%",
+                    left: (Nix * 100 / 6) + "%",
+                    top: "0px",
+                    filter: "progid:DXImageTransform.Microsoft.gradient (startColorstr='" + rainbow[Nix] + "', endColorstr='" + rainbow[Nix + 1] + "', GradientType = 1)"
+                })
+                .appendTo(div);
+        }
+    };
 
 $.todons.colorwidget.clrlib = {
     nearestInt: function(val) {
@@ -1561,13 +1585,13 @@ source:
 
 $("<div><div id='colorpicker' class='ui-colorpicker'>" +
   "    <div class='colorpicker-hs-container'>" +
-  "        <div class='colorpicker-hs-mask jquery-todons-colorwidget-clrlib-hue-gradient'></div>" +
-  "        <div class='colorpicker-hs-mask sat-gradient'></div>" +
+  "        <div id='colorpicker-hs-hue-gradient' class='colorpicker-hs-mask jquery-todons-colorwidget-clrlib-hue-gradient'></div>" +
+  "        <div id='colorpicker-hs-sat-gradient' class='colorpicker-hs-mask sat-gradient'></div>" +
   "        <div id='colorpicker-hs-val-mask' class='colorpicker-hs-mask' data-event-source='hs'></div>" +
   "        <div id='colorpicker-hs-selector' class='colorpicker-hs-selector ui-corner-all'></div>" +
   "    </div>" +
   "    <div class='colorpicker-l-container'>" +
-  "        <div class='colorpicker-l-mask l-gradient' data-event-source='l'></div>" +
+  "        <div id='colorpicker-l-gradient' class='colorpicker-l-mask l-gradient' data-event-source='l'></div>" +
   "        <div id='colorpicker-l-selector' class='colorpicker-l-selector ui-corner-all'></div>" +
   "    </div>" +
   "    <div style='clear: both;'></div>" +
@@ -1576,11 +1600,14 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
 ,        ui: {
             clrpicker: "#colorpicker",
             hs: {
+                hueGradient: "#colorpicker-hs-hue-gradient",
+                gradient: "#colorpicker-hs-sat-gradient",
                 eventSource: "[data-event-source='hs']",
                 valMask:   "#colorpicker-hs-val-mask",
                 selector:  "#colorpicker-hs-selector"
             },
             l: {
+                gradient: "#colorpicker-l-gradient",
                 eventSource: "[data-event-source='l']",
                 selector:  "#colorpicker-l-selector"
             }
@@ -1590,6 +1617,12 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
     _create: function() {
         var self = this;
 
+        // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
+        if ($.mobile.browser.ie) {
+            this._ui.hs.gradient.css("background", "none");
+            this._ui.l.gradient.css("background", "none");
+            $.todons.colorwidget.hueGradient(this._ui.hs.hueGradient);
+        }
         this.element.append(this._ui.clrpicker);
 
         $.extend( self, {
@@ -4454,9 +4487,9 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
   "            <a href='#' class='hsvpicker-arrow-btn' data-target='hue' data-location='left' data-inline='true' data-iconpos='notext' data-icon='arrow-l'></a>" +
   "        </div>" +
   "        <div class='hsvpicker-clrchannel-masks-container'>" +
-  "            <div class='hsvpicker-clrchannel-mask' style='background: #ffffff;'></div>" +
+  "            <div class='hsvpicker-clrchannel-mask hsvpicker-clrchannel-mask-white'></div>" +
   "            <div id='hsvpicker-hue-hue' class='hsvpicker-clrchannel-mask jquery-todons-colorwidget-clrlib-hue-gradient'></div>" +
-  "            <div id='hsvpicker-hue-mask-val' class='hsvpicker-clrchannel-mask' style='background: #000000;' data-event-source='hue'></div>" +
+  "            <div id='hsvpicker-hue-mask-val' class='hsvpicker-clrchannel-mask hsvpicker-clrchannel-mask-black' data-event-source='hue'></div>" +
   "            <div id='hsvpicker-hue-selector' class='hsvpicker-clrchannel-selector ui-corner-all'></div>" +
   "        </div>" +
   "        <div class='hsvpicker-arrow-btn-container'>" +
@@ -4469,8 +4502,8 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
   "        </div>" +
   "        <div class='hsvpicker-clrchannel-masks-container'>" +
   "            <div id='hsvpicker-sat-hue' class='hsvpicker-clrchannel-mask'></div>" +
-  "            <div class='hsvpicker-clrchannel-mask  sat-gradient'></div>" +
-  "            <div id='hsvpicker-sat-mask-val' class='hsvpicker-clrchannel-mask' style='background: #000000;' data-event-source='sat'></div>" +
+  "            <div id='hsvpicker-sat-gradient' class='hsvpicker-clrchannel-mask  sat-gradient'></div>" +
+  "            <div id='hsvpicker-sat-mask-val' class='hsvpicker-clrchannel-mask hsvpicker-clrchannel-mask-black' data-event-source='sat'></div>" +
   "            <div id='hsvpicker-sat-selector' class='hsvpicker-clrchannel-selector ui-corner-all'></div>" +
   "        </div>" +
   "        <div class='hsvpicker-arrow-btn-container'>" +
@@ -4482,9 +4515,9 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
   "            <a href='#' class='hsvpicker-arrow-btn' data-target='val' data-location='left' data-inline='true' data-iconpos='notext' data-icon='arrow-l'></a>" +
   "        </div>" +
   "        <div class='hsvpicker-clrchannel-masks-container'>" +
-  "            <div class='hsvpicker-clrchannel-mask' style='background: #ffffff;'></div>" +
+  "            <div class='hsvpicker-clrchannel-mask hsvpicker-clrchannel-mask-white'></div>" +
   "            <div id='hsvpicker-val-hue' class='hsvpicker-clrchannel-mask'></div>" +
-  "            <div class='hsvpicker-clrchannel-mask val-gradient' data-event-source='val'></div>" +
+  "            <div id='hsvpicker-val-gradient' class='hsvpicker-clrchannel-mask val-gradient' data-event-source='val'></div>" +
   "            <div id='hsvpicker-val-selector' class='hsvpicker-clrchannel-selector ui-corner-all'></div>" +
   "        </div>" +
   "        <div class='hsvpicker-arrow-btn-container'>" +
@@ -4502,12 +4535,14 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
                 valMask:     "#hsvpicker-hue-mask-val"
             },
             sat: {
+                gradient:    "#hsvpicker-sat-gradient",
                 eventSource: "[data-event-source='sat']",
                 selector:    "#hsvpicker-sat-selector",
                 hue:         "#hsvpicker-sat-hue",
                 valMask:     "#hsvpicker-sat-mask-val"
             },
             val: {
+                gradient:    "#hsvpicker-val-gradient",
                 eventSource: "[data-event-source='val']",
                 selector:    "#hsvpicker-val-selector",
                 hue:         "#hsvpicker-val-hue"
@@ -4519,6 +4554,13 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
         var self = this;
 
         this.element.append(this._ui.container);
+        // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
+        if ($.mobile.browser.ie) {
+            this._ui.sat.gradient.css("background", "none");
+            this._ui.val.gradient.css("background", "none");
+            this._ui.hue.hue.css("background", "none");
+            $.todons.colorwidget.hueGradient(this._ui.hue.hue);
+        }
 
         $.extend(this, {
             dragging_hsv: [ 0, 0, 0],
@@ -4618,7 +4660,10 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
             vclr = $.todons.colorwidget.clrlib.RGBToHTML($.todons.colorwidget.clrlib.HSVToRGB([hsv[0], hsv[1], 1.0]));
 
         this._ui.hue.selector.css({ left : this._ui.hue.eventSource.width() * hsv[0] / 360, background : clr });
-        this._ui.hue.hue.css("opacity", hsv[1]);
+        if ($.mobile.browser.ie)
+            this._ui.hue.hue.find("*").css("opacity", hsv[1]);
+        else
+            this._ui.hue.hue.css("opacity", hsv[1]);
         this._ui.hue.valMask.css("opacity", 1.0 - hsv[2]);
 
         this._ui.sat.selector.css({ left : this._ui.sat.eventSource.width() * hsv[1],       background : clr });
@@ -6170,7 +6215,7 @@ $("<div><div>" +
 
     _setTransition: function(value) {
         this._ui.container
-                .removeClass(this.options.transition)
+                .removeClass((this.options.transition || ""))
                 .addClass(value);
         this.options.transition = value;
         this.element.attr("data-" + ($.mobile.ns || "") + "transition", value);
@@ -6496,18 +6541,27 @@ $.widget("todons.processingbar", $.mobile.widget, {
         swatch.remove();
 
         if (bgcolor) {
-            var css = "-webkit-gradient(linear," +
-                      "left top," +
-                      "right bottom," +
-                      "color-stop(0%,  rgba(255,255,255,1.0))," +
-                      "color-stop(25%, rgba(255,255,255,1.0))," +
-                      "color-stop(25%, processingbarBarBgColor)," +
-                      "color-stop(50%, processingbarBarBgColor)," +
-                      "color-stop(50%, rgba(255,255,255,1.0))," +
-                      "color-stop(75%, rgba(255,255,255,1.0))," +
-                      "color-stop(75%, processingbarBarBgColor))";
-            css = css.replace(/processingbarBarBgColor/g, bgcolor);
-            this.bar.css('background', css);
+            var webkitCss = "-webkit-gradient(linear, left top, right bottom, " +
+                            "color-stop(0%,  rgba(255,255,255,1.0))," +
+                            "color-stop(25%, rgba(255,255,255,1.0))," +
+                            "color-stop(25%, processingbarBarBgColor)," +
+                            "color-stop(50%, processingbarBarBgColor)," +
+                            "color-stop(50%, rgba(255,255,255,1.0))," +
+                            "color-stop(75%, rgba(255,255,255,1.0))," +
+                            "color-stop(75%, processingbarBarBgColor))";
+            webkitCss = webkitCss.replace(/processingbarBarBgColor/g, bgcolor);
+            this.bar.css('background-image', webkitCss);
+
+            var step = this.bar.height() / 8;
+            var mozCss = "-moz-repeating-linear-gradient(top left -45deg, " +
+                         "rgba(255,255,255,1.0)," +
+                         "rgba(255,255,255,1.0) " + step + "px," +
+                         "processingbarBarBgColor " + step + "px," +
+                         "processingbarBarBgColor " + (step * 3) + "px," +
+                         "rgba(255,255,255,1.0) " + (step * 3) + "px," +
+                         "rgba(255,255,255,1.0) " + (step * 4) + "px)";
+            mozCss = mozCss.replace(/processingbarBarBgColor/g, bgcolor);
+            this.bar.css('background', mozCss);
         }
         // end massive hack
 
@@ -6677,14 +6731,14 @@ $.widget("todons.processingcircle", $.mobile.widget, {
 
     refresh: function () {
         if (!this._isRunning) {
-            this.circle.addClass('spin');
+            this.circle.addClass('ui-processingcircle-spin');
             this._isRunning = true;
         }
     },
 
     stop: function () {
         if (this._isRunning) {
-            this.circle.removeClass('spin');
+            this.circle.removeClass('ui-processingcircle-spin');
             this.element.trigger('stop');
             this._isRunning = false;
         }
