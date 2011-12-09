@@ -8277,6 +8277,12 @@ $("<div><div id='toggleswitch' class='ui-toggleswitch'>" +
         this.element.css("display", "none");
         this._ui.outer.find("a").buttonMarkup({inline: true, corners: true});
 
+        // After adding the button markup, make everything except the real button transparent
+        this._ui.normalBackground.find("*").css("opacity", 0.0);
+        this._ui.activeBackground.find("*").css("opacity", 0.0);
+        this._ui.refButton.css("opacity", 0.0);
+        this._ui.refButton.find("*").css("opacity", 0.0);
+
         $.extend(this, {
             _realized: false
         });
@@ -8290,8 +8296,10 @@ $("<div><div id='toggleswitch' class='ui-toggleswitch'>" +
     },
 
     _realize: function() {
+        var dstOffset = this._ui[(this.options.checked ? "t" : "f") + "Button"].offset()
+        this._ui.refButton.offset(dstOffset);
         this._ui.realButton
-            .offset(this._ui[(this.options.checked ? "t" : "f") + "Button"].offset())
+            .offset(dstOffset)
             .removeClass("toggleswitch-button-transparent");
         this._ui.activeBackground.find("a").addClass("toggleswitch-button-transparent");
         this._ui.normalBackground.find("a").addClass("toggleswitch-button-transparent");
