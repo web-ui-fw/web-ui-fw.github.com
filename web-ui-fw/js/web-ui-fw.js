@@ -3794,8 +3794,10 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
             if (klass.search("hours") > 0) {
                 var values =
                     range(this.options.twentyfourHours ? 0 : 1,
-                          this.options.twentyfourHours ? 24 : 12)
-                        .map(this._makeTwoDigitValue);
+                          this.options.twentyfourHours ? 24 : 12);
+
+                for (var Nix in values)
+                    values[Nix] = this._makeTwoDigitValue(values[Nix]);
                 /* TODO: 12/24 settings should come from the locale */
                 selectorResult = obj._populateSelector(selector, owner,
                     "hours", values, this._parseDayHoursMinutes,
@@ -3808,7 +3810,10 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
             }
             else
             if (klass.search("minutes") > 0) {
-                var values = range(0, 59).map(this._makeTwoDigitValue);
+                var values = range(0, 59);
+
+                for (var Nix in values)
+                    values[Nix] = this._makeTwoDigitValue(values[Nix]);
                 selectorResult = obj._populateSelector(selector, owner,
                     "minutes", values, this._parseDayHoursMinutes, this._makeTwoDigitValue, obj.data,
                     "minutes", ui);
@@ -3947,7 +3952,8 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
                 var item = obj._createSelectorItem(ui.itemProto.clone(), klass);
                 item.link.bind("vclick", function(e) {
                     if (!self.panning) {
-                        self._updateDate(owner, prop, parseFromFunc(this.text), this.text);
+                        var str = $(this).text();
+                        self._updateDate(owner, prop, parseFromFunc(str), str);
                         scrollable.view.find(item.selector).removeClass("current");
                         $(this).toggleClass("current");
                         obj._hideDataSelector(selector);
