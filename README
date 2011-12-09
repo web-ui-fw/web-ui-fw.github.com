@@ -1,0 +1,7 @@
+To upgrade to current web-ui-fw:
+
+    export _=/path/to/web-ui-fw
+    cp -r $_/demos/gallery/* . 2>/dev/null
+    cp -r $_/build/web-ui-fw/latest/* web-ui-fw
+
+Then git-commit and git-push.
