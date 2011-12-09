@@ -172,6 +172,7 @@
   position: absolute;
   bottom: 0px;
   border-style: solid;
+  border-color: transparent;
 }
 .ui-popupwindow {
   display: inline-block;
