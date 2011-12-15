@@ -215,7 +215,9 @@ $.widget("todons.widgetex", $.mobile.widget, {
 
 $.todons.widgetex.setValue = function(widget, newValue) {
     if (widget._value !== undefined) {
-        widget.element.attr(widget._value.attr, newValue);
+        var valueString = widget._value.makeString ? widget._value.makeString(newValue) : newValue;
+
+        widget.element.attr(widget._value.attr, valueString);
         if (widget._value.signal !== undefined)
             widget.element.triggerHandler(widget._value.signal, newValue);
         if (widget.element.is("input")) {
@@ -230,11 +232,25 @@ $.todons.widgetex.setValue = function(widget, newValue) {
                     widget.element.removeAttr("checked");
             }
             else
-                widget.element.attr("value", newValue);
+                widget.element.attr("value", valueString);
             widget.element.trigger("change");
         }
     }
 };
+
+$.todons.widgetex.assignElements = function(proto, obj) {
+    var ret = {};
+    for (var key in obj)
+        if ((typeof obj[key]) === "string") {
+            ret[key] = proto.find(obj[key]);
+            if (obj[key].match(/^#/))
+                ret[key].removeAttr("id");
+        }
+        else
+        if ((typeof obj[key]) === "object")
+            ret[key] = $.todons.widgetex.assignElements(proto, obj[key]);
+    return ret;
+}
 
 $.todons.widgetex.loadPrototype = function(widget, ui) {
     var ar = widget.split(".");
@@ -283,22 +299,8 @@ $.todons.widgetex.loadPrototype = function(widget, ui) {
             // replace the selectors with the selected elements from a copy of the HTML prototype
             if ($[namespace][widgetName].prototype._htmlProto.ui !== undefined) {
 	        // Assign the relevant parts of the proto
-                function assignElements(proto, obj) {
-                    var ret = {};
-                    for (var key in obj)
-                        if ((typeof obj[key]) === "string") {
-                            ret[key] = proto.find(obj[key]);
-                            if (obj[key].match(/^#/))
-                                ret[key].removeAttr("id");
-                        }
-                        else
-                        if ((typeof obj[key]) === "object")
-                            ret[key] = assignElements(proto, obj[key]);
-                    return ret;
-                }
-
                 $.extend(this, {
-                    _ui: assignElements(htmlProto.clone(), $[namespace][widgetName].prototype._htmlProto.ui)
+                    _ui: $.todons.widgetex.assignElements(htmlProto.clone(), $[namespace][widgetName].prototype._htmlProto.ui)
                 });
             }
         }
@@ -347,7 +349,16 @@ $.widget("todons.colorwidget", $.todons.widgetex, {
     },
 
     _setColor: function(value) {
-        if (value.match(/#[0-9A-Fa-f]{6}/) && (this.options.color != value)) {
+        var currentValue = (this.options.color + "");
+
+        value = value + "";
+        value = value.match(/#[0-9A-Fa-f]{6}/)
+            ? value
+            : currentValue.match(/#[0-9A-Fa-f]{6}/)
+                ? currentValue
+                : $.todons.colorwidget.prototype.options.color;
+
+        if (this.options.color !== value) {
             this.options.color = value;
             this._setValue(value);
             return true;
@@ -1447,7 +1458,9 @@ $("<div><div id='colorpalette' class='ui-colorpalette jquery-mobile-ui-widget' d
     _create: function() {
         var self = this;
 
-        this.element.append(this._ui.clrpalette);
+        this.element
+            .css("display", "none")
+            .after(this._ui.clrpalette);
 
         this._ui.clrpalette.find("[data-colorpalette-choice]").bind("vclick", function(e) {
             var clr = $(e.target).css("background-color"),
@@ -1478,10 +1491,12 @@ $("<div><div id='colorpalette' class='ui-colorpalette jquery-mobile-ui-widget' d
         else
             this._ui.previewContainer.css("display", "none");
         this.element.attr("data-" + ($.mobile.ns || "") + "show-preview", show);
+        this.options.showPreview = show;
     },
 
     _setColor: function(clr) {
         if ($.todons.colorwidget.prototype._setColor.call(this, clr)) {
+            clr = this.options.color;
             var Nix,
                 activeIdx = -1,
                 nChoices = this._ui.clrpalette.attr("data-" + ($.mobile.ns || "") + "n-choices"),
@@ -1623,7 +1638,10 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
             this._ui.l.gradient.css("background", "none");
             $.todons.colorwidget.hueGradient(this._ui.hs.hueGradient);
         }
-        this.element.append(this._ui.clrpicker);
+
+        this.element
+            .css("display", "none")
+            .after(this._ui.clrpicker);
 
         $.extend( self, {
             dragging: false,
@@ -1744,7 +1762,7 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
 
     _setColor: function(clr) {
         if ($.todons.colorwidget.prototype._setColor.call(this, clr)) {
-            this.dragging_hsl = $.todons.colorwidget.clrlib.RGBToHSL($.todons.colorwidget.clrlib.HTMLToRGB(clr));
+            this.dragging_hsl = $.todons.colorwidget.clrlib.RGBToHSL($.todons.colorwidget.clrlib.HTMLToRGB(this.options.color));
             this.dragging_hsl[1] = 1.0 - this.dragging_hsl[1];
             this._updateSelectors(this.dragging_hsl);
         }
@@ -1864,7 +1882,9 @@ $("<div><div id='colorpickerbutton'>" +
     _create: function() {
         var self = this;
 
-        this._ui.button.insertAfter(this.element);
+        this.element
+            .css("display", "none")
+            .after(this._ui.button);
 
         /* Tear apart the proto */
         this._ui.popup.insertBefore(this.element).popupwindow();
@@ -1890,8 +1910,8 @@ $("<div><div id='colorpickerbutton'>" +
 
     _setColor: function(clr) {
         if ($.todons.colorwidget.prototype._setColor.call(this, clr)) {
-            this._ui.hsvpicker.hsvpicker("option", "color", clr);
-            this._ui.buttonContents.css("color", clr);
+            this._ui.hsvpicker.hsvpicker("option", "color", this.options.color);
+            this._ui.buttonContents.css("color", this.options.color);
         }
     },
 
@@ -2016,12 +2036,15 @@ $("<div><div id='colortitle' class='ui-colortitle jquery-mobile-ui-widget'>" +
     },
 
     _create: function() {
-        this.element.append(this._ui.clrtitle);
+        this.element
+            .css("display", "none")
+            .after(this._ui.clrtitle);
+
     },
 
     _setColor: function(clr) {
         if ($.todons.colorwidget.prototype._setColor.call(this, clr))
-            this._ui.header.text(clr);
+            this._ui.header.text(this.options.color);
     }
 });
 
@@ -3665,7 +3688,6 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
 (function($, window, undefined) {
     $.widget("todons.datetimepicker", $.todons.widgetex, {
         options: {
-            date: null,
             showDate: true,
             showTime: true,
             header: "Set time",
@@ -3676,15 +3698,16 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
             am: "AM",
             pm: "PM",
             twentyfourHours: false,
+            date: null,
             animationDuration: 500,
             initSelector: "input[type='date'], :jqmData(type='date'), :jqmData(role='datetimepicker')"
         },
 
-        _initDateTime: function() {
-            var now = (null === this.options.date)
+        _initDateTime: function(value) {
+            var parsedDate = Date.parse(value),
+                now = (isNaN(parsedDate))
                     ? new Date()
-                    : new Date(Date.parse(this.options.date));
-
+                    : new Date(parsedDate);
             this.data.year    = now.getFullYear();
             this.data.month   = now.getMonth();
             this.data.day     = now.getDate();
@@ -3728,6 +3751,12 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
         },
 
         _initDateTimeDivs: function(ui) {
+            // We must display either time or date: if the user set both to
+            // false, we override that.
+            if (!this.options.showDate && !this.options.showTime) {
+                this.options.showDate = true;
+            }
+
             if (this.options.showDate && this.options.showTime) {
                 ui.main.attr("class", "ui-grid-a");
                 if (!this.options.twentyfourHours) {
@@ -3738,6 +3767,7 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
             this._initDate(ui);
             this._initTime(ui);
             ui.ampm.text(this._parseAmPmValue(this.data.pm));
+            ui.ampmContainer[this.options.twentyfourHours ? "hide" : "show"]();
         },
 
         _makeTwoDigitValue: function(val) {
@@ -3932,8 +3962,28 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
                     this._ui.date.day.text(newDay);
                 }
             }
+            else
+            if (field === "hours") {
+                if (this.options.twentyfourHours) {
+                    this.data.pm = (value > 11);
+                    this._ui.ampm.text(this._parseAmPmValue(this.data.pm));
+                }
+            }
             this.data[field] = value;
             owner.text(text);
+        },
+
+        _setTwentyfourHours: function(value) {
+            this.options.twentyfourHours = value;
+            this.element.attr("data-" + ($.mobile.ns || "") + "twentyfour-hours", value);
+            this._setDate(this.options.date);
+        },
+
+        _setDate: function(value) {
+            this._initDateTime(value);
+            this._initDateTimeDivs(this._ui);
+            this.options.date = this.getValue();
+            this._setValue(this.options.date);
         },
 
         _populateSelector: function(selector, owner, klass, values,
@@ -3957,7 +4007,8 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
                         scrollable.view.find(item.selector).removeClass("current");
                         $(this).toggleClass("current");
                         obj._hideDataSelector(selector);
-                        self._setValue(obj.getValue());
+                        obj.options.date = obj.getValue();
+                        self._setValue(obj.options.date);
                     }
                 }).text(values[i]);
                 if (values[i] === destValue) {
@@ -3994,7 +4045,7 @@ $("<div><div id='datetimepicker' class='ui-datetimepicker'>" +
   "                <span id='datetimepicker-time-separator' class='data separator'></span>" +
   "                <span id='datetimepicker-time-minutes' class='data minutes'></span>" +
   "            </div>" +
-  "            <div class='ampm'>" +
+  "            <div id='datetimepicker-ampm' class='ampm'>" +
   "                <span id='datetimepicker-ampm-span' class='data ampm'></span>" +
   "            </div>" +
   "        </div>" +
@@ -4031,13 +4082,21 @@ $("<div><div id='datetimepicker' class='ui-datetimepicker'>" +
                     separator: "#datetimepicker-time-separator",
                     minutes: "#datetimepicker-time-minutes"
                 },
+                ampmContainer: "#datetimepicker-ampm",
                 ampm: "#datetimepicker-ampm-span"
             }
         },
 
         _value: {
             attr: "data-" + ($.mobile.ns || "") + "date",
-            signal: "date-changed"
+            signal: "date-changed",
+            makeString: function(val) {return val.toString();}
+        },
+
+        _setHeader: function(value) {
+            this._ui.header.text(value);
+            this.options.header = value;
+            this.element.attr("data-" + ($.mobile.ns || "") + "header", value);
         },
 
         _create: function() {
@@ -4067,22 +4126,12 @@ $("<div><div id='datetimepicker' class='ui-datetimepicker'>" +
             var obj = this;
             var input = this.element;
 
-            $(input).css("display", "none");
-            $(input).after(this._ui.container);
+            $(input)
+                .css("display", "none")
+                .after(this._ui.container);
+
             this._ui.triangle.triangle({extraClass : "selector-triangle-color"});
             this.data.parentInput = input;
-
-            // We must display either time or date: if the user set both to
-            // false, we override that.
-            if (!this.options.showDate && !this.options.showTime) {
-                this.options.showDate = true;
-            }
-
-            this._initDateTime();
-
-            this._ui.header.text(this.options.header);
-
-            this._initDateTimeDivs(this._ui);
 
             this._ui.container.bind("vclick", function () {
                 obj._hideDataSelector(self._ui.selector);
@@ -4561,7 +4610,10 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
     _create: function() {
         var self = this;
 
-        this.element.append(this._ui.container);
+        this.element
+            .css("display", "none")
+            .after(this._ui.container);
+
         // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
         if ($.mobile.browser.ie) {
             this._ui.sat.gradient.css("background", "none");
@@ -4686,7 +4738,7 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
 
     _setColor: function(clr) {
         if ($.todons.colorwidget.prototype._setColor.call(this, clr)) {
-            this.dragging_hsv = $.todons.colorwidget.clrlib.RGBToHSV($.todons.colorwidget.clrlib.HTMLToRGB(clr));
+            this.dragging_hsv = $.todons.colorwidget.clrlib.RGBToHSV($.todons.colorwidget.clrlib.HTMLToRGB(this.options.color));
             this._updateSelectors(this.dragging_hsv);
         }
     }
@@ -5308,12 +5360,6 @@ $.widget("todons.optionheader", $.todons.widgetex, {
             self.toggle();
         };
 
-        // get the element's dimensions
-        // and to set its initial collapse state;
-        // either do it now (if the page is visible already)
-        // or on pageshow
-        page = this.element.closest(':jqmData(role="page")');
-
         this.refresh();
     },
 
@@ -5330,7 +5376,7 @@ $.widget("todons.optionheader", $.todons.widgetex, {
     // Draw the option header, according to current options
     refresh: function () {
         var el = this.element,
-            arrow = $('<div class="ui-option-header-triangle-arrow"></div>'),
+            arrow = $('<div></div>'),
             optionHeaderClass = 'ui-option-header',
             self = this,
             gridRowSelector = '.ui-grid-a,.ui-grid-b,.ui-grid-c,.ui-grid-d,.ui-grid-e',
@@ -5357,7 +5403,7 @@ $.widget("todons.optionheader", $.todons.widgetex, {
         el.removeClass(optionHeaderClass).addClass(optionHeaderClass);
 
         // remove any arrow currently visible
-        el.prev('.ui-option-header-triangle-arrow').remove();
+        el.prev('.ui-triangle-container').remove();
 
         // if there are elements inside the option header
         // and this.options.showIndicator,
@@ -6141,13 +6187,15 @@ source:
 $("<div><div>" +
   "    <div id='popupwindow-screen' class='ui-selectmenu-screen ui-screen-hidden ui-popupwindow-screen'></div>" +
   "    <div id='popupwindow-container' class='ui-popupwindow ui-selectmenu-hidden ui-overlay-shadow ui-corner-all'>" +
-  "        <div id='popupwindow-arrow' class='ui-popupwindow-arrow'></div>" +
+  "        <div id='popupwindow-container-inner' class='ui-popupwindow-container-inner'></div>" +
+  "        <div id='popupwindow-arrow' class='ui-triangle-container'></div>" +
   "    </div>" +
   "</div>" +
   "</div>")
 ,        ui: {
             screen:    "#popupwindow-screen",
             container: "#popupwindow-container",
+            inner:     "#popupwindow-container-inner",
             arrow:     "#popupwindow-arrow"
         }
     },
@@ -6161,7 +6209,7 @@ $("<div><div>" +
 
         thisPage.append(this._ui.screen);
         this._ui.container.insertAfter(this._ui.screen);
-        this._ui.container.append(this.element);
+        this._ui.inner.append(this.element);
         this._ui.arrow.remove();
 
         $.extend( self, {
@@ -6354,7 +6402,6 @@ $("<div><div>" +
             if (this.options.showArrow)
                 this._ui.currentArrow = this._ui.arrow
                     .clone()
-                    .addClass("ui-popupwindow-arrow-" + coords.arrowLocation)
                     [(("bottom" === coords.arrowLocation) ? "appendTo" : "prependTo")](this._ui.container)
                     .triangle({
                         location: coords.arrowLocation, offset: "50%",
@@ -8256,15 +8303,14 @@ source:
 
 $("<div><div id='toggleswitch' class='ui-toggleswitch'>" +
   "    <div id='toggleswitch-inner-active' class='toggleswitch-inner-active ui-btn ui-btn-corner-all ui-shadow ui-btn-down-c ui-btn-active'>" +
-  "        <a id='toggleswitch-button-t-active' href='#' class='toggleswitch-button-inside'></a>" +
-  "        <a href='#' class='toggleswitch-button-inside toggleswitch-button-transparent'></a>" +
+  "        <a id='toggleswitch-button-t-active' class='toggleswitch-button-inside'></a>" +
   "    </div>" +
   "    <div id='toggleswitch-inner-normal' class='ui-btn ui-btn-corner-all ui-shadow ui-btn-down-c'>" +
-  "        <a id='toggleswitch-button-t' href='#' class='toggleswitch-button-inside toggleswitch-button-transparent'></a>" +
-  "        <a id='toggleswitch-button-f' href='#' class='toggleswitch-button-inside'></a>" +
+  "        <a id='toggleswitch-button-t' class='toggleswitch-button-inside toggleswitch-button-transparent'></a>" +
+  "        <a id='toggleswitch-button-f' class='toggleswitch-button-inside'></a>" +
   "    </div>" +
-  "    <a id='toggleswitch-button-outside-ref'  href='#' data-role='button' class='toggleswitch-button-outside toggleswitch-button-transparent'></a>" +
-  "    <a id='toggleswitch-button-outside-real' href='#' data-role='button' class='toggleswitch-button-outside toggleswitch-button-transparent'></a>" +
+  "    <a id='toggleswitch-button-outside-ref' class='toggleswitch-button-outside toggleswitch-button-transparent'></a>" +
+  "    <a id='toggleswitch-button-outside-real' class='toggleswitch-button-outside toggleswitch-button-transparent'></a>" +
   "</div>" +
   "</div>")
 ,        ui: {
@@ -8287,23 +8333,32 @@ $("<div><div id='toggleswitch' class='ui-toggleswitch'>" +
     _create: function() {
         var self = this;
 
-        this.element.after(this._ui.outer);
-        this.element.css("display", "none");
-        this._ui.outer.find("a").buttonMarkup({inline: true, corners: true});
+        this.element
+            .css("display", "none")
+            .after(this._ui.outer);
 
-        // After adding the button markup, make everything transparent
-        this._ui.normalBackground.find("*").css("opacity", 0.0);
-        this._ui.activeBackground.find("*").css("opacity", 0.0);
-        this._ui.refButton.add(this._ui.refButton.find("*")).css("opacity", 0.0);
-        // ... except the buttons that display the inital position of the switch
-        this._ui.initButtons = this._ui.initButtons
+        this._ui.outer.find("a").buttonMarkup();
+
+        // Crutches for IE: It does not seem to understand opacity specified in a class, nor that opacity of an element
+        // affects all its children
+        if ($.mobile.browser.ie) {
+            // Remove this class, because it has no effect in IE :-S
+            this._ui.outer.find("*").removeClass("toggleswitch-button-transparent");
+            // After adding the button markup, make everything transparent
+            this._ui.normalBackground.find("*").css("opacity", 0.0);
+            this._ui.activeBackground.find("*").css("opacity", 0.0);
+            this._ui.refButton.add(this._ui.refButton.find("*")).css("opacity", 0.0);
+            this._ui.realButton.add(this._ui.realButton.find("*")).css("opacity", 0.0);
+            // ... except the buttons that display the inital position of the switch
+            this._ui.initButtons
                 .add(this._ui.initButtons.find("*"))
                 .add(this._ui.fButton.find("*"))
                 .add(this._ui.fButton)
                 .css("opacity", 1.0);
+        }
 
         $.extend(this, {
-            _realized: false
+            _initial: true
         });
 
         this._ui.realButton
@@ -8314,34 +8369,35 @@ $("<div><div id='toggleswitch' class='ui-toggleswitch'>" +
             });
     },
 
-    _realize: function() {
-        var dstOffset = this._ui[(this.options.checked ? "t" : "f") + "Button"].offset()
-        this._ui.refButton.offset(dstOffset);
-        this._ui.realButton
-            .offset(dstOffset)
-            .removeClass("toggleswitch-button-transparent");
-        this._ui.activeBackground.find("a").addClass("toggleswitch-button-transparent");
-        this._ui.normalBackground.find("a").addClass("toggleswitch-button-transparent");
-        this._ui.normalBackground.css({"opacity": this.options.checked ? 0.0 : 1.0});
-        this._ui.activeBackground.css({"opacity": this.options.checked ? 1.0 : 0.0});
-        this._ui.initButtons.css("opacity", 0.0);
-        this._realized = true;
+    _makeTransparent: function(obj, b) {
+        if ($.mobile.browser.ie)
+            obj.add(obj.find("*")).css("opacity", b ? 0.0 : 1.0);
+        else
+            obj[b ? "addClass" : "removeClass"]("toggleswitch-button-transparent");
     },
 
     _setChecked: function(checked) {
         if (this.options.checked != checked) {
-
-            if (this._realized) {
-                this._ui.refButton.offset(this._ui[(checked ? "t" : "f") + "Button"].offset());
-                this._ui.realButton.animate({"top": this._ui.refButton.position().top});
+            if (this.options.checked === undefined) {
+                this._makeTransparent(this._ui[(checked ? "normal" : "active") + "Background"], true);
             }
+            else {
+                this._ui.refButton.offset(this._ui[(checked ? "t" : "f") + "Button"].offset());
+                this._ui.realButton.offset(this._ui[(checked ? "f" : "t") + "Button"].offset());
 
-            this._ui.normalBackground.animate({"opacity": checked ? 0.0 : 1.0});
-            this._ui.activeBackground.animate({"opacity": checked ? 1.0 : 0.0});
+                if (this._initial) {
+                    this._makeTransparent(this._ui.outer.find("a"), true);
+                    this._makeTransparent(this._ui.realButton, false);
+                    this._initial = false;
+                }
+
+                this._ui.realButton.animate({top: this._ui.refButton.position().top});
+                this._ui.normalBackground.animate({opacity: checked ? 0.0 : 1.0});
+                this._ui.activeBackground.animate({opacity: checked ? 1.0 : 0.0});
+            }
 
             this.options.checked = checked;
             this.element.attr("data-" + ($.mobile.ns || "") + "checked", checked);
-
             this._setValue(checked);
         }
     }
@@ -8387,7 +8443,7 @@ $(document).bind("pagecreate create", function(e) {
 $.widget( "todons.triangle", $.todons.widgetex, {
     options: {
         extraClass: "",
-        offset: 50,
+        offset: null,
         color: undefined,
         location: "top",
         initSelector: ":jqmData(role='triangle')"
@@ -8397,53 +8453,18 @@ $.widget( "todons.triangle", $.todons.widgetex, {
         var triangle = $("<div></div>", {"class" : "ui-triangle"});
 
         $.extend(this, {
-            _realized: false,
             _triangle: triangle
         });
 
-        this.element.css("position", "relative").append(triangle);
-    },
-
-    // The widget needs to be realized for this function/
-    _setBorders: function() {
-        this._triangle.css(
-            (this.options.location === "top")
-                ? {
-                    "border-left-width"   : this.element.height(),
-                    "border-top-width"    : 0,
-                    "border-right-width"  : this.element.height(),
-                    "border-bottom-width" : this.element.height(),
-                    "border-left-color"   : "rgba(0, 0, 0, 0)",
-                    "border-right-color"  : "rgba(0, 0, 0, 0)"
-                } :
-            (this.options.location === "bottom")
-                ? {
-                    "border-left-width"   : this.element.height(),
-                    "border-top-width"    : this.element.height(),
-                    "border-right-width"  : this.element.height(),
-                    "border-bottom-width" : 0,
-                    "border-left-color"   : "rgba(0, 0, 0, 0)",
-                    "border-right-color"  : "rgba(0, 0, 0, 0)"
-                }
-                : {});
-    },
-
-    _realize: function() {
-        this._setBorders();
-        this._triangle.css("margin-left", -this.element.height());
-        this._setOffset(this.options.offset);
-        this._realized = true;
+        this.element.addClass("ui-triangle-container").append(triangle);
     },
 
     _setOffset: function(value) {
-        // Crutches for IE: It does not seem to understand the concept of percentages. Make an effort to convert to
-        // pixel values
-        if ($.mobile.browser.ie)
-            if (this._realized && typeof value === "string" && value.substring(value.length - 1) === "%")
-                value = (this.element.width() * parseInt(value)) / 100;
-        this._triangle.css("left", value);
-        this.options.offset = value;
-        this.element.attr("data-" + ($.mobile.ns || "") + "offset", value);
+        if (null !== value) {
+            this._triangle.css("left", value);
+            this.options.offset = value;
+            this.element.attr("data-" + ($.mobile.ns || "") + "offset", value);
+        }
     },
 
     _setExtraClass: function(value) {
@@ -8460,9 +8481,13 @@ $.widget( "todons.triangle", $.todons.widgetex, {
     },
 
     _setLocation: function(value) {
+        this.element
+            .removeClass("ui-triangle-container-" + this.options.location)
+            .addClass("ui-triangle-container-" + value);
+        this._triangle
+            .removeClass("ui-triangle-" + this.options.location)
+            .addClass("ui-triangle-" + value);
         this.options.location = value;
-        if (this._realized)
-            this._setBorders();
         this.element.attr("data-" + ($.mobile.ns || "") + "location", value);
     }
 });
@@ -8597,7 +8622,6 @@ $("<div><div class='ui-volumecontrol ui-volumecontrol-background ui-corner-all' 
           $.extend (self, {
               _isOpen: false,
               _dragging: false,
-              _realized: false,
               _volumeElemStack: []
           });
 
@@ -8659,12 +8683,6 @@ $("<div><div class='ui-volumecontrol ui-volumecontrol-background ui-corner-all' 
                       self._setVolume(newVolume);
               }
           });
-    },
-
-    _realize: function() {
-        if (!this._realized)
-            this._setVolume(this.options.volume, true);
-        this._realized = true;
     },
 
     _setBasicTone: function(value) {

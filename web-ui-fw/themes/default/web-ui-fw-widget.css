@@ -173,24 +173,37 @@
   bottom: 0px;
   border-style: solid;
   border-color: transparent;
+  border-width: 10px;
+  margin-left: -10px;
+}
+.ui-triangle-container {
+  height: 10px;
+  position: relative;
+}
+.ui-triangle-container .ui-triangle-top {
+  border-top-width: 0px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.ui-triangle-container .ui-triangle-bottom {
+  border-bottom-width: 0px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.ui-triangle-container-top {
+  top: 0px;
+  margin-top: -10px;
+}
+.ui-triangle-container-bottom {
+  bottom: 0px;
+  margin-bottom: -10px;
 }
 .ui-popupwindow {
   display: inline-block;
   position: absolute;
+}
+.ui-popupwindow .ui-popupwindow-container-inner {
   padding: 6px;
-}
-.ui-popupwindow .ui-popupwindow-arrow {
-  position: relative;
-  width: 100%;
-  height: 10px;
-}
-.ui-popupwindow .ui-popupwindow-arrow-top {
-  top: -16px;
-  margin-bottom: -10px;
-}
-.ui-popupwindow .ui-popupwindow-arrow-bottom {
-  bottom: -16px;
-  margin-top: -10px;
 }
 .ui-popupwindow-screen {
   background: #000000;
@@ -289,15 +302,6 @@
 }
 .ui-option-header .ui-controlgroup-horizontal .ui-corner-right {
     margin-right: 5px !important;
-}
-
-/* for the triangle */
-.ui-option-header-triangle-arrow {
-  top:-10px;
-  height:10px;
-  width:100%;
-  position:relative;
-  margin-bottom: -10px;
 }
 .jquery-todons-colorwidget-clrlib-hue-gradient {
     background: rgb(255,0,0); /* Old browsers */
@@ -723,9 +727,11 @@
 }
 .ui-toggleswitch {
   position: relative;
-  display: table;
+  display: inline-block;
 }
 .ui-toggleswitch .toggleswitch-button-outside {
+  left: 0px;
+  top: 0px;
   position: absolute;
 }
 .ui-toggleswitch .toggleswitch-button-inside {
@@ -736,6 +742,10 @@
 }
 .ui-toggleswitch .toggleswitch-inner-active {
   position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 .ui-volumecontrol-background {
     background: rgba(0, 0, 0, 0.666667);
@@ -978,14 +988,15 @@
   display: none;
   z-index: 9999;
   color: white;
-  height: 76px;
   font-size: 24px;
   padding: 0;
   margin: 14px 0 0 0;
   text-align: center;
+  /* Keep the triangle inside the parent container */
+
 }
 .ui-datetimepicker .selector .selector-triangle {
-  height: 10px;
+  margin: 0px !important;
 }
 .ui-datetimepicker .selector .selector-triangle .selector-triangle-color {
   border-bottom-color: #d9931a;
