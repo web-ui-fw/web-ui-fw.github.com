@@ -877,10 +877,12 @@ $( ":jqmData(role=listview)" ).live( "listviewcreate", function() {
  */
 
 // CalendarPicker can be created using the calendarpicker() method or by adding a
-// data-role="calendarpicker" attribute to an element.
+// data-role="calendarpicker" attribute to an element. The element is converted to a button, which, when clicked, pops up
+// the calendarpicker widget. Thus, you can use any button styles you wish (such as data-corners="true/false",
+// data-inline="true/false", etc.).
 // The core logic of the widget has been taken from https://github.com/jtsage/jquery-mobile-datebox
 //
-// CalendarPicker is hidden by default.It can be displayed by calling open() or setting option "show" to true
+// CalendarPicker is hidden by default. It can be displayed by calling open() or setting option "show" to true
 // during creation and close() to hide it. It appears as a popup window and disappears when closed.
 // CalendarPicker closes automatically when a valid date selection has been made, or when the user clicks
 // outside its box.
@@ -1236,7 +1238,9 @@ $( ":jqmData(role=listview)" ).live( "listviewcreate", function() {
                      theDate: theDate
             });
 
-            $(this.element).buttonMarkup();
+            $(this.element).buttonMarkup().bind("vclick", function() {
+                self.open();
+            });
 
             self._buildPage();
         },
@@ -4336,7 +4340,7 @@ function range (low, high, step) {
 
             this.options.theme = this.element.jqmData('theme') ||
                                  this.options.theme ||
-                                 this.element.closest(':jqmData(theme)').jqmData('theme')
+                                 this.element.closest(':jqmData(theme)').jqmData('theme') ||
                                  this.defaultTheme;
 
             var days = this.options.days;
@@ -5779,6 +5783,8 @@ $(document).bind("pagecreate create", function(e) {
             var li = self._ui.row.li;
             var container = self._ui.ui.personpicker.find('.ui-personpicker-container');
 
+            container.find('.loader').remove();
+            container.find('.ui-listview-filter').show();
             list.find('li').remove();
 
             persons.forEach(function(p) {
@@ -5834,6 +5840,7 @@ source:
 
 $("<div><div class='ui-personpicker'>" +
   "    <div class='ui-personpicker-container'>" +
+  "        <div class='loader' data-role='processingcircle'></div>" +
   "        <ul data-role='listview' data-filter='true'>" +
   "        </ul>" +
   "    </div>" +
@@ -6009,14 +6016,14 @@ $("<div><div class='ui-personpicker-page-container'>" +
         _resizePersonpicker: function() {
             var header = this._ui.container.find(':jqmData(role=header)');
 
-            // get the height of the container
-            var containerHeight = this._ui.container.innerHeight();
+            // get the height of the window
+            var windowHeight = $(window).height();
 
             // get the height of the header
             var headerHeight = header.outerHeight(true);
 
             // figure out how big to make the personpicker, so it fills the container
-            var personpickerHeight = containerHeight - headerHeight;
+            var personpickerHeight = windowHeight - headerHeight - 2;
 
             this._ui.personpicker.personpicker("resizeScrollview", personpickerHeight);
 
@@ -6075,6 +6082,7 @@ $("<div><div class='ui-personpicker-page-container'>" +
                 this.element.closest(".ui-page").bind("pageshow", function() {
                     self._ui.optionheader.optionheader('expand', {duration:0});
                     self._ui.optionheader.optionheader('refresh');
+                    self._resizePersonpicker();
                 });
             }
         }
@@ -6852,7 +6860,6 @@ $(document).bind("pagecreate", function (e) {
  *
  * Authors: Rijubrata Bhaumik <rijubrata.bhaumik@intel.com>
  */
-
 // Displays a progressbar element
 //
 // A progressbar does have a progress value, and can be found from getValue()
@@ -6866,7 +6873,6 @@ $(document).bind("pagecreate", function (e) {
 //     max      : maximum value, default is 100
 //     theme    : data-theme, default is swatch 'b'
 //                
-
 (function ($, window, undefined) {
     $.widget("todons.progressbar", $.mobile.widget, {
         options: {
@@ -6888,7 +6894,11 @@ $(document).bind("pagecreate", function (e) {
                 return this.currentValue;
             }
 
-            this.currentValue = parseInt(newValue);
+            // normalize invalid value
+            if (typeof newValue !== "number" || parseInt(newValue) < 0) 
+                newValue = 0;
+            newValue = (newValue > this.options.max) ? this.options.max : newValue;
+            this.currentValue = newValue;
 
             if (this.oldValue !== this.currentValue) {
                 this.delta = this.currentValue - this.oldValue;
@@ -6900,43 +6910,44 @@ $(document).bind("pagecreate", function (e) {
             }
         },
 
-         // function : animates the progressBar  
+        // function : animates the progressBar  
         _startProgress: function () {
             var percentage = 100 * this.currentValue / this.options.max;
             var width = percentage + '%';
             this.bar.width(width);
         },
-        
+
         _create: function () {
             var startValue, container;
             var html = $('<div class="ui-progressbar">' + '<div class="ui-boxImg " ></div>' + '<div class="ui-barImg " ></div>' + '</div>');
 
             $(this.element).append(html);
-            
+
             container = $(this.element).find(".ui-progressbar");
             this.box = container.find("div.ui-boxImg");
             this.bar = container.find("div.ui-barImg");
+
+            // set Options
+            var dataOptions = this.element.jqmData('options');
+            $.extend(this.options, dataOptions);
             this._setOption("theme", this.options.theme);
+
             startValue = this.options.value ? this.options.value : 0;
             this.value(startValue);
         },
-        
-        _setOption: function(key, value) {
-        	if (key == "theme")
-        		this._setTheme(value);
+
+        _setOption: function (key, value) {
+            if (key == "theme") this._setTheme(value);
         },
-        
-        _setTheme: function(value) {
-        	value = value || 
-            		this.element.data('theme') || 
-            		this.element.closest(':jqmData(theme)').attr('data-theme') || 
-            		'b';
-			this.bar.addClass("ui-bar-" + value);
+
+        _setTheme: function (value) {
+            value = value || this.element.data('theme') || this.element.closest(':jqmData(theme)').attr('data-theme') || 'b';
+            this.bar.addClass("ui-bar-" + value);
         },
-        
-        destroy: function() {
-        	this.html.detach();
-        }      
+
+        destroy: function () {
+            this.html.detach();
+        }
     }); /* End of widget */
 
     // auto self-init widgets
@@ -8725,18 +8736,21 @@ $("<div><div class='ui-volumecontrol ui-volumecontrol-background ui-corner-all' 
                 nDivisions = 2 * this._maxVolume() + 1,
                 cyElem = cy / nDivisions,
                 yStart = cy - 2 * cyElem,
+                dstOffset = this._ui.volumeImage.offset(),
                 elem;
 
             for (var Nix = this._volumeElemStack.length; Nix < this._maxVolume() ; Nix++) {
                 elem = this._ui.bar
                     .clone()
                     .css({
-                        left: (cx - (cxStart + Nix * cxInc)) / 2,
-                        top:  yStart - Nix * 2 * cyElem,
                         width: cxStart + Nix * cxInc,
                         height: cyElem
                     })
-                    .appendTo(this._ui.volumeImage);
+                    .appendTo(this._ui.volumeImage)
+                    .offset({
+                        left: dstOffset.left + (cx - (cxStart + Nix * cxInc)) / 2,
+                        top:  dstOffset.top + yStart - Nix * 2 * cyElem,
+                    });
                 this._volumeElemStack.push(elem);
             }
         }
@@ -8749,6 +8763,7 @@ $("<div><div class='ui-volumecontrol ui-volumecontrol-background ui-corner-all' 
 
     open: function() {
         if (!this._isOpen) {
+            this._setBasicTone(this.options.basicTone);
             this._ui.container.popupwindow("open",
                 window.innerWidth  / 2,
                 window.innerHeight / 2);

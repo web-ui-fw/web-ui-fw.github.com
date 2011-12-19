@@ -1,5 +1,12 @@
-.personpicker {
-  margin: 0 15px;
+.ui-personpicker-page-container .ui-content {
+  padding: 0;
+}
+.ui-personpicker-page-container .ui-header {
+  margin: 15px auto;
+  padding: 0;
+}
+.ui-personpicker-page-container .personpicker {
+  margin: 0;
 }
 .ui-processingcircle-container {
   border-width: 0.2em;
@@ -786,6 +793,9 @@
   width: 175px;
   height: 263px;
 }
+.ui-volumecontrol .ui-volumecontrol-indicator .ui-volumecontrol-level {
+  position: absolute;
+}
 .ui-volumecontrol .ui-volumecontrol-indicator .ui-volumecontrol-level-set {
   background: #ffffff;
 }
@@ -848,19 +858,26 @@
 .ui-colorpickerbutton-input-hidden {
     display: none !important;
 }
+.ui-personpicker .loader {
+  margin: 4px auto;
+  width: 32px;
+}
 .ui-personpicker .ui-listview, .ui-personpicker .ui-listview-filter {
   margin: 0;
+}
+.ui-personpicker .ui-listview-filter {
+  display: none;
 }
 .ui-personpicker li.ui-personpicker-row .content {
   width: 100%;
   display: inline-block;
 }
-.ui-personpicker li.ui-personpicker-row .content .switch {
+.ui-personpicker li.ui-personpicker-row .content .ui-toggleswitch {
   float: left;
 }
 .ui-personpicker li.ui-personpicker-row .content h3 {
   float: left;
-  margin-left: 20px;
+  margin: 30px 0 0 20px;
 }
 .ui-personpicker li.ui-personpicker-row .content .avatar {
   float: right;
