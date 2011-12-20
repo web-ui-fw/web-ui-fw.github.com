@@ -370,8 +370,10 @@ $.widget("todons.colorwidget", $.todons.widgetex, {
 // Crutches for IE: it is incapable of multi-stop gradients, so add multiple divs inside the given div, each with a two-
 // point gradient
 if ($.mobile.browser.ie)
-    $.todons.colorwidget.hueGradient = function(div) {
-        var rainbow = ["#ff0000", "#ffff00", "#00ff00", "#00ffff", "#0000ff", "#ff00ff", "#ff0000"];
+    $.todons.colorwidget.hueGradient = function(div, disabled) {
+        var rainbow = disabled
+            ? ["#363636", "#ededed", "#b6b6b6", "#c9c9c9", "#121212", "#494949", "#363636"]
+            : ["#ff0000", "#ffff00", "#00ff00", "#00ffff", "#0000ff", "#ff00ff", "#ff0000"];
         for (var Nix = 0 ; Nix < 6 ; Nix++) {
             $("<div></div>")
                 .css({
@@ -574,6 +576,48 @@ $.todons.colorwidget.clrlib = {
     // l is in [0,   1]
     RGBToHSL: function(rgb) {
         return $.todons.colorwidget.clrlib.HSVToHSL($.todons.colorwidget.clrlib.RGBToHSV(rgb));
+    },
+
+    // Converts hsl to grayscale
+    // Full-saturation magic grayscale values were taken from the Gimp
+    //
+    // Input: [ h, s, l ], where
+    // h is in [0, 360]
+    // s is in [0,   1]
+    // l is in [0,   1]
+    //
+    // Returns: [ r, g, b ], where
+    // r is in [0,   1]
+    // g is in [0,   1]
+    // b is in [0,   1]
+    HSLToGray: function(hsl) {
+        var intrinsic_vals = [0.211764706, 0.929411765, 0.71372549, 0.788235294, 0.070588235, 0.28627451, 0.211764706],
+            idx = Math.floor(hsl[0] / 60),
+            begVal, endVal, val;
+
+        // Find hue interval
+        begVal = intrinsic_vals[idx];
+        endVal = intrinsic_vals[idx + 1];
+
+        // Adjust for lum
+        if (hsl[2] < 0.5) {
+            var lowerHalfPercent = hsl[2] * 2;
+            begVal *= lowerHalfPercent;
+            endVal *= lowerHalfPercent;
+        }
+        else {
+            var upperHalfPercent = (hsl[2] - 0.5) * 2;
+            begVal += (1.0 - begVal) * upperHalfPercent;
+            endVal += (1.0 - endVal) * upperHalfPercent;
+        }
+
+        // This is the gray value at full sat, whereas hsl[2] is the gray value at 0 sat.
+        val = begVal + ((endVal - begVal) * (hsl[0] - (idx * 60))) / 60;
+
+        // Get value at hsl[1]
+        val = val + (hsl[2] - val) * (1.0 - hsl[1]);
+
+        return [val, val, val];
     }
 };
 
@@ -1633,15 +1677,18 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
         }
     },
 
+    _IEHueGradient: function(disabled) {
+        this._ui.hs.gradient.css("background", "none");
+        this._ui.l.gradient.css("background", "none");
+        $.todons.colorwidget.hueGradient(this._ui.hs.hueGradient, disabled);
+    },
+
     _create: function() {
         var self = this;
 
         // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
-        if ($.mobile.browser.ie) {
-            this._ui.hs.gradient.css("background", "none");
-            this._ui.l.gradient.css("background", "none");
-            $.todons.colorwidget.hueGradient(this._ui.hs.hueGradient);
-        }
+        if ($.mobile.browser.ie)
+            this._IEHueGradient(false);
 
         this.element
             .css("display", "none")
@@ -1676,6 +1723,7 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
     _bindElements: function(which) {
         var self = this,
             stopDragging = function(event) {
+                if (self.options.disabled) return;
                 self.dragging = false;
                 event.stopPropagation();
                 event.preventDefault();
@@ -1693,6 +1741,7 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
     },
 
     _handleMouseDown: function(event, containerStr, isSelector) {
+        if (this.options.disabled) return;
         var coords = $.mobile.todons.targetRelativeCoordsFromEvent(event),
             widgetStr = isSelector ? "selector" : "eventSource";
         if ((coords.x >= 0 && coords.x <= this._ui[containerStr][widgetStr].width() &&
@@ -1710,6 +1759,7 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
     },
 
     _handleMouseMove: function(event, containerStr, isSelector, coords) {
+        if (this.options.disabled) return;
         if (this.dragging &&
             !(( this.draggingHS && containerStr === "l") || 
               (!this.draggingHS && containerStr === "hs"))) {
@@ -1762,6 +1812,34 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
             background : gray
         });
         $.todons.colorwidget.prototype._setColor.call(this, clr);
+    },
+
+    widget: function() { return this._ui.clrpicker; },
+
+    _setDisabled: function(value) {
+        $.Widget.prototype._setOption.call(this, "disabled", value);
+        // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
+        if ($.mobile.browser.ie)
+            this._IEHueGradient(value);
+        if (value) {
+            this._ui.hs.hueGradient
+                .removeClass("jquery-todons-colorwidget-clrlib-hue-gradient")
+                .addClass("jquery-todons-colorwidget-clrlib-hue-gradient-disabled")
+            if (this.dragging_hsl !== undefined)
+                this._ui.hs.selector.css("background",
+                    $.todons.colorwidget.clrlib.RGBToHTML(
+                        $.todons.colorwidget.clrlib.HSLToGray(
+                            [ this.dragging_hsl[0],
+                              1.0 - this.dragging_hsl[1],
+                              this.dragging_hsl[2] ])));
+        }
+        else {
+            this._ui.hs.hueGradient
+                .removeClass("jquery-todons-colorwidget-clrlib-hue-gradient-disabled")
+                .addClass("jquery-todons-colorwidget-clrlib-hue-gradient")
+            if (this.dragging_hsl !== undefined)
+                this._updateSelectors(this.dragging_hsl);
+        }
     },
 
     _setColor: function(clr) {
@@ -4611,6 +4689,13 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
         }
     },
 
+    _IEHueGradient: function() {
+        this._ui.sat.gradient.css("background", "none");
+        this._ui.val.gradient.css("background", "none");
+        this._ui.hue.hue.css("background", "none");
+        $.todons.colorwidget.hueGradient(this._ui.hue.hue);
+    },
+
     _create: function() {
         var self = this;
 
@@ -4619,12 +4704,8 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
             .after(this._ui.container);
 
         // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
-        if ($.mobile.browser.ie) {
-            this._ui.sat.gradient.css("background", "none");
-            this._ui.val.gradient.css("background", "none");
-            this._ui.hue.hue.css("background", "none");
-            $.todons.colorwidget.hueGradient(this._ui.hue.hue);
-        }
+        if ($.mobile.browser.ie)
+            this._IEHueGradient();
 
         $.extend(this, {
             dragging_hsv: [ 0, 0, 0],
@@ -4738,6 +4819,34 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
         this._ui.val.hue.css("background", vclr);
 
         $.todons.colorwidget.prototype._setColor.call(this, clr);
+    },
+
+    _setDisabled: function(value) {
+        $.Widget.prototype._setOption.call(this, "disabled", value);
+        if (value) {
+            if ($.mobile.browser.ie)
+                this._ui.hue.hue.empty();
+            this._ui.hue.hue.css("background", "#808080");
+            this._ui.sat.hue.css("background", "#808080");
+            this._ui.val.hue.css("background", "#808080");
+            if (this.dragging_hsv !== "undefined") {
+                var clr = $.todons.colorwidget.clrlib.RGBToHTML(
+                    $.todons.colorwidget.clrlib.HSVToRGB([this.dragging_hsv[0], 0, this.dragging_hsv[2]]));
+                console.log(clr);
+                console.log([this.dragging_hsv[0], 0, this.dragging_hsv[2]]);
+                this._ui.hue.selector.css("background", clr);
+                this._ui.sat.selector.css("background", clr);
+                this._ui.val.selector.css("background", clr);
+            }
+        }
+        else {
+            // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
+            if ($.mobile.browser.ie)
+                this._IEHueGradient();
+            this._ui.hue.hue.removeAttr("style");
+            if (this.dragging_hsv !== undefined)
+                this._updateSelectors(this.dragging_hsv);
+        }
     },
 
     _setColor: function(clr) {
