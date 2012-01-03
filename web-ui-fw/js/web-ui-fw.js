@@ -102,6 +102,10 @@
 // after _create() if the element that anchors your widget is on a visible page. Otherwise, it will be called when the
 // page to which the widget belongs emits the "pageshow" event.
 //
+// NB: If your widget is inside a container which is itself not visible, such as an expandable or a collapsible, your
+// widget will remain hidden even though "pageshow" is fired and therefore _realize is called. In this case, widths and
+// heights will be unreliable even during _realize.
+//
 // III. systematic option handling
 //
 // If a widget has lots of options, the _setOption function can become a long switch for setting each recognized option.
@@ -142,6 +146,12 @@
 //
 // If your widget does not derive from widgetex, you can still define "_value" as described above and call
 // $.todons.widgetex.setValue(widget, newValue).
+//
+// V. Systematic enabled/disabled handling for input elements
+//
+// widgetex implements _setDisabled which will disable the input associated with this widget, if any. Thus, if you derive
+// from widgetex and you plan on implementing the disabled state, you should chain up to
+// $.todons.widgetex.prototype._setDisabled(value), rather than $.Widget.prototype._setOption("disabled", value).
 
 (function($, undefined) {
 
@@ -204,6 +214,12 @@ $.widget("todons.widgetex", $.mobile.widget, {
             this[setter](value);
         else
             $.mobile.widget.prototype._setOption.apply(this, arguments);
+    },
+
+    _setDisabled: function(value) {
+        $.Widget.prototype._setOption.call(this, "disabled", value);
+        if (this.element.is("input"))
+            this.element.attr("disabled", value);
     },
 
     _setValue: function(newValue) {
@@ -348,6 +364,37 @@ $.widget("todons.colorwidget", $.todons.widgetex, {
         signal: "colorchanged"
     },
 
+    _getElementColor: function(el, cssProp) {
+        return el.jqmData("clr");
+    },
+
+    _setElementColor: function(el, hsl, cssProp) {
+        var clrlib = $.todons.colorwidget.clrlib,
+            clr = clrlib.RGBToHTML(clrlib.HSLToRGB(hsl)),
+            dclr = clrlib.RGBToHTML(clrlib.HSLToGray(hsl));
+
+        el.jqmData("clr", clr);
+        el.jqmData("dclr", dclr);
+        el.jqmData("cssProp", cssProp);
+        el.attr("data-" + ($.mobile.ns || "") + "has-dclr", true);
+        el.css(cssProp, this.options.disabled ? dclr : clr);
+
+        return { clr: clr, dclr: dclr };
+    },
+
+    _displayDisabledState: function(toplevel) {
+        var self = this,
+            sel = ":jqmData(has-dclr='true')",
+            dst = toplevel.is(sel) ? toplevel : $([]);
+        dst
+            .add(toplevel.find(sel))
+            .each(function() {
+                el = $(this);
+
+                el.css(el.jqmData("cssProp"), el.jqmData(self.options.disabled ? "dclr" : "clr"));
+            });
+    },
+
     _setColor: function(value) {
         var currentValue = (this.options.color + "");
 
@@ -366,27 +413,6 @@ $.widget("todons.colorwidget", $.todons.widgetex, {
         return false;
     }
 });
-
-// Crutches for IE: it is incapable of multi-stop gradients, so add multiple divs inside the given div, each with a two-
-// point gradient
-if ($.mobile.browser.ie)
-    $.todons.colorwidget.hueGradient = function(div, disabled) {
-        var rainbow = disabled
-            ? ["#363636", "#ededed", "#b6b6b6", "#c9c9c9", "#121212", "#494949", "#363636"]
-            : ["#ff0000", "#ffff00", "#00ff00", "#00ffff", "#0000ff", "#ff00ff", "#ff0000"];
-        for (var Nix = 0 ; Nix < 6 ; Nix++) {
-            $("<div></div>")
-                .css({
-                    position: "absolute",
-                    width: (100 / 6) + "%",
-                    height: "100%",
-                    left: (Nix * 100 / 6) + "%",
-                    top: "0px",
-                    filter: "progid:DXImageTransform.Microsoft.gradient (startColorstr='" + rainbow[Nix] + "', endColorstr='" + rainbow[Nix + 1] + "', GradientType = 1)"
-                })
-                .appendTo(div);
-        }
-    };
 
 $.todons.colorwidget.clrlib = {
     nearestInt: function(val) {
@@ -620,6 +646,41 @@ $.todons.colorwidget.clrlib = {
         return [val, val, val];
     }
 };
+
+})(jQuery);
+(function($, undefined) {
+
+$.widget("todons.huegradient", $.todons.widgetex, {
+    _create: function() {
+        this.element.addClass("todons-huegradient");
+    },
+
+    // Crutches for IE: it is incapable of multi-stop gradients, so add multiple divs inside the given div, each with a
+    // two-point gradient
+    _IEGradient: function(div, disabled) {
+        var rainbow = disabled
+            ? ["#363636", "#ededed", "#b6b6b6", "#c9c9c9", "#121212", "#494949", "#363636"]
+            : ["#ff0000", "#ffff00", "#00ff00", "#00ffff", "#0000ff", "#ff00ff", "#ff0000"];
+        for (var Nix = 0 ; Nix < 6 ; Nix++) {
+            $("<div></div>")
+                .css({
+                    position: "absolute",
+                    width: (100 / 6) + "%",
+                    height: "100%",
+                    left: (Nix * 100 / 6) + "%",
+                    top: "0px",
+                    filter: "progid:DXImageTransform.Microsoft.gradient (startColorstr='" + rainbow[Nix] + "', endColorstr='" + rainbow[Nix + 1] + "', GradientType = 1)"
+                })
+                .appendTo(div);
+        }
+    },
+
+    _setDisabled: function(value) {
+        $.Widget.prototype._setOption.call(this, "disabled", value);
+        if ($.mobile.browser.ie)
+            this._IEGradient(this.element.empty(), value);
+    }
+});
 
 })(jQuery);
 /*
@@ -1257,9 +1318,15 @@ $( ":jqmData(role=listview)" ).live( "listviewcreate", function() {
                                 .appendTo(thisRow)
                                 .addClass('ui-btn-up-'+calmode.thisTheme)
                                 .unbind().bind((!skipThis)?'vclick':'error', function(e) {
+                                        var theDate = self._formatDate(self.theDate);
+
                                         e.preventDefault();
                                         self.theDate.setDate($(this).attr('data-date'));
-                                        self.element.trigger('selectedDate',[self._formatDate(self.theDate)]);
+                                        self.element.trigger('selectedDate',[theDate]);
+                                        if (self.element.is("input"))
+                                            self.element
+                                                .attr("value", theDate)
+                                                .trigger("change");
                                         self.close();
                                 })
                                 .css((skipThis)?'color':'nocolor', o.disabledDayColor);
@@ -1361,6 +1428,13 @@ $("<div><div class='ui-cp-container'>" +
 
         visible: function() {
             return this.isopen;
+        },
+
+        _setDisabled: function(value) {
+            $.todons.widgetex.prototype._setDisabled.call(this, value);
+            if (this.isopen && value)
+                this.close();
+            this.element[value ? "addClass" : "removeClass"]("ui-disabled");
         },
 
         open: function() {
@@ -1511,7 +1585,7 @@ $("<div><div id='colorpalette' class='ui-colorpalette jquery-mobile-ui-widget' d
             .after(this._ui.clrpalette);
 
         this._ui.clrpalette.find("[data-colorpalette-choice]").bind("vclick", function(e) {
-            var clr = $(e.target).css("background-color"),
+            var clr = $.todons.colorwidget.prototype._getElementColor.call(this, $(e.target)),
                 Nix,
                 nChoices = self._ui.clrpalette.attr("data-" + ($.mobile.ns || "") + "n-choices"),
                 choiceId, rgbMatches;
@@ -1529,7 +1603,8 @@ $("<div><div id='colorpalette' class='ui-colorpalette jquery-mobile-ui-widget' d
 
             $(e.target).addClass("colorpalette-choice-active");
             $.todons.colorwidget.prototype._setColor.call(self, clr);
-            self._ui.preview.css("background", clr);
+            $.todons.colorwidget.prototype._setElementColor.call(self, self._ui.preview,
+                $.todons.colorwidget.clrlib.RGBToHSL($.todons.colorwidget.clrlib.HTMLToRGB(clr)), "background");
         });
     },
 
@@ -1540,6 +1615,16 @@ $("<div><div id='colorpalette' class='ui-colorpalette jquery-mobile-ui-widget' d
             this._ui.previewContainer.css("display", "none");
         this.element.attr("data-" + ($.mobile.ns || "") + "show-preview", show);
         this.options.showPreview = show;
+    },
+
+    widget: function(value) {
+        return this._ui.clrpalette;
+    },
+
+    _setDisabled: function(value) {
+        $.todons.widgetex.prototype._setDisabled.call(this, value);
+        this._ui.clrpalette[value ? "addClass" : "removeClass"]("ui-disabled");
+        $.todons.colorwidget.prototype._displayDisabledState.call(this, this._ui.clrpalette);
     },
 
     _setColor: function(clr) {
@@ -1554,7 +1639,8 @@ $("<div><div id='colorpalette' class='ui-colorpalette jquery-mobile-ui-widget' d
                 theFloor = Math.floor(offset),
                 newClr;
 
-            this._ui.preview.css("background", clr);
+            $.todons.colorwidget.prototype._setElementColor.call(this, this._ui.preview,
+                $.todons.colorwidget.clrlib.RGBToHSL($.todons.colorwidget.clrlib.HTMLToRGB(clr)), "background");
 
             offset = (offset - theFloor < 0.5)
                 ? (offset - theFloor)
@@ -1571,7 +1657,8 @@ $("<div><div id='colorpalette' class='ui-colorpalette jquery-mobile-ui-widget' d
 
                 newClr = $.todons.colorwidget.clrlib.RGBToHTML($.todons.colorwidget.clrlib.HSLToRGB(hsl));
 
-                this._ui.clrpalette.find("[data-colorpalette-choice=" + Nix + "]").css("background-color", newClr);
+                $.todons.colorwidget.prototype._setElementColor.call(this, this._ui.clrpalette.find("[data-colorpalette-choice=" + Nix + "]"),
+                    $.todons.colorwidget.clrlib.RGBToHSL($.todons.colorwidget.clrlib.HTMLToRGB(newClr)), "background");
             }
 
             if (activeIdx != -1) {
@@ -1648,7 +1735,7 @@ source:
 
 $("<div><div id='colorpicker' class='ui-colorpicker'>" +
   "    <div class='colorpicker-hs-container'>" +
-  "        <div id='colorpicker-hs-hue-gradient' class='colorpicker-hs-mask jquery-todons-colorwidget-clrlib-hue-gradient'></div>" +
+  "        <div id='colorpicker-hs-hue-gradient' class='colorpicker-hs-mask'></div>" +
   "        <div id='colorpicker-hs-sat-gradient' class='colorpicker-hs-mask sat-gradient'></div>" +
   "        <div id='colorpicker-hs-val-mask' class='colorpicker-hs-mask' data-event-source='hs'></div>" +
   "        <div id='colorpicker-hs-selector' class='colorpicker-hs-selector ui-corner-all'></div>" +
@@ -1677,22 +1764,14 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
         }
     },
 
-    _IEHueGradient: function(disabled) {
-        this._ui.hs.gradient.css("background", "none");
-        this._ui.l.gradient.css("background", "none");
-        $.todons.colorwidget.hueGradient(this._ui.hs.hueGradient, disabled);
-    },
-
     _create: function() {
         var self = this;
-
-        // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
-        if ($.mobile.browser.ie)
-            this._IEHueGradient(false);
 
         this.element
             .css("display", "none")
             .after(this._ui.clrpicker);
+
+        this._ui.hs.hueGradient.huegradient();
 
         $.extend( self, {
             dragging: false,
@@ -1723,7 +1802,6 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
     _bindElements: function(which) {
         var self = this,
             stopDragging = function(event) {
-                if (self.options.disabled) return;
                 self.dragging = false;
                 event.stopPropagation();
                 event.preventDefault();
@@ -1741,7 +1819,6 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
     },
 
     _handleMouseDown: function(event, containerStr, isSelector) {
-        if (this.options.disabled) return;
         var coords = $.mobile.todons.targetRelativeCoordsFromEvent(event),
             widgetStr = isSelector ? "selector" : "eventSource";
         if ((coords.x >= 0 && coords.x <= this._ui[containerStr][widgetStr].width() &&
@@ -1759,7 +1836,6 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
     },
 
     _handleMouseMove: function(event, containerStr, isSelector, coords) {
-        if (this.options.disabled) return;
         if (this.dragging &&
             !(( this.draggingHS && containerStr === "l") || 
               (!this.draggingHS && containerStr === "hs"))) {
@@ -1796,7 +1872,7 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
     },
 
     _updateSelectors: function(hsl) {
-        var clr = $.todons.colorwidget.clrlib.RGBToHTML($.todons.colorwidget.clrlib.HSLToRGB([hsl[0], 1.0 - hsl[1], hsl[2]])),
+        var clr = $.todons.colorwidget.prototype._setElementColor.call(this, this._ui.hs.selector, [hsl[0], 1.0 - hsl[1], hsl[2]], "background").clr,
             gray = $.todons.colorwidget.clrlib.RGBToHTML([hsl[2], hsl[2], hsl[2]]);
 
         this._ui.hs.valMask.css((hsl[2] < 0.5)
@@ -1805,7 +1881,6 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
         this._ui.hs.selector.css({
             left       : (hsl[0] / 360 * this._ui.hs.eventSource.width()),
             top        : (hsl[1] * this._ui.hs.eventSource.height()),
-            background : clr
         });
         this._ui.l.selector.css({
             top        : (hsl[2] * this._ui.l.eventSource.height()),
@@ -1817,29 +1892,10 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
     widget: function() { return this._ui.clrpicker; },
 
     _setDisabled: function(value) {
-        $.Widget.prototype._setOption.call(this, "disabled", value);
-        // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
-        if ($.mobile.browser.ie)
-            this._IEHueGradient(value);
-        if (value) {
-            this._ui.hs.hueGradient
-                .removeClass("jquery-todons-colorwidget-clrlib-hue-gradient")
-                .addClass("jquery-todons-colorwidget-clrlib-hue-gradient-disabled")
-            if (this.dragging_hsl !== undefined)
-                this._ui.hs.selector.css("background",
-                    $.todons.colorwidget.clrlib.RGBToHTML(
-                        $.todons.colorwidget.clrlib.HSLToGray(
-                            [ this.dragging_hsl[0],
-                              1.0 - this.dragging_hsl[1],
-                              this.dragging_hsl[2] ])));
-        }
-        else {
-            this._ui.hs.hueGradient
-                .removeClass("jquery-todons-colorwidget-clrlib-hue-gradient-disabled")
-                .addClass("jquery-todons-colorwidget-clrlib-hue-gradient")
-            if (this.dragging_hsl !== undefined)
-                this._updateSelectors(this.dragging_hsl);
-        }
+        $.todons.widgetex.prototype._setDisabled.call(this, value);
+        this._ui.hs.hueGradient.huegradient("option", "disabled", value);
+        this._ui.clrpicker[value ? "addClass" : "removeClass"]("ui-disabled");
+        $.todons.colorwidget.prototype._displayDisabledState.call(this, this._ui.clrpicker);
     },
 
     _setColor: function(clr) {
@@ -1992,8 +2048,11 @@ $("<div><div id='colorpickerbutton'>" +
 
     _setColor: function(clr) {
         if ($.todons.colorwidget.prototype._setColor.call(this, clr)) {
+            var clrlib = $.todons.colorwidget.clrlib;
+
             this._ui.hsvpicker.hsvpicker("option", "color", this.options.color);
-            this._ui.buttonContents.css("color", this.options.color);
+            $.todons.colorwidget.prototype._setElementColor.call(this, this._ui.buttonContents, 
+                clrlib.RGBToHSL(clrlib.HTMLToRGB(this.options.color)), "color");
         }
     },
 
@@ -2010,11 +2069,14 @@ $("<div><div id='colorpickerbutton'>" +
         this.element.attr("data-" + ($.mobile.ns || "") + "close-text", value);
     },
 
-    open: function() {
-        if ( this.options.disabled ) {
-            return;
-        }
+    _setDisabled: function(value) {
+        $.todons.widgetex.prototype._setDisabled.call(this, value);
+        this._ui.popup.popupwindow("option", "disabled", value);
+        this._ui.button[value ? "addClass" : "removeClass"]("ui-disabled");
+        $.todons.colorwidget.prototype._displayDisabledState.call(this, this._ui.button);
+    },
 
+    open: function() {
         this._ui.popup.popupwindow("open",
             this._ui.button.offset().left + this._ui.button.outerWidth()  / 2,
             this._ui.button.offset().top  + this._ui.button.outerHeight() / 2);
@@ -2028,14 +2090,8 @@ $("<div><div id='colorpickerbutton'>" +
     },
 
     close: function() {
-        if ( this.options.disabled ) {
-            return;
-        }
-
-        var self = this;
-
-        self._focusButton();
-        self._ui.popup.popupwindow("close");
+        this._focusButton();
+        this._ui.popup.popupwindow("close");
     }
 });
 
@@ -2122,6 +2178,13 @@ $("<div><div id='colortitle' class='ui-colortitle jquery-mobile-ui-widget'>" +
             .css("display", "none")
             .after(this._ui.clrtitle);
 
+    },
+
+    widget: function() { return this._ui.clrtitle; },
+
+    _setDisabled: function(value) {
+        $.todons.widgetex.prototype._setDisabled.call(this, value);
+        this._ui.clrtitle[value ? "addClass" : "removeClass"]("ui-disabled");
     },
 
     _setColor: function(clr) {
@@ -4227,6 +4290,14 @@ $("<div><div id='datetimepicker' class='ui-datetimepicker'>" +
             });
         },
 
+        widget: function() { return this._ui.container; },
+
+        _setDisabled: function(value) {
+            $.todons.widgetex.prototype._setDisabled.call(this, value);
+            this._hideDataSelector(this._ui.selector);
+            this._ui.container[value ? "addClass" : "removeClass"]("ui-disabled");
+        },
+
         getValue: function() {
             var actualHours = this._clampHours(this.data.hours);
             if (actualHours === 12 && !this.data.pm)
@@ -4450,6 +4521,16 @@ function range (low, high, step) {
                                           .checkboxradio({theme: this.options.theme});
 
             this.element.controlgroup({excludeInvisible: false});
+        },
+
+        _setOption: function(key, value) {
+            if (key === "disabled")
+                this._setDisabled(value);
+        },
+
+        _setDisabled: function(value) {
+            $.Widget.prototype._setOption.call(this, "disabled", value);
+            this.element[value ? "addClass" : "removeClass"]("ui-disabled");
         },
 
         value: function () {
@@ -4689,13 +4770,6 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
         }
     },
 
-    _IEHueGradient: function() {
-        this._ui.sat.gradient.css("background", "none");
-        this._ui.val.gradient.css("background", "none");
-        this._ui.hue.hue.css("background", "none");
-        $.todons.colorwidget.hueGradient(this._ui.hue.hue);
-    },
-
     _create: function() {
         var self = this;
 
@@ -4703,9 +4777,7 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
             .css("display", "none")
             .after(this._ui.container);
 
-        // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
-        if ($.mobile.browser.ie)
-            this._IEHueGradient();
+        this._ui.hue.hue.huegradient();
 
         $.extend(this, {
             dragging_hsv: [ 0, 0, 0],
@@ -4800,53 +4872,36 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
     },
 
     _updateSelectors: function(hsv) {
-        var  clr = $.todons.colorwidget.clrlib.RGBToHTML($.todons.colorwidget.clrlib.HSVToRGB(hsv)),
-            hclr = $.todons.colorwidget.clrlib.RGBToHTML($.todons.colorwidget.clrlib.HSVToRGB([hsv[0], 1.0, 1.0])),
-            vclr = $.todons.colorwidget.clrlib.RGBToHTML($.todons.colorwidget.clrlib.HSVToRGB([hsv[0], hsv[1], 1.0]));
+        var clrlib = $.todons.colorwidget.clrlib,
+            clrwidget = $.todons.colorwidget.prototype,
+             clr = clrlib.HSVToHSL(hsv),
+            hclr = clrlib.HSVToHSL([hsv[0], 1.0, 1.0]),
+            vclr = clrlib.HSVToHSL([hsv[0], hsv[1], 1.0]);
 
-        this._ui.hue.selector.css({ left : this._ui.hue.eventSource.width() * hsv[0] / 360, background : clr });
+        this._ui.hue.selector.css({ left : this._ui.hue.eventSource.width() * hsv[0] / 360});
+        clrwidget._setElementColor.call(this, this._ui.hue.selector,  clr, "background");
         if ($.mobile.browser.ie)
             this._ui.hue.hue.find("*").css("opacity", hsv[1]);
         else
             this._ui.hue.hue.css("opacity", hsv[1]);
         this._ui.hue.valMask.css("opacity", 1.0 - hsv[2]);
 
-        this._ui.sat.selector.css({ left : this._ui.sat.eventSource.width() * hsv[1],       background : clr });
-        this._ui.sat.hue.css("background", hclr);
+        this._ui.sat.selector.css({ left : this._ui.sat.eventSource.width() * hsv[1]});
+        clrwidget._setElementColor.call(this, this._ui.sat.selector,  clr, "background");
+        clrwidget._setElementColor.call(this, this._ui.sat.hue,      hclr, "background");
         this._ui.sat.valMask.css("opacity", 1.0 - hsv[2]);
 
-        this._ui.val.selector.css({ left : this._ui.val.eventSource.width() * hsv[2],       background : clr });
-        this._ui.val.hue.css("background", vclr);
-
-        $.todons.colorwidget.prototype._setColor.call(this, clr);
+        this._ui.val.selector.css({ left : this._ui.val.eventSource.width() * hsv[2]});
+        clrwidget._setElementColor.call(this, this._ui.val.selector,  clr, "background");
+        clrwidget._setElementColor.call(this, this._ui.val.hue,      vclr, "background");
+        clrwidget._setColor.call(this, clrlib.RGBToHTML(clrlib.HSLToRGB(clr)));
     },
 
     _setDisabled: function(value) {
-        $.Widget.prototype._setOption.call(this, "disabled", value);
-        if (value) {
-            if ($.mobile.browser.ie)
-                this._ui.hue.hue.empty();
-            this._ui.hue.hue.css("background", "#808080");
-            this._ui.sat.hue.css("background", "#808080");
-            this._ui.val.hue.css("background", "#808080");
-            if (this.dragging_hsv !== "undefined") {
-                var clr = $.todons.colorwidget.clrlib.RGBToHTML(
-                    $.todons.colorwidget.clrlib.HSVToRGB([this.dragging_hsv[0], 0, this.dragging_hsv[2]]));
-                console.log(clr);
-                console.log([this.dragging_hsv[0], 0, this.dragging_hsv[2]]);
-                this._ui.hue.selector.css("background", clr);
-                this._ui.sat.selector.css("background", clr);
-                this._ui.val.selector.css("background", clr);
-            }
-        }
-        else {
-            // Crutches for IE: it uses the filter css property, and if the background is also set, the transparency goes bye-bye
-            if ($.mobile.browser.ie)
-                this._IEHueGradient();
-            this._ui.hue.hue.removeAttr("style");
-            if (this.dragging_hsv !== undefined)
-                this._updateSelectors(this.dragging_hsv);
-        }
+        $.todons.widgetex.prototype._setDisabled.call(this, value);
+        this._ui.container[value ? "addClass" : "removeClass"]("ui-disabled");
+        this._ui.hue.hue.huegradient("option", "disabled", value);
+        $.todons.colorwidget.prototype._displayDisabledState.call(this, this._ui.container);
     },
 
     _setColor: function(clr) {
@@ -5639,6 +5694,11 @@ $.widget("todons.optionheader", $.todons.widgetex, {
         }
     },
 
+    _setDisabled: function(value) {
+        $.Widget.prototype._setOption.call(this, "disabled", value);
+        this.element.add(this.element.prev(".ui-triangle-container"))[value ? "addClass" : "removeClass"]("ui-disabled");
+    },
+
     // Takes the same options as toggle()
     collapse: function (options) {
         if (!this.isCollapsed) {
@@ -6342,12 +6402,16 @@ $("<div><div>" +
     _realSetTheme: function(dst, theme) {
         var classes = (dst.attr("class") || "").split(" "),
             alreadyAdded = true,
-            currentTheme = null;
+            currentTheme = null,
+            matches;
 
         while (classes.length > 0) {
             currentTheme = classes.pop();
-            if (currentTheme.match(/^ui-body-[a-z]$/))
+            matches = currentTheme.match(/^ui-body-([a-z])$/);
+            if (matches && matches.length > 1) {
+                currentTheme = matches[1];
                 break;
+            }
             else
                 currentTheme = null;
         }
@@ -6399,14 +6463,20 @@ $("<div><div>" +
         this.element.attr("data-" + ($.mobile.ns || "") + "show-arrow", value);
     },
 
+    _setDisabled: function(value) {
+        $.Widget.prototype._setOption.call(this, "disabled", value);
+        if (value)
+            this.close();
+    },
+
     _placementCoords: function(x, y) {
         // Try and center the overlay over the given coordinates
         var ret,
             menuHeight = this._ui.container.outerHeight(true),
             menuWidth = this._ui.container.outerWidth(true),
-            scrollTop = $( window ).scrollTop(),
-            screenHeight = window.innerHeight,
-            screenWidth = window.innerWidth,
+            scrollTop = $(window).scrollTop(),
+            screenHeight = $(window).height(),
+            screenWidth = $(window).width(),
             halfheight = menuHeight / 2,
             maxwidth = parseFloat( this._ui.container.css( "max-width" ) ),
             calcCoords = function(coords) {
@@ -6496,7 +6566,7 @@ $("<div><div>" +
     },
 
     open: function(x_where, y_where) {
-        if (!this._isOpen) {
+        if (!(this._isOpen || this.options.disabled)) {
             var self = this,
                 x = (undefined === x_where ? window.innerWidth  / 2 : x_where),
                 y = (undefined === y_where ? window.innerHeight / 2 : y_where),
@@ -7577,6 +7647,11 @@ $.widget("mobile.simple", $.mobile.widget, {
             case 'updateInterval':
                 this.options.updateInterval = value;
                 break;
+            case 'disabled':
+                console.log(value);
+                this.element[value ? "addClass" : "removeClass"]("ui-disabled");
+                this.options.disabled = value;
+                break;
             }
             this.refresh();
         }
@@ -7588,8 +7663,8 @@ $.widget("mobile.simple", $.mobile.widget, {
     // reset our timer.
     refresh: function() {
         if (this._data.status == this._constants.status_running) {
-            this._stop();
-            this._start();
+            this._stop(this);
+            this._start(this);
         }
     }
 });
@@ -7687,10 +7762,12 @@ $(document).bind("pagecreate create", function(e) {
         _imageErrorHandler: function () {
             this.usingNoContents = true;
             this._showNoContents();
+            this.element.trigger( "init" );
         },
 
         _showNoContents: function () {
-            if (!this.options.noContent) {
+            var noContentSrcIsEmpty = (this.options.noContent==null);
+            if (noContentSrcIsEmpty) {
                 this.resize( this.cover );
 
                 this.image.detach();
@@ -7724,7 +7801,7 @@ $(document).bind("pagecreate create", function(e) {
             this.element.css('float','left'); // so the cover overlays the other elements
 
             this.cover = ($('<div class="ui-singleimagedisplay-nocontent"/>'));
-            this.cover.hide(); //this.cover.css('visibility','hidden');
+            this.cover.hide();
             this.imageParent.append(this.cover);
 
             this.options.source = this.element.jqmData('src');
@@ -7734,10 +7811,14 @@ $(document).bind("pagecreate create", function(e) {
                 self.usingNoContents = false;
                 self.resize( self.image );
                 self.image.show();
+                self.element.trigger( "init" );
             });
 
             // when the image fails to load, substitute noContent
-            this.image.error( function() { self._imageErrorHandler() } );
+            this.image.error( function() {
+                self._imageErrorHandler();
+                self.element.trigger( "init" );
+            } );
 
             // set the src for the image
             this._setImgSrc();
@@ -7745,6 +7826,8 @@ $(document).bind("pagecreate create", function(e) {
             // resize the image immediately if it is visible
             if (self.image.is(':visible')) {
                 self.resize( self.image );
+
+                this.element.trigger( "init" );
             }
 
             // when the page is shown, resize the image
@@ -7757,6 +7840,7 @@ $(document).bind("pagecreate create", function(e) {
                     } else {
                         self.resize( self.image );
                     }
+                    self.element.trigger( "init" );
                 });
             }
 
@@ -7767,6 +7851,7 @@ $(document).bind("pagecreate create", function(e) {
                 } else {
                     self.resize( self.image );
                 }
+                self.element.trigger( "init" );
             });
         },
 
@@ -8494,6 +8579,11 @@ $("<div><div id='toggleswitch' class='ui-toggleswitch'>" +
             obj.add(obj.find("*")).css("opacity", b ? 0.0 : 1.0);
         else
             obj[b ? "addClass" : "removeClass"]("toggleswitch-button-transparent");
+    },
+
+    _setDisabled: function(value) {
+        $.todons.widgetex.prototype._setDisabled.call(this, value);
+        this._ui.outer[value ? "addClass" : "removeClass"]("ui-disabled");
     },
 
     _setChecked: function(checked) {

@@ -38,6 +38,19 @@ var progressbarAnimator = {
 };
 
 $(document).bind("pagecreate", function () {
+    $("input[type='checkbox'][data-widget-type-list]").bind("change", function() {
+        var ls = $(this).attr("data-widget-type-list").split(","),
+            page = $(this).closest(":jqmData(role='page')"),
+            disabled = $(this).is(":checked");
+
+        $.each(ls, function(idx, widgetType) {
+            var ar = widgetType.split("-");
+
+            if (ar.length === 2)
+                page.find(":" + widgetType)[ar[1]]("option", "disabled", disabled);
+        });
+    });
+
     $('#processingcircle-demo').bind('pageshow', function (e) {
         $(this).find(':jqmData(role="processingcircle")').each(function () {
             var randomWait = 500 * (Math.floor(Math.random() * 6) + 4);
@@ -148,7 +161,7 @@ $(document).bind("pagecreate", function () {
         $("#myVolumeControl").volumecontrol("open");
     });
     $("#volumecontrol_setBasicTone").bind("change", function (e) {
-        var basicTone = !($("#volumecontrol_setBasicTone").next('label').find(".ui-icon").hasClass("ui-icon-checkbox-on"));
+        var basicTone = $("#volumecontrol_setBasicTone").is(":checked");
 
         if (basicTone) {
             $("#myVolumeControl").volumecontrol("option", "basicTone", true);
@@ -160,9 +173,9 @@ $(document).bind("pagecreate", function () {
     });
 
     $("#checkHideInput").bind("change", function (e) {
-        $("#colorpickerbutton").colorpickerbutton("option", "hideInput",
-            !($("#checkHideInput").next('label').find(".ui-icon").hasClass("ui-icon-checkbox-on")));
+        $("#colorpickerbutton").colorpickerbutton("option", "hideInput", $("#checkHideInput").is(":checked"));
     });
+
 
     $('#slider-demo').bind('pageshow', function () {
         var popupEnabled = false;
@@ -513,16 +526,16 @@ $(document).bind("pageinit", function() {
             var displayImage = $("#singleimagedisplay-display-image");
 
             var img = $(this).find('img:jqmData(role=singleimagedisplay)');
-            var src = null;
+            var source = null;
             var noContent = null;
             if (img.length>0) {
-                src = img.singleimagedisplay('option', 'source');
+                source = img.singleimagedisplay('option', 'source');
                 noContent = img.singleimagedisplay('option', 'noContent');
             };
 
             $.mobile.changePage("#singleimagedisplay-display");
 
-            displayImage.singleimagedisplay('option', 'source', src);
+            displayImage.singleimagedisplay('option', 'source', source);
             displayImage.singleimagedisplay('option', 'noContent', noContent);
         });
 

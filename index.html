@@ -96,13 +96,14 @@
             </div>
             <div data-role="content">
                 <div class="ui-grid-d">
+                    <p>Single Image Display reduces or enlarges images so that they fit their container while maintaining their aspect ratio. The container might be another element, or the window itself.
                     <div class="ui-block-a">
                         <div class="singleimagedisplay-container singleimagedisplay-vcenter singleimagedisplay-hcenter">
                             <img data-src="images/singleimage_sm_s.jpg"
                                  data-role="singleimagedisplay"
                                  class="singleimagedisplay-hcenter" />
                         </div>
-                        <div>Display a small square image. This is enlarged to fit the container.</div>
+                        <div>A small square image.</div>
                     </div>
 
                     <div class="ui-block-b">
@@ -111,7 +112,7 @@
                                  data-role="singleimagedisplay"
                                  class="singleimagedisplay-hcenter" />
                         </div>
-                        <div>Display a big square image. This is reduced to fit the browser.</div>
+                        <div>A big square image.</div>
                     </div>
 
                     <div class="ui-block-c">
@@ -120,7 +121,7 @@
                                  data-role="singleimagedisplay"
                                  class="singleimagedisplay-hcenter" />
                         </div>
-                        <div>Display a big landscape image. This is reduced to fit the browser.</div>
+                        <div>A big landscape image.</div>
                     </div>
 
                     <div class="ui-block-d">
@@ -129,7 +130,7 @@
                                  data-role="singleimagedisplay"
                                  class="singleimagedisplay-hcenter" />
                         </div>
-                        <div>Display a bit portrait image. This is reduced to fit the browser.</div>
+                        <div>A big portrait image.</div>
                     </div>
 
                     <div class="ui-block-e">
@@ -138,16 +139,16 @@
                                  data-role="singleimagedisplay"
                                  class="singleimagedisplay-hcenter" />
                         </div>
-                        <div>Display a small landscape image. This is enlarged to fit the browser.</div>
+                        <div>A small landscape image.</div>
                     </div>
 
                     <div class="ui-block-a">
                         <div class="singleimagedisplay-container singleimagedisplay-vcenter">
-                            <img data-src="http://farm7.static.flickr.com/6194/6113426630_e19840defd_b.jpg"
+                            <img data-src="http://upload.wikimedia.org/wikipedia/commons/a/ab/HuangLong_2002-09-12_51.jpg"
                                  data-role="singleimagedisplay"
                                  class="singleimagedisplay-hcenter" />
                         </div>
-                        <div>Display an image from the internet.</div>
+                        <div>An image from the internet.<br/><small><a href="http://commons.wikimedia.org/wiki/File:HuangLong_2002-09-12_51.jpg">Credit</a></small></div>
                     </div>
 
                     <div class="ui-block-b">
@@ -181,10 +182,14 @@
                 <h1>Date/time picker</h1>
             </div>
             <div data-role="content" data-scroll="y">
-                <form action="#" action="get">
-                    <div data-role="fieldcontain" style="display: table;">
+                <form action="#" action="get" style="display: table;">
+                    <div data-role="fieldcontain">
                         <div data-role="label">Date/time picker</div>
                         <input type="date" name="demo-date" id="demo-date" />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <input type="checkbox" name="disable-datetimepicker" id="disable-datetimepicker" data-widget-type-list="todons-datetimepicker"/>
+                        <label for="disable-datetimepicker">Disable</label>
                     </div>
                 </form>
                 <p>The date you selected is: <span class="selected-date"><em>(select a date first)</em></span></p>
@@ -220,6 +225,13 @@
                 <h1>Color widgets</h1>
             </div>
             <div data-role="content" data-scroll="y">
+              <form action="#" method="get" style="display: table;">
+                <div data-role="fieldcontain">
+                    <input type="checkbox" name="disable-colorwidgets" id="disable-colorwidgets"
+                        data-widget-type-list="todons-colortitle,todons-colorpalette,todons-colorpickerbutton,todons-hsvpicker,todons-colorpicker"/>
+                    <label for="disable-colorwidgets">Disable</label>
+                </div>
+              </form>
               <div style="float: left; padding-right: 20px;">
                 <div data-role="label">Color title widget</div>
                 <div data-role="colortitle" id="colortitle"></div>
@@ -316,6 +328,11 @@
             </div>
             <div data-role="content">
 
+                <div data-role="fieldcontain" style="display: table;">
+                    <input type="checkbox" name="disable-dayselectors" id="disable-dayselectors" 
+                        data-widget-type-list="todons-dayselector"/>
+                    <label for="disable-dayselectors">Disable</label>
+                </div>
                 <h2>With a legend (also API demo)</h2>
 
                 <fieldset id="dayselector1" data-role="dayselector" data-type="horizontal">
@@ -376,6 +393,10 @@
                 <h1>Switch</h1>
             </div>
             <div class="content" data-role="content">
+                <div data-role="fieldcontain" style="display: table;">
+                    <input type="checkbox" name="disable-switches" id="disable-switches" data-widget-type-list="todons-toggleswitch"/>
+                    <label for="disable-switches">Disable</label>
+                </div>
                 <div id="switch-1" data-role="toggleswitch" data-checked="false"></div>
                 <p/>
                 <div id="switch-2" data-role="toggleswitch"></div>
@@ -837,6 +858,10 @@ $scroller2List.scrollview('option','scrollDuration','10000');
                 <h1>TODONS - Calendar Picker. Click Button to launch Calendar Picker</h1>
             </div>
             <div class="content" data-role="content" id="calendarinputcontainer">
+                <div data-role="fieldcontain" style="display: table;">
+                    <input type="checkbox" name="disable-calendarpicker" id="disable-calendarpicker" data-widget-type-list="todons-calendarpicker"/>
+                    <label for="disable-calendarpicker">Disable</label>
+                </div>
                 <label id="label">Selected Date</label><input type="text" name = "calendardate" id="selectedCalendarDate" value="Select Date"/>
                 <a data-role="calendarpicker" data-icon="grid" data-iconpos="notext" id="calendarbutton" data-inline="true"></a>
             </div>
