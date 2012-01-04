@@ -6384,6 +6384,14 @@ $("<div><div>" +
         if (thisPage[0] === undefined)
             thisPage = $("body");
 
+        // Drop a placeholder into the location from which we shall rip out the popup window contents
+        this._ui.placeholder = 
+            $("<div><!-- placeholder" + 
+                    (this.element.attr("id") === undefined 
+                        ? "" 
+                        : " for " + this.element.attr("id")) + " --></div>")
+                .css("display", "none")
+                .insertBefore(this.element);
         thisPage.append(this._ui.screen);
         this._ui.container.insertAfter(this._ui.screen);
         this._ui.inner.append(this.element);
@@ -6565,6 +6573,18 @@ $("<div><div>" +
         return ret;
     },
 
+    destroy: function() {
+        // Put the element back where we ripped it out from
+        this.element.insertBefore(this._ui.placeholder);
+
+        // Clean up
+        this._ui.placeholder.remove();
+        this._ui.container.remove();
+        this._ui.screen.remove();
+        this.element.triggerHandler("destroyed");
+        $.Widget.prototype.destroy.call(this);
+    },
+
     open: function(x_where, y_where) {
         if (!(this._isOpen || this.options.disabled)) {
             var self = this,
@@ -6657,23 +6677,30 @@ $("<div><div>" +
 });
 
 $.todons.popupwindow.bindPopupToButton = function(btn, popup) {
-    // If the popup has a theme set, prevent it from being clobbered by the associated button
-    if ((popup.popupwindow("option", "overlayTheme") || "").match(/[a-z]/))
-        popup.jqmData("overlay-theme-set", true);
-    btn
-        .attr({
-            "aria-haspopup": true,
-            "aria-owns": btn.attr("href")
-        })
-        .removeAttr("href")
-        .bind("vclick", function() {
+    var btnVClickHandler = function() {
             // When /this/ button causes a popup, align the popup's theme with that of the button, unless the popup has a theme pre-set
             if (!popup.jqmData("overlay-theme-set"))
                 popup.popupwindow("option", "overlayTheme", btn.jqmData("theme"));
             popup.popupwindow("open",
                 btn.offset().left + btn.outerWidth()  / 2,
                 btn.offset().top  + btn.outerHeight() / 2);
-        });
+        };
+
+    // If the popup has a theme set, prevent it from being clobbered by the associated button
+    if ((popup.popupwindow("option", "overlayTheme") || "").match(/[a-z]/))
+        popup.jqmData("overlay-theme-set", true);
+
+    btn
+        .attr({
+            "aria-haspopup": true,
+            "aria-owns": btn.attr("href")
+        })
+        .removeAttr("href")
+        .bind("vclick", btnVClickHandler);
+
+    popup.bind("destroyed", function() {
+        btn.unbind("vclick", btnVClickHandler);
+    });
 };
 
 $(document).bind("pagecreate create", function(e) {
