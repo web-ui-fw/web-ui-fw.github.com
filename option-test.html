@@ -5,11 +5,10 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" media="screen" href="web-ui-fw/themes/default/web-ui-fw-theme.css"/>
-        <link rel="stylesheet" type="text/css" media="screen" href="option-list-tester.css"/>
         <script src="web-ui-fw/js/jquery.js"></script>
         <script src="web-ui-fw/js/jquery-mobile.js"></script>
         <script src="option-list.js"></script>
-        <script src="option-list-tester.js"></script>
+        <script src="inspect-page.js"></script>
     </head>
 
     <body>
@@ -27,21 +26,22 @@
                         <label for="sample-slider" id="sample-slider-label">Slider</label>
                         <input type="range" min="3" max="17" value="5" id="sample-slider"></input>
                     </div>
+                    <div data-role="fieldcontain">
+                        <label for="select-choice-0" class="select">Shipping method:</label>
+                        <select name="select-choice-0" id="select-choice-1" data-native-menu="false">
+                           <option value="standard">Standard: 7 day</option>
+                           <option value="rush">Rush: 3 days</option>
+                           <option value="express">Express: next day</option>
+                           <option value="overnight">Overnight</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Submit"></input>
+                    <ul id="sample-list-view" data-role="listview">
+                        <li>List Item 1</li>
+                        <li>List Item 2</li>
+                    </ul>
                     <a href="option-test-fw.html" rel="external">Web UI Framework Option Test</a>
                 </form>
-            </div>
-        </div>
-        <div data-role="page" id="inspect-page" data-add-back-btn="true">
-            <div data-role="header">
-                <h1>Test Options</h1>
-            </div>
-            <div class="content">
-                <div class="content-secondary">
-                    <ul data-role="listview" data-inset="true" id="widget-list" style="float: left; margins: 10px;">
-                    </ul>
-                </div>
-                <div class="content-primary" id="option-list" style="float: left; margins: 10px;">
-                </div>
             </div>
         </div>
     </body>

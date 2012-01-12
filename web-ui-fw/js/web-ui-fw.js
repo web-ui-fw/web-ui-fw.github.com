@@ -3938,6 +3938,8 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
             var klass = owner.attr("class");
             var selectorResult = undefined;
 
+            this._ui.triangle.show();
+
             if (klass.search("year") > 0) {
                 var values = range(1900, 2100);
                 selectorResult = obj._populateSelector(selector, owner,
@@ -4008,6 +4010,9 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
                     widthAtItem = 0,
                     x = 0;
 
+                this._ui.scrollview = selectorResult.scrollable.container;
+                this._ui.selectorOwner = owner;
+
                 // slideDown() seems to synchronously make things visible (albeit at height = 0px), so we can actually
                 // compute widths/heights below
                 selector.slideDown(obj.options.animationDuration);
@@ -4051,13 +4056,21 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
         _hideDataSelector: function(selector) {
             var self = this;
             if (this.state.selectorOut) {
-                selector.slideUp(this.options.animationDuration,
-                    function() {
-                      if (self._ui.scrollview !== undefined) {
-                          self._ui.scrollview.remove();
-                          self._ui.scrollview = undefined;
-                      }
-                    });
+                var removeScrollview = function() {
+                        if (self._ui.scrollview !== undefined) {
+                            self._ui.scrollview.remove();
+                            self._ui.scrollview = undefined;
+                            self._ui.selectorOwner = undefined;
+                        }
+                    };
+
+                if (selector.is(":visible"))
+                    selector.slideUp(this.options.animationDuration, removeScrollview);
+                else {
+                    selector.hide();
+                    self._ui.triangle.hide();
+                    removeScrollview();
+                }
                 this.state.selectorOut = false;
             }
         },
@@ -4129,6 +4142,12 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
             this._initDateTimeDivs(this._ui);
             this.options.date = this.getValue();
             this._setValue(this.options.date);
+            if (this._ui.selectorOwner) {
+                if (this._ui.selectorOwner.is(":visible"))
+                    this._ui.selectorOwner.trigger("vclick");
+                else
+                    this._hideDataSelector(this._ui.selector);
+            }
         },
 
         _populateSelector: function(selector, owner, klass, values,
@@ -4167,8 +4186,6 @@ $.widget("todons.jlayoutadaptor", $.mobile.widget, {
                 this._ui.scrollview.remove();
 
             selector.append(scrollable.container);
-
-            this._ui.scrollview = scrollable.container;
 
             return {scrollable: scrollable, currentIndex: currentIndex};
         },
@@ -6624,8 +6641,6 @@ $("<div><div>" +
             else
                 this._ui.screen.css({opacity: 0.0});
 
-            var origOverflow = { x: $("body").css("overflow-x"), y: $("body").css("overflow-y") };
-            $("body").css({"overflow-x" : "hidden", "overflow-y" : "hidden" });
             this._ui.container
                 .removeClass("ui-selectmenu-hidden")
                 .css({
@@ -6635,7 +6650,6 @@ $("<div><div>" +
                 .addClass("in")
                 .animationComplete(function() {
                     self._ui.screen.height($(document).height());
-                    $("body").css({"overflow-x" : origOverflow.x, "overflow-y" : origOverflow.y});
                 });
 
             this._isOpen = true;
@@ -6651,8 +6665,6 @@ $("<div><div>" +
                     self.element.trigger("closed");
                 };
 
-            var origOverflow = { x: $("body").css("overflow-x"), y: $("body").css("overflow-y") };
-            $("body").css({"overflow-x" : "hidden", "overflow-y" : "hidden" });
             this._ui.container
                 .removeClass("in")
                 .addClass("reverse out")
@@ -6665,7 +6677,6 @@ $("<div><div>" +
                         self._ui.currentArrow.remove();
                         self._ui.currentArrow = undefined;
                     }
-                    $("body").css({"overflow-x" : origOverflow.x, "overflow-y" : origOverflow.y});
                 });
 
             if (this.options.fade)
@@ -6677,6 +6688,8 @@ $("<div><div>" +
 });
 
 $.todons.popupwindow.bindPopupToButton = function(btn, popup) {
+    if (btn.length === 0 || popup.length === 0) return;
+
     var btnVClickHandler = function() {
             // When /this/ button causes a popup, align the popup's theme with that of the button, unless the popup has a theme pre-set
             if (!popup.jqmData("overlay-theme-set"))
