@@ -3,7 +3,8 @@
 //
 // To use:
 // 1. Add inspect-page.js, option-list.js, and inspect-page.html to the folder where the app under test is located
-// 2. Add a reference to this script (inspect-page.js) to the list of scripts loaded from the app under test
+// 2. Add a reference to this script (inspect-page.js), and to option-list.js to the list of scripts loaded from the app
+// under test
 //
 // The result:
 // Every page of the app which has a jQuery Mobile header (<div data-role='header'>) will have a button on the right
