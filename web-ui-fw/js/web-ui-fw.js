@@ -4338,33 +4338,11 @@ $("<div><div id='datetimepicker' class='ui-datetimepicker'>" +
 
 })(jQuery, this);
 /*
- *
- * This software is licensed under the MIT licence (as defined by the OSI at
- * http://www.opensource.org/licenses/mit-license.php)
- * 
- * ***************************************************************************
- * Copyright (C) 2011 by Intel Corporation Ltd.
- * 
- * Permission is hereby granted, free of charge, to any person obtaining a
- * copy of this software and associated documentation files (the "Software"),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- * ***************************************************************************
+ * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) and GPL licenses
+ * http://phpjs.org/functions/range
+ * original by: Waldo Malqui Silva
+ * version: 1107.2516
  */
-
 function range (low, high, step) {
     // Create an array containing the range of integers or characters
     // from low to high (inclusive)  
@@ -6371,7 +6349,6 @@ $.widget( "todons.popupwindow", $.todons.widgetex, {
         corners: true,
         fade: true,
         transition: $.mobile.defaultDialogTransition,
-        showArrow: false,
         initSelector: ":jqmData(role='popupwindow')"
     },
 
@@ -6380,25 +6357,20 @@ source:
 
 $("<div><div>" +
   "    <div id='popupwindow-screen' class='ui-selectmenu-screen ui-screen-hidden ui-popupwindow-screen'></div>" +
-  "    <div id='popupwindow-container' class='ui-popupwindow ui-selectmenu-hidden ui-overlay-shadow ui-corner-all'>" +
-  "        <div id='popupwindow-container-inner' class='ui-popupwindow-container-inner'></div>" +
-  "        <div id='popupwindow-arrow' class='ui-triangle-container'></div>" +
-  "    </div>" +
+  "    <div id='popupwindow-container' class='ui-popupwindow ui-popupwindow-padding ui-selectmenu-hidden ui-overlay-shadow ui-corner-all'></div>" +
   "</div>" +
   "</div>")
 ,        ui: {
             screen:    "#popupwindow-screen",
-            container: "#popupwindow-container",
-            inner:     "#popupwindow-container-inner",
-            arrow:     "#popupwindow-arrow"
+            container: "#popupwindow-container"
         }
     },
 
     _create: function() {
-        var self = this,
-            thisPage = this.element.closest(".ui-page");
+        var thisPage = this.element.closest(":jqmData(role='page')"),
+            self = this;
 
-        if (thisPage[0] === undefined)
+        if (thisPage.length === 0)
             thisPage = $("body");
 
         // Drop a placeholder into the location from which we shall rip out the popup window contents
@@ -6409,11 +6381,13 @@ $("<div><div>" +
                         : " for " + this.element.attr("id")) + " --></div>")
                 .css("display", "none")
                 .insertBefore(this.element);
+
+        // Apply the proto
         thisPage.append(this._ui.screen);
         this._ui.container.insertAfter(this._ui.screen);
-        this._ui.inner.append(this.element);
-        this._ui.arrow.remove();
+        this._ui.container.append(this.element);
 
+        // Define instance variables
         $.extend( self, {
             _isOpen: false
         });
@@ -6454,6 +6428,9 @@ $("<div><div>" +
 
     _setOverlayTheme: function(value) {
         this._realSetTheme(this._ui.container, value);
+        // The screen must always have some kind of background for fade to work, so, if the theme is being unset,
+        // set the background to "a".
+        this._realSetTheme(this._ui.screen, (value === "" ? "a" : value));
         this.options.overlayTheme = value;
         this.element.attr("data-" + ($.mobile.ns || "") + "overlay-theme", value);
     },
@@ -6483,111 +6460,51 @@ $("<div><div>" +
         this.element.attr("data-" + ($.mobile.ns || "") + "transition", value);
     },
 
-    _setShowArrow: function(value) {
-        this.options.showArrow = value;
-        this.element.attr("data-" + ($.mobile.ns || "") + "show-arrow", value);
-    },
-
     _setDisabled: function(value) {
         $.Widget.prototype._setOption.call(this, "disabled", value);
         if (value)
             this.close();
     },
 
-    _placementCoords: function(x, y) {
+    _placementCoords: function(x, y, cx, cy) {
         // Try and center the overlay over the given coordinates
         var ret,
-            menuHeight = this._ui.container.outerHeight(true),
-            menuWidth = this._ui.container.outerWidth(true),
             scrollTop = $(window).scrollTop(),
             screenHeight = $(window).height(),
             screenWidth = $(window).width(),
-            halfheight = menuHeight / 2,
+            halfheight = cy / 2,
             maxwidth = parseFloat( this._ui.container.css( "max-width" ) ),
-            calcCoords = function(coords) {
-                var roomtop = coords.y - scrollTop,
-                roombot = scrollTop + screenHeight - coords.y,
-                newtop, newleft;
+            roomtop = y - scrollTop,
+            roombot = scrollTop + screenHeight - y,
+            newtop, newleft;
 
-                if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
-                    newtop = coords.y - halfheight;
-                }
-                else {
-                    // 30px tolerance off the edges
-                    newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
-                }
-
-                // If the menuwidth is smaller than the screen center is
-                if ( menuWidth < maxwidth ) {
-                    newleft = ( screenWidth - menuWidth ) / 2;
-                }
-                else {
-                    //otherwise insure a >= 30px offset from the left
-                    newleft = coords.x - menuWidth / 2;
-
-                    // 30px tolerance off the edges
-                    if ( newleft < 30 ) {
-                        newleft = 30;
-                    }
-                    else if ( ( newleft + menuWidth ) > screenWidth ) {
-                        newleft = screenWidth - menuWidth - 30;
-                    }
-                }
-
-                return { x : newleft, y : newtop };
-            };
-
-        if (this.options.showArrow) {
-            this._ui.arrow.appendTo(this._ui.container);
-            var possibleLocations = {}, coords, desired, minDiff, minDiffIdx,
-                arrowHeight = this._ui.arrow.height();
-            this._ui.arrow.remove();
-
-            /* Check above */
-            desired = {x : x, y : y - halfheight - arrowHeight};
-            coords = calcCoords(desired);
-            possibleLocations.above = {
-                coords: coords,
-                diff: {
-                    x: Math.abs(desired.x - (coords.x + menuWidth / 2)),
-                    y: Math.abs(desired.y - (coords.y + halfheight))
-                }
-            };
-            minDiff = possibleLocations.above.diff;
-            minDiffIdx = "above";
-
-            /* Check below */
-            desired = {x : x, y : y + halfheight + arrowHeight};
-            coords = calcCoords(desired);
-            possibleLocations.below = {
-                coords: coords,
-                diff: {
-                    x: Math.abs(desired.x - (coords.x + menuWidth / 2)),
-                    y: Math.abs(desired.y - (coords.y + halfheight))
-                }
-            };
-
-            /*
-             * Compute minimum deviation from desired distance.
-             * Not sure if Euclidean distance is best here, especially since it is expensive to compute.
-             */
-            for (var Nix in possibleLocations) {
-                if (possibleLocations[Nix].diff.x + possibleLocations[Nix].diff.y < minDiff.x + minDiff.y) {
-                    minDiff = possibleLocations[Nix].diff;
-                    minDiffIdx = Nix;
-                }
-
-                if (0 === minDiff.x + minDiff.y)
-                    break;
-            }
-
-            ret = possibleLocations[minDiffIdx].coords;
-            ret.arrowLocation = (("above" === minDiffIdx) ? "bottom" : "top");
+        if ( roomtop > cy / 2 && roombot > cy / 2 ) {
+            newtop = y - halfheight;
         }
-        else
-            ret = calcCoords({x : x, y : y});
+        else {
+            // 30px tolerance off the edges
+            newtop = roomtop > roombot ? scrollTop + screenHeight - cy - 30 : scrollTop + 30;
+        }
 
-        return ret;
+        // If the menuwidth is smaller than the screen center is
+        if ( cx < maxwidth ) {
+            newleft = ( screenWidth - cx ) / 2;
+        }
+        else {
+            //otherwise insure a >= 30px offset from the left
+            newleft = x - cx / 2;
+
+            // 10px tolerance off the edges
+            if ( newleft < 10 ) {
+                newleft = 10;
+            }
+            else
+            if ( ( newleft + cx ) > screenWidth ) {
+                newleft = screenWidth - cx - 10;
+            }
+        }
+
+        return { x : newleft, y : newtop };
     },
 
     destroy: function() {
@@ -6607,7 +6524,9 @@ $("<div><div>" +
             var self = this,
                 x = (undefined === x_where ? window.innerWidth  / 2 : x_where),
                 y = (undefined === y_where ? window.innerHeight / 2 : y_where),
-                coords = this._placementCoords(x, y),
+                coords = this._placementCoords(x, y,
+                    this._ui.container.outerWidth(true),
+                    this._ui.container.outerHeight(true)),
                 zIndexMax = 0;
 
             $(document)
@@ -6622,15 +6541,6 @@ $("<div><div>" +
 
             this._ui.screen.css("z-index", zIndexMax + 1);
             this._ui.container.css("z-index", zIndexMax * 10);
-
-            if (this.options.showArrow)
-                this._ui.currentArrow = this._ui.arrow
-                    .clone()
-                    [(("bottom" === coords.arrowLocation) ? "appendTo" : "prependTo")](this._ui.container)
-                    .triangle({
-                        location: coords.arrowLocation, offset: "50%",
-                        color: this._ui.container.css("background-color")
-                    });
 
             this._ui.screen
                 .height($(document).height())
@@ -6673,10 +6583,6 @@ $("<div><div>" +
                         .removeClass("reverse out")
                         .addClass("ui-selectmenu-hidden")
                         .removeAttr("style");
-                    if (self._ui.currentArrow != undefined) {
-                        self._ui.currentArrow.remove();
-                        self._ui.currentArrow = undefined;
-                    }
                 });
 
             if (this.options.fade)
@@ -6690,13 +6596,20 @@ $("<div><div>" +
 $.todons.popupwindow.bindPopupToButton = function(btn, popup) {
     if (btn.length === 0 || popup.length === 0) return;
 
-    var btnVClickHandler = function() {
+    var btnVClickHandler = function(e) {
             // When /this/ button causes a popup, align the popup's theme with that of the button, unless the popup has a theme pre-set
             if (!popup.jqmData("overlay-theme-set"))
                 popup.popupwindow("option", "overlayTheme", btn.jqmData("theme"));
             popup.popupwindow("open",
                 btn.offset().left + btn.outerWidth()  / 2,
                 btn.offset().top  + btn.outerHeight() / 2);
+
+            // Swallow event, because it might end up getting picked up by the popup window's screen handler, which
+            // will in turn cause the popup window to close - Thanks Sasha!
+            if (e.stopPropagation)
+                e.stopPropagation();
+            if (e.preventDefault)
+                e.preventDefault();
         };
 
     // If the popup has a theme set, prevent it from being clobbered by the associated button
@@ -6724,6 +6637,237 @@ $(document).bind("pagecreate create", function(e) {
     $("a[href^='#']:jqmData(rel='popupwindow')", e.target).each(function() {
         $.todons.popupwindow.bindPopupToButton($(this), $($(this).attr("href")));
     });
+});
+
+})(jQuery);
+/*
+ * jQuery Mobile Widget @VERSION
+ *
+ * This software is licensed under the MIT licence (as defined by the OSI at
+ * http://www.opensource.org/licenses/mit-license.php)
+ *
+ * ***************************************************************************
+ * Copyright (C) 2011 by Intel Corporation Ltd.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ * ***************************************************************************
+ *
+ * Authors: Gabriel Schulhof <gabriel.schulhof@intel.com>
+ */
+
+// This widget is implemented in an extremely ugly way. It should derive from $.todons.popupwindow, but it doesn't
+// because there's a bug in jquery.ui.widget.js which was fixed in jquery-ui commit
+// b9153258b0f0edbff49496ed16d2aa93bec07d95. Once a version of jquery-ui containing that commit is released
+// (probably >= 1.9m5), and jQuery Mobile picks up the widget from there, this widget needs to be rewritten properly.
+// The problem is that, when a widget inherits from a superclass and declares an object in its prototype identical in key
+// to one in the superclass, upon calling $.widget the object is overwritten in both the prototype of the superclass and
+// the prototype of the subclass. The prototype of the superclass should remain unchanged.
+
+(function($, undefined) {
+    $.widget("todons.ctxpopup", $.todons.widgetex, {
+        options: $.extend({}, $.todons.popupwindow.prototype.options, {
+            initSelector: ":not(:not(" + $.todons.popupwindow.prototype.options.initSelector + ")):not(:not(:jqmData(show-arrow='true'), :jqmData(show-arrow)))"
+        }),
+
+        _htmlProto: {
+source:
+
+$("<div><div id='outer' class='ui-ctxpopup'>" +
+  "    <div id='top' class='ui-ctxpopup-row' data-role='triangle' data-location='top'></div>" +
+  "    <div class='ui-ctxpopup-row'>" +
+  "        <div id='left' class='ui-ctxpopup-cell' data-role='triangle' data-location='left'></div>" +
+  "        <div id='container' class='ui-ctxpopup-cell'></div>" +
+  "        <div id='right' class='ui-ctxpopup-cell' data-role='triangle' data-location='right'></div>" +
+  "    </div>" +
+  "    <div id='bottom' class='ui-ctxpopup-row' data-role='triangle' data-location='bottom'></div>" +
+  "</div>" +
+  "</div>")
+,            ui: {
+                outer     : "#outer",
+                container : "#container", // the key has to have the name "container"
+                arrow     : {
+                    all : ":jqmData(role='triangle')",
+                    l   : "#left",
+                    t   : "#top",
+                    r   : "#right",
+                    b   : "#bottom"
+                }
+            }
+        },
+
+        _create: function(){
+            if (!this.element.data("popupwindow"))
+                this.element.popupwindow();
+            this.element.data("popupwindow")
+                    ._ui.container
+                        .removeClass("ui-popupwindow-padding")
+                        .append(this._ui.outer);
+            this._ui.outer.trigger("create"); // Creates the triangle widgets
+            this._ui.container
+                .addClass("ui-popupwindow-padding")
+                .append(this.element);
+        },
+
+        _setOption: function(key, value) {
+            $.todons.popupwindow.prototype._setOption.apply(this.element.data("popupwindow"), arguments);
+            this.options[key] = value;
+        },
+    });
+
+var origOpen = $.todons.popupwindow.prototype.open,
+    orig_setOption = $.todons.popupwindow.prototype._setOption,
+    orig_placementCoords = $.todons.popupwindow.prototype._placementCoords;
+
+$.todons.popupwindow.prototype._setOption = function(key, value) {
+    var ctxpopup = this.element.data("ctxpopup"),
+        needsApplying = true;
+    if (ctxpopup) {
+        if ("shadow" === key || "overlayTheme" === key || "corners" === key) {
+            var origContainer = this._ui.container;
+
+            this._ui.container = ctxpopup._ui.container;
+            orig_setOption.apply(this, arguments);
+            this._ui.container = origContainer;
+            needsApplying = false;
+        }
+        ctxpopup.options[key] = value;
+    }
+
+    if (needsApplying)
+        orig_setOption.apply(this, arguments);
+};
+
+$.todons.popupwindow.prototype._placementCoords = function(x, y, cx, cy) {
+    var ctxpopup = this.element.data("ctxpopup"),
+        self = this;
+
+    if (ctxpopup) {
+        var coords = {}, minDiff, minDiffIdx;
+
+        function getCoords(arrow, x_factor, y_factor) {
+            var ret = {}, halfSize;
+
+            // Unhide the arrow we want to test to take it into account
+            ctxpopup._ui.arrow.all.hide();
+            ctxpopup._ui.arrow[arrow].show();
+
+            halfSize = {
+                cx: self._ui.container.width()  / 2,
+                cy: self._ui.container.height() / 2
+            };
+
+            ret.desired = { 
+                "x" : x + halfSize.cx * x_factor,
+                "y" : y + halfSize.cy * y_factor
+            };
+
+            ret.actual = orig_placementCoords.call(self, ret.desired.x, ret.desired.y,
+                self._ui.container.width(), self._ui.container.height());
+
+            ret.diff = {
+                x: ret.desired.x - (ret.actual.x + halfSize.cx),
+                y: ret.desired.y - (ret.actual.y + halfSize.cy)
+            };
+
+            ret.absDiff = Math.abs(ret.diff.x) +
+                          Math.abs(ret.diff.y);
+
+            // Hide it back
+            ctxpopup._ui.arrow[arrow].hide();
+
+            return ret;
+        }
+
+        coords = {
+            l : getCoords("l",  1,  0),
+            r : getCoords("r", -1,  0),
+            t : getCoords("t",  0,  1),
+            b : getCoords("b",  0, -1)
+        };
+
+        $.each(coords, function(key, value) {
+            if (minDiff === undefined || value.absDiff < minDiff) {
+                minDiff = value.absDiff;
+                minDiffIdx = key;
+            }
+        });
+
+        // Side-effect: show the appropriate arrow and move it to the right offset
+        ctxpopup._ui.arrow[minDiffIdx]
+            .show()
+            .triangle("option", "offset",
+                ctxpopup._ui.arrow[minDiffIdx][("b" === minDiffIdx || "t" === minDiffIdx) ? "width" : "height"]() / 2 +
+                coords[minDiffIdx].diff[("b" === minDiffIdx || "t" === minDiffIdx) ? "x" : "y"]);
+        return coords[minDiffIdx].actual;
+    }
+    else
+        return orig_placementCoords.call(this, x, y, cx, cy);
+};
+
+$.todons.popupwindow.prototype.open = function(x, y) {
+    var ctxpopup = this.element.data("ctxpopup"),
+        self = this;
+    if (ctxpopup) {
+        var coords = {};
+
+        function getCoords(arrows, x_factor, y_factor) {
+            var ret = {};
+
+            // Unhide the arrow we want to test to take it into account
+            ctxpopup._ui.arrow[arrows[0]].hide();
+            ctxpopup._ui.arrow[arrows[1]].hide();
+            ctxpopup._ui.arrow[arrows[2]].hide();
+            ctxpopup._ui.arrow[arrows[3]].show();
+
+            ret.desired = { 
+                "x" : x + (self._ui.container.width()  / 2) * x_factor,
+                "y" : y + (self._ui.container.height() / 2) * y_factor
+            };
+
+            ret.actual = self._placementCoords(ret.desired.x, ret.desired.y,
+                self._ui.container.width(), self._ui.container.height());
+            ret.actual = {
+                "x" : ret.actual.x + self._ui.container.width()  / 2,
+                "y" : ret.actual.y + self._ui.container.height() / 2
+            }
+
+            // Hide it back
+            ctxpopup._ui.arrow[arrows[3]].hide();
+
+            return ret;
+        }
+
+        this._setShadow(false);
+        this._setCorners(false);
+        this._setOverlayTheme(null);
+        this._setOption("overlayTheme", ctxpopup.options.overlayTheme);
+        ctxpopup._ui.arrow.all.triangle("option", "color", ctxpopup._ui.container.css("background-color"));
+    }
+
+    origOpen.call(this, x, y);
+};
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+    var ctxpopups = $($.todons.ctxpopup.prototype.options.initSelector, e.target);
+    $.todons.ctxpopup.prototype.enhanceWithin( e.target );
+
 });
 
 })(jQuery);
@@ -7688,7 +7832,6 @@ $.widget("mobile.simple", $.mobile.widget, {
                 this.options.updateInterval = value;
                 break;
             case 'disabled':
-                console.log(value);
                 this.element[value ? "addClass" : "removeClass"]("ui-disabled");
                 this.options.disabled = value;
                 break;
@@ -8694,7 +8837,7 @@ $.widget( "todons.triangle", $.todons.widgetex, {
     options: {
         extraClass: "",
         offset: null,
-        color: undefined,
+        color: null,
         location: "top",
         initSelector: ":jqmData(role='triangle')"
     },
@@ -8709,12 +8852,25 @@ $.widget( "todons.triangle", $.todons.widgetex, {
         this.element.addClass("ui-triangle-container").append(triangle);
     },
 
+    _doCSS: function() {
+        var location = (this.options.location || "top"),
+            offsetCoord = (($.inArray(location, ["top", "bottom"]) === -1) ? "top" : "left"),
+            cssArg = {
+                "border-bottom-color" : "top"    === location ? this.options.color : "transparent",
+                "border-top-color"    : "bottom" === location ? this.options.color : "transparent",
+                "border-left-color"   : "right"  === location ? this.options.color : "transparent",
+                "border-right-color"  : "left"   === location ? this.options.color : "transparent"
+            };
+
+        cssArg[offsetCoord] = this.options.offset;
+
+        this._triangle.removeAttr("style").css(cssArg);
+    },
+
     _setOffset: function(value) {
-        if (null !== value) {
-            this._triangle.css("left", value);
-            this.options.offset = value;
-            this.element.attr("data-" + ($.mobile.ns || "") + "offset", value);
-        }
+        this.options.offset = value;
+        this.element.attr("data-" + ($.mobile.ns || "") + "offset", value);
+        this._doCSS();
     },
 
     _setExtraClass: function(value) {
@@ -8724,10 +8880,9 @@ $.widget( "todons.triangle", $.todons.widgetex, {
     },
 
     _setColor: function(value) {
-        this._triangle.css("border-bottom-color", value);
-        this._triangle.css("border-top-color", value);
         this.options.color = value;
         this.element.attr("data-" + ($.mobile.ns || "") + "color", value);
+        this._doCSS();
     },
 
     _setLocation: function(value) {
@@ -8737,8 +8892,11 @@ $.widget( "todons.triangle", $.todons.widgetex, {
         this._triangle
             .removeClass("ui-triangle-" + this.options.location)
             .addClass("ui-triangle-" + value);
+
         this.options.location = value;
         this.element.attr("data-" + ($.mobile.ns || "") + "location", value);
+
+        this._doCSS();
     }
 });
 

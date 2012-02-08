@@ -178,46 +178,70 @@
   height: 40px;
   border: 5px solid black;
 }
-.ui-triangle {
+.ui-triangle-container {
+  position: relative;
+}
+.ui-triangle-container .ui-triangle {
   position: absolute;
-  bottom: 0px;
   border-style: solid;
   border-color: transparent;
   border-width: 10px;
-  margin-left: -10px;
-}
-.ui-triangle-container {
-  height: 10px;
-  position: relative;
 }
 .ui-triangle-container .ui-triangle-top {
+  top: 0px;
   border-top-width: 0px;
   border-left-color: transparent;
   border-right-color: transparent;
+  margin-left: -10px;
 }
 .ui-triangle-container .ui-triangle-bottom {
+  bottom: 0px;
   border-bottom-width: 0px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  margin-left: -10px;
+}
+.ui-triangle-container .ui-triangle-left {
+  right: 0px;
+  margin-top: -10px;
+  border-left-width: 0px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.ui-triangle-container .ui-triangle-right {
+  left: 0px;
+  margin-top: -10px;
+  border-right-width: 0px;
   border-left-color: transparent;
   border-right-color: transparent;
 }
 .ui-triangle-container-top {
+  height: 10px;
   top: 0px;
   margin-top: -10px;
 }
 .ui-triangle-container-bottom {
+  height: 10px;
   bottom: 0px;
   margin-bottom: -10px;
+}
+.ui-triangle-container-left {
+  width: 10px;
+}
+.ui-triangle-container-right {
+  width: 10px;
+}
+.ui-popupwindow-padding {
+  padding: 6px;
 }
 .ui-popupwindow {
   display: inline-block;
   position: absolute;
 }
-.ui-popupwindow .ui-popupwindow-container-inner {
-  padding: 6px;
-}
 .ui-popupwindow-screen {
   background: #000000;
   opacity: 0;
+  box-sizing: border-box;
 }
 /* Own CSS */
 
@@ -312,6 +336,36 @@
 }
 .ui-option-header .ui-controlgroup-horizontal .ui-corner-right {
     margin-right: 5px !important;
+}
+/* 
+ * The settings in this file are part of the theme. They are not part of the structure of ctxpopup.
+ * In the default theme, ui-body-* has a border width of 1px. So, to make the triangles cross this border, we set them in
+ * by 1px.
+ */
+
+.ui-ctxpopup-row .ui-triangle-top {
+    top: 1px;
+}
+
+.ui-ctxpopup-row .ui-triangle-left {
+    right: -1px;
+}
+
+.ui-ctxpopup-row .ui-triangle-right {
+    left: -1px;
+}
+
+.ui-ctxpopup-row .ui-triangle-bottom {
+    bottom: 1px;
+}
+.ui-ctxpopup {
+  display: table;
+}
+.ui-ctxpopup .ui-ctxpopup-row {
+  display: table-row;
+}
+.ui-ctxpopup .ui-ctxpopup-row .ui-ctxpopup-cell {
+  display: table-cell;
 }
 .ui-pagelist {
     text-align: center;
