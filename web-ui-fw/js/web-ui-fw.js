@@ -6524,10 +6524,18 @@ $("<div><div>" +
             var self = this,
                 x = (undefined === x_where ? window.innerWidth  / 2 : x_where),
                 y = (undefined === y_where ? window.innerHeight / 2 : y_where),
-                coords = this._placementCoords(x, y,
-                    this._ui.container.outerWidth(true),
-                    this._ui.container.outerHeight(true)),
+                coords,
                 zIndexMax = 0;
+
+            // If the width of the popup exceeds the width of the window, we need to limit the width here,
+            // otherwise outer{Width,Height}(true) below will happily report the unrestricted values, causing
+            // the popup to get placed wrong.
+            if (this._ui.container.outerWidth(true) > $(window).width())
+                this._ui.container.css({"max-width" : $(window).width() - 30});
+
+            coords = this._placementCoords(x, y,
+                this._ui.container.outerWidth(true),
+                this._ui.container.outerHeight(true));
 
             $(document)
                 .find("*")
@@ -6760,33 +6768,94 @@ $.todons.popupwindow.prototype._placementCoords = function(x, y, cx, cy) {
     if (ctxpopup) {
         var coords = {}, minDiff, minDiffIdx;
 
+        // Returns:
+        // {
+        //    absDiff: int
+        //    triangleOffset: int
+        //    actual: { x: int, y: int }
+        // }
         function getCoords(arrow, x_factor, y_factor) {
-            var ret = {}, halfSize;
-
             // Unhide the arrow we want to test to take it into account
             ctxpopup._ui.arrow.all.hide();
             ctxpopup._ui.arrow[arrow].show();
 
-            halfSize = {
-                cx: self._ui.container.width()  / 2,
-                cy: self._ui.container.height() / 2
-            };
+            var isHorizontal = ("b" === arrow || "t" === arrow),
+                // Names of keys used in calculations depend on whether things are horizontal or not
+                coord = (isHorizontal
+                    ? {point: "x", size: "cx", beg: "left", outerSize: "outerWidth",  niceSize: "width",  triangleSize : "height"}
+                    : {point: "y", size: "cy", beg: "top",  outerSize: "outerHeight", niceSize: "height", triangleSize : "width"}),
+                size = {
+                    cx : self._ui.container.width(),
+                    cy : self._ui.container.height()
+                },
+                halfSize = {
+                    cx : size.cx / 2,
+                    cy : size.cy / 2
+                },
+                desired = { 
+                    "x" : x + halfSize.cx * x_factor,
+                    "y" : y + halfSize.cy * y_factor
+                },
+                orig = orig_placementCoords.call(self, desired.x, desired.y, size.cx, size.cy),
 
-            ret.desired = { 
-                "x" : x + halfSize.cx * x_factor,
-                "y" : y + halfSize.cy * y_factor
-            };
+                // The triangleOffset must be clamped to the range described below:
+                //
+                //                          +-------...
+                //                          |   /\
+                //                          |  /  \
+                //                   ----+--+-,-----...
+                //lowerDiff       -->____|  |/ <-- possible rounded corner
+                //triangle size   -->    | /|
+                //                   ____|/ |
+                //                    ^  |\ | <-- lowest possible offset for triangle
+                // actual range of    |  | \| 
+                // arrow offset       |  |  | 
+                // values due to      |  .  . Payload table cell looks like
+                // possible rounded   |  .  . a popup window, and it may have
+                // corners and arrow  |  .  . arbitrary things like borders,
+                // triangle size -    |  |  | shadows, and rounded corners.
+                // our clamp range    |  | /|
+                //                   _v__|/ |
+                //triangle size   -->    |\ | <-- highest possible offset for triangle
+                //                   ____| \|
+                //upperDiff       -->    |  |\ <-- possible rounded corner
+                //                   ----+--+-'-----...
+                //                          |  \  /
+                //                          |   \/
+                //                          +-------...
+                //
+                // We calculate lowerDiff and upperDiff by considering the offset and width of the payload (this.element)
+                // versus the offset and width of the element enclosing the triangle, because the payload is inside
+                // whatever decorations (such as borders, shadow, rounded corners) and thus can give a reliable indication
+                // of the thickness of the combined decorations
 
-            ret.actual = orig_placementCoords.call(self, ret.desired.x, ret.desired.y,
-                self._ui.container.width(), self._ui.container.height());
-
-            ret.diff = {
-                x: ret.desired.x - (ret.actual.x + halfSize.cx),
-                y: ret.desired.y - (ret.actual.y + halfSize.cy)
-            };
-
-            ret.absDiff = Math.abs(ret.diff.x) +
-                          Math.abs(ret.diff.y);
+                arrowBeg = ctxpopup._ui.arrow[arrow].offset()[coord.beg],
+                arrowSize = ctxpopup._ui.arrow[arrow][coord.outerSize](true),
+                payloadBeg = self.element.offset()[coord.beg],
+                payloadSize = self.element[coord.outerSize](true),
+                triangleSize = ctxpopup._ui.arrow[arrow][coord.triangleSize](),
+                triangleOffset = 
+                    Math.max(
+                        triangleSize // triangle size
+                            + Math.max(0, payloadBeg - arrowBeg), // lowerDiff
+                        Math.min(
+                            arrowSize // bottom
+                                - triangleSize // triangle size
+                                - Math.max(0, arrowBeg + arrowSize - (payloadBeg + payloadSize)), // upperDiff
+                            arrowSize / 2 // arrow unrestricted offset
+                                + desired[coord.point]
+                                - orig[coord.point]
+                                - halfSize[coord.size])),
+                // Triangle points here
+                final = {
+                    "x": orig.x + ( isHorizontal ? triangleOffset : 0) + ("r" === arrow ? size.cx : 0),
+                    "y": orig.y + (!isHorizontal ? triangleOffset : 0) + ("b" === arrow ? size.cy : 0)
+                },
+                ret = {
+                    actual         : orig,
+                    triangleOffset : triangleOffset,
+                    absDiff        : Math.abs(x - final.x) + Math.abs(y - final.y)
+                };
 
             // Hide it back
             ctxpopup._ui.arrow[arrow].hide();
@@ -6811,9 +6880,7 @@ $.todons.popupwindow.prototype._placementCoords = function(x, y, cx, cy) {
         // Side-effect: show the appropriate arrow and move it to the right offset
         ctxpopup._ui.arrow[minDiffIdx]
             .show()
-            .triangle("option", "offset",
-                ctxpopup._ui.arrow[minDiffIdx][("b" === minDiffIdx || "t" === minDiffIdx) ? "width" : "height"]() / 2 +
-                coords[minDiffIdx].diff[("b" === minDiffIdx || "t" === minDiffIdx) ? "x" : "y"]);
+            .triangle("option", "offset", coords[minDiffIdx].triangleOffset);
         return coords[minDiffIdx].actual;
     }
     else
@@ -6821,38 +6888,9 @@ $.todons.popupwindow.prototype._placementCoords = function(x, y, cx, cy) {
 };
 
 $.todons.popupwindow.prototype.open = function(x, y) {
-    var ctxpopup = this.element.data("ctxpopup"),
-        self = this;
+    var ctxpopup = this.element.data("ctxpopup");
+
     if (ctxpopup) {
-        var coords = {};
-
-        function getCoords(arrows, x_factor, y_factor) {
-            var ret = {};
-
-            // Unhide the arrow we want to test to take it into account
-            ctxpopup._ui.arrow[arrows[0]].hide();
-            ctxpopup._ui.arrow[arrows[1]].hide();
-            ctxpopup._ui.arrow[arrows[2]].hide();
-            ctxpopup._ui.arrow[arrows[3]].show();
-
-            ret.desired = { 
-                "x" : x + (self._ui.container.width()  / 2) * x_factor,
-                "y" : y + (self._ui.container.height() / 2) * y_factor
-            };
-
-            ret.actual = self._placementCoords(ret.desired.x, ret.desired.y,
-                self._ui.container.width(), self._ui.container.height());
-            ret.actual = {
-                "x" : ret.actual.x + self._ui.container.width()  / 2,
-                "y" : ret.actual.y + self._ui.container.height() / 2
-            }
-
-            // Hide it back
-            ctxpopup._ui.arrow[arrows[3]].hide();
-
-            return ret;
-        }
-
         this._setShadow(false);
         this._setCorners(false);
         this._setOverlayTheme(null);
