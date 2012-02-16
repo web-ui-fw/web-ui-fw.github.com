@@ -845,25 +845,33 @@
 }
 .ui-toggleswitch {
   position: relative;
-  display: inline-block;
+  overflow: hidden;
 }
-.ui-toggleswitch .toggleswitch-button-outside {
-  left: 0px;
-  top: 0px;
+.ui-toggleswitch .toggleswitch-background {
   position: absolute;
-}
-.ui-toggleswitch .toggleswitch-button-inside {
-  display: block;
-}
-.ui-toggleswitch .toggleswitch-button-transparent {
-  opacity: 0;
-}
-.ui-toggleswitch .toggleswitch-inner-active {
-  position: absolute;
+  margin: 0px;
+  border: 0px;
   left: 0px;
-  top: 0px;
   right: 0px;
+  top: 0px;
   bottom: 0px;
+  pointer-events: none;
+}
+.ui-toggleswitch .toggleswitch-sizer {
+  margin: 0px;
+  opacity: 0;
+  pointer-events: none;
+}
+.ui-toggleswitch .toggleswitch-floating-button {
+  position: absolute;
+  margin: 0px;
+  left: 0px;
+  right: 0px;
+}
+.ui-toggleswitch .toggleswitch-mover {
+  border-color: transparent;
+  background: none;
+  pointer-events: none;
 }
 .ui-volumecontrol-background {
     background: rgba(0, 0, 0, 0.666667);
