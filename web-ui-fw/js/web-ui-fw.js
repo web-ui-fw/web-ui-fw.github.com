@@ -8734,12 +8734,16 @@ $("<div><div id='outer' class='ui-btn ui-btn-corner-all ui-btn-inline ui-btn-up-
   "    <div class='ui-btn ui-btn-corner-all ui-btn-up-c toggleswitch-background'></div>" +
   "    <div class='ui-btn ui-btn-corner-all ui-btn-up-c toggleswitch-background ui-btn-active' id='bg'></div>" +
   "    <div class='toggleswitch-sizer-container'>" +
-  "        <a data-role='button' data-shadow='false' class='toggleswitch-sizer'>" +
-  "           <span data-normal-text='true'></span>" +
-  "        </a>" +
-  "        <a data-role='button' data-shadow='false' class='toggleswitch-sizer'>" +
-  "           <span data-active-text='true'></span>" +
-  "        </a>" +
+  "        <div class='toggleswitch-sizer-cell'>" +
+  "            <a data-role='button' data-shadow='false' class='toggleswitch-sizer'>" +
+  "               <span data-normal-text='true'></span>" +
+  "            </a>" +
+  "        </div>" +
+  "        <div class='toggleswitch-sizer-cell'>" +
+  "            <a data-role='button' data-shadow='false' class='toggleswitch-sizer'>" +
+  "               <span data-active-text='true'></span>" +
+  "            </a>" +
+  "        </div>" +
   "    </div>" +
   "    <a data-role='button' data-shadow='false' class='toggleswitch-floating-button toggleswitch-mover' id='normal'>" +
   "       <span data-normal-text='true'></span>" +

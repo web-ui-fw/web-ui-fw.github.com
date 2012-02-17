@@ -881,7 +881,7 @@
   display: table;
   width: 100%;
 }
-.ui-toggleswitch.toggleswitch-h .toggleswitch-sizer-container .toggleswitch-sizer {
+.ui-toggleswitch.toggleswitch-h .toggleswitch-sizer-container .toggleswitch-sizer-cell {
   display: table-cell;
   width: 50%;
 }
