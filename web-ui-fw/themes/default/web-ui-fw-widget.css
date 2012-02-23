@@ -848,18 +848,42 @@
 }
 .ui-toggleswitch {
   position: relative;
-  overflow: hidden;
+  border: none;
 }
-.ui-toggleswitch .toggleswitch-mover {
+.ui-toggleswitch a {
   margin: 0px;
+}
+.ui-toggleswitch a .ui-btn-inner {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: 100%;
+}
+.ui-toggleswitch .toggleswitch-mover-container {
+  overflow: hidden;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+}
+.ui-toggleswitch .toggleswitch-mover-container .toggleswitch-mover {
+  background: none;
+  box-shadow: none;
+  pointer-events: none;
+  border-color: transparent;
+}
+.ui-toggleswitch .toggleswitch-mover-container .toggleswitch-mover .ui-btn-inner {
   border-color: transparent;
   background: none;
-  pointer-events: none;
+  box-shadow: none;
+}
+.ui-toggleswitch .toggleswitch-mover-container .toggleswitch-mover span {
+  text-overflow: clip;
 }
 .ui-toggleswitch .toggleswitch-background {
   position: absolute;
   margin: 0px;
-  border: 0px;
   left: 0px;
   right: 0px;
   top: 0px;
@@ -867,13 +891,14 @@
   pointer-events: none;
 }
 .ui-toggleswitch .toggleswitch-sizer {
-  margin: 0px;
   opacity: 0;
   pointer-events: none;
 }
-.ui-toggleswitch.toggleswitch-v .toggleswitch-floating-button {
+.ui-toggleswitch .toggleswitch-floating-button {
+  box-shadow: none;
   position: absolute;
-  margin: 0px;
+}
+.ui-toggleswitch.toggleswitch-v .toggleswitch-floating-button {
   left: 0px;
   right: 0px;
 }
@@ -886,9 +911,8 @@
   width: 50%;
 }
 .ui-toggleswitch.toggleswitch-h .toggleswitch-floating-button {
-  position: absolute;
-  margin: 0px;
   top: 0px;
+  bottom: 0px;
 }
 .ui-volumecontrol-background {
     background: rgba(0, 0, 0, 0.666667);

@@ -80,9 +80,15 @@
 // When a widget is instantiated, the HTML prototype is loaded if not already present in the prototype. If 'ui' is present
 // inside _htmlProto, the prototype is cloned. Then, a new structure is created based on 'ui' with each selector replaced
 // by a jQuery object containing the results of performing .find() on the prototype's clone with the filter set to the
-// value of the string. In the special case where the selector starts with a '#', the ID is removed from the element after
-// it is assigned into the structure being created. This structure is then made accessible from the widget instance via
-// the '_ui' key (i.e., this._ui).
+// value of the string. The elements inside this jQuery object are modified as follows:
+//
+//   1. If the selector starts with '#' it is assumed to select by ID, and the ID is removed from the elements in the jQuery
+// object.
+//
+//   2. If the selector is of the form '[text]' it is assumed to select by the presence of an attribute named 'text'. This
+// attribute is removed from the elements in the jQuery object.
+// 
+// This structure is then made accessible from the widget instance via the '_ui' key (i.e., this._ui).
 //
 // 2. Use the loadPrototype method when your widget does not derive from $.todons.widgetex:
 // Add _htmlProto to your widget's prototype as described above. Then, in your widget's _create() method, call
@@ -258,9 +264,15 @@ $.todons.widgetex.assignElements = function(proto, obj) {
     var ret = {};
     for (var key in obj)
         if ((typeof obj[key]) === "string") {
+            var theMatch = obj[key].match(/^(#(.*)|\[([^\]=]*)])$/);
             ret[key] = proto.find(obj[key]);
-            if (obj[key].match(/^#/))
-                ret[key].removeAttr("id");
+            if (theMatch) {
+                if (theMatch[2] !== undefined)
+                    ret[key].removeAttr("id");
+                else
+                if (theMatch[3] !== undefined)
+                    ret[key].removeAttr(theMatch[3]);
+            }
         }
         else
         if ((typeof obj[key]) === "object")
@@ -1737,11 +1749,11 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
   "    <div class='colorpicker-hs-container'>" +
   "        <div id='colorpicker-hs-hue-gradient' class='colorpicker-hs-mask'></div>" +
   "        <div id='colorpicker-hs-sat-gradient' class='colorpicker-hs-mask sat-gradient'></div>" +
-  "        <div id='colorpicker-hs-val-mask' class='colorpicker-hs-mask' data-event-source='hs'></div>" +
+  "        <div id='colorpicker-hs-val-mask' class='colorpicker-hs-mask' data-event-source-hs></div>" +
   "        <div id='colorpicker-hs-selector' class='colorpicker-hs-selector ui-corner-all'></div>" +
   "    </div>" +
   "    <div class='colorpicker-l-container'>" +
-  "        <div id='colorpicker-l-gradient' class='colorpicker-l-mask l-gradient' data-event-source='l'></div>" +
+  "        <div id='colorpicker-l-gradient' class='colorpicker-l-mask l-gradient' data-event-source-l></div>" +
   "        <div id='colorpicker-l-selector' class='colorpicker-l-selector ui-corner-all'></div>" +
   "    </div>" +
   "    <div style='clear: both;'></div>" +
@@ -1752,13 +1764,13 @@ $("<div><div id='colorpicker' class='ui-colorpicker'>" +
             hs: {
                 hueGradient: "#colorpicker-hs-hue-gradient",
                 gradient:    "#colorpicker-hs-sat-gradient",
-                eventSource: "[data-event-source='hs']",
+                eventSource: "[data-event-source-hs]",
                 valMask:     "#colorpicker-hs-val-mask",
                 selector:    "#colorpicker-hs-selector"
             },
             l: {
                 gradient:    "#colorpicker-l-gradient",
-                eventSource: "[data-event-source='l']",
+                eventSource: "[data-event-source-l]",
                 selector:    "#colorpicker-l-selector"
             }
         }
@@ -4704,7 +4716,7 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
   "        <div class='hsvpicker-clrchannel-masks-container'>" +
   "            <div class='hsvpicker-clrchannel-mask hsvpicker-clrchannel-mask-white'></div>" +
   "            <div id='hsvpicker-hue-hue' class='hsvpicker-clrchannel-mask jquery-todons-colorwidget-clrlib-hue-gradient'></div>" +
-  "            <div id='hsvpicker-hue-mask-val' class='hsvpicker-clrchannel-mask hsvpicker-clrchannel-mask-black' data-event-source='hue'></div>" +
+  "            <div id='hsvpicker-hue-mask-val' class='hsvpicker-clrchannel-mask hsvpicker-clrchannel-mask-black' data-event-source-hue></div>" +
   "            <div id='hsvpicker-hue-selector' class='hsvpicker-clrchannel-selector ui-corner-all'></div>" +
   "        </div>" +
   "        <div class='hsvpicker-arrow-btn-container'>" +
@@ -4718,7 +4730,7 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
   "        <div class='hsvpicker-clrchannel-masks-container'>" +
   "            <div id='hsvpicker-sat-hue' class='hsvpicker-clrchannel-mask'></div>" +
   "            <div id='hsvpicker-sat-gradient' class='hsvpicker-clrchannel-mask  sat-gradient'></div>" +
-  "            <div id='hsvpicker-sat-mask-val' class='hsvpicker-clrchannel-mask hsvpicker-clrchannel-mask-black' data-event-source='sat'></div>" +
+  "            <div id='hsvpicker-sat-mask-val' class='hsvpicker-clrchannel-mask hsvpicker-clrchannel-mask-black' data-event-source-sat></div>" +
   "            <div id='hsvpicker-sat-selector' class='hsvpicker-clrchannel-selector ui-corner-all'></div>" +
   "        </div>" +
   "        <div class='hsvpicker-arrow-btn-container'>" +
@@ -4732,7 +4744,7 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
   "        <div class='hsvpicker-clrchannel-masks-container'>" +
   "            <div class='hsvpicker-clrchannel-mask hsvpicker-clrchannel-mask-white'></div>" +
   "            <div id='hsvpicker-val-hue' class='hsvpicker-clrchannel-mask'></div>" +
-  "            <div id='hsvpicker-val-gradient' class='hsvpicker-clrchannel-mask val-gradient' data-event-source='val'></div>" +
+  "            <div id='hsvpicker-val-gradient' class='hsvpicker-clrchannel-mask val-gradient' data-event-source-val></div>" +
   "            <div id='hsvpicker-val-selector' class='hsvpicker-clrchannel-selector ui-corner-all'></div>" +
   "        </div>" +
   "        <div class='hsvpicker-arrow-btn-container'>" +
@@ -4744,21 +4756,21 @@ $("<div><div id='hsvpicker' class='ui-hsvpicker'>" +
 ,        ui: {
             container: "#hsvpicker",
             hue: {
-                eventSource: "[data-event-source='hue']",
+                eventSource: "[data-event-source-hue]",
                 selector:    "#hsvpicker-hue-selector",
                 hue:         "#hsvpicker-hue-hue",
                 valMask:     "#hsvpicker-hue-mask-val"
             },
             sat: {
                 gradient:    "#hsvpicker-sat-gradient",
-                eventSource: "[data-event-source='sat']",
+                eventSource: "[data-event-source-sat]",
                 selector:    "#hsvpicker-sat-selector",
                 hue:         "#hsvpicker-sat-hue",
                 valMask:     "#hsvpicker-sat-mask-val"
             },
             val: {
                 gradient:    "#hsvpicker-val-gradient",
-                eventSource: "[data-event-source='val']",
+                eventSource: "[data-event-source-val]",
                 selector:    "#hsvpicker-val-selector",
                 hue:         "#hsvpicker-val-hue"
             }
@@ -8724,41 +8736,49 @@ $.widget("todons.toggleswitch", $.todons.widgetex, {
         offText      : null,
         checked      : true,
         horizontal   : false,
+        // button options
+        theme        : null,
+        shadow       : true,
+        corners      : true,
+        inline       : false,
         initSelector : ":jqmData(role='toggleswitch')"
     },
 
     _htmlProto: {
 source:
 
-$("<div><div id='outer' class='ui-btn ui-btn-corner-all ui-btn-inline ui-btn-up-c ui-toggleswitch'>" +
-  "    <div class='ui-btn ui-btn-corner-all ui-btn-up-c toggleswitch-background'></div>" +
-  "    <div class='ui-btn ui-btn-corner-all ui-btn-up-c toggleswitch-background ui-btn-active' id='bg'></div>" +
+$("<div><div id='outer' class='ui-btn ui-btn-inline ui-toggleswitch'>" +
+  "    <div class='ui-btn toggleswitch-background' id='bgN'></div>" +
+  "    <div class='ui-btn toggleswitch-background ui-btn-active' id='bgA'></div>" +
   "    <div class='toggleswitch-sizer-container'>" +
   "        <div class='toggleswitch-sizer-cell'>" +
   "            <a data-role='button' data-shadow='false' class='toggleswitch-sizer'>" +
-  "               <span data-normal-text='true'></span>" +
+  "               <span data-normal-text></span>" +
   "            </a>" +
   "        </div>" +
   "        <div class='toggleswitch-sizer-cell'>" +
   "            <a data-role='button' data-shadow='false' class='toggleswitch-sizer'>" +
-  "               <span data-active-text='true'></span>" +
+  "               <span data-active-text></span>" +
   "            </a>" +
   "        </div>" +
   "    </div>" +
-  "    <a data-role='button' data-shadow='false' class='toggleswitch-floating-button toggleswitch-mover' id='normal'>" +
-  "       <span data-normal-text='true'></span>" +
-  "    </a>" +
+  "    <div class='toggleswitch-mover-container'>" +
+  "        <a data-role='button' data-shadow='false' class='toggleswitch-floating-button toggleswitch-mover' id='normal'>" +
+  "           <span data-normal-text></span>" +
+  "        </a>" +
+  "        <a data-role='button' data-shadow='false' class='toggleswitch-floating-button toggleswitch-mover ui-btn-active' id='active'>" +
+  "           <span data-active-text></span>" +
+  "        </a>" +
+  "    </div>" +
   "    <a data-role='button' data-shadow='false' class='toggleswitch-floating-button' id='button'>" +
   "       <span id='btn-span'></span>" +
-  "    </a>" +
-  "    <a data-role='button' data-shadow='false' class='toggleswitch-floating-button toggleswitch-mover ui-btn-active' id='active'>" +
-  "       <span data-active-text='true'></span>" +
   "    </a>" +
   "</div>" +
   "</div>")
 ,        ui: {
             outer     : "#outer",
-            bg        : "#bg",
+            bg        : "#bgA",
+            normalBG  : "#bgN",
             txtMovers : {
                 normal : "#normal",
                 active : "#active"
@@ -8769,6 +8789,7 @@ $("<div><div id='outer' class='ui-btn ui-btn-corner-all ui-btn-inline ui-btn-up-
                 normal : "[data-normal-text]",
                 active : "[data-active-text]",
             },
+            links     : "a"
         }
     },
 
@@ -8792,15 +8813,15 @@ $("<div><div id='outer' class='ui-btn ui-btn-corner-all ui-btn-inline ui-btn-up-
         },
 
         horizontal : {
-            btn    : {on  : {left :  "0%", right : "50%"},
-                      off : {left : "50%", right :  "0%"}},
-            bg     : {on  : {left :  "0%"},
-                      off : {left : "50%"}},
+            btn    : {on  : {left  : "50%", right :  "0%"},
+                      off : {left  :  "0%", right : "50%"}},
+            bg     : {on  : {right :  "0%"},
+                      off : {right : "50%"}},
             movers : {
-                normal : {on  : {left : "-50%", right : "100%"},
-                          off : {left :   "0%", right :  "50%"}},
-                active : {on  : {left :  "50%", right :   "0%"},
-                          off : {left : "100%", right : "-50%"}}
+                normal : {on  : {left : "100%", right : "-50%"},
+                          off : {left :  "50%", right :   "0%"}},
+                active : {on  : {left :   "0%", right :  "50%"},
+                          off : {left : "-50%", right : "100%"}}
             }
         }
     },
@@ -8811,17 +8832,31 @@ $("<div><div id='outer' class='ui-btn ui-btn-corner-all ui-btn-inline ui-btn-up-
         this.element
             .addClass("ui-toggleswitch-hidden")
             .after(this._ui.outer);
+        this._ui.links.buttonMarkup();
 
+        // Group some UI elements for easier modification later
         this._ui.clearCss =
             this._ui.btn
                 .add(this._ui.bg)
                 .add(this._ui.txtMovers.normal)
                 .add(this._ui.txtMovers.active);
-        this._ui.outer.find("a").buttonMarkup();
+        this._ui.themedElements = 
+            this._ui.outer
+                .add(this._ui.normalBG)
+                .add(this._ui.links);
+        this._ui.cornerElements = 
+            this._ui.outer
+                .add(this._ui.btn)
+                .add(this._ui.bg)
+                .add(this._ui.normalBG)
+                .add(this._ui.links)
+                .add(this._ui.links.find(".ui-btn-inner"));
+
         this._ui.txtMovers.normal
             .add(this._ui.txtMovers.active)
             .find("*")
             .css({"border-color": "transparent"});
+
 /*
         // Crutches for IE: It does not seem to understand opacity specified in a class, nor that opacity of an element
         // affects all its children
@@ -8868,8 +8903,15 @@ $("<div><div id='outer' class='ui-btn ui-btn-corner-all ui-btn-inline ui-btn-up-
     _updateBtnText: function() {
         var noText = (((this.options.offText || "") === "" &&
                        (this.options.onText  || "") === ""));
-        this._ui.btnSpan.html((noText ? "" : "&nbsp;"));
-        this._ui.outer.find("a")[(noText ? "addClass" : "removeClass")]("ui-btn-icon-notext");
+        //this._ui.btnSpan.html((noText ? "" : "&nbsp;"));
+        this._ui.links[(noText ? "addClass" : "removeClass")]("ui-btn-icon-notext");
+        this._ui.outer[(this.options.inline || noText) ? "addClass" : "removeClass"]("ui-btn-inline");
+    },
+
+    _setInline: function(value) {
+        this.options.inline = value;
+        this.element.attr("data-" + ($.mobile.ns || "") + "inline", value);
+        this._updateBtnText();
     },
 
     _setOnText: function(value) {
@@ -8877,6 +8919,45 @@ $("<div><div id='outer' class='ui-btn ui-btn-corner-all ui-btn-inline ui-btn-up-
         this.options.onText = value;
         this.element.attr("data-" + ($.mobile.ns || "") + "on-text", value);
         this._updateBtnText();
+    },
+
+    _setShadow: function(value) {
+        this.options.shadow = value;
+        this._ui.outer[value ? "addClass" : "removeClass"]("ui-shadow");
+        this.element.attr("data-" + ($.mobile.ns || "") + "shadow", value);
+    },
+
+    _setCorners: function(value) {
+        var method = (value ? "addClass" : "removeClass");
+
+        this.options.corners = value;
+        this.element.attr("data-" + ($.mobile.ns || "") + "corners", value);
+        this._ui.links.attr("data-" + ($.mobile.ns || "") + "corners", value)
+
+        this._ui.cornerElements[method]("ui-btn-corner-all");
+    },
+
+    _setTheme: function(value) {
+        value = ((null === value || "" === value || undefined === value) ? $.mobile.getInheritedTheme(this.element, "c") : value);
+        this._ui.themedElements.each(function() {
+            var el = $(this),
+                classAttr = (el.attr("class") || "") ,
+                Nix, result = "";
+
+            if (classAttr !== "") {
+                var classes = el.attr("class").split(" ");
+
+                for (Nix = 0 ; Nix < classes.length ; Nix++)
+                    if (classes[Nix].match(/ui-btn-up-[a-z]/))
+                        result = result + " " + classes[Nix];
+                el.removeClass(result);
+            }
+        });
+        this._ui.themedElements.addClass("ui-btn-up-" + value);
+
+        this.options.theme = value;
+        this._ui.links.attr("data-" + ($.mobile.ns || "") + "theme", value);
+        this.element.attr("data-" + ($.mobile.ns || "") + "theme", value);
     },
 
     _setOffText: function(value) {
