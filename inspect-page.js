@@ -101,11 +101,13 @@
         }
     }
 
-    var addInspectionTrigger = function(elem) {
-        var btn = $("<a " + (havePopupwindow ? "" : "href='#inspect-page'") + " data-remove-ghost-button='true' class='ui-btn-right' data-iconpos='left' data-icon='grid'>Test Options</a>")
-            .appendTo($(":jqmData(role='header')"))
-            .buttonMarkup()
-            .bind("vclick", launchInspector);
+    var addInspectionTrigger = function(pg) {
+        if ($(pg).find("[data-remove-ghost-button='true']").length === 0) {
+            $("<a " + (havePopupwindow ? "" : "href='#inspect-page'") + " data-remove-ghost-button='true' class='ui-btn-right' data-iconpos='left' data-icon='grid'>Test Options</a>")
+                .appendTo($(":jqmData(role='header')", pg))
+                .buttonMarkup()
+                .bind("vclick", launchInspector);
+        }
     }
 
     $(document)
