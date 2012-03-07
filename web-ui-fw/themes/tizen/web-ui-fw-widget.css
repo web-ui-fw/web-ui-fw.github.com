@@ -244,6 +244,18 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
 }
+.ui-togglepair-hidden {
+  display: none;
+}
+.ui-togglepair {
+  display: table;
+  padding: 0px;
+  border: 0px;
+}
+.ui-togglepair .togglepair-cell {
+  display: table-cell;
+  width: 50%;
+}
 /* Own CSS */
 
 .ui-upper-progressbar-container {
@@ -852,6 +864,8 @@
 }
 .ui-toggleswitch a {
   margin: 0px;
+  /* FIXME: Remove this after moving to jqm 1.1 (or a version that includes the fix for jqm #3613 (jqm@798c105)) */
+
 }
 .ui-toggleswitch a .ui-btn-inner {
   box-sizing: border-box;

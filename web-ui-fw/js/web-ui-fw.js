@@ -2008,7 +2008,7 @@ $.widget("todons.colorpickerbutton", $.todons.colorwidget, {
 source:
 
 $("<div><div id='colorpickerbutton'>" +
-  "    <a id='colorpickerbutton-button' href='#' data-role='button' aria-haspopup='true'>" +
+  "    <a id='colorpickerbutton-button' data-role='button' aria-haspopup='true' class='ui-colorpickerbutton'>" +
   "        <span id='colorpickerbutton-button-contents'>&#x2587;&#x2587;&#x2587;</span>" +
   "    </a>" +
   "    <div id='colorpickerbutton-popup-container' style='display: table;'>" +
@@ -2457,6 +2457,35 @@ jQuery.extend( jQuery.easing,
  * OF THE POSSIBILITY OF SUCH DAMAGE. 
  *
  */
+(function($, undefined) {
+	var origButtonMarkup = $.fn.buttonMarkup;
+
+	$.fn.buttonMarkup = function(options) {
+		var result = origButtonMarkup.apply(this, arguments);
+
+		options = options || {};
+
+		for (var i = 0 ; i < this.length ; i++) {
+			var el = this.eq(i),
+					e = el[0],
+					o = $.extend({}, $.fn.buttonMarkup.defaults, {
+						status: options.status !== undefined ? options.status : el.jqmData("status")
+					}, options );
+
+			if (o.status !== null) {
+				var span = document.createElement("span");
+				span.className="ui-icon ui-icon-status ui-icon-status-" + o.status + (o.iconshadow ? " ui-icon-shadow" : "");
+				e.children[0].insertBefore(span, e.children[0].firstChild);
+				e.className += " ui-btn-status";
+			}
+		}
+
+		return result;
+	};
+
+	$.fn.buttonMarkup.defaults = origButtonMarkup.defaults;
+	$.fn.buttonMarkup.defaults.status = null;
+})(jQuery);
 /*
  *
  * This software is licensed under the MIT licence (as defined by the OSI at
@@ -7461,6 +7490,65 @@ $("<div><div class='ui-progressbar-dialog'>" +
     });
 
 })(jQuery, this);
+(function($, undefined) {
+    $.widget("todons.searchinput", $.mobile.textinput, {
+        options: {
+            initSelector: "input[type='search'], input:jqmData(type='search')"
+        },
+
+        _create: function() {
+            if (!this.element.data("textinput")) {
+                this.element.textinput();
+            }
+
+            var self = this,
+                btn = this.element.next(),
+                searchTimeoutId,
+                updateSearchButton = function() {
+                    self.element.next()[self.element.val() ? "removeClass" : "addClass"]("ui-disabled");
+                    searchTimeoutId = undefined;
+                };
+
+            this.element
+                .unbind()
+                .bind("keyup", function(e) {
+                    if (e.keyCode === $.mobile.keyCode.ENTER) {
+                        console.log("Triggering search");
+                        self.element.trigger("search");
+                    }
+                })
+                .parent()
+                    .removeClass("ui-icon-searchfield");
+
+            btn
+                .unbind()
+                .addClass("ui-disabled")
+                .bind("vclick", function() {
+                    console.log("Triggering search");
+                    self.element.trigger("search");
+                })
+                .find(".ui-icon")
+                    .removeClass("ui-icon-delete")
+                    .addClass("ui-icon-search");
+
+            // Need to do this via setTimeout, because by the time we get here, a timeout has already
+            // been added to hide the button.
+            setTimeout(function() {btn.removeClass("ui-input-clear-hidden");}, 0);
+
+            this.element.bind('paste cut keyup focus change blur', function() {
+                if (!searchTimeoutId) {
+                    searchTimeoutId = setTimeout(updateSearchButton, 0);
+                }
+            });
+        }
+    });
+
+//auto self-init widgets
+$( document ).bind( "pagecreate create", function( e ){
+    $.todons.searchinput.prototype.enhanceWithin( e.target );
+});
+
+})(jQuery);
 /*
  * jQuery Mobile Widget @VERSION
  *
@@ -8679,6 +8767,140 @@ $(document).bind("pagecreate", function (e) {
     $(e.target).find(":jqmData(role='swipelist')").swipelist();
 });
 
+})(jQuery);
+(function($, undefined) {
+    $.widget("todons.togglepair", $.todons.widgetex, {
+        options: {
+            checked: false,
+        },
+
+        _htmlProto: {
+source:
+
+$("<div><div id='outer' class='ui-togglepair' data-role='controlgroup' data-type='horizontal'>" +
+  "    <a id='btn-l' data-role='button' class='togglepair-cell'>" +
+  "        <span id='label-l'></span>" +
+  "    </a>" +
+  "    <a id='btn-r' data-role='button' class='togglepair-cell'>" +
+  "        <span id='label-r'></span>" +
+  "    </a>" +
+  "</div>" +
+  "</div>")
+,            ui: {
+                outer: "#outer",
+                l: {
+                    btn: "#btn-l",
+                    lbl: "#label-l"
+                },
+                r: {
+                    btn: "#btn-r",
+                    lbl: "#label-r"
+                }
+            }
+        },
+
+        _create: function() {
+            var self = this,
+                children = this.element.children(),
+                buttons = this._ui.outer.find("a");
+
+            if (children.length > 1) {
+                this._ui.l.lbl.text($(children[0]).text());
+                this._ui.r.lbl.text($(children[1]).text());
+            }
+
+            this.element
+                .addClass("ui-togglepair-hidden")
+                .after(this._ui.outer);
+
+            buttons
+                .buttonMarkup({theme: $.mobile.getInheritedTheme(this.element, "c")})
+                .bind("vclick", function(e) {
+                    self._setChecked(this === self._ui.r.btn[0]);
+                    e.preventDefault();
+                })
+                .bind("vmousecancel vmouseup vmouseout vmouseover focus blur", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                })
+                .bind("vmousedown", function(e) {
+                    var side = $(e.target).jqmData("togglepair-value"),
+                        theme = $.mobile.getInheritedTheme(self.element, "c");
+
+                    if (( self.options.checked && side === "l") ||
+                        (!self.options.checked && side === "r")) {
+                        self._ui[side].btn
+                            .removeClass("ui-btn-up-" + theme)
+                            .addClass("ui-btn-down-" + theme);
+                    }
+                })
+                .bind("vmouseover focus", function(e) {
+                    var side = $(e.target).jqmData("togglepair-value"),
+                        theme = $.mobile.getInheritedTheme(self.element, "c");
+                    self._ui[side].btn.addClass("ui-btn-hover-" + theme);
+                })
+                .bind("vmouseout blur", function(e) {
+                    var side = $(e.target).jqmData("togglepair-value"),
+                        theme = $.mobile.getInheritedTheme(self.element, "c");
+                    self._ui[side].btn.removeClass("ui-btn-hover-" + theme);
+                })
+                .bind("vmouseout vmousecancel", function(e) {
+                    var side = $(e.target).jqmData("togglepair-value"),
+                        theme = $.mobile.getInheritedTheme(self.element, "c");
+
+                    if (( self.options.checked && side === "l") ||
+                        (!self.options.checked && side === "r")) {
+                        self._ui[side].btn
+                            .removeClass("ui-btn-down-" + theme)
+                            .addClass("ui-btn-up-" + theme);
+                    }
+                });
+
+            this._ui.l.btn
+                .add(this._ui.l.btn.find("*"))
+                    .jqmData("togglepair-value", "l");
+
+            this._ui.r.btn
+                .add(this._ui.r.btn.find("*"))
+                    .jqmData("togglepair-value", "r");
+
+            this._ui.outer.controlgroup({excludeInvisible: false});
+        },
+
+        _setChecked: function(value) {
+            var dSide = "l", uSide = "r",
+                theme = $.mobile.getInheritedTheme(this.element, "c");
+            if (value) {
+                dSide = "r";
+                uSide = "l";
+            }
+
+            this._ui[dSide].btn
+                .removeClass("ui-btn-up-" + theme)
+                .addClass("ui-btn-down-" + theme + " ui-btn-active");
+            this._ui[uSide].btn
+                .removeClass("ui-btn-down-" + theme + " ui-btn-active")
+                .addClass("ui-btn-up-" + theme);
+
+            this.options.checked = value;
+            this.element.attr("data-" + ($.mobile.ns || "") + "checked", value);
+        }
+    });
+
+    if ($.fn.slider && $.mobile.slider) {
+        var origSlider = $.fn.slider;
+
+        $.fn.slider = function() {
+            $.each(this, function(key, value) {
+                if (this.tagName === "SELECT") {
+                    $(this).togglepair(arguments);
+                }
+                else {
+                    origSlider.apply($(this), arguments);
+                }
+            });
+        };
+    }
 })(jQuery);
 /*
  * jQuery Mobile Widget @VERSION
