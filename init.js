@@ -217,6 +217,10 @@ $(document).bind("pagecreate", function () {
         $("#colorpickerbutton").colorpickerbutton("option", "hideInput", $("#checkHideInput").is(":checked"));
     });
 
+    $("#checkShowPreview").bind("change", function (e) {
+        console.log();
+        $("#colorpalette").colorpalette("option", "showPreview", $("#checkShowPreview").is(":checked"));
+    });
 
     $('#slider-demo').bind('pageshow', function () {
         var popupEnabled = false;
@@ -336,57 +340,6 @@ $(document).bind("pagecreate", function () {
         });
 
         coordSwitchesAreInit = true;
-    });
-
-    var clrWidgetsAreInit = false;
-    $("#colorwidgets-demo").bind("pageshow", function () {
-        if (clrWidgetsAreInit) return;
-
-        $("#colorpicker").bind("colorchanged", function (e, clr) {
-            $("#colorpickerbutton").colorpickerbutton("option", "color", clr);
-            $("#colorpickerbutton-noform").colorpickerbutton("option", "color", clr);
-            $("#hsvpicker").hsvpicker("option", "color", clr);
-            $("#colortitle").colortitle("option", "color", clr);
-            $("#colorpalette").colorpalette("option", "color", clr);
-        });
-        $("#colorpickerbutton").bind("colorchanged", function (e, clr) {
-            $("#colorpicker").colorpicker("option", "color", clr);
-            $("#colorpickerbutton-noform").colorpickerbutton("option", "color", clr);
-            $("#hsvpicker").hsvpicker("option", "color", clr);
-            $("#colortitle").colortitle("option", "color", clr);
-            $("#colorpalette").colorpalette("option", "color", clr);
-        });
-        $("#colorpickerbutton-noform").bind("colorchanged", function (e, clr) {
-            $("#colorpicker").colorpicker("option", "color", clr);
-            $("#colorpickerbutton").colorpickerbutton("option", "color", clr);
-            $("#hsvpicker").hsvpicker("option", "color", clr);
-            $("#colortitle").colortitle("option", "color", clr);
-            $("#colorpalette").colorpalette("option", "color", clr);
-        });
-        $("#hsvpicker").bind("colorchanged", function (e, clr) {
-            $("#colorpicker").colorpicker("option", "color", clr);
-            $("#colorpickerbutton").colorpickerbutton("option", "color", clr);
-            $("#colorpickerbutton-noform").colorpickerbutton("option", "color", clr);
-            $("#colortitle").colortitle("option", "color", clr);
-            $("#colorpalette").colorpalette("option", "color", clr);
-        });
-        $("#colortitle").bind("colorchanged", function (e, clr) {
-            $("#colorpicker").colorpicker("option", "color", clr);
-            $("#colorpickerbutton").colorpickerbutton("option", "color", clr);
-            $("#colorpickerbutton-noform").colorpickerbutton("option", "color", clr);
-            $("#hsvpicker").hsvpicker("option", "color", clr);
-            $("#colorpalette").colorpalette("option", "color", clr);
-        });
-        $("#colorpalette").bind("colorchanged", function (e, clr) {
-            $("#colorpicker").colorpicker("option", "color", clr);
-            $("#colorpickerbutton").colorpickerbutton("option", "color", clr);
-            $("#colorpickerbutton-noform").colorpickerbutton("option", "color", clr);
-            $("#hsvpicker").hsvpicker("option", "color", clr);
-            $("#colortitle").colortitle("option", "color", clr);
-        });
-        $("#colorpalette").colorpalette("option", "color", "#45cc98");
-
-        clrWidgetsAreInit = true;
     });
 
     $('#optionheader-demo-programmatic-example').bind('pageshow', function () {

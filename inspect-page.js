@@ -20,99 +20,69 @@
 // web-ui-fw defined in your app, because the coordinates of the context element are used for launching a popup window
 // which contains the widget list and the option list
 
-(function($, undefined) {
+(function( $, undefined) {
 
-    var havePopupwindow = ($.todons && $.todons.popupwindow);
-
-    function elemName(elem) {
+    function elemName( elem ) {
         var str = elem.tagName
-            + ($(elem).attr("id") === undefined ? "" : ("#" + $(elem).attr("id")))
-            + ($(elem).attr("class") === undefined ? ""
-                : ("." + $(elem).attr("class").replace(" ", ".")));
+            + ( $( elem ).attr( "id" ) === undefined ? "" : ( "#" + $( elem ).attr( "id" ) ) )
+            + ( $( elem ).attr( "class" ) === undefined ? ""
+                : ( "." + $( elem ).attr( "class" ).replace( " ", "." ) ) );
 
-        if (str.length > 40)
-            str = str.substring(0, 40) + "...";
+        if ( str.length > 40 )
+            str = str.substring( 0, 40 ) + "...";
 
         return str;
     }
 
     function launchInspector() {
-        var src = $(this),
-            page = src.closest(":jqmData(role='page')"),
-            widgetList = $("#widget-list").empty(),
-            optionList = $("#option-list"),
-            realList = $("<ul data-role='listview' data-scroll='y' class='inspect-page-pane'></ul>")
-                .appendTo(widgetList);
+        var src = $( this ),
+            page = src.closest( ":jqmData(role='page')" ),
+            widgetList = $( "#widget-list" ).empty(),
+            optionList = $( "#option-list" ),
+            realList = $( "<ul data-role='listview' data-scroll='y' class='inspect-page-pane'></ul>" )
+                .appendTo( widgetList );
 
-        if (optionList.data("optionlist"))
-            optionList.optionlist("destroy");
+        if ( optionList.data( "optionlist" ) )
+            optionList.optionlist( "destroy" );
 
-        page.find("*").each(function() {
-            var widgets = $.todons.optionlist.widgetsFromElement(this);
-            if (widgets) {
-                realList.append("<li data-role='list-divider'>" + elemName(this) + "</li>");
-                $.each(widgets, function(key, value) {
-                    $("<li><a>" + value.namespace + "." + value.widgetName + "</a></li>")
-                        .appendTo(realList)
-                        .find("a")
-                        .bind("vclick", function() {
-                            if (optionList.data("optionlist"))
-                                optionList.optionlist("destroy");
+        page.find( "*" ).each( function() {
+            var widgets = $.todons.optionlist.widgetsFromElement( this );
+            if ( widgets ) {
+                realList.append( "<li data-role='list-divider'>" + elemName( this ) + "</li>" );
+                $.each( widgets, function( key, value ) {
+                    $( "<li><a>" + value.namespace + "." + value.widgetName + "</a></li>" )
+                        .appendTo( realList )
+                        .find( "a" )
+                        .bind( "vclick", function() {
+                            if ( optionList.data( "optionlist" ) )
+                                optionList.optionlist( "destroy" );
                             optionList.optionlist();
-                            optionList.optionlist("option", "widget", value);
+                            optionList.optionlist( "option", "widget", value );
                         });
                 });
             }
         });
 
-        if (!havePopupwindow) {
-            listPage = realList.closest(":jqmData(role='page')");
-            if (listPage.data("page")) {
-                realList.listview();
-                if ($.mobile.scrollview)
-                    realList.scrollview();
-            }
-        }
-        else
-            realList.trigger("create");
-
-        if (havePopupwindow) {
-            var changePage = true,
-                content = widgetList.closest(":jqmData(role='content')");
-
-            if (content.length > 0) {
-                content
-                    .appendTo(page)
-                    .trigger("create")
-                    .removeAttr("style")
-                    .popupwindow({fade: false})
-                    .popupwindow("option", "overlayTheme", src.jqmData("theme"))
-                    .bind("closed", function() {
-                        $(this).popupwindow("destroy").css("display", "none");
-                    })
-                    .popupwindow("open",
-                        src.offset().left + src.width() / 2,
-                        src.offset().top + src.height() / 2);
-                changePage = false;
-            }
-
-            if (changePage)
-                $.mobile.changePage("#inspect-page");
+        listPage = realList.closest( ":jqmData(role='page')" );
+        if ( listPage.data( "page" ) ) {
+            realList.listview();
+            if ( $.mobile.scrollview )
+                realList.scrollview();
         }
     }
 
-    var addInspectionTrigger = function(pg) {
-        if ($(pg).find("[data-remove-ghost-button='true']").length === 0) {
-            $("<a " + (havePopupwindow ? "" : "href='#inspect-page'") + " data-remove-ghost-button='true' class='ui-btn-right' data-iconpos='left' data-icon='grid'>Test Options</a>")
-                .appendTo($(":jqmData(role='header')", pg))
+    var addInspectionTrigger = function( pg ) {
+        if ( $( pg ).find( "[data-option-inspect-button='true']" ).length === 0 ) {
+            $( "<a href='#inspect-page' data-option-inspect-button='true' class='ui-btn-right' data-iconpos='left' data-icon='grid'>Test Options</a>" )
+                .appendTo( $( ":jqmData(role='header')", pg ) )
                 .buttonMarkup()
-                .bind("vclick", launchInspector);
+                .bind( "vclick", launchInspector );
         }
     }
 
-    $(document)
-        .ready(function() {
-            $.mobile.loadPage("inspect-page.html");
+    $( document )
+        .ready( function() {
+            $.mobile.loadPage( "inspect-page.html" );
         })
-        .bind("pagecreate", function(e) { addInspectionTrigger(e.target); });
-})(jQuery);
+        .bind( "pagecreate", function( e ) { addInspectionTrigger( e.target ); } );
+})( jQuery );
