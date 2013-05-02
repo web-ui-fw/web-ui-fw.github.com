@@ -1,0 +1,248 @@
+--- Log opened Thu May 02 10:00:06 2013
+10:00 -!- Changsuk [~Changsuk@121.133.176.50] has joined #web-ui-fw
+10:00 < _|Nix|_> Hey all!
+10:00 < Changsuk> _|Nix|_: Hi~
+10:00 < _|Nix|_> Shall we get things rolling?
+10:00 < Hyunsook> Hi~ All~
+10:00 < Changsuk> _|Nix|_: yes~
+10:00 < Kangsik> Hi~ All :-)
+10:01 < _|Nix|_> So, who wants to go first? Kangsik?
+10:02 < _|Nix|_> BTW: I figured out how to turn on logging. So, I can post logs of this meeting somewhere.
+10:02 < Changsuk> All: ha ha~~
+10:02 < Changsuk> _|Nix|_: oh~~
+10:02 < Hyunsook> _|Nix|_: I'll first. :)
+10:02 < _|Nix|_> OK.
+10:02 < _|Nix|_> Hyunsook: Go ahead!
+10:02 < Changsuk> _|Nix|_: so where will you put it on?
+10:03 < Hyunsook> _|Nix|_: I sent you email yesterday for the API build system. Did you read that?
+10:03 < Changsuk> _|Nix|_: No, I didn't get your email.
+10:03 < Changsuk> Hyunsook: Ah.... sorry..
+10:04 < Changsuk> Hyunsook: I was confused with Gabriel. ;)
+10:04 < Hyunsook> Changsuk: NP.
+10:04 < _|Nix|_> Changsuk: I was thinking http://gabrielschulhof.github.io/
+10:04 < Changsuk> _|Nix|_: Where will you post the meeting logs?
+10:05 < _|Nix|_> Changsuk: Actually, we can make it more official: http://web-ui-fw.github.com
+10:05 < _|Nix|_> Changsuk: Something like http://web-ui-fw.github.com/irc-logs/2013-05-02.log.txt
+10:05 < Changsuk> _|Nix|_: Yeah, I think, web-ui-fw on GH is better than your site. 
+10:05 < _|Nix|_> Hyunsook: I saw your mail.
+10:06 < _|Nix|_> Hyunsook: Good work!
+10:06 < Hyunsook> _|Nix|_: Thanks. did you build it?
+10:07 < _|Nix|_> Hyunsook: I was thinking: Is there a way to make your changes to those repos in such a way that they are compatible with both grunt-0.3 and grunt 0.4?
+10:07 < _|Nix|_> Hyunsook: That way, if you made a PR it would stand a better chance of being accepted.
+10:07 < _|Nix|_> Hyunsook: Not yet, I'm afraid.
+10:07 < _|Nix|_> Hyunsook: I can try building now, as we meet.
+10:08 < Hyunsook> _|Nix|_: Well....
+10:09 < _|Nix|_> Hyunsook: ... running npm install in docs/
+10:09 < _|Nix|_> Hyunsook: Builds fine.
+10:09 < Hyunsook> _|Nix|_: If now they are compatible with both grunt-0.3 and grunt 0.4, they will be check original repos of modules.
+10:10 < _|Nix|_> Hyunsook: I don't understand.
+10:11 < _|Nix|_> Hyunsook: Wait ... I didn't try running grunt deploy ... running that now.
+10:11 < _|Nix|_> Hyunsook: Looks good so far.
+10:11 < Hyunsook> _|Nix|_: They clone modules/codes from original repository  and
+10:13 < Hyunsook> _|Nix|_: also they clone modules/codes from my repo. And then they can compare them, like diff.
+10:14 < _|Nix|_> Hyunsook: OK. I can have a look at the diff and see if I can make it backwards-compatible.
+10:15 < Hyunsook> _|Nix|_: If they compare them on my repo only, maybe.... I think... I'll commit modules on my new repo again. - 1) commit for grunt-0.3. 2) commit modifications on grunt-0.4.
+10:16 < _|Nix|_> Hyunsook: Works great! I see that running grunt deploy from docs/ will delete jQM content and replace it with web-ui-fw content.
+10:16 < _|Nix|_> Hyunsook: Very nice!
+10:17 < Hyunsook> _|Nix|_: Thanks~ :)
+10:17 < Changsuk> All: Ok... then, I think, Hyunsook completed her job so Can we just write our widget documents?
+10:17 < _|Nix|_> Yeah, I think it's gotten so far.
+10:18 < Hyunsook> Changsuk: Yes, we can.
+10:20 < _|Nix|_> Alright ...
+10:20 < _|Nix|_> Who's next?
+10:20 < Changsuk> Hyunsook: Thanks so much. :)
+10:21 < Changsuk> Kangsik: Do you have any words to talk? Can you start?
+10:22 < Hyunsook> All: I think that _|Nix|_ can build the doc after he make the doc,  but Kansik and Chansuk cannot it. So
+10:22 < _|Nix|_> Oh, really?
+10:23 < Changsuk> Hyunsook: Should I and Kangsik have the build solutions?
+10:23 < Hyunsook> All: Becasue they didnot set up the build environment - grunt deploy.
+10:23 < _|Nix|_> All I did was git pull origin jqm; git clean -x -d -f -f; cp ../api.jquerymobile.com/config.json docs/; cd docs; npm cache clean; npm install; grunt deploy;
+10:24 < _|Nix|_> Hyunsook: Oh, that's right. They need to set up the Web server and stuff.
+10:24 < Hyunsook> _|Nix|_: Right.
+10:24 < Changsuk> Hyunsook: Ok, I'll do it tomorrow.
+10:24 < _|Nix|_> *sigh* ... we should really have a central Web server ...
+10:24 < Changsuk> _|Nix|_: yes, I think so.
+10:25 < Hyunsook> Kangsik, Changsuk: If you make docs - xmls and htmls and share them, I'll build them instead.
+10:25 < Kangsik> Hyunsook: Yes. I will do it tomorrow.
+10:25 < Hyunsook> Kangsik, Changsuk: OK.
+10:25 < _|Nix|_> Hyunsook: Actually, if they create them and run grunt and everything passes, they should just be able to commit and push. Then you can build whenever you want.
+10:25 < Changsuk> _|Nix|_: hmmm.... Do you have a Web server to share with us?
+10:26 < _|Nix|_> Changsuk: I have my personal Web server at http://babulina.go-nix.ca/
+10:26 < _|Nix|_> Changsuk: It has a LAMP setup, so it could work, but it's very weak: Nokia N810 :)
+10:26 < _|Nix|_> Changsuk: Nokia N810 + external HDD :)
+10:26 < _|Nix|_> Changsuk: So, not exactly a data centre :)
+10:27 < Changsuk> _|Nix|_: Ok... so can we connect to the server with telnet?
+10:27 < _|Nix|_> Changsuk: You won't need to. 
+10:27 < Changsuk> _|Nix|_: I think we can use that server at first.
+10:27 < _|Nix|_> Changsuk: I can make it so the server checks github every once in a while and pulls from it.
+10:28 < _|Nix|_> Changsuk: Then, it builds the docs locally.
+10:28 < Changsuk> All: After our widget is popular, we can change the server to a new thing.
+10:28 < _|Nix|_> Changsuk: So, if you edit/commit/push, eventually it will pull and build, and then you'll be able to see the cahnges.
+10:29 < Changsuk> _|Nix|_: thanks~
+10:29 < _|Nix|_> Changsuk: Yeah, I think we'll have to, because my family will have no Internet connection anymore :)
+10:29 < _|Nix|_> Changsuk: I spoke to a colleague at work and he said we might be able to make use of 01.org ...
+10:29 < Changsuk> _|Nix|_: ah.... what'a shame.
+10:30 < Changsuk> _|Nix|_: really?
+10:30 < _|Nix|_> Changsuk: Yeah ... that's our public-facing infrastructure.
+10:30 < Changsuk> _|Nix|_: I hope that he will make it.
+10:30 < Changsuk> _|Nix|_: ;)
+10:30 < _|Nix|_> Changsuk: Let's see.
+10:32 < _|Nix|_> OK. So that's a few ARs for me.
+10:32 < _|Nix|_> Changsuk: Wanna talk about optimization?
+10:33 < Changsuk> _|Nix|_: After we make the documents and 4 widgets, when can we talk to jQM team about our widgets?
+10:33 < Changsuk> _|Nix|_: Ok.
+10:33 < _|Nix|_> Changsuk: For sure!
+10:34 < Changsuk> _|Nix|_: ah... I'm wondering when can we talk to jQM team. :)
+10:34 < _|Nix|_> Changsuk: Well, when we have the demos/docs up and running, I think.
+10:35 < Changsuk> _|Nix|_: I think you can talk to them. :)
+10:35 < _|Nix|_> Changsuk: Then they can list us on the resources page.
+10:35 < Changsuk> _|Nix|_: yes... then?
+10:36 < _|Nix|_> Changsuk: When we have the demos/docs up and running.
+10:36 < Hyunsook> _|Nix|_: And... the unit-tests.
+10:37 < _|Nix|_> Right.
+10:37 < _|Nix|_> Those too ...
+10:38 < _|Nix|_> So yeah, that's basically the long-term plan.
+10:38 < _|Nix|_> Changsuk: ... so, optimization?
+10:39 < Changsuk> _|Nix|_, Hyunsook: long-term... but I think, after we make all of things, can we talk to jQM team to use our widgets on jQM?
+10:39 < Changsuk> _|Nix|_: Yeah, I'll
+10:40 < _|Nix|_> Changsuk: For sure!
+10:40 < _|Nix|_> BTW: Check this out: http://nativedroid.godesign.ch/
+10:42 < _|Nix|_> Really cool!
+10:42 < Changsuk> _|Nix|_: It looks nice~!
+10:42 < Changsuk> who make it?
+10:43 < Changsuk> _|Nix|_: It just a theme?
+10:43 < _|Nix|_> Presumably some guy in Switzerland ...
+10:43 < _|Nix|_> Changsuk: I think it has some widgets, too ...
+10:43 < Changsuk> _|Nix|_: ah..ha.
+10:43 < _|Nix|_> Like the gallery.
+10:44 < Changsuk> _|Nix|_: hmmm... I think, that site may compete with us.
+10:44 < _|Nix|_> Changsuk: That's fine. Competition is good.
+10:45 < Changsuk> _|Nix|_: anyway, I'll talk about the performance.
+10:45 < _|Nix|_> OK.
+10:47 < Changsuk> _|Nix|_: I'm sorry that My team didn't look into Ugomobi's codes yet. 
+10:47 < Changsuk> _|Nix|_: My team can start to get the codes in next week.
+10:48 < Changsuk> _|Nix|_: Because my team haven't completed the job which have started last week.
+10:48 < _|Nix|_> That's fine.
+10:49 < _|Nix|_> Changsuk: Make sure that when you do look at the branch, you go step-by-step, because there may be things in there that are mostly architectural, especially towards the end.
+10:49 < _|Nix|_> Jasper's been trying to reduce the number of classes used in jQM.
+10:50 < Changsuk> _|Nix|_: Ok. I see
+10:50 < _|Nix|_> The plan is to get people to apply the classes themselves, instead of adding them from JS.
+10:50 < Changsuk> _|Nix|_: If my team get some trouble, I'll ask you or Jasper. :)
+10:50 < _|Nix|_> However, that means that inheritance and selectors/scoping have to work correctly.
+10:50 < _|Nix|_> So, that's what he's been improving.
+10:51 < Changsuk> _|Nix|_: Ok.
+10:52 < Changsuk> _|Nix|_: My team changed some codes using $.data() and added the codes to Tizen WebUIFW.
+10:52 < _|Nix|_> Changsuk: Next he wants to make theme inheritance work via CSS. This should remove the need for $.mobile.getInheritedTheme().
+10:53 < Changsuk> _|Nix|_: OK, I'll check the jQM codes after our meeting. :)
+10:54 < Changsuk> _|Nix|_: My team changed the codes using data() as follows.
+10:54 < Changsuk> fromPage.data( "page" )._trigger( "beforehide", null, ... ); 
+10:55 < Changsuk> _|Nix|_: to "fromPage[0].page._trigger( "beforehide", null, ... );"
+10:55 < Changsuk> _|Nix|_: My team changed some codes like that case.
+10:55 < _|Nix|_> Aha! That's not bad ... using a property on the DOM element directly.
+10:55 < Changsuk> _|Nix|_: We got a big improvement.
+10:56 < _|Nix|_> That's great!
+10:56 < _|Nix|_> It's good that Tizen supports this reliably.
+10:56 < Changsuk> _|Nix|_: yes, right.
+10:56 < Changsuk> _|Nix|_: yeah.
+10:56 < _|Nix|_> It might be worth checking if all our supported platforms now support this, especially since we've dropped IE7 ...
+10:57 < _|Nix|_> ... in jQM I mean.
+10:57 < _|Nix|_> However, I'd go with something like fromPage[0].userData.page._trigger( ... )
+10:57 < Changsuk> _|Nix|_: And my team found some jqmData calls and change it to getAttrFixed which you made. :)
+10:57 < _|Nix|_> Sweet!
+10:58 < Changsuk> _|Nix|_: yeah, We should check the other browsers but Tizen Web UIFW is just running on Tizen browser.
+10:59 < _|Nix|_> I can ask the jQuery core developers about changing the implementation of $.data to use native properties when the browser supports them.
+10:59 < Changsuk> _|Nix|_: really?
+10:59 < _|Nix|_> Changsuk: Yeah, that's why we can make these changes for Tizen.
+10:59 < _|Nix|_> Changsuk: Yes, I mean, it would be a huge performance benefit ... /if/ we can show that it would work on all browser supported by jQuery.
+11:00 < Changsuk> _|Nix|_: yes, right. If they accept the codes, I'll do a PR with that.
+11:00 < _|Nix|_> Changsuk: ... if we can show this and jQuery makes the change, then the change would be available as of jQuery 2.0.x or 2.1.x ...
+11:01 < _|Nix|_> Changsuk: Just to be clear: I'm talking about jQuery core here, not jQuery Mobile.
+11:01 < Changsuk> _|Nix|_: Yes, I think so. It may take some time...
+11:01 < Changsuk> _|Nix|_: :) Yes.
+11:01 < Changsuk> _|Nix|_: I know. :)
+11:02 < _|Nix|_> OK. That's great!
+11:02 < _|Nix|_> Changsuk: So, how many ms are left until the magical 1000?
+11:04 < Changsuk> _|Nix|_: And my team is changing globalization module to use XMLHttpRequest directly. 
+11:04 < Changsuk> ... Not yet. 
+11:04 < Changsuk> _|Nix|_: It remains around 200ms
+11:05 < _|Nix|_> Man ... still a lot of work ...
+11:05 < Changsuk> _|Nix|_: yeah.
+11:05 < _|Nix|_> It just won't go down :/
+11:06 < _|Nix|_> Changsuk: I'm wondering: Can you change the implementation of $.data to use the DOM element directly? Then you need to make the change in only one spot and all calls to $.data, el.data(), and el.jqmData() would be improved ...
+11:06 < Changsuk> But After all of tuned codes are added to Tizen, we may reduce 100ms or more.
+11:07 < Changsuk> _|Nix|_: We can't change all of cases. 
+11:07 < _|Nix|_> I see.
+11:07 < _|Nix|_> Changsuk: What are some cases that need to stay the way they are?
+11:08 < Changsuk> _|Nix|_: Let me see....
+11:12 < Changsuk> _|Nix|_: there are many things to remain. We should use Ugomobi's codes first and improve changePage, setScrollPosition and bridget methods.
+11:12 < _|Nix|_> OK.
+11:12 < _|Nix|_> That's cool!
+11:12 < Changsuk> _|Nix|_: and my team and SEC folks will do code refactoring.
+11:12 < _|Nix|_> OK.
+11:13 < _|Nix|_> You guys are doing awesome work!
+11:13 < Changsuk> _|Nix|_: Ah... One big thing is remained.
+11:13 < Changsuk> _|Nix|_: Asyn. loading. :)
+11:13 < Changsuk> _|Nix|_: Asynchrounous loading. 
+11:13 < _|Nix|_> Right.
+11:14 < _|Nix|_> How's that going?
+11:14 < Changsuk> _|Nix|_: I think if we do all of things, we will get the goal ~! 
+11:15 < _|Nix|_> I really hope so. Have you talked to the SDK guys about asynchronous loading?
+11:15 < _|Nix|_> If we do the sync/async split, that might require support from the SDK.
+11:16 < _|Nix|_> Changsuk: Yeah. The goal sounds reachable.
+11:16 < Changsuk> _|Nix|_: Async. loading will be started at the beginning of next month.
+11:16 < _|Nix|_> Oh, very nice!
+11:17 < Changsuk> _|Nix|_: Yes, we may need SDK team
+11:17 < Changsuk> s
+11:17 < Changsuk> 's help.
+11:17 < Changsuk> _|Nix|_: but, we can make it without SDK's support.
+11:18 < _|Nix|_> Changsuk: For sure, after all, all you need to do is add support for the possibility, and then the SDK team writes the code to make use of that support.
+11:19 < Changsuk> _|Nix|_: Anyway, my team will check it again before we start the job.
+11:19 < _|Nix|_> OK.
+11:19 < Changsuk> _|Nix|_: yes, right. but SDK team won't change their work or plan easily.
+11:21 < _|Nix|_> Of course not. This async thing is very involved, and we have to be able to prove that it's worth the effort.
+11:21 < Changsuk> _|Nix|_: Anyway, we should find a way without SDK's support or ask them to support us. 
+11:21 < Changsuk> _|Nix|_: yes, right.
+11:22 < _|Nix|_> OK. Sounds like you've got things well-covered.
+11:22 < Changsuk> _|Nix|_: I'll email you next monday so as to get the performance work status in detail.
+11:23 < _|Nix|_> OK.
+11:23 < Changsuk> _|Nix|_: ha ha ... Thanks. :)
+11:24 < Changsuk> _|Nix|_: And... All of your ideas help us to improve performance. Thanks~!
+11:24 < _|Nix|_> No - thank /you/! It's good to know there's a whole team working on this stuff!
+11:25 < Changsuk> _|Nix|_: ha ha... yeah.
+11:25 < _|Nix|_> OK ... so, given that we're almost 30 minutes over, are there any other topics we need to discuss?
+11:26 < Changsuk> _|Nix|_: we're always over our time... :)
+11:26 < Kangsik> Yes. I had fixed bugs in virtualgrid demo page. 
+11:26 < Kangsik> now you will  see the demo page. :-)
+11:26 < Changsuk> _|Nix|_: No, I talked all. 
+11:26 < _|Nix|_> Kangsik: Great!
+11:26  * _|Nix|_ goes and refreshes the demo page :)
+11:27 < _|Nix|_> Kangsik: I see you've switched to dist/web-ui-fw.js ...
+11:27 < _|Nix|_> Kangsik: ... any particular reason?
+11:28 < _|Nix|_> Kangsik: Super-cool! Works fine now!
+11:28 < Kangsik> _|Nix|_: Thank :-)
+11:29 < Changsuk> _|Nix|_: ha ha... You could resolve on your own... 
+11:29 < _|Nix|_> Kangsik: ... Hmm it works, but only if I load the page directly. If I follow the link from demos/ then it doesn't work.
+11:30 < _|Nix|_> Kangsik: Anyway ... good work! We can work out these kinks as we go along.
+11:31 < Kangsik> _|Nix|_: hmm.. I will fix it.
+11:31 < _|Nix|_> Kangsik: Great! Thanks!
+11:31 < _|Nix|_> OK. I guess we'll (continune to ;) ) have our hands full :)
+11:31 < Hyunsook> _|Nix|_: maybe.... other widgets's demo also doesnot work, if I follow the link from demos/.
+11:32 < _|Nix|_> Hyunsook: Yeah, we should definitely check that.
+11:32 < _|Nix|_> Hyunsook: If you find anything broken, please file an issue.
+11:32 < Hyunsook> _|Nix|_: Ok, I see.
+11:33 < Changsuk> All: Ok, then... Shall we close our meeting? I'll go out to take dinner because some members in my team are waiting for me....
+11:33 < _|Nix|_> OK.
+11:33 < Changsuk> All: I'm so sorry...
+11:33 < _|Nix|_> have a good weekend all!
+11:33 < _|Nix|_> Good work, everybody!
+11:33 < Changsuk> _|Nix|_: You, too.
+11:34 < _|Nix|_> I'll see y'all next week. I'll post the log to web-ui-fw.github.com/irc-logs
+11:34 < Kangsik> Have a good weekend all! see you again. :-)
+11:34 < Changsuk> _|Nix|_: Have a nice weekend and talk to you later~! :)
+11:34 < Hyunsook> Have a nice weekend~ All~~
+11:34 < Changsuk> _|Nix|_: Thanks for your posting~!!! :)
+11:34 < Hyunsook> Bye~ :)
+11:35 < _|Nix|_> Changsuk: NP!
+11:35 < _|Nix|_> Bye, all!
+11:36 < Kangsik> Bye.  :-)
+--- Log closed Thu May 02 12:02:19 2013
