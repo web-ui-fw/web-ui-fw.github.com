@@ -1,0 +1,263 @@
+10:02:40 < Changsuk> Hi~~
+10:03:23 -!- Kangsik [~Kangsik@121.133.176.4] has joined #web-ui-fw
+10:04:42 < Changsuk> _|Nix|_: Are you on IRC?
+10:08:20 < _|Nix|_> Changsuk: Hey!
+10:08:22 < _|Nix|_> Sorry.
+10:08:28 < _|Nix|_> We should get started.
+10:08:40 < _|Nix|_> I was busy setting up the API docs in a VM.
+10:08:53 < Changsuk> _|Nix|_: it's OK. yes, let's start~ :)
+10:09:14 < Changsuk> _|Nix|_: VM?
+10:09:19 < _|Nix|_> Changsuk: Why don't you start?
+10:09:28 < _|Nix|_> VM === "Virtual Machine"
+10:10:23 < Changsuk> _|Nix|_: Ah.. I see. 
+10:11:15 -!- Hyunsook [~Hyunsook@121.133.176.4] has joined #web-ui-fw
+10:11:24 < _|Nix|_> Changsuk: So, what have you been up to?
+10:11:32 < _|Nix|_> It's been a while since we've met :)
+10:11:33 < Changsuk> _|Nix|_: I think that Hyunsook has some things to talk to you.
+10:11:39 < _|Nix|_> Sure!
+10:11:44 < _|Nix|_> Hyunsook: What's up?
+10:12:22 < Hyunsook> I'm sorry to be late.
+10:12:32 < _|Nix|_> NP!
+10:13:23 < Changsuk> _|Nix|_: And as you can guess, my team has improved performance these days and will wrap up all of improved codes next week.
+10:13:49 < _|Nix|_> Very nice!
+10:14:46 < Changsuk> _|Nix|_: I think, Total improved time may be around 300 msec.
+10:15:04 < _|Nix|_> Changsuk: That sounds like it may just be enough ...
+10:15:24 < _|Nix|_> IIRC 300ms was about what we were trying to shave off, right?
+10:15:56 < Changsuk> _|Nix|_: so, a test Web App's launching time may be reduced from 1.4 sec to 1.1 sec.
+10:16:18 < Changsuk> _|Nix|_: IIRC? 
+10:16:30 < Changsuk> What was that mean? :)
+10:16:57 < _|Nix|_> IIRC === "If I Recall Correctly"
+10:17:37 < _|Nix|_> Oh, so we have another 100ms to go ... *whew* ... 
+10:17:44 < Changsuk> _|Nix|_: Ah... :) I see. Thanks~!. Anyway SEC folks wanted to reduce launching time from 1.4 sec to 0.9 sec.
+10:17:58 < _|Nix|_> Oh, so another 200ms.
+10:17:59 < _|Nix|_> Wow!
+10:18:15 < _|Nix|_> Man ... where are we gonna get another 200 ms from?
+10:18:20 < Changsuk> _|Nix|_: So, we need to add 200 msec or more. yes... right. :(
+10:18:42 < Changsuk> _|Nix|_: That's is what I'
+10:18:57 < Changsuk> I'll talk to you... 
+10:19:38 < Changsuk> _|Nix|_: The last remain thing is lazy loading issue.
+10:20:29 < _|Nix|_> Woah .... do you mean you actually wanna use that? *sigh* ... I dunno ... that's pretty crazy.
+10:20:32 < Changsuk> _|Nix|_: So I think, if we add some things to improve performance to lazy loading issue...
+10:20:47 < Changsuk> _|Nix|_: We can do it. 
+10:20:57 < Changsuk> _|Nix|_:  :)
+10:21:06 < _|Nix|_> Have you guys gone through the widget factory? Like, $.widget.bridge and stuff?
+10:21:26 < Changsuk> _|Nix|_: yes, Exactly.
+10:21:47 < Changsuk> _|Nix|_: We should make it like that.
+10:22:16 < _|Nix|_> Changsuk: I meant to ask: Have you already analyzed the performance improvements that can be made inside $.widget.bridge?
+10:22:41 < Changsuk> _|Nix|_: And 2nd performance improvement works will be start in next month with SEC folks.
+10:23:57 < _|Nix|_> OK ... well, lemme see ... I have a branch somewhere with my lazy loading stuff ...
+10:23:59 < Changsuk> _|Nix|_: ah.... My team hasn't done the way yet.
+10:24:17 < _|Nix|_> OK. Well, I'm sure it's gonna be less than 200 ms :)
+10:24:26 < Changsuk> _|Nix|_: I'll ask about that after this meeting. 
+10:24:35 < _|Nix|_> But you never know. A lot of the startup time is in widget definition.
+10:24:47 < Changsuk> _|Nix|_: yes, right.
+10:24:53 < Changsuk> _|Nix|_: widgets
+10:24:59 < _|Nix|_> ... and the more widgets the more often $.widget and $.widget.bridge get called.
+10:25:03 < Changsuk> 's creation time is huge.
+10:25:22 < Changsuk> _|Nix|_: yes, right.
+10:25:52 < _|Nix|_> Yeah, I guess there are two ways around that. Either you improve $.wdget and $.widget.bridge (straight-up optimization), or you don't call $.widget.bridge (lazy-loading).
+10:27:32 < Changsuk> _|Nix|_: I think we'd better to use the second way.
+10:28:05 < _|Nix|_> Really? So there's not much we can optimize?
+10:28:38 < Changsuk> _|Nix|_: But SEC folks may change their idea so we may make a new light jQuery like jqMobi.
+10:29:05 < Changsuk> _|Nix|_: Not much?
+10:30:06 < _|Nix|_> Have you looked at the contents of $.widget.bridge? Have you found that it is difficult to optimize any further?
+10:30:51 < Changsuk> _|Nix|_: I think, if we make lazy-loading modules which can load widget/libraries on run-time, we can reduce the launching time around 150 ms.
+10:31:09 < _|Nix|_> That much? Wow! OK. I suppose that's worth it.
+10:32:07 < Changsuk> _|Nix|_: Actually, a member of my team tested it after making a sample Web UIFW and Web App.
+10:33:17 < Changsuk> _|Nix|_: The sample Web App.'s launching time is reduced from 1.5 sec to 1.35 sec.
+10:33:51 < _|Nix|_> I'm not sure how much a lighter jQuery will help. $.widget.bridge will not be faster with a faster jQuery, because $.widget.bridge doesn't use jQuery. It's plain JS.
+10:34:37 < _|Nix|_> So, if a lot of time is spent defining widgets, that time will not be saved by switching away from jQuery.
+10:35:35 < Changsuk> _|Nix|_: Yes, right.
+10:36:01 < _|Nix|_> You know, I just had another thought. What if we could record the result of $.widget?
+10:36:04 < Changsuk> _|Nix|_: and I already know what you're worring.
+10:36:38 < Changsuk> _|Nix|_: Then?
+10:37:06 < Changsuk> _|Nix|_: Can we use that result again and again?
+10:37:22 < _|Nix|_> Changsuk: I mean, like, compile the library from JS to JS. The resulting JS would just be like $.tizen.virtualgrid = { /* the result of calling $.widget */ }
+10:38:07 < Changsuk> _|Nix|_: Yes...
+10:38:12 < _|Nix|_> Changsuk: In Chrome, if you type $.tizen.virtualgrid into the console, you get a big object that has been created with $.widget.
+10:38:36 < Changsuk> _|Nix|_: OK.
+10:38:42 < _|Nix|_> Changsuk: So, what if we were to write that object into a source file. We wouldn't have to call $.widget on startup.
+10:39:01 < _|Nix|_> Changsuk: We could just assign that object, and BAM! Done!
+10:39:17 < Changsuk> _|Nix|_: Yes, that's a nice idea~! :)
+10:39:37 < _|Nix|_> Changsuk: ... but I'm not sure if it's possible, because $.widget creates a lot of closures.
+10:40:11 < Changsuk> _|Nix|_: Actually my team did some codes like that way. ha, ha~
+10:40:24 < _|Nix|_> Wow! You guys have thought of everything!
+10:40:40 < Changsuk> _|Nix|_: yes, closure.... is so hard to handle it.
+10:41:29 < _|Nix|_> So, what was your team's conclusion? Is it possible? Is it worth the effort? How much time does it save?
+10:41:57 < Changsuk> _|Nix|_: If thers is a object using a closure, we can't do that easily.
+10:42:27 < Changsuk> _|Nix|_: It is possible.
+10:43:46 < Changsuk> _|Nix|_: I'll send you an architecture doc. regarding that way before my team start to make the lazy loading module.
+10:43:55 < _|Nix|_> OK. Thanks!
+10:44:07 < _|Nix|_> Changsuk: I'm just looking at https://developers.google.com/closure/compiler/ and I'm not sure if that's what we want or not.
+10:44:51 < Changsuk> _|Nix|_: I think that I really have to send you the doc. and give your ideas or suggestions.
+10:44:59 < Changsuk> give -> take
+10:45:02 < Changsuk> _|Nix|_: :)
+10:45:36 < Changsuk> _|Nix|_: because I think It's really improtant for us. 
+10:46:19 < _|Nix|_> Yeah, if we can avoid doing lazy loading we should.
+10:46:29 < Changsuk> _|Nix|_: Anyway, are you still in USA?
+10:46:41 < _|Nix|_> Nono. I'm back in Finland.
+10:47:00 < _|Nix|_> Happy to be here, too! Strangely San Francisco was cold!
+10:47:03 < Changsuk> _|Nix|_: OK, i see. did you spend a good time?
+10:47:05 < _|Nix|_> Colder than Finland!
+10:47:16 < _|Nix|_> Very strange.
+10:47:19 < Changsuk> _|Nix|_: ha ha... :)
+10:47:25 < Hyunsook> haha~
+10:47:28 < Changsuk> _|Nix|_: strange? why?
+10:47:42 < _|Nix|_> Changsuk: Because California is supposed to be warm, not cold.
+10:47:52 < _|Nix|_> Yeah, it was pretty good. I found a couple of people using jQM for their projects.
+10:48:38 < Changsuk> _|Nix|_: the problem is that weather was changed... ha~
+10:48:42 < Changsuk> _|Nix|_: wow~!
+10:49:36 < _|Nix|_> I know, eh? I get out of the airport expecting a warm breeze, and instead I have to run back inside and put on my jacket :/
+10:50:02 < Changsuk> _|Nix|_: Did you ask them what system do they develop?
+10:50:23 < Changsuk> _|Nix|_: ha ha ha~~
+10:50:44 < Hyunsook> kkkk~
+10:50:59 < Changsuk> Hyunsook: kkkk ?
+10:51:18 < Hyunsook> Korian: ¤»¤»¤»¤» = english : kkkk
+10:51:26 < _|Nix|_> There was an app for shipping cars, then there was some guy from Jinhak with an app that I didn't quite understand, and then there was WeVideo who were using jQuery UI for dragging/dropping.
+10:51:32 < Hyunsook> Korean*
+10:51:43 < Changsuk> _|Nix|_: the korean words are broken...
+10:51:59 < Changsuk> _|Nix|_ -> Hyunsook. I'm so sorry.. :)
+10:52:06 < Hyunsook> Changsuk: Oppssss! Sorry
+10:52:41 < Hyunsook> _|Nix|_: Well, now I guess it's my turn. :)
+10:52:43 < _|Nix|_> So, that's about it from TDC 2013.
+10:52:48 < Changsuk> _|Nix|_: ah..ha. So are they korean?
+10:53:11 < _|Nix|_> Changsuk: Yes, but I didn't quite understand what the app does. Something about talking or songs or something.
+10:53:23 < Changsuk> _|Nix|_: I think that Jinhak is sound likes korean word.
+10:53:30 < Changsuk> _|Nix|_: wow~~!!
+10:53:33 < _|Nix|_> Changsuk: The guy presenting it was quite impressed when I told him I was on the jQM developer team :)
+10:54:03 < _|Nix|_> http://www.jinhak.com/
+10:54:04 < Changsuk> _|Nix|_: ha ha ha....
+10:54:48 < _|Nix|_> The company logo matches the logo I saw at TDC. Otherwise, I have no idea what they do, and I can't seem to find an English version of the Web site.
+10:54:57 < Changsuk> _|Nix|_: yes, some developers in our country envy you or guys who work in a Open source community.
+10:55:46 < Changsuk> _|Nix|_: and they really want to work as a memeber of a open source team.
+10:56:40 < Changsuk> _|Nix|_: ah..ha... I see.
+10:56:41 < _|Nix|_> Believe me, becoming a member of the jQM team is one of the biggest accomplishments of my career so far. It's the first time I've actually worked on an upstream project.
+10:57:08 < _|Nix|_> So, I was one of those envious guys until then.
+10:57:52 < Changsuk> _|Nix|_: Yes, you did and are doing such a nice work~! :)
+10:57:59 < _|Nix|_> Thanks!
+10:58:10 < Changsuk> _|Nix|_: you're welcome~ :)
+10:58:19 < _|Nix|_> Anyway. Let's keep going. Hyunsook?
+10:58:51 < Hyunsook> _|Nix|_: Yep.
+10:59:07 < _|Nix|_> Hyunsook: What have you been up to?
+10:59:44 < Hyunsook> _|Nix|_: I've read your respons and understood your thinking for PHP Web server. Thanks for your explain. :)
+11:00:52 < Hyunsook> _|Nix|_: Ah. I was busy due to performance tasks of Tizen during 2-3 weeks. :(
+11:01:22 < Hyunsook> _|Nix|_: Well, when do we need to complete running API Docs site on PHP Web server?
+11:02:10 < Hyunsook> _|Nix|_: hmmm....Due date is 06/28 (MM/DD)?
+11:02:39 < _|Nix|_> I don't get it. Let's get one thing straight. Quarter 2 ends next month. Right?
+11:02:50 < _|Nix|_> So, don't we still have this month?
+11:02:58 < _|Nix|_> Like, June?
+11:03:54 < Hyunsook> _|Nix|_: Right.  Quarter 2 ends June.
+11:04:27 < Hyunsook> _|Nix|_: First, I'll also ask to company's network team next week whether my PC can be public.
+11:04:42 < _|Nix|_> Hyunsook: Great!
+11:05:12 < _|Nix|_> Hyunsook: I think we'd be OK with the API docs they are now, but we should probably get rid of all the jQuery branding.
+11:05:31 < _|Nix|_> Hyunsook: ... and we can do that from the jquery-wp-content/themes directory, I think.
+11:05:56 < Hyunsook> _|Nix|_: ah......
+11:05:57 < _|Nix|_> Hyunsook: In the long run, I want to make a separate blog for web-ui-fw, so we don't overwrite jQM API docs.
+11:06:19 < _|Nix|_> Hyunsook: However, I don't know if I can make that work in the next month.
+11:06:49 < _|Nix|_> Hyunsook: So, for now, I think we should just go with this API site - that is, the one that's basically api.jquerymobile.com but with all the entries overwritten.
+11:07:16 < _|Nix|_> Hyunsook: I've done some work on the API docs yesterday.
+11:07:26 < Hyunsook> _|Nix|_: If we need to change theme, I think we are difficult to complete setting up API docs site.
+11:07:59 < Hyunsook> _|Nix|_,: until June.
+11:08:22 < Hyunsook> _|Nix|_: Right.
+11:08:26 < Changsuk> _|Nix|_: so, will we remove a dependency of jQuery/jQM and run a seperated Web-UI-FW, right? 
+11:08:29 < _|Nix|_> Hyunsook: Nah. I don't mean to actually come up with a new theme. I just mean to get cut out all the jQuery-related stuff. Basically we should just have the category and the list of widgets and that's it.
+11:09:22 < Hyunsook> _|Nix|_: ah. I see.
+11:09:29 < _|Nix|_> Changsuk: What I'm saying is that we should create a Web site under jquery-wp-content that is separate from all the other jQuery Web sites, but has the same structure.
+11:10:39 < _|Nix|_> Hyunsook: Coming up with a new theme is a long-term goal, because we don't have time to do that within a month. So, we get rid of all the jQuery logos and stuff so we don't violate the licensing terms, and that's it. We publish.
+11:11:03 < _|Nix|_> Hyunsook: I was already able to remove some links on http://web-ui-fw.go-nix.ca:8081/
+11:11:32 < Hyunsook> Changsuk: As Gabriel said, current our API docs already is create under  jquery-wp-content. But we didnot  separate from other jQuery web sites.
+11:11:34 < _|Nix|_> Hyunsook: All the links from the search bar are gone - things like "Download", "Platforms", etc.
+11:12:05 < _|Nix|_> Hyunsook: So, only the API docs are left.
+11:12:16 < Hyunsook> _|Nix|_: Yes. I do think so.
+11:12:36 < Changsuk> _|Nix|_, Hyunsook: Ok~ I see. I was alarmed and confused. I can understand that. :)
+11:12:46 < _|Nix|_> Hyunsook: In the worst case, we can simply replace the jQuery images with transparent pngs.
+11:13:07 < Hyunsook> _|Nix|_: Wow~
+11:13:09 < _|Nix|_> Hyunsook: ... so as to avoid licensing problems.
+11:13:20 < _|Nix|_> Hyunsook: Depending on how much time we have :)
+11:13:42 < _|Nix|_> Hyunsook: I'll do that on June 30th at 23:59:59 :)
+11:14:07 < Changsuk> _|Nix|_: HA HA HA~~
+11:14:12 < Hyunsook> _|Nix|_: ha ha~~~~
+11:14:36 < Kangsik> _|Nix|_ : ha ha :-)
+11:14:39 < _|Nix|_> In the meantime, we have a month to do it right.
+11:14:46 < Changsuk> _|Nix|_: I think you should have to take an alarm clock on your body. :)
+11:14:58 < _|Nix|_> Yeah :)
+11:15:00 < Hyunsook> _|Nix|_: I saw already docs you uploaded and built them. :)
+11:15:19 < _|Nix|_> Push the big red button to replace all logos with transparent PNGs.
+11:15:22 < Hyunsook> _|Nix|_: Thanks.
+11:15:34 < _|Nix|_> Hyunsook: Yeah, and the GH hook seems to be working nicely.
+11:15:50 < _|Nix|_> Hyunsook: Whenever we push to GH, the docs are updated.
+11:16:10 < Hyunsook> _|Nix|_: Oh~~ Gooood~!
+11:16:17 < _|Nix|_> Yeah, I like it too :)
+11:16:37 < Hyunsook> _|Nix|_: Well. I want to fix due date for remaining tasks.
+11:16:56 < Hyunsook> All guys, please tell me your opinion for due date of tasks as follows:
+11:17:12 < Hyunsook> 1. Complete making docs of the first release widgets
+11:17:12 < Hyunsook> - colorpalette: done
+11:17:12 < Hyunsook> - ctxpopup: ?
+11:17:12 < Hyunsook> - hsvpicker: done
+11:17:12 < Hyunsook> - tokentextarea: done (need to update)
+11:17:13 < Hyunsook> - virtualgrid: done (need to update)
+11:17:13 < Hyunsook> => Due date is 06/14 (MM/DD).
+11:17:26 < _|Nix|_> ctxpopup is already upstream.
+11:17:36 < Hyunsook> ah ha~!
+11:17:45 < Hyunsook> OK. I see. I'll update. :)
+11:17:54 < Hyunsook> Next.
+11:17:58 < Hyunsook> 2. Complete making unit-test and checking a normal running of unit-tests for the first release widgets.
+11:17:58 < Hyunsook> => I didn't check current status for this task. But.. Due date is 06/21.
+11:18:18 < Hyunsook> 3. Complete the task for performance and new feature of tokentextarea, virtualgrid. (I'm not sure whether we need this task about other widgets.)
+11:18:19 < Hyunsook> => I didn't check current status for this task. But.. Due date is 06/28.
+11:18:20 < _|Nix|_> colorpalette has unit tests.
+11:18:39 < Hyunsook> I see.
+11:18:42 < Changsuk> Hyunsook: I'll suppor the testing tasks.
+11:18:49 < _|Nix|_> virtualgrid doesn't work in the API docs, because it needs some JS for displaying items.
+11:18:55 < Changsuk> Hyunsook: support.
+11:18:57 < _|Nix|_> I fixed the demos.
+11:19:01 < Hyunsook> Changsuk: Oh~ Thanks.
+11:19:32 < Hyunsook> _|Nix|_: Yes. Kangsik will update VG's doc.
+11:19:40 < _|Nix|_> virtualgrid uses custom JS to fill the grid with items. I think a small version with a few items needs to be added to docs/entries/virtualgrid.xml inline.
+11:20:30 < Changsuk> All: I agree with Gabriel's idea.
+11:20:53 < Hyunsook> _|Nix|_: Yes. I think we need to check (cross-check) after making all docs and unit-tests.
+11:21:17 < Kangsik> _|Nix|_: Yes. I will make small version.
+11:21:23 < _|Nix|_> Kangsik: Awesome!
+11:22:01 < _|Nix|_> Kangsik: You need to add it to docs/entries/virtualgrid.xml to the <example> section at the end of the file.
+11:22:32 < _|Nix|_> Kangsik: The result will be rendered in an iframe at the end of http://web-ui-fw.go-nix.ca:8081/virtualgrid/
+11:23:47 < _|Nix|_> OK. So, in conclusion, we need to write a few more unit tests, and we need to get rid of the jQuery branding, and we should be good to go.
+11:24:11 < Hyunsook> _|Nix|_: Right.
+11:24:19 < Changsuk> _|Nix|_: yes, exactly.
+11:24:34 < Kangsik> _|Nix|_: Yes. Right. :)
+11:24:53 < _|Nix|_> Oh, I've also added RELEASE.md to the repo which contains the steps for making a release. It's very incomplete, but if you can think of any more steps that need to be taken as part of the release, please write them there.
+11:25:07 < Hyunsook> _|Nix|_: but.. I wonder we can complete until getting rid of the jQuery branding.
+11:25:28 < Changsuk> _|Nix|_: Ok, I'll. 
+11:25:39 < Hyunsook> worry*
+11:25:42 < _|Nix|_> Hyunsook: Of course! Like I said, in the worst case, we can simply replace the logos.
+11:26:03 < Hyunsook> _|Nix|_: OK. I see.
+11:26:10 < _|Nix|_> Hyunsook: ... if we /really/, /really/ have no more time.
+11:26:27 < Hyunsook> _|Nix|_: ha ha ~ OK.
+11:26:47 < _|Nix|_> Hyunsook: IMO the first release doesn't have to look that good. It just has to work.
+11:26:56 < _|Nix|_> Hyunsook: We can improve from there.
+11:27:21 < Hyunsook> _|Nix|_: Yes. I see. :)
+11:27:45 < _|Nix|_> I think it's more important that the API docs be accurate and have working examples than for the theme and stuff to be all neat and tidy.
+11:28:39 < _|Nix|_> ... and even so we'll probably have 1.0e6 bugs. But that's fine! I hope we get 1.0e6 bug reports :)
+11:29:25 < Changsuk> _|Nix|_: yes, right but, I think the nice things we make, we can make the better things after that. 
+11:29:38 < Hyunsook> _|Nix|_: ha ha.. Right.
+11:29:52 < _|Nix|_> Changsuk: Of course. We'll do our best within this month.
+11:31:07 < _|Nix|_> OK. So, do we have any other topics?
+11:31:14 < _|Nix|_> Kangsik? What have you been up to?
+11:32:00 < Changsuk> _|Nix|_: No, I told you all things.
+11:33:14 < Kangsik> I have applied NativeIs() to Tizen and profiling it.
+11:33:36 < Kangsik> The performance was improved approximately 15msec.
+11:33:36 < Hyunsook> _|Nix|_: I also told you all thinks.
+11:35:06 < _|Nix|_> Kangsik: DaveMethvin told me that jQuery 2.0.0 uses matchesSelector() whenever possible. Have you had a chance to look at that?
+11:38:30 < Kangsik> _|Nix|_: I see your e-mail. but I have never seen the code.
+11:39:47 < _|Nix|_> Kangsik: That's fine. If nativeIs() works fine, then I guess there's no point making unnecessary code changes.
+11:40:10 < _|Nix|_> Kangsik: Good performance improvement!
+11:40:57 < _|Nix|_> OK. In that case, I think we've covered all topics.
+11:41:12 < _|Nix|_> Let's do this again next week :)
+11:41:28 < _|Nix|_> I think we have plenty to keep us busy :)
+11:41:50 < Changsuk> _|Nix|_: yes, I think so.
+11:42:11 < _|Nix|_> Alrighty then. Have a good weekend, and see you guys next week!
+11:42:39 < Hyunsook> Have a good weekend~ All~~!
+11:42:41 < Kangsik> Yes.. Have a good weekend. :-)
+11:42:46 < Hyunsook> Bye bye~
+11:43:03 < Changsuk> _|Nix|_: Have a good breakfast and a nice weekend~
+11:43:13 < _|Nix|_> Thanks, all!
+11:43:19 < Changsuk> _|Nix|_: talk to you later~~ :)
