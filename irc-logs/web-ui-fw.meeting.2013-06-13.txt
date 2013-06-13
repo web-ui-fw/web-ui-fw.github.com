@@ -1,0 +1,102 @@
+--- Log opened Thu Jun 13 09:13:19 2013
+09:13 -!- Irssi: Log file ~/2013-06-13.txt opened
+09:13 #web-ui-fw: < _|Nix|_> Kangsik: Hey!
+09:13 #web-ui-fw: < Kangsik> _|Nix|_ : Hi :-)
+09:14 -!- Hyunsook [~Hyunsook@121.133.176.4] has joined #jquerymobile-dev
+09:14 #web-ui-fw: < Changsuk> _|Nix|_: Wow~ You went to the Conference~! :)
+09:14 #web-ui-fw: < _|Nix|_> Changsuk: Yeah. It's great to talk to the guys in person. So much easier.
+09:14 #web-ui-fw: < Changsuk> _|Nix|_: I envy you.
+09:15 #web-ui-fw: < Changsuk> _|Nix|_: yes... I think so.
+09:15 #jquery-dev: < JamesMGreene> So you didn't come to Portland because you hate people. Got it.  :-P
+09:15 #web-ui-fw: < _|Nix|_> Changsuk: I mentioined your performance improvement results. I even talked about lazy loading. You guys did some great work measuring those times!
+09:15 #web-ui-fw: < Changsuk> _|Nix|_: Are the intel jQmobi members joining the conference?
+09:16 -!- Hyunsook [~Hyunsook@121.133.176.4] has left #jquerymobile-dev []
+09:16 -!- Hyunsook [~Hyunsook@121.133.176.4] has joined #web-ui-fw
+09:16 #web-ui-fw: < Changsuk> _|Nix|_: ha ha~ Thanks so much.
+09:16 #web-ui-fw: < Hyunsook> Hi all
+09:16 #web-ui-fw: < _|Nix|_> Changsuk: No, unfortunately. The Intel person who was supposed to coordinate the meeting between Intel/jqMobi and the jQuery foundation is in Europe right now :(
+09:16 -!- _tinman_ [~user@66.206.78.50] has quit [Remote host closed the connection]
+09:16 #web-ui-fw: < _|Nix|_> Hyunsook: Hey!
+09:16 -!- stephenplusplus [~stephenpl@c-71-238-131-205.hsd1.mi.comcast.net] has quit [Quit: Leaving.]
+09:17 #web-ui-fw: < Hyunsook> _|Nix|_: :)
+09:17 #web-ui-fw: < Changsuk> _|Nix|_: And my team will start to develop lazy loading modules in this month.
+09:17 #web-ui-fw: < _|Nix|_> So, d'you guys think we can get started? I'd really like to go to bed soon :) I';;;;m dead tired, although I'm happy that I could stay up this late.
+09:17 #web-ui-fw: < Changsuk> _|Nix|_: Ok.
+09:17 #web-ui-fw: < _|Nix|_> Changsuk: Oh, really? Is it worth those couple of tens of ms?
+09:18 -!- roelmonnens [~roelmonne@d54C2232C.access.telenet.be] has joined #grunt
+09:18 #web-ui-fw: < Changsuk> Hyunsook, Kangsik: I'm sorry that I have to meet other team members now, So if you guys share the web-ui-fw development status?
+09:18 #web-ui-fw: < _|Nix|_> Changsuk: I asked the guys here about running $.widget offline and recording the output, but the idea hasn't resonated yet.
+09:19 #web-ui-fw: < Changsuk> _|Nix|_: Yes, right.
+09:19 #web-ui-fw: < _|Nix|_> Kangsik, Hyunsook: Alright. Let's do this thing. Who wants to go first?
+09:20 #web-ui-fw: < Changsuk> _|Nix|_: I think if my team add lazy loading feature to Tizen, A Tizen Web App's launching time may improve 100 or more msec.
+09:21 #web-ui-fw: < _|Nix|_> Changsuk: Alright! That's totally cool, and you don't really have to worry about whether accessor functions are available or not, because, of course, they're totally available on Tizen :)
+09:21 #web-ui-fw: < Changsuk> Hyunsook, Kangsik, _|Nix|_: I'll meet other guys in other team, But I can watch IRC.
+09:21 #web-ui-fw: < _|Nix|_> Changsuk: OK.
+09:21 #web-ui-fw: < Changsuk> Hyunsook, Kangsik, _|Nix|_: and If I have to talk to your guys, I'll write it.
+09:22 -!- orkel [~orkel@dhcp107-16-186-211.hil-rllcdt.sea.wayport.net] has joined #jquery-dev
+09:22 -!- orkel [~orkel@dhcp107-16-186-211.hil-rllcdt.sea.wayport.net] has joined #jquery-meeting
+09:22 #web-ui-fw: < _|Nix|_> Changsuk: Cool.
+09:22 #web-ui-fw: < _|Nix|_> Hyunsook: So, how's it going? What have you been up to?
+09:23 #web-ui-fw: < Hyunsook> _|Nix|_: As I sent email last week, now I'm doing code sync task for Tokentextarea.
+09:23 -!- jblanche [~jblanche@ivr94-10-88-177-169-11.fbx.proxad.net] has joined #grunt
+09:24 #web-ui-fw: < _|Nix|_> Hyunsook: OK. Cool!
+09:24 #web-ui-fw: < _|Nix|_> Kangsik?
+09:24 #web-ui-fw: < Hyunsook> _|Nix|_: And I'll apply the fixed codes for TTA's bugs in Tizen.
+09:24 #web-ui-fw: < _|Nix|_> Hyunsook: Awesome!
+09:25 #web-ui-fw: < Kangsik> I am testing virtualgrid. and writing unit test codes.
+09:26 #web-ui-fw: < _|Nix|_> Kangsik: That's great. We really need some coverage on that. And speaking of coverage: gseguin has done an awesome job adding test coverage percentage indicators to jQM unit tests.
+09:27 #web-ui-fw: < _|Nix|_> We're gonna have that by the autumn, he says.
+09:27 #web-ui-fw: < _|Nix|_> Oh, and more news from the conference: Both UI and core have decided to use AMD to break up the library.
+09:28 #web-ui-fw: < _|Nix|_> I shared the experience of integrating jQM with web-ui-fw via AMD with them, and ther solution is very similar.
+09:28 #web-ui-fw: < Hyunsook> ah ha..
+09:28 #web-ui-fw: < Kangsik> _|Nix|_: Wow......
+09:28 #web-ui-fw: < _|Nix|_> So, we'll soon be able to dive all the way into core and grab only what we need.
+09:29 #web-ui-fw: < _|Nix|_> Yeah. AMD rocks!
+09:29 #web-ui-fw: < _|Nix|_> Putting this in the SDK will be more important.
+09:29 #web-ui-fw: < _|Nix|_> ... and we'll have more support from upstream.
+09:29 -!- kumavis [~kumavis@75-101-102-108.dsl.static.sonic.net] has joined #grunt
+09:30 #web-ui-fw: < _|Nix|_> I'll try to get them to do the part where the rest of the library is loaded asynchronously.
+09:30 -!- utjjuy [~coderboy@sociotechnical.ischool.drexel.edu] has joined #jquery-infrastructure
+09:30 #web-ui-fw: < _|Nix|_> ... just like we wanted.
+09:30 #web-ui-fw: < Hyunsook> Right.
+09:31 #web-ui-fw: < _|Nix|_> Yeah, that's good news all-round.
+09:31 #web-ui-fw: < Kangsik> awesome!!
+09:31 #web-ui-fw: < _|Nix|_> As for me, I've been trying to get hosting, but I don't think I can pull it off.
+09:31 -!- bnaya [~bnaya@bzq-84-111-198-38.red.bezeqint.net] has quit [Ping timeout: 252 seconds]
+09:31 #web-ui-fw: < _|Nix|_> So, I'm going to write a client-only application for displaying the API data.
+09:31 #grunt: < JamesMGreene> ben_alman jzaefferer ajpiano: Anyone at jQCon want to help me hack on grunt-lib-phantomjs to make it use WebSockets instead of file I/O for the Node-PhantomJS IPC?
+09:32 -!- dkirker is now known as zz_dkirker
+09:32 -!- toonketels [~toonketel@91.183.84.141] has joined #grunt
+09:32 #web-ui-fw: < Hyunsook> Ok. I see.
+09:32 #web-ui-fw: < _|Nix|_> Basically, the application displays links to docs/dist/wordpress/posts/post/*.html and loads them via AJAX and styles them.
+09:33 #web-ui-fw: < _|Nix|_> We'll see how far I can get with that.
+09:33 -!- jblanche [~jblanche@ivr94-10-88-177-169-11.fbx.proxad.net] has quit [Quit: Computer has gone to sleep.]
+09:33 #web-ui-fw: < _|Nix|_> Hopefully we can get rid of the need for wordpress and then we can publish on web-ui-fw.github.com
+09:34 #web-ui-fw: < _|Nix|_> ... and then we don't need to worry about the branding anymore, either :)
+09:34 #web-ui-fw: < Hyunsook> Oh~ Good~
+09:34 #web-ui-fw: < _|Nix|_> So, that's about it. Lots and lots and lots of work both in jQM and web-ui-fw.
+09:34 #web-ui-fw: < Kangsik> HaHa..Good~ :)
+09:35 #web-ui-fw: < _|Nix|_> Yeah. It'd be good. I need to write some code in grunt to assemble the menu that will be diplayed on the left (like categories, etc.).
+09:35 #web-ui-fw: < Hyunsook> So you're very tired....
+09:36 #web-ui-fw: < _|Nix|_> Hyunsook: Very. That's why, if we don't have any other topics, I'd like to conclude the meeting and go to bed :)
+09:36 #web-ui-fw: < Hyunsook> Oh! Kangsik uploaded PR for getAttrFixed.
+09:36 #web-ui-fw: < Hyunsook> Can you check it ? Ah! At tomorrow~!
+09:37 #web-ui-fw: < _|Nix|_> Sweet! I'll have a look at it.
+09:37 #web-ui-fw: < _|Nix|_> Kangsik: Thanks!
+09:37 #web-ui-fw: < Hyunsook> OK. Thanks. :)
+09:38 #web-ui-fw: < Hyunsook> Well, you can got to bed.
+09:38 #web-ui-fw: < Hyunsook> Hurry up~~ :)
+09:38 -!- timmywil [~timmywil@ip-64-134-140-133.public.wayport.net] has quit [Quit: O.o]
+09:38 -!- timmywil [~timmywil@ip-64-134-140-133.public.wayport.net] has quit [Quit: O.o]
+09:38 #web-ui-fw: < Kangsik> _|Nix|_: It`s my pleasure :)
+09:38 #web-ui-fw: < _|Nix|_> Alright. Talk to you guys next week. Have a good weekend, and good work everybody! I'll post this log to http://web-ui-fw.github.io/irc-logs/ in a few minutes.
+09:39 #web-ui-fw: < Hyunsook> Ok. Thanks~
+09:39 #web-ui-fw: < Hyunsook> Have a nice weekend. :)
+09:39 #web-ui-fw: < Kangsik> Thanks :)
+09:39 #web-ui-fw: < Kangsik> Have a good weekend. :)
+09:39 -!- Krinkle is now known as Krinkle|detached
+09:39 -!- Krinkle is now known as Krinkle|detached
+09:39 -!- Krinkle is now known as Krinkle|detached
+09:39 -!- Krinkle is now known as Krinkle|detached
+09:42 -!- Irssi: Unknown command: log off
+--- Log closed Thu Jun 13 09:42:56 2013
