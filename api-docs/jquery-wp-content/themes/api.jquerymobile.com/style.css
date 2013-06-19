@@ -1,0 +1,27 @@
+/*
+Theme Name: api-jquerymobile-com
+Template: jquery
+*/
+
+a {
+	color: #108040;
+}
+
+.version-details a,
+.returns a {
+	color: #3EB249;
+}
+
+.signatures li h4 {
+	background: #108040;
+}
+
+.column-headers {
+	width: 100%;
+	margin: 1em 0;
+}
+
+.column-headers th {
+	width: 170px;
+	text-align: left;
+}
