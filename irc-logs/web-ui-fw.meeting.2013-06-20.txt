@@ -1,0 +1,230 @@
+09:52:26 < Changsuk> Hi~
+09:54:05 < Kangsik> Hi ~ :-)
+09:55:42 < _|Nix|_> Hey!
+09:56:20 < Changsuk> _|Nix|_: You wake up early, I suppose. :)
+09:56:36 < _|Nix|_> Not really. I woke up two minutes ago :)
+09:56:49 < Changsuk> _|Nix|_: huh~ haha~
+09:57:14 < Kangsik> _|Nix|_: HaHa~~
+09:57:31 < _|Nix|_> I'm having a meeting for breakfast.
+09:57:35 < Changsuk> _|Nix|_: Hyunsook is off today because her sister in in a hostipal and she's taking care her sister. 
+09:58:17 < _|Nix|_> OK. Hope everything turns out fine for them!
+09:58:41 < _|Nix|_> So, we might as well get started.
+09:59:06 < Changsuk> _|Nix|_: thanks for your kind words. :)
+09:59:20 < Changsuk> _|Nix|_: Ok.
+09:59:45 < Changsuk> _|Nix|_: Hyunsook told me about her work status.
+10:00:32 < Changsuk> _|Nix|_: She will finish making a demo page of TokenTextArea in this week.
+--- Log opened Thu Jun 20 10:01:17 2013
+10:01 -!- Irssi: Log file ~/2013-06-20.txt opened
+10:01 #web-ui-fw: < _|Nix|_> Cool!
+10:01 #web-ui-fw: < Changsuk> _|Nix|_: and she will do unit tests and make API documents in next Friday.
+10:02 #web-ui-fw: < _|Nix|_> Excellent! I had this idea to mirror the API docs site with wget and place the result on web-ui-fw.github.com
+10:02 #web-ui-fw: < Changsuk> _|Nix|_: I think those are all things that she has to do. right?
+10:02 #web-ui-fw: < _|Nix|_> Yep.
+10:02 -!- snover [~Adium@unaffiliated/snover] has quit [Quit: Leaving.]
+10:03 #web-ui-fw: < Changsuk> _|Nix|_: thanks, mirror the API doc site?
+10:03 #web-ui-fw: < Changsuk> _|Nix|_: What was that mean?
+10:04 #web-ui-fw: < _|Nix|_> Since I cannot get my hands on a site where I can install wordpress, I copy everything with wget.
+10:04 #web-ui-fw: < Changsuk> _|Nix|_: and Kangsil will finish all of things(demo page, unit test and API docs.) of VirtualGrid in this week.
+10:05 #web-ui-fw: < _|Nix|_> Excellent!
+10:05 #web-ui-fw: < Changsuk> Kangsik: Am I right?
+10:05 #web-ui-fw: < Kangsik> Changsuk: Yes. right :-)
+10:05 #web-ui-fw: < _|Nix|_> The mirroring almost worked. Then, I discovered that github pages can't even be symlinks :(
+10:06 #web-ui-fw: < _|Nix|_> So, the Web server for github pages doesn't even follow symlinks :(
+10:06 #web-ui-fw: < _|Nix|_> So, I'll have to write some JS to edit the hrefs and src= for the scripts/styles/links in the API docs :(
+10:06 #web-ui-fw: < Changsuk> _|Nix|_: So, copy all of things to web-ui-fw.gitbug.com ?
+10:07 #web-ui-fw: < _|Nix|_> :) "gitbug"? Do you have a complaint about github? :)
+10:07 #web-ui-fw: < _|Nix|_> Changsuk: ... but yeah. That's the idea.
+10:07 #web-ui-fw: < Changsuk> _|Nix|_:ah. Sorry, github. :)
+10:07 #web-ui-fw: < _|Nix|_> Changsuk: It basically "renders" the Web site.
+10:08 #web-ui-fw: < _|Nix|_> Changsuk: It's like clicking on a link -> Save As, clicking on a link from that page -> Save As, etc.
+10:08 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I can understand. :)
+10:08 #web-ui-fw: < _|Nix|_> Changsuk: ... only automated.
+10:08 #web-ui-fw: < Changsuk> _|Nix|_: ah~ha. Cool~
+10:08 #web-ui-fw: < _|Nix|_> It works pretty well, but the result does not work without some manual intervention.
+10:09 -!- domidumont [~dodu@nat/hp/x-phmygaqhwbxrrrps] has quit [Remote host closed the connection]
+10:09 #web-ui-fw: < Changsuk> _|Nix|_: Yes, I think so.
+10:09 -!- domidumont [~dodu@nat/hp/x-dsnyxahqglmhatzj] has joined #enyojs
+10:10 #web-ui-fw: < Changsuk> _|Nix|_: so can we see the http://web-ui-fw.go-nix.ca:8081/ ?
+10:10 #web-ui-fw: < _|Nix|_> Changsuk: I'm afraid it doesn't work anymore :( I broke it :( For some reason, all the links from the main page point to "local.web-ui-fw.go-nix.ca".
+10:10 #web-ui-fw: < Changsuk> _|Nix|_: I saw that site a few minutes ago. but the Widgets link on the left panel won't work.
+10:10 #web-ui-fw: < _|Nix|_> Changsuk: Exactly.
+10:11 #web-ui-fw: < _|Nix|_> Changsuk: I don't know why it broke.
+10:11 #web-ui-fw: < Changsuk> _|Nix|_: hmmmmm....
+10:11 #web-ui-fw: < _|Nix|_> Changsuk: Something about staging vs. production.
+10:11 #web-ui-fw: < _|Nix|_> Changsuk: I'll put the mirror up on github.
+10:11 #web-ui-fw: < Changsuk> _|Nix|_: Does that local site work well?
+10:11 #web-ui-fw: < _|Nix|_> Changsuk: Yes. That's the one I copied with wget.
+10:12 #web-ui-fw: < _|Nix|_> Changsuk: The only thing that does not work is the styles, because the CSS file lies on a path with symlinks.
+10:13 #web-ui-fw: < Changsuk> _|Nix|_: I think that the public site's link doesn't changed from local link to public site's link.
+10:14 #web-ui-fw: < _|Nix|_> Changsuk: http://babulina.go-nix.ca:8080/nix/api-docs/
+10:14 #web-ui-fw: < _|Nix|_> Changsuk: That's the mirrored site.
+10:14 #web-ui-fw: < _|Nix|_> Changsuk: ... but it needs symlinks to work.
+10:14 #web-ui-fw: < _|Nix|_> Changsuk: Fixing that is what I'm gonna have to do over the next week.
+10:15 #web-ui-fw: < Changsuk> _|Nix|_: I checked it but the Widgets link on the left doesn't still work properly.
+10:16 #web-ui-fw: < _|Nix|_> Oh, I missed a symlink :)
+10:16 #web-ui-fw: < Changsuk> _|Nix|_: symlinks? Is it a solution?
+10:16 #web-ui-fw: < Changsuk> _|Nix|_: I'm sorry that I never heard about it. :)
+10:17 #web-ui-fw: < Changsuk> _|Nix|_: Is a symbolic link?
+10:17 #web-ui-fw: < _|Nix|_> Changsuk: Yes.
+10:17 #web-ui-fw: < Changsuk> _|Nix|_: ah~~ I see. :)
+10:17 #web-ui-fw: < _|Nix|_> Changsuk: ... but the Web server at github doesn't follow symlinks.
+10:18 #web-ui-fw: < _|Nix|_> Changsuk: So, I'll have to write some JS to edit the hrefs at runtime.
+10:18 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. I think that the symlinks are broken.
+10:18 #web-ui-fw: < _|Nix|_> Changsuk: One symlink is broken.
+10:18 #web-ui-fw: < Changsuk> _|Nix|_: yes, you have to. 
+10:18 #web-ui-fw: < _|Nix|_> Changsuk: The widget API docs still work.
+10:18 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. the API docs works well. :)
+10:19 #web-ui-fw: < _|Nix|_> Yeah, so I'll write that script and inject it into each file and we should be good to go.
+10:20 #web-ui-fw: < Changsuk> _|Nix|_: So after Kangsik and Hyunsook make the documents, then just put all of doc files to /doc folder in the github?
+10:20 #web-ui-fw: < Changsuk> _|Nix|_: Thanks~! You did a great work. ! :)
+10:20 #web-ui-fw: < _|Nix|_> Changsuk: Yeah. The way we create API documentation and demos has not changed.
+10:21 #web-ui-fw: < _|Nix|_> Changsuk: Thanks! It's not done yet, but I hope I can finish in time.
+10:21 #web-ui-fw: < Changsuk> _|Nix|_: Ok.
+10:21 #web-ui-fw: < Changsuk> _|Nix|_: ha~ Yes, and I really believe you. :)
+10:21 #web-ui-fw: < _|Nix|_> Changsuk: I also hope that I've sufficiently removed the jQuery branding.
+10:22 #web-ui-fw: < _|Nix|_> Changsuk: Did you guys know that toddmparker has stepped down as jQM lead dev?
+10:22 #web-ui-fw: < _|Nix|_> Changsuk: uGoMobi (Jasper deGroot) has taken over his role.
+10:22 #web-ui-fw: < Changsuk> _|Nix|_: Huh?
+10:22 #web-ui-fw: < Changsuk> _|Nix|_: really?
+10:22 #web-ui-fw: < _|Nix|_> Yep.
+10:22 #web-ui-fw: < _|Nix|_> Changsuk: Just before the conference.
+10:23 #web-ui-fw: < _|Nix|_> Changsuk: Todd is really busy with client work.
+10:23 #web-ui-fw: < Changsuk> _|Nix|_: It's such a shame.
+10:23 #web-ui-fw: < _|Nix|_> Changsuk: He's still working on the project, but he doesn't have time to run the meetings and do the releases.
+10:24 #web-ui-fw: < _|Nix|_> Changsuk: It's not like he's gone forever.
+10:24 #web-ui-fw: < Changsuk> _|Nix|_: ah... I see.
+10:25 -!- mephinet [~Thunderbi@unaffiliated/mephinet] has joined #enyojs
+10:25 #web-ui-fw: < _|Nix|_> Changsuk: ... and johnbender is also going to be doing a lot less. He's starting his Ph.D. so he won't have too much time for jQM either.
+10:25 #web-ui-fw: < Changsuk> _|Nix|_: It seems a good for us.
+10:25 -!- AzaToth [~azatoth@wikipedia/AzaToth] has joined #jquery-dev
+10:25 -!- AzaToth [~azatoth@wikipedia/AzaToth] has joined #jqueryui-dev
+10:25 #web-ui-fw: < _|Nix|_> Changsuk: At the conference he showed arschmitz and me his work on the content widget so that we could finish it.
+10:25 #web-ui-fw: < Changsuk> _|Nix|_: There was a big change....
+10:26 -!- danielvdende [~danielvde@x044138.its-s.tudelft.nl] has joined #jqueryui-dev
+10:26 #web-ui-fw: < _|Nix|_> Changsuk: Yeah, and lots and lots of work.
+10:26 -!- danielvdende [~danielvde@x044138.its-s.tudelft.nl] has quit [Client Quit]
+10:26 #web-ui-fw: < _|Nix|_> Changsuk: Oh, and jQM and jq-ui are merging. Our team is already in #jqueryui-dev.
+10:26 #web-ui-fw: < _|Nix|_> Changsuk: We've closed #jquerymobile-dev.
+10:26 #web-ui-fw: < Changsuk> _|Nix|_: huh?
+10:27 -!- danielvdende [~danielvde@x044138.its-s.tudelft.nl] has joined #jqueryui-dev
+10:27 #web-ui-fw: < _|Nix|_> Changsuk: That's right. Try to join #jquerymobile-dev, and you will  be redirected to #jqueryui-dev.
+10:27 #web-ui-fw: < Kangsik> _|Nix|_: Hmm......
+10:27 #web-ui-fw: < Changsuk> _|Nix|_: Is it a good chance for us? or.... bad?
+10:27 #web-ui-fw: < Changsuk> _|Nix|_: How do you think about merging the two teams?
+10:28 #web-ui-fw: < _|Nix|_> We've convinced UI and core to use AMD, and UI has accepted that they need to work better with form inputs.
+10:29 #web-ui-fw: < _|Nix|_> I think it's great! scott_gonzalez is a really smart guy! AFAIK he /wrote/ the widget factory. So, he knows a lot about writing widgets.
+10:29 #web-ui-fw: < _|Nix|_> ... and now he's on /our/ team.
+10:29 #web-ui-fw: < _|Nix|_> So, it'll be great to have his input on the changes we need to make in jQM to improve the library.
+10:30 #web-ui-fw: < _|Nix|_> Also, arschmitz has written a replacement for slider that performs much better than the current slider widget.
+10:30 #web-ui-fw: < Changsuk> _|Nix|_: I think, jQM FW is just for mobile devices. but jQuery UI is for desktops so I think merging the two FWs may make some confusions.
+10:31 #web-ui-fw: < _|Nix|_> Changsuk: We need not break that.
+10:31 #web-ui-fw: < Changsuk> _|Nix|_: Yes, righth. Scott is such a nice guys.
+10:31 #web-ui-fw: < _|Nix|_> Changsuk: If it works on mobile, it works on desktop. If it works on desktop it may or may not work on mobile. So, jQM is the more universal framework. UI can benefit from that.
+10:32 #web-ui-fw: < Changsuk> _|Nix|_: so jQM will keep going on?
+10:32 #web-ui-fw: < _|Nix|_> Changsuk: I don't doubt it, but we will keep on merging the libraries until there is only one, which works at least as well on mobile - if not better.
+10:33 #web-ui-fw: < _|Nix|_> Changsuk: scott_gonzalez and RWhitbeck(from jQM) delivered their keynote at the conference together. So, there's another symbolic gesture.
+10:33 #web-ui-fw: < _|Nix|_> Changsuk: Oh, and we merged uGoMobi's "next" branch in to master - so, now all his performance improvements and reduced markup is in master.
+10:34 #web-ui-fw: < Changsuk> _|Nix|_: hmmm.... It must be a big change... and I just wondering about performance in a mobile device.
+10:34 #web-ui-fw: < Changsuk> _|Nix|_: Wow~
+10:34 #web-ui-fw: < _|Nix|_> Changsuk: Don't worry about it. We're not going to throw out any improvements we've made, and we're not going to have one giant library with two sets of widgets.
+10:35 #web-ui-fw: < Changsuk> _|Nix|_: You and uGoMobi did a great work so I really appreciate your guys. 
+10:35 #jqueryui-dev: < _|Nix|_> uGoMobi: Ping!
+10:35 #web-ui-fw: < Changsuk> _|Nix|_: SEC may take your guys' results and add those codes to Tizen. 
+10:35 #jqueryui-dev: < _|Nix|_> uGoMobi: Wait - you're on vacation. Well, I'll ask in case you show up: Is there a link to that arch study? I'd especially like the chart about generated markup.
+10:36 #web-ui-fw: < _|Nix|_> Well, it was mostly uGoMobi. I helped out here and there.
+10:36 #web-ui-fw: < _|Nix|_> Now, there is still a lot of work to do. For example, we need to review all of our widgets to make sure they meet the widget factory API promises.
+10:37 #web-ui-fw: < _|Nix|_> arschmitz and I have been planning that for a long time.
+10:37 #web-ui-fw: < _|Nix|_> ... and gseguin showed us a demo where running the tests also gives you code coverage percentages. So, awesome work by everyone!
+10:37 #web-ui-fw: < Changsuk> _|Nix|_: Ok, If we keep performance issues on a mobile device,  I can feel relieved. :)
+10:38 #web-ui-fw: < _|Nix|_> Changsuk: It would be suicide if we sacrificed mobile performance :)
+10:38 #web-ui-fw: < Changsuk> _|Nix|_: ha ha... yeah.. right. :)
+10:38 #web-ui-fw: < _|Nix|_> Changsuk: The mobile Web is growing much faster than the desktop. I think it may already be bigger.
+10:38 #web-ui-fw: < _|Nix|_> Changsuk: Interesting statistic: In Egypt, 70% of people access the Web from a mobile device!
+10:39 #web-ui-fw: < _|Nix|_> Changsuk: They don't even know desktop. Just mobile.
+10:39 #web-ui-fw: < Changsuk> _|Nix|_: Absolutely.
+10:39 #web-ui-fw: < _|Nix|_> Changsuk: So, it's not like we're going to start ignoring it.
+10:39 #web-ui-fw: < Changsuk> _|Nix|_: :)
+10:40 #web-ui-fw: < _|Nix|_> Changsuk: ... and my colleague siovene got permission to publish his performance tracking suite. We'll probably start using it eventually, and then we'll have continuous performance tracking.
+10:40 #web-ui-fw: < Changsuk> _|Nix|_: Anyway, we will keep going on our way - making such a nice widgets for mobile.
+10:40 #web-ui-fw: < _|Nix|_> Yeah, I think it's a good plan.
+10:41 #web-ui-fw: < Changsuk> _|Nix|_: Really? wow~
+10:41 #web-ui-fw: < Changsuk> _|Nix|_: Thanks for his efforts~!
+10:41 #web-ui-fw: < _|Nix|_> Changsuk: Yeah. Lots of progress from lots of directions.
+10:41 #web-ui-fw: < _|Nix|_> Well, the Web doesn't wait for anyone, right?
+10:42 #web-ui-fw: < Changsuk> _|Nix|_: ha~ yes.
+10:42 #web-ui-fw: < _|Nix|_> I guess the conference has been really productive in the end. Even though I was jetlagged to death. I'm still jetlagged :)
+10:43 -!- b0bben [~b0bben@212.16.174.32] has joined #enyojs
+10:43 #web-ui-fw: < _|Nix|_> I wish you guys/gals could've been there :/
+10:43 #web-ui-fw: < Changsuk> _|Nix|_: Yeah, I think so but It's a shame for your health.
+10:43 #web-ui-fw: < Kangsik> _|Nix|_: I hope too. :)
+10:43 #web-ui-fw: < _|Nix|_> Changsuk: Nah. I'll sleep it off.
+10:44 #web-ui-fw: < Changsuk> _|Nix|_: yes... I really wanted it but wouldn't there.
+10:44 #web-ui-fw: < _|Nix|_> Changsuk: I just have to remember to go to bed when my daughter does, because she sleeps, like, 12 hours. So, if I do that, I'll have plenty of sleep :)
+10:45 #web-ui-fw: < Changsuk> _|Nix|_: Ah~! How much will you pay for our document site - hosting service payment.?
+10:45 #web-ui-fw: < Changsuk> _|Nix|_: Will I support you?
+10:45 #web-ui-fw: < Changsuk> _|Nix|_: I'm so sorry about that. 
+10:46 #web-ui-fw: < _|Nix|_> Changsuk: No. I'm not allowed to pay for it.
+10:46 -!- b0bben [~b0bben@212.16.174.32] has quit [Client Quit]
+10:46 #web-ui-fw: < _|Nix|_> Changsuk: It has to be created according to Intel's requirements, and then Intel will pay for it.
+10:47 #web-ui-fw: < Changsuk> _|Nix|_: ha..ha... you seem to like your daughter very much. :)
+10:47 #web-ui-fw: < _|Nix|_> Changsuk: If I was allowed to host the API docs myself, I wouldn't have used wget and mirroring and symlinks and all those hacks.
+10:47 #web-ui-fw: < Changsuk> _|Nix|_: Sounds cool~!! 
+10:48 #web-ui-fw: < _|Nix|_> Changsuk: Well, I hope I can make it work on github.
+10:48 -!- b0bben [~b0bben@212.16.174.32] has joined #enyojs
+10:48 -!- j_simon [~j_simon@firewall.know-center.tu-graz.ac.at] has joined #jqueryui-dev
+10:48 -!- j_simon [~j_simon@firewall.know-center.tu-graz.ac.at] has joined #jquery-dev
+10:49 #web-ui-fw: < _|Nix|_> Changsuk: Then, we'll have to pitch the project to jQM and maybe they'll add a link to our site. Then, we will hopefully start getting some bug reports.
+10:49 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. that work is out job.
+10:50 #web-ui-fw: < _|Nix|_> Changsuk: You said something about a performance meeting yesterday. Do you know anything more about that?
+10:50 #web-ui-fw: < Changsuk> _|Nix|_: Sure, If bugs are on the site, we will fix it.
+10:51 #web-ui-fw: < _|Nix|_> Changsuk: I know we used to have them weekly on Wednsday mornings, but I stopped attending those. Are they becoming relevant again?
+10:52 #web-ui-fw: < Changsuk> _|Nix|_: No, the first performance works was closed two weeks ago and the second works will start in next month.
+10:52 #web-ui-fw: < _|Nix|_> Aha! OK. I understand.
+10:52 #web-ui-fw: < Changsuk> _|Nix|_: But I think my team may not join the work.
+10:53 #web-ui-fw: < _|Nix|_> OK. I understand.
+10:53 #web-ui-fw: < Changsuk> _|Nix|_: SRPOL(It's a SEC company in Poland.) will take over the second performance works.
+10:54 #web-ui-fw: < Changsuk> _|Nix|_: But my team may support some cases.
+10:54 #web-ui-fw: < _|Nix|_> Aha. Wow! OK. They're really close. Poland is only, like, an hour's flight from here.
+10:54 #web-ui-fw: < Changsuk> _|Nix|_: ha... yes. :)
+10:55 #web-ui-fw: < Changsuk> _|Nix|_: But I think they may develope another thing not like jQM.
+10:55 #web-ui-fw: < _|Nix|_> Changsuk: You know, I gotta ask: Will they re-create all the widgets and functionality that jQM and web-ui-fw have now? That's a lot of work.
+10:55 #web-ui-fw: < Changsuk> _|Nix|_: SEC team in HQ hasn'
+10:55 #web-ui-fw: < Changsuk> 't decided yet.
+10:56 #web-ui-fw: < Changsuk> _|Nix|_: yes... right.
+10:56 #web-ui-fw: < Changsuk> _|Nix|_: I got a prototype from SEC folk in HQ
+10:56 #web-ui-fw: < _|Nix|_> Well, if they do that, I wish them luck.
+10:57 #web-ui-fw: < Changsuk> _|Nix|_: Most of codes doesn't use jQuery and jQM.
+10:57 #web-ui-fw: < _|Nix|_> Changsuk: ... and? Do they have a hsvpicker yet? :)
+10:57 #web-ui-fw: < _|Nix|_> Changsuk: That's fine - especially if it's faster.
+10:57 #web-ui-fw: < Changsuk> _|Nix|_: yest, right. They just made a sample button and listview. That's all.
+10:58 -!- domidumont [~dodu@nat/hp/x-dsnyxahqglmhatzj] has quit [Read error: Connection reset by peer]
+10:59 #web-ui-fw: < _|Nix|_> Changsuk: Well, like I said - they have lots of work ahead of them if they wish to reproduce all the widgets.
+10:59 #web-ui-fw: < Changsuk> _|Nix|_: Exactly.
+11:00 #web-ui-fw: < _|Nix|_> OK. This is lots of new information for all of us and plenty of work for the week ahead. Do we have any other topics to discuss?
+11:01 #web-ui-fw: < Changsuk> _|Nix|_: The performance of the protopyte is really nice, but after they add all of widgets and JS libraries, I must go to a hell.
+11:01 #web-ui-fw: < _|Nix|_> Changsuk: Not if they're careful.
+11:01 #web-ui-fw: < Changsuk> _|Nix|_: yes, I hope so.
+11:01 #web-ui-fw: < _|Nix|_> Changsuk: ... it will be interesting to see just how well they'll be able to maintain performance.
+11:01 #web-ui-fw: < _|Nix|_> Changsuk: You know, doing the SDK approach may be best.
+11:02 #web-ui-fw: < Changsuk> _|Nix|_: No, I told you all things that I have.
+11:02 #web-ui-fw: < _|Nix|_> Changsuk: I mean, where you get to choose which widgets/plugins/etc. you want to use and then you create a custom build.
+11:02 #web-ui-fw: < Changsuk> _|Nix|_: SDK approach... yes, right.
+11:02 #web-ui-fw: < _|Nix|_> Changsuk: Tell them that, maybe - in case they haven't thought about it.
+11:03 #web-ui-fw: < _|Nix|_> Changsuk: If they're doing things from scratch, then they should do them right.
+11:03 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I'll tell them about it.
+11:03 #web-ui-fw: < Changsuk> _|Nix|_: thanks for your info. ~ :)
+11:04 #web-ui-fw: < _|Nix|_> OK. In that case, I think we should call it a meeting. Good work everyone, and have a good weekend! All the best to Hyunsook's sister!
+11:04 #web-ui-fw: < Changsuk> _|Nix|_: yeah. I agree with you.
+11:05 #web-ui-fw: < Changsuk> _|Nix|_: Thank~ and  I'll send your word to Hyunsook~
+11:05 #web-ui-fw: < _|Nix|_> Thanks!
+11:05 #web-ui-fw: < Changsuk> _|Nix|_: Have a nice weekend~!
+11:05 #web-ui-fw: < Kangsik> Have a good weekend.. :)
+11:05 #web-ui-fw: < _|Nix|_> Changsuk, Kangsik: Have a good one!
+11:05 #web-ui-fw: < Changsuk> _|Nix|_: talk to you via email or IRC~ :_
+11:05 #web-ui-fw: < Changsuk> :)
+11:05 #web-ui-fw: < Changsuk> later~ :)
+11:05 #web-ui-fw: < _|Nix|_> Right!
+11:05 #web-ui-fw: < _|Nix|_> L8R
+11:06 -!- fikst [~fikst@d54C6DC82.access.telenet.be] has joined #jquery-dev
+11:06 -!- fikst [~fikst@d54C6DC82.access.telenet.be] has joined #jquery-meeting
+--- Log closed Thu Jun 20 11:06:45 2013
