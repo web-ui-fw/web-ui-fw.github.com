@@ -2,7 +2,7 @@
   <service>
     <engineName>WordPress</engineName>
     <engineLink>http://wordpress.org/</engineLink>
-    <homePageLink>http://local.api.jquerymobile.com</homePageLink>
+    <homePageLink>http://api.jquerymobile.com</homePageLink>
     <apis>
       <api name="WordPress" blogID="1" preferred="true" apiLink="xmlrpc.php" />
       <api name="Movable Type" blogID="1" preferred="false" apiLink="xmlrpc.php" />
