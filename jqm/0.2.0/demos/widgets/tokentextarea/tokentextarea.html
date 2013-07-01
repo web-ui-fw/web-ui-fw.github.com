@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Tokentextarea Demo - Web UI Framework Demos</title>
+		<link rel="stylesheet" href="http://web-ui-fw.github.com/jqm/0.2.0/web-ui-fw.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+		<link rel="stylesheet" href="http://view.jquerymobile.com/1.3.1/demos/_assets/css/jqm-demos.css">
+
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+		<script src="http://web-ui-fw.github.com/jqm/0.2.0/web-ui-fw.js"></script>
+		<script src="../../_assets/js/index.js"></script>
+		<!-- Demo.js -->
+		<script src="tokentextarea-demo.js"></script>
+	</head>
+
+	<body>
+		<div id="tokentextarea" data-role="page" data-scroll="none" >
+			<div data-role="header" data-position="fixed" data-theme="f">
+				<h1>TokenTextArea Entry</h1>
+				<a href="../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
+			</div>
+			<div data-role="content" data-scroll="none">
+				<div data-role="tokentextarea" data-link="#addressbook"></div>
+				<br>
+				<ul id="tta-cmdlist" data-role="listview" data-scroll="none">
+					<li>
+						<a id='TTAaddItemTest'>Append Item</a>
+					</li>
+					<li>
+						<a id='TTAremoveItemTest'>Remove first Item</a>
+					</li>
+					<li>
+						<a id='TTAinputTextTest'>Input 'Hello'</a>
+					</li>
+					<li>
+						<a id='TTAgetInputTextTest'>Get input text</a>
+					</li>
+					<li>
+						<a id='TTAselectItemTest'>Select 1</a>
+					</li>
+					<li>
+						<a id='TTAgetSelectedItemTest'>Selected item</a>
+					</li>
+					<li>
+						<a id='TTAlengthTest'>Length</a>
+					</li>
+					<li>
+						<a id='TTAfocusOutTest'>Grouping On</a>
+					</li>
+					<li>
+						<a id='TTAfocusInTest'>Grouping Off</a>
+					</li>
+					<li>
+						<a id='TTAremoveAllItemTest'>Remove All Item</a>
+					</li>
+				</ul>
+			</div>
+			<div data-role="footer" data-position="fixed">
+				<h1>Footer</h1>
+			</div>
+		</div>
+		<div data-role="page" id="addressbook" data-add-back-btn="none">
+			<div data-role="header"  data-position="fixed">
+				<h1>Address Book</h1>
+				<a href="#tokentextarea" data-icon="back" data-iconpos="notext" data-direction="reverse">Home</a>
+			</div>
+			<div data-role="content" id="contentList">
+				<ul data-role="listview">
+					<li data-role="list-divider">
+						A
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Adam Kinkaid</a>
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Alex Wickerham</a>
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Avery Johnson</a>
+					</li>
+					<li data-role="list-divider">
+						B
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Bob Cabot</a>
+					</li>
+					<li data-role="list-divider">
+						C
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Caleb Booth</a>
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Christopher Adams</a>
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Culver James</a>
+					</li>
+					<li data-role="list-divider">
+						D
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">David Walsh</a>
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Drake Alfred</a>
+					</li>
+					<li data-role="list-divider">
+						E
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Elizabeth Bacon</a>
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Emery Parker</a>
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Enid Voldon</a>
+					</li>
+					<li data-role="list-divider">
+						F
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Francis Wall</a>
+					</li>
+					<li data-role="list-divider">
+						G
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Graham Smith</a>
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Greta Peete</a>
+					</li>
+					<li data-role="list-divider">
+						H
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Harvey Walls</a>
+					</li>
+					<li data-role="list-divider">
+						M
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Mike Farnsworth</a>
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Murray Vanderbuilt</a>
+					</li>
+					<li data-role="list-divider">
+						N
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Nathan Williams</a>
+					</li>
+					<li data-role="list-divider">
+						P
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Paul Baker</a>
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Pete Mason</a>
+					</li>
+					<li data-role="list-divider">
+						R
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Rod Tarker</a>
+					</li>
+					<li data-role="list-divider">
+						S
+					</li>
+					<li>
+						<a class="name-resource" href="#tokentextarea">Sawyer Wakefield</a>
+					</li>
+				</ul>
+			</div><!--/content -->
+		</div>
+	</body>
+</html>
