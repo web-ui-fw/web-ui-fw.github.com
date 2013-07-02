@@ -1,3 +1,7 @@
+.ui-hidden-input {
+	visibility: hidden;
+	position: absolute;
+}
 .ui-colorpalette {
 	display: table;
 }

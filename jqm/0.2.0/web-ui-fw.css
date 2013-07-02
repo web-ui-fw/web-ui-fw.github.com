@@ -49,6 +49,10 @@
 	width: 70px;
 	height: 70px;
 }
+.ui-hidden-input {
+	visibility: hidden;
+	position: absolute;
+}
 .ui-colorpalette {
 	display: table;
 }
