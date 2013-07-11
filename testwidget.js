@@ -1,6 +1,6 @@
 ( function( $, undefined ) {
 
-$.widget( "mobile.testwidget", {
+$.widget( "mobile.testwidget", $.mobile.widget, {
 	options: {
 		repository: null,
 		initSelector: ":jqmData(role='testwidget')"
