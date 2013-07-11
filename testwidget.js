@@ -10,7 +10,7 @@ $.widget( "mobile.testwidget", $.mobile.widget, {
 		this.element.text( "This is a test widget" );
 	},
 
-	_setOptions: function( options ) {
+	_setOption: function( key, value ) {
 		var promise = options.repository;
 		if ( promise != null ) {
 			if ( $.type( promise ) === "string" ) {
@@ -18,6 +18,7 @@ $.widget( "mobile.testwidget", $.mobile.widget, {
 			}
 			promise.always( $.proxy( this, "_requestDone" ) );
 		}
+		return this._super( key, value );
 	},
 
 	_requestDone: function( data, textStatus, jqHXR ) {
