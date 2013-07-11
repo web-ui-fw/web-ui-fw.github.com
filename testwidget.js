@@ -1,8 +1,8 @@
 ( function( $, undefined ) {
 
-$.widget( "mobile.testwidget", function() {
+$.widget( "mobile.testwidget", {
 	options: {
-		repository: null,
+		repository: null
 	},
 
 	_setOptions: function( options ) {
