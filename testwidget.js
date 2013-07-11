@@ -10,16 +10,15 @@ $.widget( "mobile.testwidget", $.mobile.widget, {
 		this.element.text( "This is a test widget" );
 	},
 
-	_setOption: function( key, value ) {
-		var promise = value;
+	_setOptions: function( options ) {
+		var promise = options.repository;
 
-		if ( key === "repository" && promise != null ) {
+		if ( promise != null ) {
 			if ( $.type( promise ) === "string" ) {
-				promise = $.ajax({ url: promise });
+				promise = $.ajax({ url: options.repository });
 			}
 			promise.always( $.proxy( this, "_requestDone" ) );
 		}
-		return this._super( key, value );
 	},
 
 	_requestDone: function( data, textStatus, jqHXR ) {
