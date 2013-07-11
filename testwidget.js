@@ -11,10 +11,11 @@ $.widget( "mobile.testwidget", $.mobile.widget, {
 	},
 
 	_setOption: function( key, value ) {
-		var promise = options.repository;
-		if ( promise != null ) {
+		var promise = value;
+
+		if ( key === "repository" && promise != null ) {
 			if ( $.type( promise ) === "string" ) {
-				promise = $.ajax({ url: options.repository });
+				promise = $.ajax({ url: promise });
 			}
 			promise.always( $.proxy( this, "_requestDone" ) );
 		}
