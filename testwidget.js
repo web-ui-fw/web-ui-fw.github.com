@@ -2,7 +2,12 @@
 
 $.widget( "mobile.testwidget", {
 	options: {
-		repository: null
+		repository: null,
+		initSelector: ":jqmData(role='testwidget')"
+	},
+
+	_create: function() {
+		this.element.text( "This is a test widget" );
 	},
 
 	_setOptions: function( options ) {
@@ -20,6 +25,10 @@ $.widget( "mobile.testwidget", {
 		console.log( data );
 		this._trigger( "done" );
 	}
+});
+
+$( document ).bind( "pagecreate", function( e ) {
+	$.mobile.testwidget.prototype.enhanceWithin( $( e.target ) );
 });
 
 })( jQuery );
