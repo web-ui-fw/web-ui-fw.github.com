@@ -11,12 +11,14 @@ $.widget( "mobile.testwidget", {
 			if ( $.type( promise ) === "string" ) {
 				promise = $.ajax({ url: options.repository });
 			}
-			promise.done( $.proxy( this, "_requestDone" ) );
+			promise.always( $.proxy( this, "_requestDone" ) );
 		}
 	},
 
-	_requestDone: function() {
-		alert( "request done!" );
+	_requestDone: function( data, textStatus, jqHXR ) {
+		console.log( "request done with status " + textStatus + " and data:" );
+		console.log( data );
+		this._trigger( "done" );
 	}
 });
 
