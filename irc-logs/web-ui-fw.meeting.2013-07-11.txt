@@ -1,0 +1,197 @@
+10:00:14 < Changsuk> Hi~
+10:01:13 < _|Nix|_> Changsuk: Hey!
+10:01:22 < _|Nix|_> How's everybody?
+10:01:41 < Changsuk> _|Nix|_: I'm sorry that I didn't talk to you last meeting. :)
+10:01:57 < _|Nix|_> Changsuk: No worries! It happens.
+10:02:06 < Changsuk> _|Nix|_: I'm so busy these days.
+10:02:15 < _|Nix|_> Changsuk: Join the club :)
+10:02:42 < _|Nix|_> I've been spending all my time preparing jQM widgets for integration with jQuery UI.
+10:02:44 < Changsuk> _|Nix|_: I have a lot of interviews and organize another Tizen project and so on.
+10:02:46 < _|Nix|_> It's soooo much work ...
+10:02:49 < Changsuk> _|Nix|_: ha ha~
+10:02:58 < _|Nix|_> Aha! Good stuff!
+10:03:07 < Changsuk> _|Nix|_: The club is nice?
+10:03:11 < Changsuk> _|Nix|_: ;)
+10:03:23 < _|Nix|_> Changsuk: No, it's full of busy people :)
+10:03:31 < Changsuk> _|Nix|_: ha~
+10:03:59 < _|Nix|_> So, shall we get started?
+10:04:04 < Changsuk> _|Nix|_: You also busy these days.
+10:04:07 < Changsuk> _|Nix|_: yeap.
+10:04:07 < _|Nix|_> Yep!
+--- Log opened Thu Jul 11 10:04:40 2013
+10:04 -!- Irssi: Log file ~/2013-07-11.txt opened
+10:05 #web-ui-fw: < Changsuk> _|Nix|_: Ah, Hynsook can't join today meeting because she's sister is in a hospital again.
+10:05 #web-ui-fw: < Changsuk> _|Nix|_: so she is going to go now.
+10:05 #web-ui-fw: < _|Nix|_> That's fine.
+10:06 #web-ui-fw: < _|Nix|_> I wish her sister all the best!
+10:06 #web-ui-fw: < Changsuk> _|Nix|_: Thanks for your kind word~ I'll send your message to her. :)
+10:07 #web-ui-fw: < _|Nix|_> Thanks! So, what have you been up to?
+10:07 #web-ui-fw: < Changsuk> _|Nix|_: Ah. She told me some comment before our meeting.
+10:08 #web-ui-fw: < Changsuk> _|Nix|_: Actually I haven't followed our project because I have to manage another Tizen project team.
+10:08 #web-ui-fw: < Changsuk> _|Nix|_: But I can share my time between two projects.
+10:09 #web-ui-fw: < _|Nix|_> That's understandable.
+10:09 #web-ui-fw: < Changsuk> _|Nix|_: Anyway, She was told me that....
+10:10 #web-ui-fw: < Changsuk> _|Nix|_: She changed theme and added view source button on the TTA demo.
+10:10 #web-ui-fw: < Changsuk> _|Nix|_: And
+10:11 #web-ui-fw: < Changsuk> _|Nix|_: Kangsik also changed theme and modified css/images/JSON.
+10:11 #web-ui-fw: < _|Nix|_> Awesome!
+10:11 #web-ui-fw: < _|Nix|_> Excellent!
+10:12 #web-ui-fw: < Changsuk> _|Nix|_: for keep the JSON data properly to display the VG's contents.
+10:12 #web-ui-fw: < Changsuk> _|Nix|_: and
+10:13 #web-ui-fw: < _|Nix|_> Kangsik: I see the problem though: If you load http://web-ui-fw.github.com/jqm/0.2.0/web-ui-fw.js and your Web site is on http://example.com/ then VG cannot load the JSON from example.com, right?
+10:13 #web-ui-fw: < Changsuk> _|Nix|_: He is modifiing the demo codes to add View source button and will finish next week.
+10:14 #web-ui-fw: < Changsuk> _|Nix|_: Yeah.
+10:14 #web-ui-fw: < _|Nix|_> Can VG be changed to accept a promise from a $.ajax call as input?
+10:14 #web-ui-fw: < Changsuk> _|Nix|_: I thnk Kangsik already sent you an email about that issue.
+10:14 #web-ui-fw: < _|Nix|_> Yeah.
+10:15 #web-ui-fw: < Changsuk> _|Nix|_: Did you read it?
+10:15 #web-ui-fw: < _|Nix|_> I did.
+10:15 #web-ui-fw: < _|Nix|_> I understand the problem (I think).
+10:15 #web-ui-fw: < Changsuk> _|Nix|_: ah.... :)
+10:16 #web-ui-fw: < Changsuk> _|Nix|_: So should we write that issue on the doc.?
+10:16 #web-ui-fw: < _|Nix|_> Definitely! If someone uses the repository option then that issue will arise.
+10:17 #web-ui-fw: < Changsuk> _|Nix|_: OK, I see. I'm sorry that I can't understand that the promise.
+10:18 #web-ui-fw: < Changsuk> _|Nix|_: the promise from a $.ajax call.
+10:18 #web-ui-fw: < _|Nix|_> However, we could do something like this: $( "#myVG" ).virtualgrid( "option", "repository", $.ajax({ ... }) );
+10:18 #web-ui-fw: < _|Nix|_> Yeah.
+10:19 #web-ui-fw: < _|Nix|_> Of course, this can only be done at runtime, but you could do $( "#myVG" ).on( "virtualgridcreate", function() { $( this ).virtualgrid( "option", "repository", $.ajax({ ... }) );
+10:19 #web-ui-fw: < _|Nix|_> });
+10:20 #web-ui-fw: < Changsuk> _|Nix|_: You mean that VG can or should accept $.ajax() ?
+10:20 #web-ui-fw: < _|Nix|_> Changsuk: The return value of $.ajax is a promise.
+10:20 #web-ui-fw: < _|Nix|_> Changsuk: VG can accept that promise as a value for the "repository" option.
+10:21 #web-ui-fw: < _|Nix|_> Changsuk: Then, the user can make the connection between the two domains.
+10:22 #web-ui-fw: < Changsuk> _|Nix|_: But I think that the web server containing the JSON file should have the authority of "Same-origin policy".
+10:23 #web-ui-fw: < Changsuk> _|Nix|_: so VG can't handle or manage the authority.
+10:24 #web-ui-fw: < Changsuk> _|Nix|_: If VG is on the another web server, VG can handle it?
+10:24 #web-ui-fw: < _|Nix|_> Changsuk: I believe so, because the request originates from example.com, not web-ui-fw.github.com
+10:24 #web-ui-fw: < _|Nix|_> Changsuk: We can always do an experiment.
+10:25 #web-ui-fw: < Changsuk> _|Nix|_: Ok...
+10:25 #web-ui-fw: < _|Nix|_> We can create a small widget at web-ui-fw.github.com and a Web page somewhere else, and load the script from the Web page and then try to pass the script a promise from a $.ajax call.
+10:26 #web-ui-fw: < _|Nix|_> I can do the experiment.
+10:26 #web-ui-fw: < Changsuk> _|Nix|_: Will you do that?
+10:27 #web-ui-fw: < _|Nix|_> Changsuk: Yes. I will use web-ui-fw.github.com to host the script and I will use jsbin.com to host the Web page.
+10:27 #web-ui-fw: < _|Nix|_> Changsuk: jsbin.com will also host the JSON (if that works).
+10:27 #web-ui-fw: < _|Nix|_> Changsuk: If jsbin.com cannot host JSON, then I will use babulina.go-nix.ca
+10:29 #web-ui-fw: < _|Nix|_> I will make a widget that has two options: repositoryPath (a string) and repositoryPromise (a promise object).
+10:29 #web-ui-fw: < Changsuk> _|Nix|_: Ok, If you have any trouble, pls let me know and I'm willing to support you with Kangsik. :)
+10:30 #web-ui-fw: < _|Nix|_> OK. Should be fairly straight-forward. I'll let you know the result by email.
+10:30 #web-ui-fw: < Changsuk> _|Nix|_: Wow~ Thanks so much. :)
+10:30 #web-ui-fw: < _|Nix|_> NP!
+10:31 #web-ui-fw: < Changsuk> _|Nix|_: Hyunsook has a question about the repositories - "jqm" and "0.2-stable" branch.
+10:32 #web-ui-fw: < Changsuk> _|Nix|_: What branch should we upload the modified widget codes?
+10:32 #web-ui-fw: < _|Nix|_> Changsuk: If it's a bugfix, then both. If it's a new feature, then jqm.
+10:32 #web-ui-fw: < Changsuk> _|Nix|_: I see. Thanks.
+10:33 #web-ui-fw: < _|Nix|_> To commit to both, do this: git checkout jqm; git commit -a -m 'Blah blah blah'; git checkout 0.2-stable; git cherry-pick -x jqm;
+10:33 #web-ui-fw: < _|Nix|_> git push origin 0.2-stable; git checkout jqm; git push origin jqm;
+10:34 #web-ui-fw: < _|Nix|_> So, 0.2-stable only contains bugfix commits.
+10:34 #web-ui-fw: < Changsuk> _|Nix|_: Ok~ thanks for your kind guide. :)
+10:34 #web-ui-fw: < _|Nix|_> NP!
+10:35 #web-ui-fw: < _|Nix|_> Do we have any other topics?
+10:36 #web-ui-fw: < Changsuk> _|Nix|_: After Hyunsook and Kangsik fix TTA and VG codes, they will email you.
+10:36 #web-ui-fw: < _|Nix|_> OK. Great!
+10:36 #web-ui-fw: < Changsuk> _|Nix|_: That's all. :)
+10:37 #web-ui-fw: < _|Nix|_> OK. Then I have some news from jQM:
+10:37 #web-ui-fw: < _|Nix|_> We're hoping to release 1.4.0-alpha next week.
+10:37 #web-ui-fw: < _|Nix|_> We're significantly modifying widget autoinit after 1.4.0.
+10:37 #web-ui-fw: < Changsuk> _|Nix|_: yeah, I really wondering about jQM and jQuery UI.
+10:37 #web-ui-fw: < _|Nix|_> All widgets will be like jQUery UI widgets - that is, they contain no autoinit code.
+10:38 #web-ui-fw: < Changsuk> _|Nix|_: autoinit ? what is that?
+10:38 #web-ui-fw: < _|Nix|_> Changsuk: The code that turns <div data-role="popup"></div> into a popup widget.
+10:39 #web-ui-fw: < Changsuk> _|Nix|_: What's the difference between <div data-role="popup"></div> and a popup widget?
+10:40 #web-ui-fw: < _|Nix|_> Changsuk: The difference is a call to $( "div[data-role='popup']" ).popup();
+10:40 #web-ui-fw: < _|Nix|_> Changsuk: After that call, the div is a popup widget. Before that call, it's just a div.
+10:40 #web-ui-fw: < Changsuk> _|Nix|_: ah~~ autoinit will change the div tag to a widget automatically?
+10:40 #web-ui-fw: < _|Nix|_> Yes.
+10:41 #web-ui-fw: < _|Nix|_> That code needs to be changed so the automation is not part of the widget.
+10:41 #web-ui-fw: < Changsuk> _|Nix|_: ok, I see. that's a nice suff.
+10:41 #web-ui-fw: < _|Nix|_> ... because jQuery UI widgets have no such automation.
+10:41 #web-ui-fw: < Changsuk> _|Nix|_: suff -> stuff.
+10:41 #web-ui-fw: < _|Nix|_> ... and jQM widgets have to be changed to look like jQuery UI widgets.
+10:41 #web-ui-fw: < Changsuk> _|Nix|_: I did many mistyped today... :(
+10:41 #web-ui-fw: < _|Nix|_> NP.
+10:42 #web-ui-fw: < Changsuk> _|Nix|_: ha~~ I'm sorry.
+10:42 #web-ui-fw: < _|Nix|_> Basically, we're now enforcing a separation between widgets and framework.
+10:42 #web-ui-fw: < _|Nix|_> autoinit is framework-level stuff, so there should be no code related to that in a widget.
+10:43 #web-ui-fw: < _|Nix|_> I've already done some work in this direction with $.mobile._enhancer, but that will be removed, and arschmitz will instead shim $.widget.
+10:43 #web-ui-fw: < _|Nix|_> We're also getting rid of enhance-time dependencies between widgets.
+10:43 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I see. There're some changes on 1.4.x version.
+10:44 #web-ui-fw: < _|Nix|_> *nod* BIG changes ... 
+10:44 -!- Dragooon [~shitiz@122.177.184.254] has joined #jqueryui-dev
+10:44 #web-ui-fw: < Changsuk> _|Nix|_: Ha~ yes, right.
+10:44 #web-ui-fw: < _|Nix|_> However, as we all know, "BIG changes" === "lots of work" :)
+10:44 #web-ui-fw: < Changsuk> _|Nix|_: I'm sorry that I told you like that. :)
+10:45 #web-ui-fw: < Changsuk> _|Nix|_: Yeah.... there are so many works to do.
+10:45 #web-ui-fw: < _|Nix|_> Nah, it's good! It feels like we're making good progress on the library. Hopefully performance will be better too.
+10:45 #web-ui-fw: < _|Nix|_> Oh, and one more thing!
+10:45 #web-ui-fw: < _|Nix|_> Speaking of performance!
+10:46 #web-ui-fw: < _|Nix|_> Widgets will now have a new option: data-enhanced
+10:46 #web-ui-fw: < Changsuk> _|Nix|_: I hope that Kangsik and Hyunsook can support you and contribute their codes on 1.4.x version.
+10:46 #web-ui-fw: < _|Nix|_> It's boolean. data-enhanced="true" means that the DOM already contains all the elements necessary for a widget, so don't to any .insertBefore(), .append(), .prepend(), .addClass(), etc.
+10:47 #web-ui-fw: < Changsuk> _|Nix|_: Great~!
+10:48 #web-ui-fw: < _|Nix|_> So, theoretically, if you add data-enhanced="true", startup should be much faster. However, you then have to create the widgets by hand. So, instead of something simple like <div class="ui-popup-screen ui-screen-hidden"></div><div data-role="popup"></div> you will have <div class="ui-popup-container ui-popup-hidden ui-overlay-shadow ui-corner-all"><div data-role="popup" class="ui-popup"><p>This is the popup</p></div></div>
+10:48 #web-ui-fw: < Changsuk> _|Nix|_: I think my team can use that property in Tizen.
+10:49 #web-ui-fw: < _|Nix|_> Yes, but it's up to application developers to provide the DOM.
+10:49 #web-ui-fw: < _|Nix|_> If data-enhanced="true" and the corresponding widget elements are absent, then it won't work.
+10:49 #web-ui-fw: < _|Nix|_> So, we're basically giving developers the option of reducing startup time in exchange for increased initial DOM size.
+10:50 #web-ui-fw: < _|Nix|_> At least that's what we're hoping will happen.
+10:50 #web-ui-fw: < Changsuk> _|Nix|_: I see.
+10:51 #web-ui-fw: < _|Nix|_> Ideally, when all widgets support data-enhanced, there will be /zero/ DOM manipulation on startup. Only jQuery selections.
+10:52 #web-ui-fw: < Changsuk> _|Nix|_: You and Jasper made the new CSS styles before the beginning of 1.4.x and the property can use the CSS codes. right?
+10:52 #web-ui-fw: < Changsuk> _|Nix|_: So a user can improve launching performance easily. :)
+10:52 #web-ui-fw: < _|Nix|_> Changsuk: Well, yes. It should be easier to improve launch time.
+10:53 #web-ui-fw: < Changsuk> _|Nix|_: Yes. anyway users can use that property if they already have CSS class codes.
+10:53 #web-ui-fw: < _|Nix|_> Changsuk: Basically, you run without data-enhanced="true", you copy the resulting DOM, save it to the HTML file and then you add data-enhanced="true", and Bam! Should be faster. 
+10:53 #web-ui-fw: < Changsuk> _|Nix|_: :)
+10:54 #web-ui-fw: < Changsuk> _|Nix|_: yes. It's a nice feature. ! :)
+10:54 #web-ui-fw: < _|Nix|_> Changsuk: Hopefully :)
+10:54 #web-ui-fw: < _|Nix|_> Changsuk: An SDK can do that on behalf of the developer.
+10:55 #web-ui-fw: < _|Nix|_> Changsuk: For example, the SDK can set data-enhanced="true" by default and create all the DOM for the dev.
+10:55 #web-ui-fw: < Changsuk> _|Nix|_: Yes, right. But there is an concern with SDK team on Tizen project.
+10:56 #web-ui-fw: < _|Nix|_> What's the concern?
+10:57 #web-ui-fw: < Changsuk> _|Nix|_: anyway, if good stuffs are in the jQM, Tizen web developer will happy to make a Web App. :)
+10:57 #web-ui-fw: < Changsuk> _|Nix|_: ah....
+10:58 #web-ui-fw: < Changsuk> _|Nix|_: the concern is some complicated so I'll tell you about it on the next meeting. I'm sorry.
+10:59 #web-ui-fw: < _|Nix|_> OK. No problem!
+10:59 -!- fikstt [~fikst@d54C6DC82.access.telenet.be] has joined #jquery-meeting
+10:59 #web-ui-fw: < _|Nix|_> Either way, 1.4.0 should provide more tools for improving performance.
+10:59 #web-ui-fw: < Changsuk> _|Nix|_: Nice~!
+11:00 #web-ui-fw: < Changsuk> _|Nix|_: Can I see the features on jQM site or GH.?
+11:01 #web-ui-fw: < _|Nix|_> Hold on ... I have a link ...
+11:01 #web-ui-fw: < Changsuk> _|Nix|_: But I always wonder about the code size.
+11:01 #web-ui-fw: < _|Nix|_> I think popup already does that.
+11:02 #web-ui-fw: < _|Nix|_> Changsuk: Well, yeah. Code size should be bigger, but I think the removal of DOM manips will more than offset the increase in parsing time.
+11:02 #web-ui-fw: < _|Nix|_> Changsuk: ... and since we're talking longer term, it should also be possible to do custom builds.
+11:03 #web-ui-fw: < _|Nix|_> Changsuk: https://github.com/jquery/jquery-mobile/blob/master/js/widgets/popup.js#L71
+11:04 #web-ui-fw: < _|Nix|_> Changsuk: ... and https://github.com/jquery/jquery-mobile/blob/master/js/widgets/popup.js#L237
+11:04 #web-ui-fw: < _|Nix|_> Changsuk: Notice how, if options.enhanced is true, it simply does a few jQuery selectors to retrieve the widget's pieces?
+11:05 #web-ui-fw: < _|Nix|_> Changsuk: In the case of popup it's not even selectors, because it can be done with parent() and prev(). The only selection is document.getElementById, and that's suuuuuper fast.
+11:07 #web-ui-fw: < Changsuk> _|Nix|_: Ok, but I'm sorry that I have some time to understand what you said via the popup codes.
+11:07 #web-ui-fw: < _|Nix|_> Changsuk: That's fine. Take your time.
+11:07 #web-ui-fw: < Changsuk> _|Nix|_: I think your team added such a nice stuff but I'll read the codes after our meeting. :)
+11:07 #web-ui-fw: < _|Nix|_> Changsuk: We'll keep hacking at jQM, implementing that for all widgets.
+11:08 #web-ui-fw: < _|Nix|_> Go ahead! Do tell/file an issue/PR if you find bugs/concerns/mistakes.
+11:09 -!- AlexRS [d490249a@gateway/web/cgi-irc/kiwiirc.com/ip.212.144.36.154] has joined #jqueryui-dev
+11:09 #web-ui-fw: < Changsuk> _|Nix|_: Ha~ yes, I'll tell my team about it. :) If they have some time, they can or will do the PR, I beleive.
+11:09 #web-ui-fw: < _|Nix|_> Alright! Good stuff!
+11:10 #web-ui-fw: < _|Nix|_> In that case, if there're no other topics, I say good work and have a good weekend!
+11:10 #web-ui-fw: < Changsuk> _|Nix|_: And our new widgets will or can add on jQM 1.5.x ?
+11:10 -!- AlexRS [d490249a@gateway/web/cgi-irc/kiwiirc.com/ip.212.144.36.154] has quit [Client Quit]
+11:11 #web-ui-fw: < Changsuk> _|Nix|_: Should you feed your daugther? :)
+11:11 #web-ui-fw: < _|Nix|_> Changsuk: I think when we've released 1.4.0 I will ask uGoMobi and arschmitz to have a look at 0.2.0 and add a link to the Web site.
+11:11 #web-ui-fw: < _|Nix|_> Changsuk: She's eaten. She got up "early" today: 09:10 :)
+11:11 -!- AlexRS [d490249a@gateway/web/freenode/ip.212.144.36.154] has joined #jqueryui-dev
+11:11 #web-ui-fw: < Changsuk> _|Nix|_: Thanks ~!
+11:11 #web-ui-fw: < Changsuk> _|Nix|_: ha ~ :)
+11:11 #jqueryui-dev: < AlexRS> Hi Friends
+11:11 #web-ui-fw: < _|Nix|_> Changsuk: Then, hopefully, web-ui-fw will gain some exposure.
+11:12 #web-ui-fw: < Changsuk> _|Nix|_: I hope so. :)
+11:12 #jqueryui-dev: < AlexRS> I'm searching for documentation about page() function. Do you know where to find it?
+11:12 #web-ui-fw: < _|Nix|_> Changsuk: I already told arschmitz about the release.
+11:13 #web-ui-fw: < _|Nix|_> For now though, a ton of work remains to be done to get 1.4.0 out the door.
+11:13 #web-ui-fw: < Changsuk> _|Nix|_: Yes. I can understand your word.
+11:14 #web-ui-fw: < Changsuk> _|Nix|_: Ok~ thanks and I told you all things that I have. :)
+11:15 #web-ui-fw: < _|Nix|_> OK. Great! Have a good weekend everybody! And again, all the best to Hyunsook and her sister!
+11:15 #web-ui-fw: < Changsuk> _|Nix|_: Thanks~:) I'll send your message to her and have a nice weekend~! :)
+11:16 #web-ui-fw: < Kangsik> Have a good weekend.. :-)
+11:18 -!- Irssi: Log file  not open
+--- Log closed Thu Jul 11 11:19:38 2013

@@ -1,0 +1,160 @@
+09:58:06 < Changsuk> Hi, All~
+09:58:24 < Hyunsook> Hi~
+09:58:31 < Kangsik> Hi ~ :)
+09:59:50 < Changsuk> I think, _|Nix|_ will come just on time.
+10:01:42 < _|Nix|_> Hey!
+--- Log opened Thu Jul 18 10:01:59 2013
+10:01 -!- Irssi: Log file ~/2013-07-18.txt opened
+10:02 #web-ui-fw: < _|Nix|_> How are y'all?
+10:02 #web-ui-fw: < _|Nix|_> Ready for another action-packed meeting? :)
+10:03 #web-ui-fw: < Changsuk> Yeah, I'm ready to talk. :)
+10:03 #web-ui-fw: < Hyunsook> Yeah.
+10:03 #web-ui-fw: < _|Nix|_> Alrighty then! Let's do this thing! :)
+10:03 #web-ui-fw: < _|Nix|_> Changsuk: Wanna let loose?
+10:04 #web-ui-fw: < Changsuk> _|Nix|_: not yet... :(
+10:04 #web-ui-fw: < Changsuk> _|Nix|_: But I can and will control my time.
+10:04 #web-ui-fw: < Changsuk> _|Nix|_: thanks for worring me. :)(
+10:04 #web-ui-fw: < Changsuk> _|Nix|_: :)
+10:04 #web-ui-fw: < _|Nix|_> Changsuk: Oh, I meant let loose with your topics :) Sorry!
+10:05 #web-ui-fw: < _|Nix|_> Changsuk: This stuff doesn't carry over well in IRC :)
+10:05 #web-ui-fw: < Changsuk> _|Nix|_: Ah~! I'm sorry that I was confused. :)
+10:07 #web-ui-fw: < _|Nix|_> NP. In that case, I might as well go first, because I really have not much to say. I've been busy reviewing widgets and fixing bugs in jQM. There's sooooo much work there ...
+10:07 #web-ui-fw: < Changsuk> _|Nix|_: I haven't any issues but Hyunsook has some topics to talk with you.
+10:07 #web-ui-fw: < _|Nix|_> That's cool. I see that you guys did some work on VG and TTA.
+10:08 #web-ui-fw: < Changsuk> _|Nix|_: ah~ It's such a shame.
+10:08 #web-ui-fw: < Hyunsook> _|Nix|_: Right. I and Kangsik completed some tasks and committed them on the jqm branch.
+10:08 #web-ui-fw: < Changsuk> _|Nix|_: you're always busy... I thnk.
+10:08 #web-ui-fw: < Changsuk> think.
+10:08 #web-ui-fw: < _|Nix|_> BTW: Off topic: My daughter loves Robocar Poli :)
+10:09 #web-ui-fw: < _|Nix|_> Hyunsook: That's great!
+10:09 #web-ui-fw: < Hyunsook> Haha~
+10:09 #web-ui-fw: < Changsuk> _|Nix|_: What? Robocar Poli ? What is that?
+10:09 #web-ui-fw: < _|Nix|_> Changsuk: It's a cartoon with transforming rescue robots from Korea.
+10:09 #web-ui-fw: < Changsuk> _|Nix|_: ah~ ha.
+10:10 #web-ui-fw: < Kangsik> Ha Ha~~.. My nephew like Robocar Poli :)
+10:10 #web-ui-fw: < Changsuk> _|Nix|_: It looks like Transformer films?
+10:10 #web-ui-fw: < _|Nix|_> Changsuk: Yeah.
+10:10 #web-ui-fw: < Changsuk> _|Nix|_: ha ha... I see... but She is Not a son...
+10:11 #web-ui-fw: < _|Nix|_> Changsuk: Meh. This is the 21st century.
+10:11 #web-ui-fw: < _|Nix|_> Hyunsook: Do you think we should release 0.2.1?
+10:11 #web-ui-fw: < Hyunsook> _|Nix|_: Not yet.
+10:12 #web-ui-fw: < _|Nix|_> Hyunsook: Alright ...
+10:12 #web-ui-fw: < Hyunsook> _|Nix|_: As you gave me the commit guide at last meeting,
+10:12 #web-ui-fw: < Hyunsook> _|Nix|_: I've tried commit and cherry-pick in order to the code sync between jqm branch and 2.0-stable branch.
+10:12 #web-ui-fw: < _|Nix|_> Right.
+10:12 #web-ui-fw: < Hyunsook> _|Nix|_: But I failed. :(
+10:12 #web-ui-fw: < _|Nix|_> Oh?
+10:12 #web-ui-fw:  * _|Nix|_ goes to see ...
+10:13 #web-ui-fw: < Hyunsook> _|Nix|_: Can you help me? or Can you do the code sync instead of me?
+10:13 #web-ui-fw: < _|Nix|_> Hyunsook: Sure! I'm checking it out right now.
+10:13 #web-ui-fw: < Changsuk> _|Nix|_: How can you type like that - * _|Nix|_ goes to see ... ?
+10:13 #web-ui-fw: < Hyunsook> _|Nix|_: Thanks~~~ :)
+10:14 #web-ui-fw: < Hyunsook> Changsuk, _|Nix|_: I also wonder it. :-O
+10:15 #web-ui-fw: < _|Nix|_> /me goes to see
+10:16 #web-ui-fw: < Kangsik> _|Nix|_: Thanks :)
+10:16 #web-ui-fw: < _|Nix|_> OK, so until the two branches diverge, 0.2-stable will be the same as jqm.
+10:16 #web-ui-fw: < Changsuk> _|Nix|_: ah~ha. ! Thanks~! :)
+10:16 #web-ui-fw: < Hyunsook> _|Nix|_: Aha~~~
+10:16 #web-ui-fw: < _|Nix|_> So, basically, no need to make two commits.
+10:17 #web-ui-fw: < _|Nix|_> Only when you commit something to jqm that should not be on 0.2-stable do you need to merge.
+10:18 #web-ui-fw: < _|Nix|_> I think we should draw the line when we add another widget.
+10:18 #web-ui-fw: < _|Nix|_> However, I can make a trivial change to cause the two branches to diverge.
+10:18 #web-ui-fw: < Hyunsook> Ah... I see.
+10:20 #web-ui-fw: < _|Nix|_> OK. We've actually had some divergence by virtue of the fact that you guys had some minor differences.
+10:20 #web-ui-fw: < _|Nix|_> ... causing merges.
+10:21 #web-ui-fw: < _|Nix|_> So, we have the divergence we've been looking for.
+10:21 #web-ui-fw: < Changsuk> _|Nix|_: between 0.2.0 and jqm branch?
+10:22 #web-ui-fw: < _|Nix|_> Changsuk: Yes, because Hyunsook and Kangsik pushed some merge commits.
+10:23 #web-ui-fw: < _|Nix|_> Changsuk: I did a git rebase 0.2-stable and that could not be fast-forwarded because of the presence of merges.
+10:23 #web-ui-fw: < _|Nix|_> Changsuk: So, it diverged at that point.
+10:24 #web-ui-fw: < Changsuk> _|Nix|_: So, one of us should merge the changed codes from jqm branch to 0.2.0 branch?
+10:25 #web-ui-fw: < Hyunsook> _|Nix|_: Kangsik and I did not pushed codes by "merge" command. But when I checked commit list on jqm branch, our commits saw as merge commits.
+10:25 #web-ui-fw: < Changsuk> _|Nix|_: ah... you did it but the status is not good....
+10:26 #web-ui-fw: < _|Nix|_> OK. What you guys need to do now is git checkout jqm; git pull --rebase origin jqm; git checkout 0.2-stable; git pull --rebase origin 0.2-stable; git push origin 0.2-stable; git checkout jqm; git push origin jqm;
+10:26 #web-ui-fw: < _|Nix|_> Hyunsook: Yeah. When you both push to origin, you should always first git pull --rebase origin jqm
+10:26 #web-ui-fw: < _|Nix|_> Hyunsook: Before you git push origin jqm
+10:26 #web-ui-fw: < _|Nix|_> Hyunsook: Same thing with 0.2-stable
+10:27 #web-ui-fw: < _|Nix|_> Hyunsook: That will keep the line of commits linear.
+10:28 #web-ui-fw: < Changsuk> Hyunsook : Can yu do that git commands now?
+10:28 #web-ui-fw: < _|Nix|_> So now all that cherry-picking should work.
+10:30 #web-ui-fw: < _|Nix|_> Is it working for you now?
+10:30 #web-ui-fw: < Hyunsook> _|Nix|_: As you gave me guide, I'll test it on my personal repo.
+10:30 #web-ui-fw: < _|Nix|_> OK.
+10:31 #web-ui-fw: < _|Nix|_> Hyunsook: Do you use any git visualization tools?
+10:31 #web-ui-fw: < Changsuk> Hyunsook: If you have any concerns, pls do that after our meeting. :)
+10:31 #web-ui-fw: < Changsuk> _|Nix|_: Is a GUI tool?
+10:32 #web-ui-fw: < Hyunsook> _|Nix|_: gitk?
+10:32 #web-ui-fw: < _|Nix|_> Hyunsook: You use gitk? That's cool. I was just asking because I find it really helpful to know where my branch pointers are.
+10:33 #web-ui-fw: < Hyunsook> _|Nix|_: I installed it yesterday.
+10:33 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. Some guys in my team use a GUI tool likes gitk. :)
+10:33 #web-ui-fw: < _|Nix|_> Hyunsook: Good. I personally cannot visualize git in my head. I have to see the tree using one of the tools.
+10:34 #web-ui-fw: < Hyunsook> _|Nix|_: Right.
+10:35 #web-ui-fw: < _|Nix|_> OK. So, having hopefully fixed the jqm/0.2-stable issue, is there anything else for this week?
+10:35 #web-ui-fw: < Changsuk> Hyunsook: Will you ask performance enhancement features on jQM 1.4?
+10:35 #web-ui-fw: < Changsuk> ...ask about... :)
+10:36 #web-ui-fw: < Hyunsook> Changsuk: Yeap.
+10:37 #web-ui-fw: < Hyunsook> _|Nix|_: SEC folks wonder whether jQM 1.4 has some performance enhancements for widget factory or not.
+10:37 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: I heard about the other performance related features on jQM 1.4 from Hyunsook.
+10:38 #web-ui-fw: < _|Nix|_> Hyunsook: Probably not for widget factory. However, if you have some modifications you would like to see made to the factory, please make a PR.
+10:38 #web-ui-fw: < Hyunsook> Changsuk, _|Nix|_: Right. performance enhancements for widget factory and other performane features
+10:39 #web-ui-fw: < _|Nix|_> Do you guys have some code that makes the widget factory faster?
+10:40 #web-ui-fw: < Hyunsook> _|Nix|_: Not yet. Just, we have some ideas.
+10:40 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: So, It would be better for my team to make a faster widget factory and do a PR. :)
+10:40 #web-ui-fw: < Kangsik> we have only plan to modify widget factory.
+10:40 #web-ui-fw: < _|Nix|_> Absolutely!
+10:41 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: Before do it, We should get the ideas from _|Nix|_.
+10:41 #web-ui-fw: < _|Nix|_> I would recommend that you make the PR against the jquery-ui repository, which is the original home of the widget factory.
+10:41 #web-ui-fw: < Changsuk> _|Nix|_: yes, I think so.
+10:41 #web-ui-fw: < _|Nix|_> That way, we can get the changes upstream right away.
+10:43 #web-ui-fw: < Changsuk> Hyunsook, Kangsik: Is it doable?
+10:43 #web-ui-fw: < Changsuk> Hyunsook, Kangsik: and are there any ideas in my team?
+10:44 #web-ui-fw: < Changsuk> _|Nix|_: So, are there any other features about performance on 1.4 ?
+10:44 #web-ui-fw: < Hyunsook> _|Nix|_, Changsuk: I'm sorry for confusing.
+10:45 #web-ui-fw: < Changsuk> Hyunsook: Can my team make a faster widget factory module?
+10:46 #web-ui-fw: < _|Nix|_> Changsuk: We constantly keep performance in mind. Things like reducing the number of DOM manips. For example, we try to add all the classes and sub-elements before we append to the DOM.
+10:46 #web-ui-fw: < _|Nix|_> Changsuk: ... during _create()
+10:46 #web-ui-fw: < Hyunsook> _|Nix|_, Changsuk: Strictly speaking, now it has the plan.
+10:46 #web-ui-fw: < _|Nix|_> Changsuk: As I review the various widgets for widget factory API compliance, I tend to reduce the DOM manips as I go.
+10:47 #web-ui-fw: < _|Nix|_> Changsuk: ... and we're gonna merge a much faster slider widget.
+10:47 #web-ui-fw: < _|Nix|_> Changsuk: ... and we're separating the slider from the toggle switch to make them both faster.
+10:47 #web-ui-fw: < Hyunsook> _|Nix|_, Changsuk: We should derive ideas for widget factory enhancement.
+10:48 #web-ui-fw: < Hyunsook> _|Nix|_: As Changsuk said, we will need your helps.
+10:48 #web-ui-fw: < _|Nix|_> Hyunsook: I haven't really looked at the factory since trying to make it lazy. However, I think enabling _super() and _superApply() is introducing a serious performance penalty, because it has to loop over all the prototype functions and create closures.
+10:49 #web-ui-fw: < _|Nix|_> Hyunsook: I know. I'll start looking into that after we get 1.4.0 out the door.
+10:49 #web-ui-fw: < _|Nix|_> Hyunsook: The UI guys may appreciate our help, especially as we're trying to merge jQM and jQ-UI.
+10:50 #web-ui-fw: < _|Nix|_> It would be really, really cool if we could unwind calls to $.widget()
+10:50 #web-ui-fw: < _|Nix|_> That is, if we could make the call during build time, and record the result.
+10:50 #web-ui-fw: < _|Nix|_> That would be insanely awesome!
+10:50 #web-ui-fw: < Changsuk> _|Nix|_: yes... I think so and really want do that.
+10:51 #web-ui-fw: < _|Nix|_> I think what makes $.widget() so tempting is that we /know/ that a call to $.widget() does not affect anything besides $.namespace.widgetname.
+10:52 #web-ui-fw: < _|Nix|_> However, I'm not sure if we can find a tool that will let us do that.
+10:52 #web-ui-fw: < Hyunsook> Yes. I want to do that.
+10:52 #web-ui-fw: < Changsuk> _|Nix|_: yes, there are many concerns to change or remove $.widget().
+10:53 #web-ui-fw: < _|Nix|_> Changsuk: The thing is, the code size of the recorded result may be much bigger than the code containing the call to $.widget, and so parsing time may increase to the point where it's faster to call $.widget.
+10:53 #web-ui-fw: < _|Nix|_> Changsuk: ... and there would be a lot of code duplication.
+10:54 #web-ui-fw: < Changsuk> Hyunsook, Kangsik: Anyway, we may have some time to talk about widget factory and make a schedule to develope it, if we can make it.
+10:54 #web-ui-fw: < Hyunsook> Changsuk: Right.
+10:54 #web-ui-fw: < Kangsik> Chansuk : Yes... :)
+10:55 #web-ui-fw: < _|Nix|_> If you guys could look into this "pre-compilation" possibility, that would be really, really awesome!
+10:56 #web-ui-fw: < Changsuk> _|Nix|_: Thanks~! and if my team needs your support, I'll ask you to give my team nice ideas.
+10:57 #web-ui-fw: < Changsuk> _|Nix|_: if you have some time, pls support my team. :)
+10:57 #web-ui-fw: < _|Nix|_> I hope I will have some to give :)
+10:57 #web-ui-fw: < Changsuk> _|Nix|_: Thanks~! :)
+10:57 #web-ui-fw: < Hyunsook> _|Nix|_: Thanks~!!! ;)
+10:58 #web-ui-fw: < Kangsik> _|Nix|_: Thanks!!! Buddy ~ :)
+10:58 #web-ui-fw: < Changsuk> _|Nix|_: ha~~ you got three thanks messages ~! :)
+10:58 #web-ui-fw: < Hyunsook> haha~~
+10:58 #web-ui-fw: < Changsuk> _|Nix|_: You
+10:58 #web-ui-fw: < _|Nix|_> ... and thank you all for your help too!
+10:59 #web-ui-fw: < Changsuk> _|Nix|_: Ah~ I'm sorry that i mistyped.
+10:59 #web-ui-fw: < _|Nix|_> Let's hope we can /really/ improve things as we go forward.
+10:59 #web-ui-fw: < _|Nix|_> On that cheery note, I think we can call it a meeting for today, right? Do we have anything else to discuss?
+11:00 #web-ui-fw: < Changsuk> _|Nix|_: Ok~! I hope so... and reall want do that. :)
+11:00 #web-ui-fw: < Hyunsook> Changsuk, _|Nix|_: + 1
+11:01 #web-ui-fw: < Changsuk> _|Nix|_: right, I told you guys all things that i had.
+11:01 #web-ui-fw: < Hyunsook> _|Nix|_: I think it's all.
+11:01 #web-ui-fw: < _|Nix|_> Excellent! In that case, have a nice weekend, and talk to y'all next week!
+11:02 #web-ui-fw: < Hyunsook> Have a good weekend~
+11:02 #web-ui-fw: < Changsuk> All: Nice meeting~! And have a nice weekend~~
+11:02 #web-ui-fw: < Kangsik> Have a nice weekend... :) See you again.
+--- Log closed Thu Jul 18 11:05:17 2013
