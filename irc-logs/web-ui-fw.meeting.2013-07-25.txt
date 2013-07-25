@@ -1,0 +1,183 @@
+--- Log opened Thu Jul 25 09:57:35 2013
+09:58 -!- Kangsik [~Kangsik@121.133.176.4] has joined #web-ui-fw
+10:00 < _|Nix|_> Heya, folks!
+10:00 -!- Hyunsook [~Hyunsook@121.133.176.4] has joined #web-ui-fw
+10:00 < _|Nix|_> Ready to go?
+10:00 < Hyunsook> Hi~~~
+10:00 < Kangsik> Hi~  _|Nix|_ :)
+10:00 < _|Nix|_> Hey!
+10:01 < Hyunsook> Now Changsuk  is attending on another meeting.
+10:01 < _|Nix|_> OK.
+10:02 < _|Nix|_> Will he be able to join later?
+10:02 < Hyunsook> Yes, I guess..
+10:02 < _|Nix|_> OK.
+10:03 < _|Nix|_> Hyunsook: Wanna go first?
+10:03 < Hyunsook> By the way, I don't have any topics to talk with you today.
+10:03 < Hyunsook> Maybe Changsuk and Kangsik will be same with me.
+10:04 < _|Nix|_> OK, then I have two.
+10:04 < Hyunsook> As you already know through my email, currently, we are finding some performance improvement/enhancement features for Tizen Web UIFW 3.0
+10:04 < _|Nix|_> Right.
+10:05 < Hyunsook> So my team is analyzing jQM 1.4pre codes.
+10:05 < _|Nix|_> Oh, really? That's great!
+10:05 < _|Nix|_> Please make lots of PRs! :)
+10:06 < Hyunsook> Ha ha~
+10:06 < Hyunsook> Sure. :)
+10:06 < _|Nix|_> We have been doing a lot of refactoring, so we haven't really had time to analyze performance thoroughly.
+10:06 < Hyunsook> Aha~~
+10:06 < _|Nix|_> Of course, we always keep performance in mind, but a systematic analysis is always important.
+10:06 < Kangsik> Yes. If I find somethihing, I will send PR.
+10:07 < Hyunsook> Right.
+10:07 < _|Nix|_> So, one thing I wanted to talk about was the license for web-ui-fw.
+10:07 < _|Nix|_> When I created the jqm branch, I forgot to copy the license from master.
+10:08 < Hyunsook> If we find some things for PR, I'll send email to you after uploading PR.
+10:08 < _|Nix|_> So, I wanted to double-check with you guys if it's OK with you if I copy it now.
+10:08 < _|Nix|_> Hyunsook: Yes, please, thanks :)
+10:09 < Hyunsook> _|Nix|_: the license?
+10:09 < _|Nix|_> Hyunsook: Yeah. master has the MIT license, but I forgot to copy that to jqm.
+10:10 < _|Nix|_> Hyunsook: Since we're releasing from jqm, I figured it should have a license as well.
+10:10 < Hyunsook> ah~~
+10:10 < Hyunsook> _|Nix|_: Ok, right.
+10:10 < _|Nix|_> Hyunsook: Since you contributed some code as well, I figured I should make sure you guys are OK with my copying the license from master.
+10:11 < _|Nix|_> https://github.com/web-ui-fw/web-ui-fw/blob/master/COPYING
+10:12 < Hyunsook> _|Nix|_: Right, I do think so.
+10:12 < _|Nix|_> Kangsik: What about you?
+10:12 < Kangsik> +1 :)
+10:13 < _|Nix|_> OK. Sooold! *tock*
+10:16 < _|Nix|_> Great!
+10:16 < _|Nix|_> The other thing I wanted to talk about was releasing 0.2.1.
+10:16 < _|Nix|_> Elliot Smith (my colleague at Intel) wants to create a bower package for web-ui-fw.
+10:16 < Hyunsook> Ah! Right. I forgot it.
+10:17 < _|Nix|_> So, I added AMD wrappers around the built web-ui-fw.js. I would like to release 0.2.1 so he can start packaging it.
+10:18 < Hyunsook> Ok, I see.
+10:18 < _|Nix|_> Well, actually, the wrapper is optional and not added by default, but if you run grunt release --wrap then it will add it.
+10:18 < Hyunsook> Currently, Kangsik and I completed all bug fixes.
+10:18 < Kangsik> _|Nix|_
+10:19 < _|Nix|_> Hyunsook: That's cool.
+10:19 < Kangsik> _|Nix|_ : Greate..
+10:19 < _|Nix|_> Kangsik: "Greate"?
+10:19 < Kangsik> _|Nix|_: --wrap is grunt command?
+10:20 < _|Nix|_> Kangsik: Yeah, it's the switch. If you run with --wrap, it'll put build/wrap.start and build/wrap.end around web-ui-fw.js
+10:20 < _|Nix|_> Kangsik: ... just like jQM, except jQM does it by default.
+10:20 < Hyunsook> I guess... "Greate" is typo.
+10:20 < Kangsik> _|Nix|_: Sorry :( Greate (x), Great(o)
+10:20 < _|Nix|_> Kangsik: Got it :)
+10:21 < _|Nix|_> Kangsik: The only reason I didn't make it the default is that wrap.start requires jQM by saying define( [ "jquery", "jquery.mobile" ], function() { /* web-ui-fw goes here */ } );
+10:22 < Kangsik> _|Nix|_: I see. Thanks :-)
+10:22 < _|Nix|_> Kangsik: The problem is, "jquery.mobile" is never defined, unless you configure requirejs manually.
+10:22 < _|Nix|_> Kangsik: ... because jQM does AMD-wrap itself, but it does so as an anonymous module.
+10:22 < _|Nix|_> Kangsik: ... so you have to manually configure requirejs to satisfy "jquery.mobile".
+10:23 < _|Nix|_> Kangsik: ... and since most people don't want/know how to do that, I put it behind the --wrap switch.
+10:24 < _|Nix|_> Kangsik: Elliot will use the switch to create the bower package, but most people will probably want the un-wrapped version.
+10:24 < _|Nix|_> Kangsik: So, unless others ask for it too, I think we'll release unwapped.
+10:25 < _|Nix|_> So, that's basically it for me. I've been going crazy with jQM 1.4.0. Soooo much work!
+10:26 < _|Nix|_> I'll roll 0.2.1 sometime today.
+10:27 < Hyunsook> Oh.... I already know that you and guys is working hard.
+10:28 < _|Nix|_> Hyunsook: Yeah, I'm just saying, like, wow! I thought 1.3.0 was a lot of work, but 1.4.0 is ... well, even more work :)
+10:29 < Changsuk> Hi, All. I'm sorry that I'm late.
+10:29 < Hyunsook> So, we are difficult to analyze jQM 1.4pre and find preformance improvement features to add to Tizen Web UIFW 3.0. :(
+10:29 < Hyunsook> Changsuk: Hi~
+10:29 < _|Nix|_> What do you mean it is difficult?
+10:30 < Kangsik> Changsuk : hi ~
+10:30 < _|Nix|_> Changsuk: Hey!
+10:30 < _|Nix|_> Changsuk: Don't worry about it!
+10:30 < Changsuk> All: what are you guys talking about?
+10:31 < Hyunsook> Ah. because jQM 1.4pre is changed and added many many codes.
+10:31 < _|Nix|_> Changsuk: We decided to copy the license (MIT) from master to jqm, and I will release 0.2.1 today (probably).
+10:32 < _|Nix|_> Changsuk: Hyunsook was saying that jQM master has changed a lot and it's more difficult to performance-analyze because of that.
+10:32 < Changsuk> _|Nix|_: yes. :)
+10:32 < Changsuk> _|Nix|_: ah~ I see. Thanks for your summary :)
+10:32 < _|Nix|_> Changsuk: NP.
+10:33 < Changsuk> _|Nix|_: 0.2.1 release today? Wow~!!
+10:33 < Changsuk> All : I think, all of us did a great work.~! :)
+10:33 < _|Nix|_> Hyunsook: ... and jQM master is still not finalized. We have 5 more branches to merge: ext-panels, button, filter-widget-review, table-widget-review, autoinit.
+10:34 < _|Nix|_> Changsuk: Thanks!
+10:34 < _|Nix|_> Hyunsook: ... before 1.4.0alpha
+10:34 < _|Nix|_> Hyunsook: We've made a lot of changes to accomodate jQuery UI.
+10:34 < Hyunsook> _|Nix|_: Really? .......
+10:35 < _|Nix|_> Hyunsook: For example, we split up jquery.mobile.core.js and are now using jquery.ui.core.js.
+10:35 < _|Nix|_> Hyunsook: Yeah. The long-term plan is to merge with jQuery UI and move all our widgets there.
+10:35 < Hyunsook> _|Nix|_: My team will be feel sad, I guess.
+10:35 < Changsuk> Hyunsook, _|Nix|_: So I think, Tizen team shoule go over all of branches. right?
+10:35 < Changsuk> should. :)
+10:36 < Hyunsook> Changsuk: Right....
+10:36 < _|Nix|_> Changsuk: Yes, absolutely. Please!
+10:36 < _|Nix|_> Hyunsook: Don't feel sad. It's not like the project will disappear.
+10:36 < _|Nix|_> Hyunsook: jQuery Mobile will use jQuery UI widgets.
+10:36 < _|Nix|_> Hyunsook: The navigation and the page widget will remain.
+10:37 < _|Nix|_> Hyunsook: ... and probably all the support tests, virtual events, etc.
+10:37 < Changsuk> _|Nix|_: hmmm.... then when the branched will be merged to master?
+10:37 < _|Nix|_> Changsuk: ASAP :)
+10:37 < Changsuk> _|Nix|_: ha ha.. :)
+10:37 < _|Nix|_> Changsuk: We're working really hard to merge all those branches.
+10:37 < Changsuk> _|Nix|_: but is there any merge schedules?
+10:37 < _|Nix|_> Changsuk: ... but there are only three of us: uGoMobi, arschmitz, and _|Nix|_.
+10:37 < _|Nix|_> Changsuk: ASAP :)
+10:37 < Changsuk> _|Nix|_: yes... I see. :)
+10:38 < Changsuk> _|Nix|_: only three... hmmm.....
+10:38 < _|Nix|_> Changsuk: We promised 1.4.0alhpa for last week, and now we're almost a week late.
+10:38 < _|Nix|_> Changsuk: Yeah, so it's a /lot/ of work.
+10:38 < Changsuk> _|Nix|_: yes,  I think so.
+10:39 < _|Nix|_> Changsuk: I have to finish the unit tests for filter-widget-review, then merge it, then start working on table-widget-review.
+10:39 < Hyunsook> _|Nix|_: Oh my god. It's sooooo much work.
+10:39 < Kangsik> _|Nix|_:  You have too much work. Are you ok?
+10:39 < Changsuk> _|Nix|_: I think you need some support.
+10:39 < _|Nix|_> Kangsik: I'll survive.
+10:39 < _|Nix|_> Changsuk: We can always use more help.
+10:39 < Hyunsook> ha ha~
+10:39 < Kangsik> _|Nix|_:  Ha. Ha. ~ :)
+10:39 < _|Nix|_> Changsuk: ... especially now that it's only three of is.
+10:40 < Changsuk> _|Nix|_: but I think that only the three members can do that.
+10:40 < _|Nix|_> Changsuk: frequent has been helping out with some of the branches, so that was good.
+10:40 < Changsuk> _|Nix|_: Any other guys in my team can help you merge those branches?
+10:40 < _|Nix|_> Changsuk: ... and scott_gonzalez is excellent at keeping our focus on becoming more UI-like.
+10:41 < Changsuk> _|Nix|_: I think, if jQM team is OK, Kangsik and Hyunsook can help you do the merge job.
+10:42 < Changsuk> Hyunsook, Kangsik: What do you think about it?
+10:42 < Hyunsook> Changsuk: Sure.
+10:42 < _|Nix|_> If you guys wanna look at the table-widget-review, then that'd be cool.
+10:42 < Kangsik> Changsuk : Yes. :)
+10:43 < _|Nix|_> https://github.com/jquery/jquery-mobile/pull/6201 is frequent's most recent pull request.
+10:43 < _|Nix|_> It's on top of the table-widget-review branch.
+10:44 < Changsuk> Kangsik, Hyunsook: Shall you see that PR?
+10:44 < _|Nix|_> I looked at it briefly, and it seems that he's using a refresh() method that takes parameters. I'm not too fond of that. I'd like to see a solution that keeps the refresh method clean. That is refresh: function() {}
+10:45 < _|Nix|_> OTOH, if you guys could take releasing 0.2.1 off my hands, that would be great help too!
+10:45 < Hyunsook> Changsuk: Ok.
+10:45 < Changsuk> _|Nix|_: yes, right.
+10:46 < _|Nix|_> So, I guess that's where I'm at.
+10:47 < Changsuk> _|Nix|_: I'm worrying about the number of jQM team. 3 members are all in jQM team?
+10:48 < _|Nix|_> Changsuk: Well, there's also gseguin and agcolom, but gseguin doesn't have a lot of time, and agcolom is handling the documentation, Web sites, etc.
+10:49 < _|Nix|_> Changsuk: gseguin is also helping with infrastructure stuff.
+10:49 < Changsuk> _|Nix|_: You asked me that Kangsik or Hyunsook will review the 6201 PR, right?
+10:50 < _|Nix|_> Changsuk: Yeah, that'd be cool!
+10:50 < Changsuk> _|Nix|_: yes, so I think, Actually 3 members are dedicated to jQM....
+10:50 < _|Nix|_> Changsuk: Yeah, basically. uGoMobi does the CSS, and arschmitz and I do the JS.
+10:51 < Changsuk> _|Nix|_: yes, So after Kangsik or Hyunsook review that PR, and then They just let you know about it?
+10:51 < Changsuk> _|Nix|_: Just add their comments?
+10:52 < _|Nix|_> Changsuk: Yeah. Comments would be awesome!
+10:53 < Changsuk> Hyunsook, Kangsik: Can you review and add your comments on that PR?
+10:54 < Hyunsook> Changsuk: OK.
+10:54 < Changsuk> Hyunsook, Kangsik: If it is OK, I think, you guys can start to join in jQM team a little. :)
+10:54 < Changsuk> _|Nix|_: Am I right?
+10:54 < Kangsik> Changsuk : Yes. :)
+10:57 < Changsuk> Hyunsook, Kangsik: I also think that my team should talk in english fluently.
+10:58 < _|Nix|_> Changsuk: What do you mean? You guys /are/ talking English fluently.
+10:58 < Changsuk> _|Nix|_: really? ha ha... thanks~
+10:58 < Hyunsook> _|Nix|_: Thank you soooo much. :)
+10:59 < Changsuk> _|Nix|_: Anyway, coworking with jQM team is important, I think.
+10:59 < Hyunsook> _|Nix|_: but ... I'm shame..
+11:00 < _|Nix|_> Changsuk: Yeah, we can really use the help these days.
+11:01 < Changsuk> _|Nix|_: yes, I think that Hyunsook and Kangsik can review that PR and support jQM team's job.
+11:01 < _|Nix|_> Alright, so, I guess we all have a lot on our plates. Unless we have other topics, let's call it a meeting.
+11:01 < _|Nix|_> Changsuk, Hyunsook, Kangsik: Thanks!
+11:01 < Changsuk> _|Nix|_: Ok, Sure~
+11:02 < Hyunsook> _|Nix|_: Ok
+11:02 < Changsuk> _|Nix|_: NP. :)
+11:02 < Hyunsook> _|Nix|_: NP.
+11:02 < Kangsik> _|Nix|_: NP. :-)
+11:02 < Changsuk> _|Nix|_: We are one team and should help each other. :)
+11:03 < _|Nix|_> Alright. In that case, have a good weekend, and thanks again for looking at that PR!
+11:03 < Changsuk> _|Nix|_: I think you're in a trouble, so Kangsik and Hyunsook can or should help you. :)
+11:04 < Changsuk> _|Nix|_: NP and you have a nice weekend~
+11:04 < Hyunsook> _|Nix|_: Have a good weekend~
+11:05 < _|Nix|_> Thanks! See you guys next week!
+11:05 < Hyunsook> See you next week :)
+--- Log closed Thu Jul 25 11:05:58 2013
