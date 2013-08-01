@@ -1,0 +1,220 @@
+--- Log opened Thu Aug 01 09:57:59 2013
+09:57 -!- Irssi: Log file ~/2013-08-01.txt opened
+10:00 #web-ui-fw: < _|Nix|_> Hey, all!
+10:00 -!- jqmobilecommit [~jqmobilec@192.30.252.51] has joined #jqueryui-dev
+10:00 #jqueryui-dev: < jqmobilecommit> [jquery-mobile] gabrielschulhof pushed 1 new commit to master: http://git.io/GW4joQ
+10:00 #jqueryui-dev: < jqmobilecommit> jquery-mobile/master 1aa725e Gabriel Schulhof: Popup: Improving some more variable names.
+10:00 -!- jqmobilecommit [~jqmobilec@192.30.252.51] has left #jqueryui-dev []
+10:00 #web-ui-fw: < _|Nix|_> Ready for another fun-filled Thursday afternoon/morning?
+10:01 #web-ui-fw: < Hyunsook> Hi~
+10:01 #web-ui-fw: < _|Nix|_> Hyunsook: Hey!
+10:01 #web-ui-fw: < Kangsik> Hi! :)
+10:01 #web-ui-fw: < _|Nix|_> Kangsik: Hey!
+10:01 #web-ui-fw: < Hyunsook> _|Nix|_: :)
+10:01 #web-ui-fw: < Changsuk> All: Hi~! :)
+10:01 #web-ui-fw: < _|Nix|_> Changsuk: Hey!
+10:01 #web-ui-fw: < Kangsik> _|Nix|_:  Yep!!
+10:01 #web-ui-fw: < _|Nix|_> Changsuk: So, you don't need to worry about my well-being, eh? I'm on vacation next week. Yaaay!
+10:02 -!- Minkyeong [~Minkyeong@121.133.176.4] has joined #web-ui-fw
+10:02 #web-ui-fw: < Changsuk> _|Nix|_: ha..ha~~ Sound great~! :)
+10:02 #web-ui-fw: < _|Nix|_> Changsuk: Yeah, I think I need it.
+10:02 #web-ui-fw: < Changsuk> _|Nix|_: I really worried about you.
+10:02 #web-ui-fw: < Hyunsook> _|Nix|_: ha ha~~
+10:02 #web-ui-fw: < _|Nix|_> Changsuk: I hope the weather's gonna be good.
+10:03 #web-ui-fw: < Hyunsook> _|Nix|_: Congratulations~
+10:03 #web-ui-fw: < Changsuk> _|Nix|_: so how is the status of 1.4 release?
+10:03 #web-ui-fw: < _|Nix|_> Hyunsook: Thanks!
+10:03 #web-ui-fw: < Kangsik> _|Nix|_: Vacation?? Great!
+10:03 #web-ui-fw: < Changsuk> _|Nix|_: I saw the pre version was released.
+10:03 #web-ui-fw: < _|Nix|_> Changsuk: Well, all the major branches have landed except one: autoinit.
+10:04 #web-ui-fw: < Hyunsook> _|Nix|_, Changsuk: I think, jQM member are working API Doc and Demo site for jQM 1.4.
+10:04 #web-ui-fw: < _|Nix|_> arschmitz is working on getting rid of initSelector.
+10:04 #web-ui-fw: < Changsuk> _|Nix|_: ah... I see.
+10:04 #web-ui-fw: < _|Nix|_> Hyunsook: Well, there's still room for bug fixes, because it's only alpha.
+10:04 #web-ui-fw: < Hyunsook> _|Nix|_: ah~ I see.
+10:05 #web-ui-fw: < _|Nix|_> Changsuk: Did a bunch of bug fixes, and I'm renaming variables because some of the names are ugly: ret, val, rc, coords, opts, elem, el, $tgt ... ugly, and they do not conform to jQuery coding standards.
+10:05 #web-ui-fw: < Changsuk> _|Nix|_: jQM guys look still busy. I think.
+10:05 #web-ui-fw: < _|Nix|_> Changsuk: Yep, lots to do.
+10:05 #web-ui-fw: < _|Nix|_> Changsuk: The demos and the API docs are still a big job.
+10:06 #web-ui-fw: < Changsuk> _|Nix|_: So I decided to add a member of my team to support jQM 1.4 release and web-ui-fw jobs.
+10:06 #web-ui-fw: < _|Nix|_> Changsuk: Aweseom!
+10:07 #web-ui-fw:  * _|Nix|_ thinks it's so awaesome he's forgotten to type :)
+10:07 #web-ui-fw: < _|Nix|_> BTW: Cool new demo: http://view.jquerymobile.com/master/demos/examples/popups/alignment.php
+10:07 #web-ui-fw: < _|Nix|_> I made an alignment option for the popup. For now, it's just a demo, but maybe it'll end up as an extension.
+10:07 #web-ui-fw: < Changsuk> All: A new member can support your guys but she cann't dedicated on that jobs and she can work as side jobs.
+10:08 #web-ui-fw: < _|Nix|_> Minkyeong: I'm assuming you're the new member ... right?
+10:08 #web-ui-fw: < Changsuk> _|Nix|_: It looks nice~!! :)
+10:08 #web-ui-fw: < Minkyeong> _|Nix|_: Yes, I am
+10:09 #web-ui-fw: < _|Nix|_> Minkyeong: Welcome! We need your help :)
+10:09 #web-ui-fw: < Minkyeong> I'm Minkyeong Kim working at Tizen Web UI F/W Team.. with Changsuk, Hyunsook, Kangsik
+10:09 #web-ui-fw: < Minkyeong> So happy to join this project :)
+10:09 #web-ui-fw: < Changsuk> _|Nix|_: That popup moves by X,Y aligment values... ha~ Cool~~!!
+10:09 #web-ui-fw: < Minkyeong> _|Nix|_: Thanks~
+10:09 #web-ui-fw: < Hyunsook> Minkyeong: Wel~~come~~! ;)
+10:09 -!- jqmobilecommit [~jqmobilec@192.30.252.63] has joined #jqueryui-dev
+10:09 #jqueryui-dev: < jqmobilecommit> [jquery-mobile] uGoMobi closed issue #6257: The official CDN does not have a working flipswitch control.  http://git.io/EaaVOA
+10:09 -!- jqmobilecommit [~jqmobilec@192.30.252.63] has left #jqueryui-dev []
+10:10 #web-ui-fw: < Kangsik> Minkyeong : welcome :)
+10:10 #web-ui-fw: < _|Nix|_> Changsuk: Yeah, I learned about alignment from GTK+. I figured I'd use it here.
+10:10 #web-ui-fw: < Changsuk> _|Nix|_: So I can guess Hyunsook, Kangsik and Minkyeong can support you and jQM guys a little more.
+10:11 #web-ui-fw: < _|Nix|_> Changsuk: Definitely! Please!
+10:11 #web-ui-fw: < Changsuk> _|Nix|_: ah~ha... yes, right. I think GTK is a good reference.
+10:12 #web-ui-fw: < _|Nix|_> Changsuk: Yeah ... sometimes I wish I had some of its layouting features.
+10:12 #web-ui-fw: < _|Nix|_> Changsuk: But then the Web is powerful in other ways.
+10:12 #web-ui-fw: < _|Nix|_> So, shall we get to what we've been up to?
+10:12 #web-ui-fw: < Changsuk> _|Nix|_: So I asked that guys to review 1.4 release ASAP and do PRs as many as possible.
+10:13 #web-ui-fw: < Changsuk> _|Nix|_: Ok.
+10:13 #web-ui-fw: < _|Nix|_> Changsuk: That's a good idea, especially performance PRs.
+10:13 #web-ui-fw: < _|Nix|_> Changsuk: Thanks!
+10:13 #web-ui-fw: < Changsuk> Hyunsook, Kangsik: Are there any things to be added on web-ui-fw?
+10:14 #web-ui-fw: < _|Nix|_> Changsuk: We should start adding the remaining widgets soon, to keep our 0.3.0 schedule.
+10:14 #web-ui-fw: < Changsuk> _|Nix|_: Ah~ Is there any PRs to review?
+10:14 #web-ui-fw: < _|Nix|_> Changsuk: Not currently that I'm aware of.
+10:14 #web-ui-fw: < Changsuk> _|Nix|_: I see.
+10:14 #web-ui-fw: < _|Nix|_> Changsuk: One thing that's bugging me is that we're still using optionDemultiplexer in slider and rangeslider.
+10:15 #web-ui-fw: < _|Nix|_> Changsuk: I introduced optionDemultiplexer but we decided not to use it, after all. We've managed to get rid of it in most places, but those two are still using it.
+10:15 #web-ui-fw: < Changsuk> _|Nix|_: but Is there any things to spend your time, pls don't hesitate to tell us. ;)
+10:16 #web-ui-fw: < Changsuk> _|Nix|_: I see.
+10:16 #web-ui-fw: < _|Nix|_> Changsuk: I was mostly planning on tackling any incoming bugs.
+10:17 #web-ui-fw: < Changsuk> Kangsik, Minkyeong: Can you guys go over that issue that Gabriel told after this meeting?
+10:18 #web-ui-fw: < Hyunsook> Changsuk: Nothing. Just... Kangsik modified Virtualgrid Doc. regarding JSON loading issue on 0.2.0 web-ui-fw today.
+10:18 #web-ui-fw: < Changsuk> _|Nix|_: So we should remove  optionDemultiplexer in the two widgets?
+10:18 #web-ui-fw: < _|Nix|_> Kangsik, Minkyeong: If you guys do go over slider and rangeslider, please use the other widgets (for example controlgroup) as a reference.
+10:19 #web-ui-fw: < Kangsik> Hyunsook : I have modified virtualgrid DOc in yesterday. :-)
+10:19 #web-ui-fw: < Hyunsook> Kangsik: Oh~ Sorry. ;)
+10:20 #web-ui-fw: < _|Nix|_> Changsuk: Yeah, the idea is that _create() looks up existing elements if options.enhanced is true, otherwise it creates elements and assigns internal variables just like _setOptions would. _setOptions has a series of if ( options.x !== undefined ) { /* apply options.x } blocks inside which takes care of the options.
+10:20 #web-ui-fw: < Kangsik> Hyunsook : NP! :)
+10:20 -!- travis-ci [~travis-ci@ec2-50-19-131-239.compute-1.amazonaws.com] has joined #jqueryui-dev
+10:20 #jqueryui-dev: < travis-ci> [travis-ci] jquery/jquery-mobile#599 (master - 1aa725e : Gabriel Schulhof): The build passed.
+10:20 #jqueryui-dev: < travis-ci> [travis-ci] Change view : https://github.com/jquery/jquery-mobile/compare/992dac518d82...1aa725eaeff6
+10:20 #jqueryui-dev: < travis-ci> [travis-ci] Build details : http://travis-ci.org/jquery/jquery-mobile/builds/9724167
+10:20 -!- travis-ci [~travis-ci@ec2-50-19-131-239.compute-1.amazonaws.com] has left #jqueryui-dev []
+10:20 #web-ui-fw: < _|Nix|_> Kangsik: One of the VG unit tests is failing. Could you please have a look at that?
+10:21 #web-ui-fw: < Kangsik> _|Nix|_: Oh!!! Thanks... I will check it...
+10:21 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has joined #jqueryui-dev
+10:21 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I'll look over again after our meeting and ask Kangsik and Minkyeong to make a solution.
+10:22 #web-ui-fw: < _|Nix|_> Changsuk: Thanks!
+10:22 #web-ui-fw: < Changsuk> _|Nix|_: When we should resolve your concern? in this week?
+10:22 #web-ui-fw: < Changsuk> _|Nix|_: your welcome~ :)
+10:23 #web-ui-fw: < Changsuk> _|Nix|_: or tomorrow?
+10:23 #web-ui-fw: < _|Nix|_> Changsuk: Whenever you have time.
+10:23 #web-ui-fw: < Changsuk> ha~~
+10:23 #web-ui-fw: < Changsuk> _|Nix|_: I see.
+10:24 #web-ui-fw: < _|Nix|_> Changsuk: I dunno what the plans are for beta. I'll probably find out tonight.
+10:24 #web-ui-fw: < Changsuk> _|Nix|_: and if you have any thing to ask us, pls leave that here. I'll check IRC as many times as I can.
+10:24 #web-ui-fw: < _|Nix|_> Changsuk: Cool!
+10:24 #web-ui-fw: < Changsuk> _|Nix|_: :)
+10:25 #web-ui-fw: < _|Nix|_> Also, don't hesitate to hang out in #jqueryui-dev. There's lots of relevant discussion going on. Ask uGoMobi and arschmitz as well.
+10:25 #web-ui-fw: < Changsuk> _|Nix|_: ah. ha.~ Ok, I see.
+10:26 #web-ui-fw: < Changsuk> _|Nix|_: I'll join that IRC and look over it.
+10:26 #web-ui-fw: < _|Nix|_> Changsuk: Another thing you guys could help us out with is measuring the performance difference between enhanced and non-enhanced.
+10:26 #web-ui-fw: < Hyunsook> _|Nix|_: ah. OK. I see.
+10:26 #web-ui-fw: < _|Nix|_> Changsuk: That is, you create two widgets: One has options.enhanced = false, and the other has options.enhanced = true.
+10:26 #web-ui-fw: < Changsuk> _|Nix|_: yes.
+10:26 #web-ui-fw: < Changsuk> _|Nix|_: then?
+10:26 #web-ui-fw: < _|Nix|_> Changsuk: With options.enhanced = true, you have to create all the wrapper divs and assign all the classes yourself, but startup should be faster.
+10:27 #web-ui-fw: < Changsuk> _|Nix|_: Exactly.
+10:27 #web-ui-fw: < _|Nix|_> Changsuk: Actually, I'd prefer if you guys could give us some performance numbers on option "enhanced".
+10:28 #web-ui-fw: < _|Nix|_> Changsuk: That would help us out immensely, because we've been implementing option enhanced left and right, but we don't really know how much it helps.
+10:28 #web-ui-fw: < Changsuk> Hyunsook: can we make a test widget and check that number?
+10:28 #web-ui-fw: < Hyunsook> _|Nix|_, Changsuk: Sure.
+10:28 #web-ui-fw: < Changsuk> _|Nix|_: yes, I think so.
+10:28 #web-ui-fw: < Changsuk> Hyunsook: Thanks~!
+10:29 #web-ui-fw: < _|Nix|_> Hyunsook: I think most of the widgets support option enhanced, so you have plenty of widgets to analyze.
+10:29 #web-ui-fw: < _|Nix|_> Hyunsook: The only ones that are still missing (unfortunately) are listview and select.
+10:30 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: yes, right. so can we check several widgets to estimate others?
+10:30 #web-ui-fw: < Hyunsook> _|Nix|_: Ah... Ok, I see.
+10:30 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: ah... Gabriel told. ha ha :)
+10:31 #web-ui-fw: < _|Nix|_> Another thing you guys might be able to help us out with is making documents that use a custom build of jQM and checking whether our widgets work outside the page.
+10:31 -!- fikst [~fikst@d54C442D5.access.telenet.be] has quit [Quit: Leaving]
+10:31 #web-ui-fw: < _|Nix|_> That is, no more <div data-role="page">...<div data-role="controlgroup>...</div>...</div<
+10:31 #web-ui-fw: < Hyunsook> Changsuk: NP.
+10:31 #web-ui-fw: < _|Nix|_> But directly <body><div data-role="controlgroup">...</div>...</body>
+10:31 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has quit [Ping timeout: 240 seconds]
+10:32 #web-ui-fw: < _|Nix|_> ... and no more <script src="jquery.mobile.min.js"></script>
+10:32 #web-ui-fw: < Changsuk> _|Nix|_: So, Algorm? She is doing jQM documentation?
+10:32 #web-ui-fw: < _|Nix|_> Changsuk: Yep.
+10:32 -!- jqmobilecommit [~jqmobilec@192.30.252.60] has joined #jqueryui-dev
+10:32 #jqueryui-dev: < jqmobilecommit> [jquery-mobile] uGoMobi pushed 1 new commit to master: http://git.io/6Mkwyw
+10:32 #jqueryui-dev: < jqmobilecommit> jquery-mobile/master bd6a849 Jasper de Groot: Demos: Fixed the responsive table example on the filter demo page.
+10:32 -!- jqmobilecommit [~jqmobilec@192.30.252.60] has left #jqueryui-dev []
+10:32 #web-ui-fw: < _|Nix|_> Changsuk: I'm assuming you mean agcolom.
+10:33 #web-ui-fw: < Changsuk> _|Nix|_: ah.. yes, right. agcolom. :)
+10:34 #web-ui-fw: < Changsuk> _|Nix|_: I can't exactly understand how can we support the documentation jobs.
+10:34 #jqueryui-dev: < uGoMobi> _|Nix|_: problem was missing class "ui-responsive" ^^^
+10:34 #web-ui-fw: < _|Nix|_> Basically, performance, making widgets work outside pages, and making widgets more like jQuery UI have been the three major goals for 1.4.0. We think we've done pretty well to achieve those goals, but we need lots of testing to see just how well we've done.
+10:34 #web-ui-fw: < _|Nix|_> Changsuk: Don't worry about the documentation.
+10:34 #web-ui-fw: < Changsuk> _|Nix|_: Just make an example to check widgets work properly?
+10:35 #web-ui-fw: < _|Nix|_> Changsuk: Yes, but not a typical example. A simple page with one widget, that does not include the whole jQM, but only the dependencies of the widget.
+10:35 #jqueryui-dev: < _|Nix|_> uGoMobi: Awesome! Thanks!
+10:35 #jqueryui-dev: < _|Nix|_> uGoMobi: I'm trying to recruit some help from web-ui-fw.
+10:35 #jqueryui-dev: < _|Nix|_> uGoMobi: Check #web-ui-fw.
+10:36 #web-ui-fw: < Changsuk> _|Nix|_: then send agcolom that example codes?
+10:36 #jqueryui-dev: < uGoMobi> _|Nix|_: oh that would be great!
+10:36 #jqueryui-dev: < _|Nix|_> uGoMobi: I'm asking them to test widgets outside pages and test the performance of options.enhanced = true vs. false.
+10:36 -!- uGoMobi [uid6652@gateway/web/irccloud.com/x-befukoeclugxzcwh] has joined #web-ui-fw
+10:36 #web-ui-fw: < _|Nix|_> Changsuk: Actually, if you find that the widget doesn't work outside the page, then please file an issue on jQM github.
+10:36 #web-ui-fw: < Changsuk> _|Nix|_: or just upload that example to GH?
+10:36 #web-ui-fw: < Hyunsook> uGoMobi: Hi~ Jasper. :)
+10:37 #web-ui-fw: < Changsuk> uGoMobi: Hi~! :)
+10:37 #web-ui-fw: < uGoMobi> hi Hyunsook 
+10:37 #web-ui-fw: < uGoMobi> hello Changsuk 
+10:37 #web-ui-fw: < uGoMobi> good afternoon all
+10:37 #web-ui-fw: < _|Nix|_> Changsuk: Please add the test page to the issue.
+10:37 #web-ui-fw: < Changsuk> ha... Didn't you go to bed?
+10:37 #web-ui-fw: < Kangsik> uGoMobi : Hi~  :)
+10:37 #web-ui-fw: < uGoMobi> it's 9.30am here in Amsterdam, The Netherlands
+10:38 #web-ui-fw: < uGoMobi> I did sleep :)
+10:38 #web-ui-fw: < Changsuk> uGoMobi: ah... I see. ha I'm sorry that I think you live America.
+10:38 #web-ui-fw: < _|Nix|_> uGoMobi: So, I've been asking Changsuk and his team if they can do some performance tests comparing option enhanced = true vs. false, and writing some test pages to see if our widgets do really work outside the page with custom builds.
+10:38 #web-ui-fw: < uGoMobi> _|Nix|_: great!
+10:39 #web-ui-fw: < uGoMobi> do you test with 1.4 alpha or latest code on branch master?
+10:39 #web-ui-fw: < Changsuk> uGoMobi: yes, my team can do the test.
+10:40 #web-ui-fw: < uGoMobi> Changsuk: that's great, thanks!
+10:40 #web-ui-fw: < Changsuk> uGoMobi, _|Nix|_: As you know, my team is making Tizen Web UIFW using jQuery and jQM.
+10:41 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: So my team start to going over 1.4 release a week ago.
+10:41 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: So Hyunsook and other guys can support your team.
+10:42 #web-ui-fw: < uGoMobi> Changsuk: That's very nice
+10:42 #web-ui-fw: < Changsuk> _|Nix|_: You asked two jobs, right? When should we finished? :)
+10:43 #web-ui-fw: < _|Nix|_> uGoMobi: What's the plan for beta?
+10:44 -!- Hyunsook [~Hyunsook@121.133.176.4] has joined #jqueryui-dev
+10:44 #web-ui-fw: < uGoMobi> _|Nix|_: I hope we can do next release second half of next week
+10:44 #web-ui-fw: < uGoMobi> _|Nix|_: not sure if that's alpha 2 or beta 1
+10:44 -!- Hyunsook [~Hyunsook@121.133.176.4] has left #jqueryui-dev []
+10:45 #web-ui-fw: < _|Nix|_> uGoMobi: OK. Either way, it would be good to have this data by then, I guess ...
+10:45 #web-ui-fw: < Changsuk> _|Nix|_: I think that we can make example web apps to check the enhance property performance just in a few days.
+10:45 #web-ui-fw: < _|Nix|_> Changsuk: I think that'd be fine.
+10:46 #web-ui-fw: < Changsuk> _|Nix|_: your welcome, and we can support the second case as many and soon as possible.
+10:47 #web-ui-fw: < _|Nix|_> Changsuk: Very, very cool!
+10:47 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: Is that good?
+10:47 #web-ui-fw: < _|Nix|_> Changsuk: You got my vote :)
+10:47 #web-ui-fw: < Changsuk> _|Nix|_: ha~. ;)
+10:47 #web-ui-fw: < uGoMobi> Changsuk: that's perfect!
+10:47 #web-ui-fw: < Hyunsook> _|Nix|_, Changsuk: ha~
+10:48 #web-ui-fw: < Changsuk> _|Nix|_: but... Actually I may ask Hyunsook, Kangsik and Minkyeong about that schedule. :)
+10:50 #web-ui-fw: < _|Nix|_> Changsuk: Any little bit helps. And file issues as soon as you find them.
+10:50 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: as you know, Tizen Web UIFW is based on jQuery and jQM so jQM performance improvement is very important to my team and SEC folks.
+10:51 #web-ui-fw: < _|Nix|_> Changsuk: You guys are awesome at picking out performance bottlenecks and measuring the effect of code changes.
+10:51 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: hence I think that helping us each other is a nice way to enhance jQM.
+10:52 #web-ui-fw: < Changsuk> _|Nix|_: Thanks a lot. :)
+10:52 #web-ui-fw: < Hyunsook> _|Nix|_: Thanks~
+10:53 -!- travis-ci [~travis-ci@ec2-23-20-234-231.compute-1.amazonaws.com] has joined #jqueryui-dev
+10:53 #jqueryui-dev: < travis-ci> [travis-ci] jquery/jquery-mobile#600 (master - bd6a849 : Jasper de Groot): The build passed.
+10:53 #jqueryui-dev: < travis-ci> [travis-ci] Change view : https://github.com/jquery/jquery-mobile/compare/1aa725eaeff6...bd6a849ffc54
+10:53 #jqueryui-dev: < travis-ci> [travis-ci] Build details : http://travis-ci.org/jquery/jquery-mobile/builds/9724814
+10:53 -!- travis-ci [~travis-ci@ec2-23-20-234-231.compute-1.amazonaws.com] has left #jqueryui-dev []
+10:53 #web-ui-fw: < _|Nix|_> Excellent! Do we have any other topics to discuss?
+10:54 #web-ui-fw: < Changsuk> _|Nix|_: That's all for now.
+10:54 #web-ui-fw: < uGoMobi> Thanks everyone!
+10:54 #web-ui-fw: < Changsuk> uGoMobi: your welcome.
+10:54 #web-ui-fw: < _|Nix|_> OK, in that case, have a good weekend, and I'll see y'all in two weeks!
+10:55 #web-ui-fw: < Changsuk> _|Nix|_: Have a resurely vacation and talk to you later.
+10:55 #web-ui-fw: < Hyunsook> _|Nix|_, uGoMobi: Have a nice weekend. I'll support you as much as possible.
+10:56 #web-ui-fw: < _|Nix|_> Thanks! Take it easy, folks!
+10:56 #web-ui-fw: < Changsuk> uGoMobi: See you later on #jqueryui-dev.
+10:56 #web-ui-fw: < uGoMobi> Hyunsook: Thank you!
+10:56 #web-ui-fw: < Kangsik> _|Nix|_, uGoMobi : Have a nice weekend. :-)
+10:56 #web-ui-fw: < Changsuk> uGoMobi: I'll join there as many times as I can.
+10:56 #web-ui-fw: < Hyunsook> uGoMobi: :)
+10:56 #web-ui-fw: < uGoMobi> Changsuk: ok see you there :)
+--- Log closed Thu Aug 01 10:57:55 2013
