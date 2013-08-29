@@ -1,0 +1,298 @@
+--- Log opened Wed Aug 14 09:52:24 2013
+09:52 -!- Irssi: Log file ~/2013-08-14.txt opened
+09:52 #web-ui-fw: < Hyunsook> ha ha~ Hi~! :)
+09:52 #web-ui-fw: < Kangsik> Hi ^^
+09:53 #web-ui-fw: < _|Nix|_> You guys ready for another action-filled edge-of-your-seat meeting?
+09:53 #web-ui-fw: < Hyunsook> _|Nix|_: Yep~!
+09:53 #web-ui-fw: < _|Nix|_> Awesome!
+09:54 #web-ui-fw: < Hyunsook> _|Nix|_: I emailed the result measured for the performance difference between enhanced and non-enhanced
+09:54 #web-ui-fw: < _|Nix|_> Hyunsook: I saw that. Looks good!
+09:54 #web-ui-fw: < Hyunsook> _|Nix|_: ... and Changsuk and I took a message about it on IRC. Did you see it?
+09:54 #web-ui-fw: < Hyunsook> _|Nix|_: aha~
+09:54 #web-ui-fw: < _|Nix|_> Hyunsook: Yeah.
+09:54 #web-ui-fw: < Hyunsook> _|Nix|_: :)
+09:55 #web-ui-fw: < Hyunsook> _|Nix|_: Minkyeong created the sample Apps. and Kangsik and Minkyeong measured the apps. ;)
+09:55 #web-ui-fw: < _|Nix|_> Hyunsook: Looks like it really is worth using data-enhanced="true'.
+09:56 #web-ui-fw: < _|Nix|_> Kangsik, Minkyeong: Good work!
+09:56 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, rigiht~!
+09:56 #web-ui-fw: < Kangsik> _|Nix|_: Thanks :)
+09:57 #web-ui-fw: < Minkyeong> Hi All :)
+09:57 #web-ui-fw: < Minkyeong> _|Nix|_: Thank you!
+09:57 #web-ui-fw: < Hyunsook> _|Nix|_: Did uGoMobi also know the result?
+09:57 #web-ui-fw: < _|Nix|_> Woah! with https://github.com/jquery/jquery-mobile/issues/6274 now merged, we can actually get rid of optionDemultiplexer from the library.
+09:58 #web-ui-fw: < _|Nix|_> Hyunsook: I believe so.
+09:58 #web-ui-fw: < Hyunsook> _|Nix|_: ha ha~ yes.
+09:58 #web-ui-fw: < _|Nix|_> Hyunsook: I think we will use the result in the blog entry announcing 1.4.0.
+09:59 #web-ui-fw: < Hyunsook> _|Nix|_: Sounds good~!
+09:59 #web-ui-fw: < Hyunsook> _|Nix|_: I uploaded an issue about the error of input or button-based Button widgets.: https://github.com/jquery/jquery-mobile/issues/6288
+10:00 #web-ui-fw: < Hyunsook> _|Nix|_: Did you see it?
+10:00 #web-ui-fw: < Hyunsook> _|Nix|_: I think... now Download builder has some bugs on checking module dependency. :(
+10:01 #web-ui-fw: < Hyunsook> _|Nix|_: So, I stopped checking widgets with custom build after I checked button widgets.
+10:02 -!- Miezel [~Mimieam@63-152-210-66.stcd.qwest.net] has joined #jqueryui-dev
+10:02 #web-ui-fw: < _|Nix|_> Hyunsook: It may not be download builder.
+10:02 #web-ui-fw: < _|Nix|_> Hyunsook: It may be jQM.
+10:03 #web-ui-fw: < _|Nix|_> Hyunsook: We split up jquery.mobile.core.js into multiple files. The button widget may not be depending on the right files.
+10:03 #web-ui-fw: < Hyunsook> _|Nix|_: ah.... really?
+10:03 #web-ui-fw: < _|Nix|_> Hyunsook: Yep, that's right. It needs to depend on jquery.mobile.data
+10:04 #web-ui-fw: < _|Nix|_> Hyunsook: ... although in the latest version of widgets/forms/button.js it no longer uses $.mobile.getAttribute, so that may be fixed.
+10:04 #web-ui-fw: < Hyunsook> _|Nix|_: But uGoMobi already moved the issue to Download builder repo.
+10:04 #web-ui-fw: < _|Nix|_> Hyunsook: Not sure if download builder supports building from git.
+10:05 #web-ui-fw: < _|Nix|_> Hyunsook: If download builder supports building from git then that issue may already be fixed.
+10:06 #web-ui-fw: < _|Nix|_> Hyunsook: I can check that issue locally with --modules
+10:06 #web-ui-fw: < _|Nix|_> Hyunsook: It's good that you're testing these things. It's very important.
+10:06 #web-ui-fw: < Hyunsook> _|Nix|_: I rechecked download builder for button-based Button widget and recheck the 6288 issue. But it's still.
+10:07 #web-ui-fw: < _|Nix|_> Hyunsook: Right, but is download builder building from master?
+10:08 #web-ui-fw: < Hyunsook> _|Nix|_: I checked widgets with jqm1.4 latest version in download builder.
+10:08 #web-ui-fw: < _|Nix|_> Hyunsook: Actually, that gave me an idea.
+10:08 #web-ui-fw: < _|Nix|_> Hyunsook: We can add your page to the test suite.
+10:09 #web-ui-fw: < _|Nix|_> Hyunsook: The test suite uses requirejs to pull in modules so if there's a dependency error, it will catch that.
+10:09 #web-ui-fw: < Hyunsook> _|Nix|_: ah....
+10:11 -!- kinblas1 [~kinblas@192.150.10.210] has joined #jqueryui-dev
+10:11 #web-ui-fw: < _|Nix|_> Hyunsook: I'll test locally with requirejs.
+10:11 #web-ui-fw: < Hyunsook> _|Nix|_: Can you do that?
+10:11 #web-ui-fw: < Hyunsook> _|Nix|_: Oh~! I see.
+10:11 #web-ui-fw: < _|Nix|_> Hyunsook: Yeah, I've done it before.
+10:11 #web-ui-fw: < _|Nix|_> Hyunsook: It's actually quite cool.
+10:12 #web-ui-fw: < Hyunsook> _|Nix|_: Coool~
+10:12 #web-ui-fw: < _|Nix|_> Hyunsook: Here's one for custom select: (long paste follows):
+10:13 -!- Irssi: Pasting 14 lines to #web-ui-fw. Press Ctrl-K if you wish to do this or Ctrl-C to cancel.
+10:13 #web-ui-fw: < _|Nix|_> 	<script src="external/requirejs/require.js"></script>
+10:13 #web-ui-fw: < _|Nix|_> 	<script src="js/requirejs.config.js"></script>
+10:13 #web-ui-fw: < _|Nix|_> 	<script>
+10:13 #web-ui-fw: < _|Nix|_> ( function() {
+10:13 #web-ui-fw: < _|Nix|_> 	requirejs.config( {
+10:13 #web-ui-fw: < _|Nix|_> 		baseUrl: "js"
+10:13 #web-ui-fw: < _|Nix|_> 	});
+10:13 #web-ui-fw: < _|Nix|_> 	require( [ "jquery", "widgets/forms/select.custom", "jquery.mobile.navigation" ], function( $ ) {
+10:13 #web-ui-fw: < _|Nix|_> 		$( function() {
+10:13 #web-ui-fw: < _|Nix|_> 			$( "select" ).selectmenu();
+10:13 #web-ui-fw: < _|Nix|_> 		});
+10:13 #web-ui-fw: < _|Nix|_> 	});
+10:13 #web-ui-fw: < _|Nix|_> })();
+10:13 #web-ui-fw: < _|Nix|_> 	</script>
+10:13 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has quit [Read error: Connection reset by peer]
+10:13 -!- kinblas1 [~kinblas@192.150.10.210] has quit [Read error: Connection reset by peer]
+10:13 #web-ui-fw: < _|Nix|_> That will include only custom select in a document.
+10:14 #web-ui-fw: < _|Nix|_> The test suite has a helper that will help with this even more.
+10:14 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has joined #jqueryui-dev
+10:14 #web-ui-fw: < Hyunsook> _|Nix|_: Ah ha~!
+10:16 #web-ui-fw: < Hyunsook> _|Nix|_: As you said, it's cool.
+10:16 #web-ui-fw: < _|Nix|_> Yep.
+10:16 #web-ui-fw: < Kangsik> _|Nix|_: Thank you ~ :-) It is a good adivice for me.
+10:16 #web-ui-fw: < _|Nix|_> The error is still present: http://babulina.go-nix.ca:8080/nix/jqm/6288.html
+10:17 #web-ui-fw: < _|Nix|_> This is likely a problem with the library, not the download builder.
+10:17 #web-ui-fw: < Hyunsook> _|Nix|_: ah~ I see.
+10:18 #web-ui-fw: < _|Nix|_> I'm surprised the test suite hasn't picked up this problem.
+10:18 #web-ui-fw: < _|Nix|_> We have a suite for button tests. Maybe the suite loads additional files.
+10:19 #web-ui-fw: < Hyunsook> _|Nix|_: OK, I see. If this problem is fixed, could you let me know?
+10:20 #web-ui-fw: < _|Nix|_> Yeah. The suite loads both button and buttonMarkup, and it loads init as well. One of those probably depends on data, so $.mobile.getAttribute will be defined.
+10:20 #web-ui-fw: < _|Nix|_> Hyunsook: Sure. It should be fixed right after the meeting.
+10:20 #web-ui-fw: < Hyunsook> _|Nix|_: Thanks~
+10:20 #web-ui-fw: < _|Nix|_> Hyunsook: I'll try to make a test suite for single modules.
+10:20 #web-ui-fw: < Hyunsook> _|Nix|_: OK
+10:20 #web-ui-fw: < _|Nix|_> Hyunsook: ... to make sure that all modules work individually.
+10:21 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has quit [Quit: Leaving.]
+10:21 #web-ui-fw: < Hyunsook> _|Nix|_: Oh! I have some news for the performance improvement of Tizen Web UIFW v2.2
+10:22 #web-ui-fw: < Hyunsook> _|Nix|_: .... which is release version for commercial market.
+10:23 -!- jqmobilecommit [~jqmobilec@192.30.252.53] has joined #jqueryui-dev
+10:23 #jqueryui-dev: < jqmobilecommit> [jquery-mobile] gabrielschulhof reopened issue #6288: Download Builder(latest): A input or button-based Button widget has an error.  http://git.io/r-CYWA
+10:23 -!- jqmobilecommit [~jqmobilec@192.30.252.53] has left #jqueryui-dev []
+10:23 #web-ui-fw: < _|Nix|_> Hyunsook: Good news or bad news? :)
+10:23 #web-ui-fw: < Hyunsook> _|Nix|_: hmmmmm.... both.
+10:23 #web-ui-fw: < _|Nix|_> :/
+10:23 #web-ui-fw: < _|Nix|_> Do tell :)
+10:24 #web-ui-fw: < Hyunsook> _|Nix|_: First is bad news. It's for applying jQM 1.4 performance improvement features on Tizen Web UIFW v2.2:
+10:24 #web-ui-fw: < Hyunsook> _|Nix|_: My team completed an analysis for jQM1.4 major performance improvement features
+10:25 #web-ui-fw: < _|Nix|_> Please tell me they don't make performance worse!
+10:25 #web-ui-fw: < Hyunsook> _|Nix|_: ... and discussed whether there are available to apply the major features to Tizen Web UIFW v2.2 with SEC folks.
+10:26 #web-ui-fw: < Hyunsook> _|Nix|_: ... As a result, SEC folks and we decided not to apply the features. - Strictly speaking, we cannot apply it.
+10:26 #web-ui-fw: < _|Nix|_> Hyunsook: I'm not surprised. 1.4.0 is very different from 1.3.x.
+10:26 #web-ui-fw: < _|Nix|_> Hyunsook: We've made some major changes.
+10:26 #web-ui-fw: < Hyunsook> _|Nix|_: No. The feature don't make performance worse.
+10:27 #web-ui-fw: < Hyunsook> _|Nix|_: Right.
+10:27 #web-ui-fw: < _|Nix|_> Oh, *phew* ... thank goodness!
+10:27 #web-ui-fw: < Hyunsook> _|Nix|_: Tizen v2.2 should be maintain the compatibility with commercial Web Apps made by previous Tizen version.
+10:27 #web-ui-fw: < _|Nix|_> Hyunsook: Moving web-ui-fw to 1.4.0 will also be a major task.
+10:27 #web-ui-fw: < _|Nix|_> Hyunsook: That's understandable.
+10:28 #web-ui-fw: < Hyunsook> _|Nix|_: ... i.e. if WebApp is using ".ui-btn-inner" or ".ui-btn-text", the codes should be modified to work WebApp normally.
+10:28 #web-ui-fw: < Hyunsook> _|Nix|_: ... But Tizen commercial WebApp codes should not be modified. :/
+10:28 #web-ui-fw: < _|Nix|_> Hyunsook: I understand, but jQM never promised that .ui-btn-inner and .ui-btn-text will be there.
+10:28 #web-ui-fw: < Hyunsook> _|Nix|_: ... So, we cannot apply the features.
+10:29 #web-ui-fw: < _|Nix|_> Hyunsook: If app writers make use of .ui-btn-inner then that's their mistake.
+10:30 #web-ui-fw: < _|Nix|_> Hyunsook: They should do this: <a href="#" data-role="button"><span id="#identifiableLabel">This text will change</span></a>
+10:30 #web-ui-fw: < Hyunsook> _|Nix|_: Right.
+10:31 #web-ui-fw: < _|Nix|_> Hyunsook: If they do this, they don't need .ui-btn-text. They can just $( "#identifiableLabel" ).text( "The new label" );
+10:31 #web-ui-fw: < _|Nix|_> Hyunsook: ui-btn-inner and ui-btn-text is not public API.
+10:32 #web-ui-fw: < _|Nix|_> Hyunsook: If you wish to maintain compatibility with ui-btn-inner and ui-btn-text, you will forever be stuck with 1.3.x.
+10:32 #web-ui-fw: < Hyunsook> _|Nix|_: But unfortunately, we and SEC folks cannot checkand guide all commercial WebApp codes. :(
+10:33 #web-ui-fw: < _|Nix|_> Hyunsook: Only those apps will break that abuse the API. Those that use the API correctly will not break.
+10:33 #web-ui-fw: < _|Nix|_> Hyunsook: You should not encourage people to write broken apps.
+10:33 #web-ui-fw: < _|Nix|_> Hyunsook: Providing that kind of support makes things worse, not better.
+10:34 #web-ui-fw: < _|Nix|_> Hyunsook: Besides, those apps may work on tizen, but they won't work anywhere else.
+10:34 #web-ui-fw: < _|Nix|_> Hyunsook: ... and how do you know the point where developers have realized their mistake and have removed references to .ui-btn-inner and .ui-btn-text?
+10:34 #web-ui-fw: < _|Nix|_> Hyunsook: Some day, all apps will be free of ui-btn-inner and ui-btn-text.
+10:35 #web-ui-fw: < _|Nix|_> Hyunsook: How do you know when that day has arrived?
+10:35 #web-ui-fw: < _|Nix|_> Hyunsook: Will you check all the apps in the store?
+10:35 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, Right. The WebApps work on Tizen because of the Apps. for commercial market.
+10:35 #web-ui-fw: < Changsuk> Hi~ all. I'm sorry that I'm late.
+10:35 #web-ui-fw: < _|Nix|_> Changsuk: NP. Good to see you!
+10:35 #web-ui-fw: < Kangsik> Changsuk: NP! :-)
+10:35 #web-ui-fw: < Hyunsook> Changsuk: welcom~
+10:36 #web-ui-fw: < Minkyeong> Changsuk: Hi~
+10:36 #web-ui-fw: < _|Nix|_> Changsuk: We were just talking about support for .ui-btn-inner and .ui-btn-text and how it's preventing you from integrating 1.4.0 perf improvements into Tizen.
+10:37 #web-ui-fw: < _|Nix|_> Changsuk: I was arguing that it's very bad to consider .ui-btn-inner/text as part of the public API.
+10:37 #web-ui-fw: < Changsuk> _|Nix|_: Ok. got it.
+10:38 #web-ui-fw: < Changsuk> _|Nix|_: I'm sorry that I don't know whether .ui-btn-inner/text is an API or a property or not.
+10:38 #web-ui-fw: < Changsuk> _|Nix|_: .ui-btn-inner is a class name?
+10:39 #web-ui-fw: < _|Nix|_> Changsuk: In 1.3.x, the structure of the enhanced button is this: <a class="ui-btn"><span class="ui-btn-inner"><span class="ui-btn-text">Text</span></span></a>
+10:39 #web-ui-fw: < _|Nix|_> Changsuk: In 1.4.0, the structure is simply <a class="ui-btn">Text</a>
+10:39 #web-ui-fw: < Changsuk> _|Nix|_: yes, right.
+10:39 #web-ui-fw: < _|Nix|_> Changsuk: But if app writers rely on $( "a" ).find( ".ui-btn-text" ).text( "New Text" ) then their apps will break with 1.4.0.
+10:40 #web-ui-fw: < Changsuk> _|Nix|_: Yes, I think so.
+10:40 #web-ui-fw: < _|Nix|_> Changsuk: However, the structure of the enhanced button is not part of the public API.
+10:40 #web-ui-fw: < Changsuk> _|Nix|_: because .ui-btn-text will be removed.
+10:40 #web-ui-fw: < _|Nix|_> Changsuk: Exactly.
+10:41 #web-ui-fw: < _|Nix|_> Changsuk: However, jQM has never documented those two inner spans. They were part of the implementation - internal details, not public API.
+10:41 #web-ui-fw: < _|Nix|_> Changsuk: So, if you start supporting them as though they are public API, you will encourage bad practices.
+10:41 #web-ui-fw: < Changsuk> _|Nix|_: But if a user developed a Web App. with jQM 1.3, can he need that .ui-btn-text class?
+10:41 #web-ui-fw: < _|Nix|_> Changsuk: No.
+10:42 #web-ui-fw: < _|Nix|_> Changsuk: It's not needed.
+10:42 #web-ui-fw: < _|Nix|_> Changsuk: If you want to modify the text of a button at runtime, do this: <a><span id="mySpan">My Text</span></a>
+10:42 #web-ui-fw: < _|Nix|_> Changsuk: That will become <a><span class="ui-btn-inner"><span class="ui-btn-text"><span id="mySpan">My Text</span></span></span></a>
+10:43 #web-ui-fw: < _|Nix|_> Changsuk: Now, you can access the text via $( "#mySpan" );
+10:43 #web-ui-fw: < _|Nix|_> Changsuk: In 1.4.0 that will become <a><span id="mySpan"></span></a>
+10:43 #web-ui-fw: < _|Nix|_> Changsuk: ... and you can still access the text via $( "#mySpan" );
+10:44 #web-ui-fw: < _|Nix|_> Changsuk: So, the correct way to modify the text of a button is to inclose the text in a span that has an ID so you can grab it later.
+10:44 #web-ui-fw: < Changsuk> _|Nix|_: but if that class name already is in his JS code and he can't change his JS codes, I think that he can use a new class name - ui-bth.
+10:44 #web-ui-fw: < _|Nix|_> Changsuk: We never documented that class name.
+10:44 #web-ui-fw: < Changsuk> _|Nix|_: ah...
+10:45 #web-ui-fw: < Changsuk> he can not use the new class name. :)
+10:45 #web-ui-fw: < _|Nix|_> Changsuk: If people use .find( ".ui-btn-text" ).text( "Some New Text" ) then that's a mistake.
+10:45 #web-ui-fw: < Changsuk> _|Nix|_: right?
+10:45 #web-ui-fw: < _|Nix|_> Changsuk: Exactly.
+10:45 #web-ui-fw: < _|Nix|_> Changsuk: Correct.
+10:45 #web-ui-fw: < Changsuk> _|Nix|_: hmmmm....
+10:45 #web-ui-fw: < _|Nix|_> Changsuk: We never promised span.ui-btn-text ... 
+10:46 #web-ui-fw: < _|Nix|_> Changsuk: Apps that use that may not break on Tizen, if Tizen supports span.ui-btn-text, but they will break everywhere else, and their devs will realize that and fix the code.
+10:47 #web-ui-fw: < Changsuk> _|Nix|_: Actually Tizen commercial developers, for example Dokomo developers in Japan, they won't change theire codes any more. but We have to adapt jQM 1.4.
+10:47 #web-ui-fw: < _|Nix|_> Changsuk: So they won't even fix bugs?
+10:47 #web-ui-fw: < Changsuk> _|Nix|_: yes, I think so.
+10:48 #web-ui-fw: < _|Nix|_> Changsuk: Code like .find( ".ui-btn-text" ).text( "New Text" ) is a bug.
+10:48 #web-ui-fw: < _|Nix|_> Changsuk: You should never access DOM elements generated by the framework.
+10:48 #web-ui-fw: < Changsuk> _|Nix|_: Yes, I think so. Because SEC will sell Tizen phone to Dokomo.
+10:48 #web-ui-fw: < Changsuk> _|Nix|_: yes, right.
+10:49 #web-ui-fw: < _|Nix|_> Changsuk: Well, then, I guess those phones will have to be based on 1.3.x.
+10:49 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, I thins so.
+10:49 #web-ui-fw: < Changsuk> _|Nix|_: So if they want use jQM 1.4, they should use new class names. right?
+10:49 #web-ui-fw: < _|Nix|_> Changsuk: They should stop accessing DOM elements added by JQM.
+10:50 #web-ui-fw: < Changsuk> _|Nix|_: If that's the case then, they have to modify their JS or HTML codes.
+10:50 #web-ui-fw: < _|Nix|_> Changsuk: Yes.
+10:50 #web-ui-fw: < Changsuk> _|Nix|_: yes...... hmmmmmm
+10:50 #web-ui-fw: < _|Nix|_> The problem with HTML5 is that everything is public. Not like C++ where you can declare public/private/protected/friend.
+10:51 #web-ui-fw: < _|Nix|_> So, the only way to make something private is to not document it.
+10:51 #web-ui-fw: < _|Nix|_> Also, there's the _functionName convention. If it starts with an _ it's private, and you should not use it.
+10:51 #web-ui-fw: < _|Nix|_> But it's all convention, and it relies on the programmers discipline.
+10:51 #web-ui-fw: < Changsuk> _|Nix|_: yes... I can understand what did you suggest.
+10:51 #web-ui-fw: < _|Nix|_> programmer's
+10:52 #web-ui-fw: < Changsuk> _|Nix|_: hmmmm, ok, I'll talk to SEC folks about that issue.
+10:52 #web-ui-fw: < _|Nix|_> So, if Dokomo programmers did not know that span.ui-btn-text was private then that's because they didn't read the documentation.
+10:53 #web-ui-fw: < _|Nix|_> Changsuk: Make no mistake though. The removal of span.ui-btn-text will probably cause problems outside of Tizen as well.
+10:53 #web-ui-fw: < Changsuk> Hyunsook: Did you announce the New Sizzle to _|Nix|_?
+10:53 #web-ui-fw: < _|Nix|_> Changsuk: Dokomo developers were probably not the only ones to use span.ui-btn-text.
+10:53 #web-ui-fw: < Changsuk> _|Nix|_: I hope so.
+10:54 #web-ui-fw: < _|Nix|_> Changsuk: That's another reason why we're making the 1.4.0 alpha/beta period so long.
+10:54 #web-ui-fw: < _|Nix|_> Changsuk: ... to give people a chance to adapt.
+10:54 #web-ui-fw: < Hyunsook> Changsuk: Not yet.
+10:54 #web-ui-fw: < Changsuk> _|Nix|_: But the programmers are expert to JS, jQuery and JQM. :(
+10:54 #web-ui-fw: < _|Nix|_> Changsuk: ... but so far we haven't received any bugs about the missing span.ui-btn-text.
+10:55 #web-ui-fw: < Changsuk> _|Nix|_: I think they are already know most of class names in jQM 1.3 version.
+10:55 #web-ui-fw: < Changsuk> _|Nix|_: also they use it. :(
+10:56 #web-ui-fw: < Changsuk> _|Nix|_: Anyway I WILL discuss about that issue with SEC.
+10:56 #web-ui-fw: < _|Nix|_> Changsuk: It's easy to find out what classes jQM uses: Just click "Inspect Element". That's not the point. The point is that just because you know the class doesn't mean you're allowed to use it in a selector in your code.
+10:56 #web-ui-fw: < _|Nix|_> Changsuk: That's great! Do talk to them. This is a serious issue, and it's preventing you from improving performance.
+10:57 #web-ui-fw: < _|Nix|_> Changsuk: Who knows? Independent developers may have better discipline, and now you're not giving them the latest and greatest!
+10:57 #web-ui-fw: < Changsuk> _|Nix|_: yes,... I think so and I'll talk to SEC. :)
+10:57 #web-ui-fw: < _|Nix|_> Changsuk: Awesome!
+10:57 #web-ui-fw: < Hyunsook> _|Nix|_: I think so.
+10:57 #web-ui-fw: < _|Nix|_> So, what is this "New Sizzle"?
+10:58 #web-ui-fw: < Changsuk> _|Nix|_: ha~ I saw that word. lol
+10:58 #web-ui-fw: < Changsuk> _|Nix|_: yes, my team is making a new Sizzle.
+10:58 #web-ui-fw: < _|Nix|_> Changsuk: Oh, cool! To replace jQuery's? Very, very nice!
+10:59 #web-ui-fw: < _|Nix|_> Changsuk: Amazing!
+10:59 #web-ui-fw: < Changsuk> _|Nix|_: As you know, Sizzle is so heavy and can't be matched with mobile platform.
+10:59 #web-ui-fw: < _|Nix|_> Changsuk: Right.
+10:59 #web-ui-fw: < _|Nix|_> Changsuk: Hopefully you can contribute some of it back.
+11:00 #web-ui-fw: < _|Nix|_> Changsuk: ... and you can make use of Tizen-specific improvements.
+11:00 #web-ui-fw: < _|Nix|_> +1000 from me :)
+11:00 #web-ui-fw: < Changsuk> _|Nix|_: So my team analyzed that for two weeks and there are needless modules to search DOM, CSS and so on.
+11:00 #web-ui-fw: < Hyunsook> _|Nix|_: ha ha~
+11:01 #web-ui-fw: < Changsuk> _|Nix|_: ha ha... Thanks. but All of memebers in my team will do that not me. :)
+11:01 #web-ui-fw: < Changsuk> _|Nix|_: anyway.
+11:01 #web-ui-fw: < _|Nix|_> Changsuk: I'm not sure, but I think the jQuery guys have started down the path of AMD. Maybe they will AMD-ize Sizzle as well.
+11:02 #web-ui-fw: < _|Nix|_> Changsuk: ... and then you can remove parts of Sizzle. Not sure though. You'd have to ask DaveMethvin.
+11:02 #web-ui-fw: < _|Nix|_> Changsuk: You should definitely talk to him though.
+11:02 #web-ui-fw: < _|Nix|_> Changsuk: He has a ton of experience with this.
+11:02 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I'll do that.
+11:03 #web-ui-fw: < _|Nix|_> Great!
+11:03 #web-ui-fw: < _|Nix|_> Alright. Do we have any other topics to discuss?
+11:04 #web-ui-fw: < Changsuk> _|Nix|_: Sizzle is developed with seperated modules, OK, It's so nice. but that concept isn't matched with Mobile devices.
+11:04 -!- frequent [~chatzilla@246.42.83.79.rev.sfr.net] has joined #jqueryui-dev
+11:04 #web-ui-fw: < _|Nix|_> Changsuk: Where exactly is the mismatch? I'm just curious.
+11:04 #web-ui-fw: < Changsuk> _|Nix|_: And we can use pure JS APIs likes "QuerySelectorAll" in Sizzle.
+11:05 #web-ui-fw: < _|Nix|_> Changsuk: Yeah, those will probably take time to integrate into sizzle, because you have to make sure that all platforms can do that.
+11:05 #web-ui-fw: < _|Nix|_> Changsuk: So, yeah, that's definitely a point where you can diverge from upstream.
+11:06 #web-ui-fw: < _|Nix|_> Changsuk: Adding device-specific code is a big priority on mobile.
+11:06 #web-ui-fw: < Changsuk> _|Nix|_: After my team's analysis, I think, we don't need to use "SuperMatcher" in Sizzle.
+11:07 #web-ui-fw: < _|Nix|_> Right. Well, I dunno much about Sizzle, but I guess it would be nice if you could provide alternative implementations of some of its modules.
+11:08 #web-ui-fw: < Changsuk> _|Nix|_: I think SuperMatcher's main role is gathering tokenized "selector", then searching and getting the matched CSSs or DOM elements.
+11:10 #web-ui-fw: < _|Nix|_> Changsuk: The only thing I can think of is this: Sizzle probably supports selectors that native does not support. For example, custom pseudo like ":mobile-collapsibleset".
+11:10 #web-ui-fw: < _|Nix|_> Changsuk: If you have a complex selector that includes some of these custom pseudos, then you first need to break that up and only pass those portions to the native JS code that it can understand.
+11:10 #web-ui-fw: < Changsuk> _|Nix|_: yes, as you told, some cases are right.
+11:11 #web-ui-fw: < _|Nix|_> Changsuk: It also matters how the native reacts to "invalid" selectors like ":mobile-collapsibleset". If it ignores them, then that's fine. If it throws an error, then that's bad.
+11:12 #web-ui-fw: < _|Nix|_> Changsuk: ... and actually, even if it ignores it, it's still not good, because you will get an incorrect match.
+11:12 #web-ui-fw: < _|Nix|_> Changsuk: But hey! I'm sure you guys went into far more detail than that.
+11:13 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. My first idea is removing the storing the tokenized selectors job.
+11:14 #web-ui-fw: < Changsuk> _|Nix|_: yes, Thanks~! and I thought about your words.
+11:14 #web-ui-fw: < Changsuk> _|Nix|_: ha~ ok.
+11:15 #web-ui-fw: < Changsuk> _|Nix|_: After my team make a new Sizzle, I'll give you it with some concepts.
+11:15 #web-ui-fw: < _|Nix|_> Changsuk: Thanks!
+11:15 #web-ui-fw: < Changsuk> _|Nix|_: If you can, pls go over it. ~! :)
+11:16 #web-ui-fw: < _|Nix|_> Changsuk: For sure, although I don't know much about Sizzle. You may want to also show it to DaveMethvin and to people he recommends.
+11:16 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I'll talk to him. thank~ :)
+11:16 #web-ui-fw: < Hyunsook> _|Nix|_: Thanks
+11:17 #web-ui-fw: < Changsuk> _|Nix|_: time goes fast~
+11:17 #web-ui-fw: < _|Nix|_> OK. If we have no other topics, I suggest you guys gear up for Independence Day.
+11:18 #web-ui-fw: < Changsuk> All: I told you all thing for now.
+11:18 #web-ui-fw: < _|Nix|_> Finland's Independence Day is still far away: December 6th.
+11:18 #web-ui-fw: < _|Nix|_> BTW: I'll be on vacation again next week.
+11:18 #web-ui-fw: < _|Nix|_> My in-laws will be visiting.
+11:19 #web-ui-fw: < Changsuk> _|Nix|_: wow... I envy you....
+11:19 #web-ui-fw: < Hyunsook> ah...
+11:19 #web-ui-fw: < _|Nix|_> Changsuk: Finland is really good about vacation: 5 weeks/year paid vacation guaranteed by law.
+11:19 #web-ui-fw: < Changsuk> _|Nix|_: ha... you'll serve them. :)
+11:19 #web-ui-fw: < _|Nix|_> Changsuk: *sigh*
+11:20 #web-ui-fw: < Changsuk> _|Nix|_: Wow~!! Great~
+11:20 #web-ui-fw: < Kangsik> _|Nix|_: Great!!!!
+11:20 #web-ui-fw: < _|Nix|_> Changsuk: Yeah, I'm definitely loving it.
+11:20 #web-ui-fw: < Changsuk> _|Nix|_: You can use long~ vacations....
+11:20 #web-ui-fw: < _|Nix|_> All: Come to Finland! :)
+11:20 #web-ui-fw: < Hyunsook> _|Nix|_: Wow, I envy you....
+11:20 #web-ui-fw: < Hyunsook> Ha ha~
+11:20 #web-ui-fw: < Changsuk> _|Nix|_: ha~~~ I really really~~ hope SO~~~~
+11:20 #web-ui-fw: < Kangsik> _|Nix|_ : Ha Ha~~ :)
+11:20 #web-ui-fw: < Minkyeong> _|Nix|_: I hope so (lol)
+11:20 #web-ui-fw: < Hyunsook> Changsuk: +1
+11:21 #web-ui-fw: < Changsuk> _|Nix|_: paid vacation.... It's cool~~~
+11:21 #web-ui-fw: < _|Nix|_> Anyway ... for now, enjoy Independence Day and your weekend. I'll see y'all in, probably two weeks.
+11:21 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has joined #jqueryui-dev
+11:21 #web-ui-fw: < _|Nix|_> Don't have too much fun ;)
+11:22 #web-ui-fw: < Hyunsook> _|Nix|_: OK. Have a good vacations~
+11:22 #web-ui-fw: < _|Nix|_> Thanks!
+11:22 #web-ui-fw: < Changsuk> _|Nix|_: yes... I'll try to do that...
+11:22 #web-ui-fw: < Minkyeong> _|Nix|_: Yep. Enjoy your vacation again!
+11:22 #web-ui-fw: < Kangsik> _|Nix|_: Have a good vacations... :)
+11:22 #web-ui-fw: < Changsuk> _|Nix|_: have such a nice valcation~!!
+11:22 #web-ui-fw: < _|Nix|_> Thanks, all!
+11:22 #web-ui-fw: < Hyunsook> .... envy......
+11:22 #web-ui-fw: < Minkyeong> (lol)
+--- Log closed Wed Aug 14 11:23:02 2013
