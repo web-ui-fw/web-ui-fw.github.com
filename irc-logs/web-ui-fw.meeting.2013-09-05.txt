@@ -1,0 +1,197 @@
+--- Log opened Thu Sep 05 10:00:50 2013
+10:00 -!- Irssi: Log file ~/2013-09-05.txt opened
+10:00 #web-ui-fw: < _|Nix|_> Hey all!
+10:01 #web-ui-fw: < _|Nix|_> Ding ding ding!
+10:01 #web-ui-fw: < _|Nix|_> Meeting time!
+10:01 #web-ui-fw: < _|Nix|_> How are y'all doing?
+10:02 #web-ui-fw: < Hyunsook> Hi~
+10:02 #web-ui-fw: < Kangsik> Hi~ :)
+10:02 #web-ui-fw: < Hyunsook> :)
+10:03 #web-ui-fw: < Minkyeong> Hi all
+10:03 #web-ui-fw: < _|Nix|_> So, what have you guys been up to? How's the new Sizzle coming along?
+10:04 #web-ui-fw: < Hyunsook> Now Changsuk is in another meeting, but he will be coming soon.
+10:05 #web-ui-fw: < Kangsik> _|Nix|_: We need more time to make new sizzle.
+10:05 #web-ui-fw: < _|Nix|_> Hyunsook: That's fine.
+10:06 #web-ui-fw: < _|Nix|_> Kangsik: Understandable.
+10:06 #web-ui-fw: < _|Nix|_> Minkyeong: Hey!
+10:06 #web-ui-fw: < Minkyeong> _|Nix|_: Hi~
+10:06 #web-ui-fw: < Hyunsook> _|Nix|_: Kangsik and another team member are working hard for making new sizzle.
+10:07 #web-ui-fw: < _|Nix|_> It's an important effort.
+10:07 #web-ui-fw: < Hyunsook> _|Nix|_: Maybe... New sizzle will be completed next week. Kangsik, right?
+10:07 #web-ui-fw: < Kangsik> _|Nix|_:  We faced up unkonw issues. so we need to change the architcture of new sizzle.
+10:07 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, right.
+10:08 #web-ui-fw: < _|Nix|_> Kangsik: I've had a similar experience too many times before :)
+10:09 #web-ui-fw: < Kangsik> _|Nix|_: Yes, I will do it until next week.
+10:09 #web-ui-fw: < _|Nix|_> Kangsik: That's awesome! I can't wait to see the results!
+10:10 #web-ui-fw: < Kangsik> _|Nix|_:Thanks for your understanding.
+10:10 #web-ui-fw: < Hyunsook> _|Nix|_: haha~
+10:10 #web-ui-fw: < Kangsik> _|Nix|_: :-)
+10:10 #web-ui-fw: < _|Nix|_> You guys are all doing really good work! It's great that you have such a clear focus on what needs to be done. It helps a lot!
+10:11 #web-ui-fw: < Hyunsook> _|Nix|_, Kangsik: If new sizzle is completed, Kangsik will be send the code to you.
+10:11 #web-ui-fw: < _|Nix|_> Hyunsook: OK.
+10:11 #web-ui-fw: < Hyunsook> _|Nix|_: Thanks~ :)
+10:11 #web-ui-fw: < Kangsik> Hyunsook: Yep! :-)
+10:12 #web-ui-fw: < Hyunsook> _|Nix|_: Oh~! One another news.
+10:12 #web-ui-fw: < Hyunsook> _|Nix|_: My team made progress the task removing $.extend in jQM until yesterday.
+10:12 #web-ui-fw: < _|Nix|_> Hyunsook: Is it a bottleneck?
+10:13 #web-ui-fw: < Hyunsook> _|Nix|_: We could not remove all $.extend in jQM, but could get a good result.
+10:13 #web-ui-fw: < _|Nix|_> Interesting.
+10:13 #web-ui-fw: < Hyunsook> _|Nix|_: The launching time of Tizen Demo Winset App. was reduced about 64 mesc after removing $.extend.
+10:13 #web-ui-fw: < _|Nix|_> Wow!
+10:14 #web-ui-fw: < _|Nix|_> Hmmm ... makes me think that widgets shouldn't be using it in _create().
+10:14 #web-ui-fw: < Hyunsook> _|Nix|_: you can see the removed cases and the results through the following jsPerf URLs :
+10:14 #web-ui-fw: < Hyunsook> _|Nix|_: http://jsperf.com/extend-this-vs-direct-setting
+10:14 #web-ui-fw: < Hyunsook> _|Nix|_: http://jsperf.com/extend-vs-direct-setting/2
+10:14 #web-ui-fw: < Hyunsook> _|Nix|_: http://jsperf.com/extend-vs-direct-setting-object
+10:15 #web-ui-fw: < Hyunsook> _|Nix|_: We excepted if the code lines or the performance is increased due to changing.
+10:16 #web-ui-fw: < _|Nix|_> Wow! Amazing. $.extend is really slow.
+10:16 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, right.
+10:16 #web-ui-fw: < Hyunsook> _|Nix|_: I think jQM also should to remove $.extend.
+10:17 #web-ui-fw: < _|Nix|_> Agreed.
+10:17 #web-ui-fw: < Hyunsook> _|Nix|_: Can I add PR about it?
+10:17 #web-ui-fw: < _|Nix|_> Hyunsook: Is there a URL for the Tizen Demo Winset App?
+10:17 #web-ui-fw: < _|Nix|_> Hyunsook: For sure!
+10:17 #web-ui-fw: < _|Nix|_> Hyunsook: Please!
+10:18 #web-ui-fw: < _|Nix|_> Hyunsook: PR away! :)
+10:18 #web-ui-fw: < Hyunsook> _|Nix|_: haha~ OK.
+10:18 #web-ui-fw: < _|Nix|_> Hyunsook: Make sure you include the jsperf links in your PR description.
+10:18 #web-ui-fw: < Hyunsook> _|Nix|_: hmm.... URL.... please wait.
+10:18 #web-ui-fw: < _|Nix|_> Hyunsook: Also mention the 64msec decrease in startup time.
+10:19 #web-ui-fw: < _|Nix|_> Hyunsook: ... and, if you have a URL for the Demo App, then please put that in the description too.
+10:19 #web-ui-fw: < Hyunsook> _|Nix|_: OK. I see.
+10:19 #web-ui-fw: < _|Nix|_> Hyunsook: This is great!
+10:20 #web-ui-fw: < _|Nix|_> Wow!
+10:20 #web-ui-fw: < Hyunsook> _|Nix|_: But I should check whether there is URL of Tizen Demo App or not.
+10:20 #web-ui-fw: < _|Nix|_> Hyunsook: If there isn't, that's no problem.
+10:20 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, It's great! ;)
+10:20 #web-ui-fw: < _|Nix|_> Hyunsook: Just mention the 64 msec improvement.
+10:21 #web-ui-fw: < Hyunsook> _|Nix|_: OK, I see.
+10:22 #web-ui-fw: < _|Nix|_> Hyunsook: Thanks soooo much!
+10:22 #web-ui-fw: < Hyunsook> _|Nix|_: I and Changsuk expected that it will be reduced about 20msec. but we got a goooood result. :)
+10:23 #web-ui-fw: < _|Nix|_> Hyunsook: What will be reduced by about 20msec?
+10:23 #web-ui-fw: < Hyunsook> _|Nix|_: Welcome~!
+10:23 #web-ui-fw: < _|Nix|_> Hyunsook: Do you mean jQM startup time?
+10:23 #web-ui-fw: < Hyunsook> _|Nix|_: Yes.
+10:23 #web-ui-fw: < _|Nix|_> Oh, cool!
+10:24 #web-ui-fw: < Hyunsook> _|Nix|_: Oh. sorry. I mean Tizem App startup time.
+10:25 #web-ui-fw: < Hyunsook> _|Nix|_: Oops, typo. Tizen Demo App.*
+10:25 #web-ui-fw: < _|Nix|_> OK. Now I'm confused.
+10:26 #web-ui-fw: < _|Nix|_> If Tizen Demo App startup time will be reduced by about 20msec, then whose startup time did you reduce by 64msec?
+10:26 #web-ui-fw: < Hyunsook> _|Nix|_: Nono.
+10:26 #web-ui-fw: < _|Nix|_> Hyunsook: Sorry :)
+10:27 #web-ui-fw: < _|Nix|_> Basically, you mentioned two numbers: 64msec and 20msec. Which one refers to what? :)
+10:27 #web-ui-fw: < Hyunsook> _|Nix|_: I means my expectation is 20msec, but the result is 64msec.
+10:28 #web-ui-fw: < _|Nix|_> Hyunsook: Oh, I see. So you had a pleasant surprise.
+10:28 #web-ui-fw: < _|Nix|_> Hyunsook: Excellent!
+10:28 #web-ui-fw: < _|Nix|_> Very, very cool!
+10:28 #web-ui-fw: < _|Nix|_> Good work!
+10:28 #web-ui-fw: < Hyunsook> _|Nix|_: Sorry to  confuse.
+10:29 #web-ui-fw: < Hyunsook> _|Nix|_: Thank you. :)
+10:29 #web-ui-fw: < _|Nix|_> Hyunsook: NP. I'm really happy!
+10:29 #web-ui-fw: < Hyunsook> _|Nix|_: haha~
+10:31 #web-ui-fw: < _|Nix|_> OK. Wow! So, any other miracles arriving from Korea this (morning/afternoon)? :)
+10:33 #web-ui-fw: < _|Nix|_> Compared to this, my work has been outright banal :) I've just touched up textinput because of some missing widget review items, and I've been working on the API docs.
+10:33 #web-ui-fw: < Hyunsook> _|Nix|_: Hmmmmm.. I don't know understood. what do you mean?
+10:33 #web-ui-fw: < Hyunsook> _|Nix|_: Aaaaaa~~! I got it.
+10:33 #web-ui-fw: < _|Nix|_> Hyunsook: :)
+10:35 #web-ui-fw: < Hyunsook> _|Nix|_: No. you also are doing good work now.
+10:35 #web-ui-fw: < Hyunsook> _|Nix|_: Is there news of jQM 1.4?
+10:35 #web-ui-fw: < _|Nix|_> Hyunsook: Still working towards beta.
+10:36 #web-ui-fw: < _|Nix|_> Hyunsook: uGoMobi is taking care of the blog post, changelog, and demos.
+10:36 #web-ui-fw: < _|Nix|_> Hyunsook: We want to polish them off before going beta.
+10:36 #web-ui-fw: < Hyunsook> _|Nix|_: Ah~
+10:37 #web-ui-fw: < _|Nix|_> Hyunsook: If the documentation is bad, people will not try the beta, and we won't have good bug reports.
+10:37 #web-ui-fw: < _|Nix|_> Hyunsook: So, it's important to improve the documentation.
+10:38 #web-ui-fw: < Hyunsook> _|Nix|_:  Ah~ I see. When do jQM guys beta release?
+10:38 #web-ui-fw: < _|Nix|_> Hyunsook: Let's ask uGoMobi.
+10:38 #web-ui-fw: < _|Nix|_> uGoMobi: Ping!
+10:38 #web-ui-fw: < _|Nix|_> uGoMobi: Got a sec?
+10:38 #web-ui-fw: < uGoMobi> hi all
+10:38 #web-ui-fw: < Hyunsook> uGoMobi: Hi~ :)
+10:38 #web-ui-fw: < uGoMobi> hi Hyunsook 
+10:38 #web-ui-fw: < Minkyeong> uGoMobi: Hi
+10:39 #web-ui-fw: < uGoMobi> hi Minkyeong 
+10:39 #web-ui-fw: < uGoMobi> about the 1.4 beta release...
+10:39 #web-ui-fw: < Kangsik> Hi uGoMobi :-)
+10:39 #web-ui-fw: < uGoMobi> like _|Nix|_ said, we are updating demos, etc.
+10:40 #web-ui-fw: < uGoMobi> hi Kangsik 
+10:40 #web-ui-fw: < uGoMobi> to make it easier for people to upgrade and test
+10:41 #web-ui-fw: < uGoMobi> 1.4 beta will be released before the Austin conf next Tue, hopefully today or tomorrow
+10:41 #web-ui-fw: < _|Nix|_> uGoMobi: Awesome!
+10:41 #web-ui-fw: < Hyunsook> uGoMobi: Yes. I think the docs are important to people.
+10:41 #web-ui-fw: < _|Nix|_> uGoMobi: Are we doing a beta of the API docs as well?
+10:41 #web-ui-fw: < uGoMobi> _|Nix|_: to be honest, I am not sure
+10:42 -!- Changsuk [~Changsuk@121.133.176.50] has joined #web-ui-fw
+10:42 #web-ui-fw: < Hyunsook> uGoMobi: Wow!
+10:42 #web-ui-fw: < uGoMobi> _|Nix|_: would be great if we can already show the 1.4 API docs
+10:42 #web-ui-fw: < Changsuk> Hi~ All~~! I'm sorry that I'm late.
+10:42 #web-ui-fw: < Hyunsook> Changsuk: hi~
+10:42 #web-ui-fw: < Minkyeong> Changsuk: Hi~
+10:42 #web-ui-fw: < _|Nix|_> uGoMobi: Well, I got a lot done, but there's still a lot to go.
+10:42 #web-ui-fw: < uGoMobi> _|Nix|_: but I am not sure if we that's possible
+10:43 #web-ui-fw: < uGoMobi> hi Changsuk 
+10:43 #web-ui-fw: < _|Nix|_> uGoMobi: ... and there are places where I'm not sure of myself. Like fixedToolbar, for example.
+10:43 #web-ui-fw: < _|Nix|_> Changsuk: Hey!
+10:43 #web-ui-fw: < Changsuk> Hi, uGoMobi~ :)
+10:43 #web-ui-fw: < Changsuk> Hi, _|Nix|_~ :)
+10:43 #web-ui-fw: < _|Nix|_> uGoMobi: OK. That's cool!
+10:43 #web-ui-fw: < uGoMobi> _|Nix|_: yeah,  I understand... got the same with updating the demos
+10:43 #web-ui-fw: < uGoMobi> I also writing an upgrade guide
+10:43 #web-ui-fw: < uGoMobi> I am*
+10:44 #web-ui-fw: < _|Nix|_> uGoMobi: Even if we don't get the API docs, it'll still be good to release.
+10:45 #web-ui-fw: < _|Nix|_> uGoMobi: Thanks for letting us know!
+10:45 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: so can Tizen us 1.4 release from today?
+10:45 #web-ui-fw: < Changsuk> use :)
+10:45 #web-ui-fw: < uGoMobi> _|Nix|_: yes, we have to get the beta out asap
+10:45 #web-ui-fw: < _|Nix|_> Changsuk: It's not out yet, but will be today or tomorrow.
+10:45 #web-ui-fw: < uGoMobi> _|Nix|_: no problem
+10:45 #web-ui-fw: < Changsuk> uGoMobi: Thanks so much ~~!!!
+10:46 #web-ui-fw: < Changsuk> _|Nix|_: ha~ yes, OK.
+10:46 #web-ui-fw: < uGoMobi> Changsuk: 1.4 beta
+10:46 #web-ui-fw: < Hyunsook> uGoMobi: I cannot wait to see upgrade guide.
+10:46 #web-ui-fw: < Changsuk> Hyunsook: I think, it would be better to tell SEC folks.
+10:46 #web-ui-fw: < uGoMobi> Hyunsook: I cannot wait to be done with writing it ;-)
+10:47 #web-ui-fw: < Changsuk> Hyunsook, uGoMobi: ha ha ~~ ;)
+10:47 #web-ui-fw: < _|Nix|_> uGoMobi: :)
+10:47 #web-ui-fw: < Hyunsook> uGoMobi: haha~
+10:47 #web-ui-fw: < uGoMobi> have a nice 15 hour flight tomorrow so that gives me some time to finish it :)
+10:48 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: and that release is stable?
+10:48 #web-ui-fw: < _|Nix|_> Changsuk: It's beta.
+10:48 #web-ui-fw: < uGoMobi> Changsuk: no it will be beta
+10:48 #web-ui-fw: < _|Nix|_> Changsuk: So, it's API stable.
+10:48 #web-ui-fw: < _|Nix|_> uGoMobi: Right?
+10:48 #web-ui-fw: < uGoMobi> correct
+10:48 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I see.
+10:48 #web-ui-fw: < _|Nix|_> Changsuk: We won't change the API after beta, but there are still some bugs to fix.
+10:48 #web-ui-fw: < uGoMobi> no more changes in features, only fixing bugs if needed
+10:49 #web-ui-fw: < uGoMobi> and maye small style tweaks
+10:49 #web-ui-fw: < _|Nix|_> Exactly.
+10:49 #web-ui-fw: < _|Nix|_> Changsuk: ... and we're hoping people will start testing and filing bugs.
+10:49 #web-ui-fw: < uGoMobi> after beta we do a RC release, then final
+10:49 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: 1.4 seems almost done.
+10:50 #web-ui-fw: < Changsuk> _|Nix|_: yes, right.
+10:50 #web-ui-fw: < uGoMobi> Changsuk: the code yes, all the documentation... no
+10:50 #web-ui-fw: < Changsuk> uGoMobi: ah ha... I see. :)
+10:50 #web-ui-fw: < _|Nix|_> Changsuk: Yeah. I'm only doing the API docs, and it's a motherlode.
+10:50 #web-ui-fw: < uGoMobi> we also have to update the ThemeRoller before final
+10:50 #web-ui-fw: < uGoMobi> which is going to be complex with the theming changes
+10:51 #web-ui-fw: < uGoMobi> and we will switch to new jquerymobile.com web site with 1.4 final release
+10:51 #web-ui-fw: < Changsuk> uGoMobi: Ok, I see.
+10:52 #web-ui-fw: < Hyunsook> uGoMobi, _|Nix|_: Oh, Cool!
+10:52 #web-ui-fw: < uGoMobi> so I better get back to working on the demos
+10:52 #web-ui-fw: < _|Nix|_> uGoMobi: Thanks for letting us know!
+10:52 #web-ui-fw: < uGoMobi> let me know if you need anything from me
+10:52 #web-ui-fw: < uGoMobi> thanks all
+11:04 #web-ui-fw: < _|Nix|_> Do we have any other topics we need to talk about?
+11:04 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: How do you think about removing $.extend?
+11:04 #web-ui-fw: < _|Nix|_> Changsuk: Hyunsook knows more about that.
+11:05 #web-ui-fw: < _|Nix|_> Changsuk: She will send a PR to jQM.
+11:05 #web-ui-fw: < Changsuk> _|Nix|_: Ah... I'm sorry. Closing Time is coming...
+11:05 #web-ui-fw: < Changsuk> _|Nix|_: ah~ I see. :)
+11:06 #web-ui-fw: < Changsuk> All: I told you all for now.
+11:06 #web-ui-fw: < _|Nix|_> Alright. We've had another week of excellent work! Looking forward to that $.extend perf PR! Let's all have a nice weekend!
+11:07 #web-ui-fw: < Changsuk> Yes, We did a nice work this week. :)
+11:08 #web-ui-fw: < Changsuk> All: Have a nice weekend and enjoy your time~~~ ;)
+11:08 #web-ui-fw: < Hyunsook> Have a good weekend~ :)
+11:09 #web-ui-fw: < Minkyeong> All: Have a nice weekend~ See you next week :)
+--- Log closed Thu Sep 05 11:11:31 2013

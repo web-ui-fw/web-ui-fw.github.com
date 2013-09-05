@@ -18,54 +18,24 @@
 10:03 #web-ui-fw: < _|Nix|_> Changsuk: By all means.
 10:03 #web-ui-fw: < _|Nix|_> Changsuk: What have you been up to?
 10:04 #web-ui-fw: < Changsuk> _|Nix|_: ha ha Thanks~
-10:05 #web-ui-fw: < Changsuk> _|Nix|_: I changed some of my roles to add Tizen View system to Chromium web engine with another team in my company.
-10:06 #web-ui-fw: < _|Nix|_> Changsuk: What is Tizen View?
-10:06 #web-ui-fw: < Changsuk> _|Nix|_: VP, Choi. in SEC recently changed Tizen browser engine from Webkit2 to Chromium.
 10:06 #web-ui-fw: < Hyunsook> _|Nix|_: Humm... sorry but, no. As I said on last my email, Tizen v2.2 is targeted the commercial Web Apps. i.e.; it run on Tizen browser only.
-10:06 #web-ui-fw: < Changsuk> _|Nix|_: As you can know, Tizen's Graphic engine is EFL.
-10:07 #web-ui-fw: < Changsuk> _|Nix|_: So my team should use EFL to render Web contents in Chromium Web rendering engine.
-10:07 #web-ui-fw: < _|Nix|_> Changsuk: Oh, I see.
 10:07 #web-ui-fw: < Hyunsook> _|Nix|_: So, my team are removing codes/functions regarding other browser. BTW, I think it cannot be applied upstream. :/
-10:07 #web-ui-fw: < Changsuk> _|Nix|_: Tizen View is a EFL view.
 10:08 #web-ui-fw: < _|Nix|_> Hyunsook: That's OK.
 10:09 #web-ui-fw: < Hyunsook> _|Nix|_: Instead, Kangsik and Minkyeong improve jQuery now.
-10:09 #web-ui-fw: < Changsuk> _|Nix|_: As you can guess Wekbit2 and Chromium browser engine's architecture is too hard to understand.
 10:10 #web-ui-fw: < Hyunsook> Kangsik, Minkyeong: Can you talk about the jQuery tuning status?
-10:10 -!- riju [riju@nat/intel/x-alyhguldstmuobpn] has joined #web-ui-fw
-10:10 #web-ui-fw: < Changsuk> _|Nix|_: So, I'm struggling to add EFL port in Chromium browser engine.
-10:10 #web-ui-fw: < Changsuk> _|Nix|_: That's my work these day... :(
-10:11 #web-ui-fw: < Changsuk> riju: Hello~
-10:11 #web-ui-fw: < riju> hello
-10:11 #web-ui-fw: < Changsuk> _|Nix|_: Could you introduce him/her to us?
-10:11 #web-ui-fw: < _|Nix|_> Changsuk: Him.
-10:11 #web-ui-fw: < Minkyeong> riju: Hi
-10:12 #web-ui-fw: < Kangsik> riju : hi :-)
-10:12 #web-ui-fw: < Hyunsook> riju: Hello~
-10:12 #web-ui-fw: < Changsuk> _|Nix|_: ah~~ Yes. Hello~ Mr, riju.
-10:12 #web-ui-fw: < Changsuk> _|Nix|_, riju: :)
 10:12 #web-ui-fw: < Kangsik> _|Nix|_ : I and my co-worker are developing a module to replace Sizzle.
-10:12 #web-ui-fw: < riju> well i was gabriel's team mate during web-ui-fw days 
-10:13 #web-ui-fw: < riju> now moved on to something else .. 
 10:13 #web-ui-fw: < Minkyeong> _|Nix|_: Mr. Woosung Sohn and I are improve some DOM manipulation parts of jQuery.
 10:13 #web-ui-fw: < Kangsik> _|Nix|_: Our goal is to make a moudle that will work faster than Sizzle in tizen browser.
 10:13 #web-ui-fw: < Minkyeong> _|Nix|_: Mr. Sohn is my team member.
-10:13 #web-ui-fw: < Changsuk> riju: ah~ha. I see.
-10:14 #web-ui-fw: < Changsuk> riju: then what kind of work do you take part in?
 10:14 #web-ui-fw: < Kangsik> _|Nix|_: So, we are minimizing a call depth, removing unnecessary steps and using native functions like a 'querySelectorAll' to find a dom.
 10:14 #web-ui-fw: < Minkyeong> _|Nix|_: We're removing unnecessary codes for Tizen, for example, jQuery.support.
 10:14 #web-ui-fw: < Kangsik> For more information, please refer to the following website : 
 10:14 #web-ui-fw: < Kangsik> https://docs.google.com/presentation/d/1-aOBaDnDUK8uEVr5I9NO5zHm5oZicQ-kbh6UtytfeJc/edit?pli=1#slide=id.gfdf96df1_08
 10:15 #web-ui-fw: < _|Nix|_> Kangsik: Good work!
-10:16 #web-ui-fw: < riju> Changsuk, : webkit / blink 
 10:16 #web-ui-fw: < Changsuk> _|Nix|_: If you see the document, you can understand changing work about a new sizzle. :)
 10:16 #web-ui-fw: < _|Nix|_> Kangsik: Be careful though. You may be sacrificing portability if you remove jQuery APIs like .support. No?
-10:16 #web-ui-fw: < Changsuk> riju: Wow~ really?
 10:16 #web-ui-fw: < Kangsik> _|Nix|_: We will get the module of prototype version at least next week.
-10:16 #web-ui-fw: < Changsuk> _|Nix|_: thanks for introducing him~ :) lol
-10:17 #web-ui-fw: < Changsuk> riju: So I think you already know about changing Tizen web browser enging. right?
-10:18 #web-ui-fw: < Changsuk> riju: engine. :)
 10:18 #web-ui-fw: < Kangsik> _|Nix|_: Yes. we does not consider browser compatibility. Our target is Tizen browser.
-10:18 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has joined #jqueryui-dev
 10:20 #web-ui-fw: < Changsuk> _|Nix|_: I think that portability sacrifice may not concern of Kangsik's work.
 10:21 #web-ui-fw: < _|Nix|_> Kangsik: Yes, however, existing apps may use $.support and they will break when ported to Tizen.
 10:21 #web-ui-fw: < _|Nix|_> Changsuk: ^
@@ -73,25 +43,15 @@
 10:22 #web-ui-fw: < Hyunsook> _|Nix|_: But, this is just current plan.
 10:23 #web-ui-fw: < Changsuk> Kangsik: $.support can be a matter in Tizen Web Apps?
 10:23 #web-ui-fw: < _|Nix|_> Kangsik: jQuery.support.ajax; TypeError: Cannot read property 'ajax' of undefined
-10:23 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has quit [Ping timeout: 256 seconds]
 10:24 #web-ui-fw: < _|Nix|_> Changsuk: For apps written from scratch and targeted specifically at Tizen, it should not be a problem.
-10:24 #web-ui-fw: < Changsuk> riju: Are you there?
 10:24 #web-ui-fw: < _|Nix|_> Changsuk: However, existing apps that use upstream jQuery may be using $.support, so if that's absent, then they will have to be ported.
 10:25 #web-ui-fw: < _|Nix|_> Kangsik: What is it about $.support that is slow?
-10:25 #web-ui-fw: < Changsuk> riju: If you can and you know about Chromium, Can I discuss about Chromium browser enging via email or IRC later?
-10:26 #web-ui-fw: < _|Nix|_> Changsuk: I put you in touch via email with a colleague of mine whom you can talk to.
 10:26 #web-ui-fw: < Changsuk> Minkyeong: Can you talk about the issue of removing or chainging $.support?
-10:26 #web-ui-fw: < Changsuk> _|Nix|_: Thanks~! :)
-10:26 #web-ui-fw: < riju> Changsuk, i just started work on chromium, but will be happy to help if i can 
 10:28 #web-ui-fw: < Minkyeong> _|Nix|_: $.support may not slow. The reason why I removed that, just reduce the code lines.
-10:28 #web-ui-fw: < Changsuk> riju: Thanks and If my team have any issues to discuss with you, I'll email or IRC you. :)
 10:28 #web-ui-fw: < Kangsik> Changsuk: Minkyeong knows about $.support.
-10:28 #web-ui-fw: < riju> Changsuk, sure .. 
 10:28 #web-ui-fw: < _|Nix|_> Minkyeong: Can you at least provide a stub? Like jQuery.support = { ajax: true, boxModel: true, ... };
 10:29 #web-ui-fw: < _|Nix|_> Minkyeong: It may make porting a lot easier without adding much code.
 10:29 #web-ui-fw: < _|Nix|_> Minkyeong: Basically you don't need to run any of the tests, because you already know the result for Tizen.
-10:29 #web-ui-fw: < Changsuk> riju: If you can please let me know your email address, TIA~ :)
-10:31 -!- riju [riju@nat/intel/x-alyhguldstmuobpn] has left #web-ui-fw ["Leaving"]
 10:33 #web-ui-fw: < Changsuk> _|Nix|_: Making a port? What is that? Could you tell me about it?
 10:34 #web-ui-fw: < Minkyeong> _|Nix|_: Exactly $.support is not removed. Some of properties in $.support have been removed. the properties related in IE are not necessary in Tizen.
 10:34 #web-ui-fw: < _|Nix|_> Minkyeong: Oh, that's perfect that.
@@ -106,7 +66,6 @@
 10:36 #web-ui-fw: < _|Nix|_> Hyunsook: This separation between commercial and open source - is it because of the Docomo thing?
 10:36 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, right.
 10:36 #web-ui-fw: < _|Nix|_> Hyunsook: Aaah, I understand.
-10:37 -!- orkel [~orkel@dhcp234-224-red.yandex.net] has joined #jquery-meeting
 10:37 #web-ui-fw: < _|Nix|_> Hyunsook: It's too bad though. It places more burden on you guys, because now you have to maintain two versions which cannot be merged :(
 10:37 #web-ui-fw: < Changsuk> _|Nix|_: yes, I think so. but porting business havn't concerned us yet.
 10:38 #web-ui-fw: < Hyunsook> _|Nix|_: So SEC folks and my team should manage both FW codes. :/
@@ -118,7 +77,6 @@
 10:41 #web-ui-fw: < Kangsik> _|Nix|_: If you find my mistake. Please tell me.
 10:42 #web-ui-fw: < Changsuk> _|Nix|_: About Sizzle improvement. :)
 10:42 #web-ui-fw: < _|Nix|_> Changsuk: My first reaction is, like, wow! Sizzle doesn't special-case #id, tagname, and .class?
-10:42 -!- orkel [~orkel@dhcp234-224-red.yandex.net] has quit [Ping timeout: 264 seconds]
 10:42 #web-ui-fw: < _|Nix|_> Kangsik: I'm not all too familiar with Sizzle, but I'll try to understand as best I can.
 10:42 #web-ui-fw: < Kangsik> _|Nix|_: Thanks :-)
 10:43 #web-ui-fw: < Changsuk> Kangsik: Can you answer about Gabriels question? - Sizzle doesn't special-case #id, tagname, and .class?
@@ -129,7 +87,6 @@
 10:45 #web-ui-fw: < _|Nix|_> There may be good reasons why things are the way they are.
 10:46 #web-ui-fw: < Changsuk> _|Nix|_: Ok, Thanks. You told us about it the previous meeting. :) So Hyunsook or Kangsik will ask him about it.
 10:46 #web-ui-fw: < _|Nix|_> Of course, in the case of Tizen-specific optimizations, it may be possible to change those things, and some of your changes may even be applicable upstream, because some aspects of upstream Sizzle may not have received much attention recently.
-10:46 -!- fikst [~fikst@d54C442D5.access.telenet.be] has quit [Remote host closed the connection]
 10:46 #web-ui-fw: < Hyunsook> _|Nix|_: Thanks~! I or Kangsik will ask him.
 10:47 #web-ui-fw: < Changsuk> _|Nix|_: Thanks for your advise and words.
 10:48 #web-ui-fw: < _|Nix|_> I'm here to help, and I know DaveMethvin is probably by far the most experienced person when it comes to Sizzle.
@@ -154,7 +111,6 @@
 10:56 #web-ui-fw: < Hyunsook> _|Nix|_: Is the next version jquery.mobile-1.4.0-beta.1?
 10:56 #web-ui-fw: < _|Nix|_> Changsuk: I'm always busy all days :)
 10:56 #web-ui-fw: < _|Nix|_> Hyunsook: I think so. We don't want any more alpha versions.
-10:56 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has joined #jquery-meeting
 10:56 #web-ui-fw: < Hyunsook> _|Nix|_: ah~
 10:57 #web-ui-fw: < _|Nix|_> Hyunsook: I hope we can release 1.4.0 before I go to the HTML5 Developers' Conference in October, so I can talk about it there.
 10:57 #web-ui-fw: < _|Nix|_> Hyunsook: It also looks like data-enhanced="true" is having a real performance impact. This is really good!
@@ -184,7 +140,6 @@
 11:03 #web-ui-fw: < Changsuk> _|Nix|_: Ok.
 11:04 #web-ui-fw: < Hyunsook> _|Nix|_: OK.
 11:04 #web-ui-fw: < Changsuk> Hyunsook, Minkyeong, Kangsik: Are there any remain issues to talk?
-11:04 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has quit [Ping timeout: 260 seconds]
 11:05 #web-ui-fw: < Hyunsook> _|Nix|_: No, that's all.
 11:05 #web-ui-fw: < Minkyeong> Changsuk: No :)
 11:05 #web-ui-fw: < _|Nix|_> Changsuk: Make sure you check your email. I wrote you one.
