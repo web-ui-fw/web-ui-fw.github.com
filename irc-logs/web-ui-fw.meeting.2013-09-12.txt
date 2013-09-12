@@ -1,0 +1,190 @@
+--- Log opened Thu Sep 12 09:58:29 2013
+10:00 < _|Nix|_> The meeting of the Web UI Framework Development team is hereby convened - yaaay!
+10:00 < _|Nix|_> How have y'all been?
+10:00 < Changsuk> Hi~!!
+10:00 < Kangsik> Hi~ :)
+10:00 < Minkyeong> All: Hi~
+10:00 < Hyunsook> Hi all~!
+10:01 < Changsuk> _|Nix|_: I'm so busy these days... hew~~
+10:01 < Changsuk> _|Nix|_: Did you finish the documentation job - jQM 1.4 ?
+10:01 < _|Nix|_> Changsuk: I wish. I got quite a bit done, but it just seems an unending quest.
+10:02 < _|Nix|_> Changsuk: However, I'm getting to the point where I kinda need more eyes on it.
+10:02 < _|Nix|_> Changsuk: I'll ask uGoMobi and arschmitz to look over it ...
+10:03 < Changsuk> _|Nix|_: That's great. I think you almost did it~! :)
+10:04 < Hyunsook> _|Nix|_: Oh, good. How is upgrade guide of uGoMobi?
+10:05 < Changsuk> _|Nix|_: As you know I'm managing two project these day... So I confused program languages between C/C++ and JS sometimes.
+10:05 < _|Nix|_> Hyunsook: I dunno ... we delayed the release some more, however, we're having our weekly meeting today, so I'll probably know tonight.
+10:05 < _|Nix|_> Changsuk: :)
+10:06 < _|Nix|_> Changsuk: ::
+10:06 < _|Nix|_> :)
+10:06 < Hyunsook> _|Nix|_: ahha~
+10:07 < _|Nix|_> uGoMobi and arschmitz are in Austin, TX, US at a jQuery conference right now, so they're discussing these things in person.
+10:07 < Hyunsook> _|Nix|_: Oh, I know uGoMobi and Alex are attending the conference. right?
+10:07 < Changsuk> _|Nix|_: So we can know when 1.4 verion will be released finally today.
+10:07 < _|Nix|_> Changsuk: Hopefully. We've discussed whether we should deprecate style options as of 1.4.0, so we can get rid of them in 1.5.0.
+10:07 < Changsuk> _|Nix|_: ah ha... I see.
+10:08 < _|Nix|_> Changsuk: We kinda don't need them anymore, because you can just apply the right classes by hand.
+10:08 < Hyunsook> _|Nix|_: ah ha~ I see.
+10:08 < _|Nix|_> Changsuk: That would be a significant reduction in code size.
+10:08 < _|Nix|_> Changsuk: We have a lot of if ( options.corners !== undefined ) { this.element.toggleClass( "ui-corner-all", options.corners ); }
+10:08 < _|Nix|_> Changsuk: We can delete all that.
+10:10 < Changsuk> _|Nix|_: yes, right. But Web App. developers should make the classes, right?
+10:10 < _|Nix|_> Changsuk: We also wanna deprecate buttonMarkup, because it's the same thing there - just add the classes yourself.
+10:10 < _|Nix|_> Changsuk: No. We provide the classes as part of the theme.
+10:10 < Changsuk> _|Nix|_: Ok, I see~
+10:11 < _|Nix|_> These classes: ui-mini ui-corner-all, ui-(body|overlay|bar)-a, ui-btn, ui-icon-*, etc.
+10:11 < Changsuk> _|Nix|_: Web developers just use them.
+10:11 < _|Nix|_> Changsuk: Exactly.
+10:11 < Changsuk> _|Nix|_: Nice~!!
+10:11 < Hyunsook> _|Nix|_: Good!
+10:12 < _|Nix|_> Changsuk: Writing extra JS to convert data-corners="true" to ui-corner-all is useless, if you can just .addClass( "ui-corner-all" )
+10:12 < Changsuk> _|Nix|_: and Hyunsook did PRs regarding $.extend() calls. did you see that?
+10:12 < Changsuk> _|Nix|_: ah~ Looks nice~! :)
+10:13 < Changsuk> _|Nix|_: Code size must be cut down. Good~~
+10:13 < _|Nix|_> Changsuk: I saw that, however, I'm a bit concerned that the replacement for $.extend() changes the meaning.
+10:13 < Changsuk> _|Nix|_: why?
+10:14 < Hyunsook> _|Nix|_: Why?
+10:14 < _|Nix|_> The reason is that the original code is x = $.extend( {}, x, { ... } );
+10:14 < _|Nix|_> The new code is x = { ... };
+10:14 < Changsuk> _|Nix|_: right.
+10:14 < Hyunsook> _|Nix|_: right.
+10:14 < _|Nix|_> The two are only equivalent if x === null/undefined when x = $.extend( {}, x, { ... } ); is called.
+10:15 < _|Nix|_> However, if x === { something } and then you x = { something else }, then { something } is lost.
+10:15 < Changsuk> Hyunsook: I think, it would be better fot you to follow _|Nix|_'s ideas. :)
+10:15 < Changsuk> fot -> for
+10:15 < _|Nix|_> The idea behind extend is this: x = { a: 1, b: 2 }; x = $.extend( {}, x, { c: 3 } );
+10:16 < _|Nix|_> ... and now x = { a: 1, b: 2, c: 3 };
+10:16 < Hyunsook> _|Nix|_, Changsuk: We checked the values on Tizen Demo Apps.
+10:16 < _|Nix|_> However, if you replace the $.extend, the final result will be x = { c: 3};
+10:17 < _|Nix|_> Hyunsook: OK, so you're sure that nothing is lost when you overwrite like that?
+10:18 < Changsuk> _|Nix|_, Hyunsook: So only "c" variable will be remain not a, b?
+10:18 < _|Nix|_> Changsuk: That's right. I mean, you're overwriting one object with another.
+10:18 < Hyunsook> _|Nix|_: I know.
+10:19 < Hyunsook> _|Nix|_: hmmmmm.... nothing is lost on Tizen Demo app.
+10:20 < _|Nix|_> Hyunsook: No, I'm seeing that too. In the case of $.event.special.orientationchange, it's undefined before the $.extend, so in that case $.extend(...) is the same as = { ... };
+10:21 < _|Nix|_> Hyunsook: However, there may be a reason why $.extend is used there, namely that some other framework may be defining $.event.special.orientationchange, in which case we don't wanna overwrite it.
+10:21 < _|Nix|_> Hyunsook: I agree, however, that $.extend should not be used in jquery.mobile.data.js.
+10:23 < _|Nix|_> Hyunsook: I'll discuss your PR with the rest of the group.
+10:24 < _|Nix|_> Hyunsook: Why didn't you put all the possible places where $.extend() can be removed into one PR?
+10:25 < _|Nix|_> Hyunsook: Also, can you please rebase the PR onto master? We're trying to avoid merge commits.
+10:25 < Hyunsook> _|Nix|_: I agree to your concerns.
+10:26 < Changsuk> _|Nix|_, Hyunsook: yes, In case of (x = { c:3 }) which you already told us, I can agreed your thought. but I think Hyunsook already considered that case.
+10:26 < Hyunsook> _|Nix|_: If there are wrong removed codes/modules, we should rolled back them.
+10:28 < _|Nix|_> Hyunsook: If you make a PR from hyunsook:remove-extend to jquery-mobile:master instead of hyunsook:master to jquery-mobile:master it's easier to rebase.
+10:29 < Changsuk> _|Nix|_, Hyunsook: I think, All of the changed codes on the PR may not be related with that case - (x = { c:3 }).
+10:29 < _|Nix|_> Hyunsook: ... because you can just git push origin :remove-extend; git checkout master; git pull git@github.com:jquery/jquery-mobile.git master; git checkout remove-extend; git rebase master; git push origin remove-extend
+10:29 < _|Nix|_> Hyunsook: ... and then re-open the PR.
+10:30 < _|Nix|_> Hyunsook: ... because I think deleting a branch on GH will cause all PRs against that branch to close.
+10:30 < Hyunsook> _|Nix|_: ah.... I'm sorry.
+10:30 < _|Nix|_> Hyunsook: ... but you can reopen them, of course, or file a new PR.
+10:30 < _|Nix|_> Hyunsook: Don't worry about it. It's cleaner that way.
+10:31 < _|Nix|_> Changsuk: They're not. The changes in js/jquery.mobile.data.js should be fine.
+10:31 < Hyunsook> _|Nix|_: OK, I see. I'll rebase the PR as your guide.
+10:31 < Changsuk> _|Nix|_: Yes, right.
+10:32 < _|Nix|_> Hyunsook: Thanks!
+10:32 < Changsuk> Hyunsook: Your PR codes are related with  "js/jquery.mobile.data.js"?
+10:32 < _|Nix|_> Changsuk: Yeah, it's one of the files where $.extend is removed.
+10:32 < Hyunsook> Changsuk: Yes.
+10:33 < Changsuk> _|Nix|_, Hyunsook: I'm so sorry that I didn't really understand Gabriel's words.
+10:33 < Changsuk> _|Nix|_, Hyunsook: ah~~!
+10:33 < Changsuk> _|Nix|_, Hyunsook: I see. I got it. :)
+10:35 < Changsuk> _|Nix|_, Hyunsook: So how about will we do a PR except that file?
+10:36 < _|Nix|_> Hyunsook: It'd also be good if you included the rest of the $.extend removals in separate commits.
+10:36 < _|Nix|_> Hyunsook: That way, we can cherry-pick from your PR.
+10:37 < Changsuk> _|Nix|_, Hyunsook: Anyway It's a very little idea, decision is depends on you.
+10:38 < Hyunsook> _|Nix|_: I already commited the rest of the $.extend removals....
+10:38 < _|Nix|_> Hyunsook: OK. Cool!
+10:38 < Changsuk> Hyunsook: Pls consider all the cases above, after our meeting.
+10:38 < Changsuk> Hyunsook: Ha~~ I'm sorry. :)
+10:39 < Hyunsook> _|Nix|_: And I commented one question and one discussion on $6445.
+10:39 < Hyunsook> https://github.com/jquery/jquery-mobile/pull/6445
+10:41 < _|Nix|_> Hyunsook: Aaaah, yes ... the jshing thing. I think there is a way of turning off jshint with a special comment.
+10:42 < _|Nix|_> Hyunsook: GOod point about the second one.
+10:42 < _|Nix|_> Hyunsook: Those are input values and may be null, in which case defaults need to be used.
+10:43 < _|Nix|_> Hyunsook: I guess that's another reason why $.extend has been created. It only overwrites if the new value is not undefined.
+10:43 < _|Nix|_> Hyunsook: It's used in buttonMarkup as well.
+10:44 < _|Nix|_> Hyunsook: ... for that very reason - you can use it to merge sets of options non-destructively.
+10:44 < Hyunsook> _|Nix|_: Right.
+10:45 < _|Nix|_> Hyunsook: Anyway, overall I'd say it's a very good idea, and you should definitely submit a nice, clean PR, and we'll give it a thorough review.
+10:45 < _|Nix|_> Hyunsook: Another good idea would be to create a JSPerf for actual parts of the library.
+10:45 < Changsuk> _|Nix|_, Hyunsook: Yes, right. But performance issues are remained to us. So Hyunsook modified and did a RR with new codes but the case((x = { c:3 }).
+10:46 < Changsuk> _|Nix|_: Yes, thanks~
+10:46 < Hyunsook> _|Nix|_: Thanks.
+10:46 < _|Nix|_> Hyunsook: For example, I was thinking about doing this: var old = function() { /* The complete old jQuery Mobile code */ }, new = function() { /* The complete new jQuery Mobile code */ } and then put both into jsperf.
+10:47 < _|Nix|_> Hyunsook: However, it's not that simple, because you cannot include the complete jQuery Mobile code.
+10:47 < _|Nix|_> Hyunsook: For example, you need to remove the click handler and the init module.
+10:47 < Changsuk> _|Nix|_: right... huge...
+10:47 < _|Nix|_> Changsuk: Yes, huge, but relevant, because it's a real-world measurement.
+10:48 < Hyunsook> _|Nix|_: I know. but...... r
+10:48 < Hyunsook> _|Nix|_, Changsuk: Yes. huge...
+10:49 < _|Nix|_> Changsuk: Just because $.extend() is 95% slower than assignment doesn't mean it will give a huge performance boost if it's used in very few places. Now, I know that you've achieved a 64ms reduction, and that's significant, however, it'd be good to show that on jsperf as well.
+10:49 < _|Nix|_> Now, I may be wrong about this.
+10:49 < _|Nix|_> It was just an idea.
+10:50 < _|Nix|_> Another thing we could do is add progressively more modules via grunt --modules=list,of,modules and do a jsperf at each step.
+10:50 < _|Nix|_> Like grunt --modules js/jquery.mobile.data,js/jquery.mobile.defaults
+10:50 < _|Nix|_> That would be smaller than the whole jQuery mobile.
+10:50 < _|Nix|_> After that, we can add some more modules and do another comparison.
+10:50 < Changsuk> Hyunsook, _|Nix|_: No way. And I think we'd better to make more test cases and check the performance.
+10:50 < _|Nix|_> ... and so on, until it becomes too big.
+10:51 < Changsuk> _|Nix|_: yes, I think so.
+10:51 < _|Nix|_> Like, if we can reduce the loading time of a significant portion of the library by a significant amount, then that would be worth a lot!
+10:52 < Hyunsook> _|Nix|_, Changsuk: yes. I think so.
+10:52 < _|Nix|_> Another problem with doing a test like this is that we need to exclude portions of the library that cannot be unloaded..
+10:52 < _|Nix|_> For example, the click handler attaches an event handler to the document.
+10:52 < _|Nix|_> So, if you keep defining the library over and over and over, you end up with 523 copies of the event handler.
+10:52 < _|Nix|_> ... and that's going to slow things down.
+10:53 < _|Nix|_> ... and destroy the accuracy of your test.
+10:53 < Changsuk> _|Nix|_: ah~ Sound good~
+10:53 < _|Nix|_> So we can only include those modules via grunt --modules which can be removed by simply setting $.mobile = undefined;
+10:54 < Changsuk> _|Nix|_, Hyunsook: anyway, I think Hyunsook can make a good test case.  :)
+10:54 < _|Nix|_> But anyway ... I think I may work on that test, because, quite honestly I need a break from writing API docs .
+10:55 < Hyunsook> _|Nix|_: Anyway, I'll make test case as your guide and clean PR.
+10:55 < _|Nix|_> Hyunsook: Oh, wow! I just noticed. Your second commit has /all/ the remaining $.extend removals. Very nice! Very, very nice!
+10:56 < Hyunsook> _|Nix|_, Changsuk: ^^;
+10:56 < Changsuk> _|Nix|_, Hyunsook: Ok~ then shall we go to next item?
+10:56 < Hyunsook> Changsuk: OK.
+10:57 < Changsuk> _|Nix|_, Hyunsook: We don't have enought time... It's almost 5 P.M. in Korea.
+10:58 < Hyunsook> _|Nix|_: Oooops.....!
+10:58 < Changsuk> Kangsik, Minkyeong: Is there any items to talk?
+10:58 < Minkyeong> Changsuk: No
+10:58 < Kangsik> Changsuk : I have one item. :-)
+10:58 < Changsuk> _|Nix|_, Hyunsook: I'm sorry that I interrupted you. pls understand.  :)
+10:59 < Kangsik> I and my co-worker were developed a replacement of sizzle.
+10:59 < Kangsik> We call this module 'TOSE' : Tizen Optimization Search Engine'. :-)
+10:59 < _|Nix|_> Hyunsook: http://www.jshint.com/docs/config/
+10:59 < Kangsik> The code lines in this module are reduced by half but almost functions(:first, :not, :has etc,,,) are provided.
+10:59 < _|Nix|_> Kangsik: Very nice!
+11:00 < Hyunsook> _|Nix|_: Oh~! Thank you.
+11:00 < _|Nix|_> Kangsik: Good work!
+11:00 < Kangsik> _|Nix|_ : thanks :-)
+11:00 < Kangsik> The module has passed all the test cases of Sizzle.
+11:00 < _|Nix|_> Hyunsook: That should help with the build.
+11:00 < _|Nix|_> Hyunsook: I mean with travis.
+11:00 < _|Nix|_> Kangsik: Excellent! That's great!
+11:00 < Kangsik> If you visit the web page, You will see the test result :  http://allsteady.github.io/testcase/testcases_tose.html
+11:01 < Kangsik> _|Nix|_: Thanks :-)
+11:01 < Hyunsook> _|Nix|_: OK.
+11:01 < _|Nix|_> Kangsik: Very nice!
+11:02 < _|Nix|_> OK. I'm sorry Hyunsook and I took so much time!
+11:02 < _|Nix|_> Minkyeong: Did you also have an item?
+11:03 < Minkyeong> _|Nix|_: No :)
+11:03 < _|Nix|_> As for me, I've been doing the API docs and playing with Web components a little bit, but nothing serious so far.
+11:04 < _|Nix|_> I think we'll be no less busy next week :)
+11:04 < Changsuk> _|Nix|_: Web component? what is that?
+11:04 < _|Nix|_> Changsuk: http://www.chromium.org/blink/web-components
+11:04 < _|Nix|_> Changsuk: It's a really cool set of tools for writing widgets.
+11:04 < _|Nix|_> Changsuk: However, it's not yet standard.
+11:04 < Changsuk> _|Nix|_: you must be a hard worker.... ha~ ;)
+11:05 < _|Nix|_> Changsuk: I thank my family for keeping me from working 16hrs/day
+11:05 < _|Nix|_> :)
+11:06 < _|Nix|_> Anyway. Let's call this one. Good work everyone, and thanks a lot for your support! Have a good weekend everybody!
+11:06 < Changsuk> _|Nix|_: wow... It's cool modules~!!
+11:06 < _|Nix|_> Changsuk: Yeah, it's quite a set of tools.
+11:07 < Changsuk> _|Nix|_: thanks for your information~ have a nice weekends and see you on next meeting~ :)
+11:07 < Hyunsook> _|Nix|_: Have a good weekend and I hope you can take a rest.
+11:08 < _|Nix|_> Thanks!
+11:08 < Hyunsook> All: Have a good weekend~
+11:08 < Minkyeong> All: Have a nice weekend :)
+11:08 < Changsuk> ALL: Have a nice weekend and bye~~~
+11:08 < Kangsik> All: Have a good weekend.
+--- Log closed Thu Sep 12 11:08:45 2013
