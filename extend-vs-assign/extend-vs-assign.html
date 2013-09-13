@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+	<script src="js/jquery.js"></script>
+	<link rel="stylesheet" href="css/themes/default/jquery.mobile.css" />
+	<script>
+// Decide which jQM we want to load
+window.jqmVariety = ( Math.round( Math.random() ) === 0 ? "extend" : "assign" );
+
+// Grab it ...
+$.getScript( "jquery.mobile." + window.jqmVariety + ".js", function() {
+
+	//... and when it arrives, wait for domready ...
+	$( function() {
+
+		// ... and then measure how long it takes to execute
+		var start = window.performance.now();
+
+		window.createJQueryMobile();
+
+		// By this time the page is enhanced as displayed
+		console.log( window.jqmVariety + ": " + ( window.performance.now() - start ) );
+	});
+});
+	</script>
+</head>
+<body>
+	<div data-role="page">
+		<div data-role="content">
+			<div id="the-popup" data-role="popup">
+				<p>The popup</p>
+			</div>
+			<div id="collapsible-set" data-role="collapsibleset">
+				<div data-role="collapsible">
+					<h2>Collapsible Heading</h2>
+					<p>Collapsible content</h2>
+				</div>
+				<div data-role="collapsible">
+					<h2>Collapsible Heading</h2>
+					<p>Collapsible content</h2>
+				</div>
+			</div>
+			<form>
+				<input type="range" min="0" max="100" value="23" id="the-slider" data-popup-enabled="true"></input>
+				<input type="button" value="Button Widget"></input>
+				<select id="flipswitch" data-role="flipswitch">
+					<option value="1">Stay</option>
+					<option value="2">Go</option>
+				</select>
+				<input type="text" data-type="search" id="filter-search"></input>
+			</form>
+			<div id="controlgroup" data-input="#filter-search" data-filter="true" data-inset="true" data-role="controlgroup">
+				<a href="#" class="ui-btn ui-corner-all ui-shadow">Button 1</a>
+				<a href="#" class="ui-btn ui-corner-all ui-shadow">Button 2</a>
+			</div>
+			<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
+  			<thead>
+    			<tr>
+      			<th data-priority="1">Rank</th>
+      			<th data-priority="persist">Movie Title</th>
+      			<th data-priority="2">Year</th>
+      			<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+      			<th data-priority="4">Reviews</th>
+    			</tr>
+  			</thead>
+  			<tbody>
+    			<tr>
+      			<th>1</th>
+      			<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+      			<td>1941</td>
+      			<td>100%</td>
+      			<td>74</td>
+    			</tr>
+    			<tr>
+      			<th>2</th>
+      			<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+      			<td>1942</td>
+      			<td>97%</td>
+      			<td>64</td>
+    			</tr>
+  			</tbody>
+			</table>
+			<table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke">
+    	 <thead>
+      	 <tr>
+        	 <th data-priority="2">Rank</th>
+        	 <th>Movie Title</th>
+        	 <th data-priority="3">Year</th>
+        	 <th data-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+        	 <th data-priority="5">Reviews</th>
+      	 </tr>
+    	 </thead>
+    	 <tbody>
+      	 <tr>
+        	 <th>1</th>
+        	 <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+        	 <td>1941</td>
+        	 <td>100%</td>
+        	 <td>74</td>
+      	 </tr>
+      	 <tr>
+        	 <th>2</th>
+        	 <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+        	 <td>1942</td>
+        	 <td>97%</td>
+        	 <td>64</td>
+      	 </tr>
+    	 </tbody>
+  	 </table>
+		</div>
+	</div>
+</body>
+</html>
