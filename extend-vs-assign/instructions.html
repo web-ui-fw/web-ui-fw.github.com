@@ -25,8 +25,11 @@ END {
   print( "assign: " ( new / newcount ) "ms, extend: " ( old / oldcount ) "ms" );
 }'</code></pre></li>
 
-		<li>Paste the output of the console into the terminal emulator. Make sure
-		there is exactly one newline at the end.</li>
+		<li>Paste the output of the console into the terminal emulator. The output
+		is assumed to be such that the first column is the string "assign:" or
+		"extend:" and the second column is the page load time in ms. Make sure the
+		output conforms to that format. Make sure there is exactly one newline at
+		the end of the output.</li>
 		<li>Press Ctrl+D (EOF)</li>
 	</ol>
 </p>
