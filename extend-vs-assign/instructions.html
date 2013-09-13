@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>Instructions</title>
+</head>
+<body>
+<p>To collect performance results:
+	<ol>
+		<li>Open <a href="extend-vs-assign.html">the page</a> in a browser</li>
+		<li>Open the js console and clear it</li>
+		<li>Hard-refresh the page many times (Ctrl+Shift+R). This assumes the js
+		console is not cleared between refreshes. If it is cleared, record the line
+		printed before doing the next refresh.</li>
+		<li>Run the following command line in a terminal emulator. It will hang waiting
+   for input.
+
+<pre><code>cat - | awk -v 'old=0' -v 'oldcount=0' -v 'new=0' -v 'newcount=0' '
+{
+  if ($1 == "assign:") {
+    new = new + $2; newcount++; 
+  } else {
+    old = old + $2; oldcount++;
+  }
+}
+END {
+  print( "assign: " ( new / newcount ) ", extend: " ( old / oldcount ) );
+}'</code></pre></li>
+
+		<li>Paste the output of the console into the terminal emulator. Make sure
+		there is exactly one newline at the end.</li>
+		<li>Press Ctrl+D (EOF)</li>
+	</ol>
+</p>
+
+<p>At this point, you should see the average page load time in ms for the version
+of the library that uses $.extend ("extend") as well as the one that uses
+assignment ("assign").</p>
+</body>
+</html>
