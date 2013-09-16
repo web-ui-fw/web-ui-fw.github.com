@@ -7,8 +7,32 @@
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/git/jquery.mobile-git.min.css" />
 	<script>
+( function( $, undefined ) {
+
+var start;
+
+function getNow() {
+	return ( window.performance && window.performance.now() ) ||
+		( Date.now && Date.now() ) ||
+		( ( new Date() ).getTime() );
+}
+
 // Decide which jQM we want to load
 window.jqmVariety = ( Math.round( Math.random() ) === 0 ? "extend" : "assign" );
+
+$( document ).on( "pageshow", function() {
+
+	setTimeout( function() {
+		// By this time the page is enhanced as displayed
+		var message = window.jqmVariety + ": " + ( getNow() - start );
+
+		if ( location.search.indexOf( "alert" ) >= 0 ) {
+			alert( message );
+		} else {
+			console.log( message );
+		}
+	}, 100 );
+});
 
 // Grab it ...
 $.getScript( "jquery.mobile." + window.jqmVariety + ".js", function() {
@@ -17,14 +41,12 @@ $.getScript( "jquery.mobile." + window.jqmVariety + ".js", function() {
 	$( function() {
 
 		// ... and then measure how long it takes to execute
-		var start = window.performance.now();
-
+		start = getNow();
 		window.createJQueryMobile();
-
-		// By this time the page is enhanced as displayed
-		console.log( window.jqmVariety + ": " + ( window.performance.now() - start ) );
 	});
 });
+
+})( jQuery );
 	</script>
 </head>
 <body>
