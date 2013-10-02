@@ -1,0 +1,165 @@
+--- Log opened Wed Oct 02 09:58:22 2013
+09:58 < _|Nix|_> You guys wanna start?
+09:59 < Changsuk> All: I think Hyunsook has somethings to share with us.
+09:59 < Hyunsook> _|Nix|_, Changsuk: Right.
+10:00 < Hyunsook> _|Nix|_: I'll start first. :)
+10:00 < Hyunsook> _|Nix|_: My team finished the performance improvement task of Tizen 2.2 version
+10:00 < Hyunsook> _|Nix|_: ....  for the commercial Web Apps last week.
+10:02 < Hyunsook> _|Nix|_: Tasks are DOM manipulation improvement, reducing $.extend function calls, new Sizzle.
+10:03 < _|Nix|_> Hyunsook: Congratulations!
+10:03 < Hyunsook> _|Nix|_: Like jsperf, the measured performance result by the remote inspector on Tizen Device also
+10:03 < Hyunsook> _|Nix|_: ..... has a margin of error of 100 ms and over. :/
+10:03 < _|Nix|_> Hyunsook: Really? jsperf has such a wide margin?
+10:03 < Hyunsook> _|Nix|_: So we measured the performance with 60fps Camera, on Tizen Device.
+10:04 < _|Nix|_> Hyunsook: Nice!
+10:05 < Hyunsook> _|Nix|_: Ah. jsperf has not a wide margin, but has ordering issue as you explained us via email.
+10:05 < _|Nix|_> Hyunsook: Yeah. It's difficult to load a lot of JS into jsperf.
+10:06 < Hyunsook> _|Nix|_: Sorry for confusing.
+10:06 < _|Nix|_> Hyunsook: You meant the remote inspector. NP!
+10:07 < Hyunsook> _|Nix|_: Yes.
+10:07 < Hyunsook> _|Nix|_: Actually, SEC folks measure the performance with high speed camera.
+10:07 < _|Nix|_> Hyunsook: I think that's the best way to do it.
+10:08 < Hyunsook> _|Nix|_: Yes, right.
+10:08 < Hyunsook> _|Nix|_: But we don't have high speed camea. So we used 60fps camera instead.
+10:08 < Changsuk> Hyunsook: So, Can you tell us the result of three cases above?
+10:09 < Hyunsook> Changsuk: Sure~
+10:09 < Hyunsook> _|Nix|_, Changsuk: First, The task reducing $.extend function calls reduced the launching time of the simple Tizen sample App about 23ms.
+10:11 < Changsuk> Hyunsook, _|Nix|_: It's nice~ but I think there is difference between Gabriel's result and the camera test. right?
+10:11 < Hyunsook> _|Nix|_, Changsuk: Yes.
+10:12 < _|Nix|_> Unfortunately, I don't have a 60 fps camera, nor a high speed camera, so all I could use was window.performance.
+10:12 < Changsuk> Hyunsook, _|Nix|_: if that's the case then, can we add Hyunsook's PR to jQM GH.? I think that It
+10:12 < Changsuk> it's not easy to do that
+10:12 < Hyunsook> _|Nix|_: I don' know whether it is because of jQM version, or of a measured way.
+10:15 < _|Nix|_> Hyunsook: I don't understand this last thing you said.
+10:15 < Changsuk> _|Nix|_, Hyunsook: We may as well recheck The PR of $.extend or close it on GH. right?
+10:16 < _|Nix|_> Changsuk: Yeah. I think arschmitz is right. It might be better to have many, small, targeted PRs. We should also not modify jquery.ui.*.js, because those are not part of jQM.
+10:16 < Hyunsook> _|Nix|_: Sorry. I did not explain properly.
+10:16 < Hyunsook> _|Nix|_: :(
+10:16 < _|Nix|_> Changsuk: If we modify jquery.ui.*.js, we must submit a PR to jQuery UI, not jQuery Mobile.
+10:17 < Changsuk> _|Nix|_, Hyunsook: yes, right. I can agree with your an arschmitz's thought.
+10:17 < Changsuk> Hyunsook: then, How about the others
+10:17 < Changsuk> ?
+10:19 < Hyunsook> _|Nix|_: jQM version of Tizen Web UIFW is 1.2 and jQuery version is 1.8.2. So the our result is able to different from your result.
+10:19 < Hyunsook> _|Nix|_: And the measured way also different from yours.
+10:20 < _|Nix|_> Hyunsook: I see.
+10:20 < _|Nix|_> Hyunsook: Well, that's certainly true.
+10:20 < _|Nix|_> Hyunsook: I measured against master.
+10:21 < _|Nix|_> Hyunsook: We've made a lot of performance improvements since 1.2.
+10:21 < Hyunsook> _|Nix|_, Changsuk: I think we can try to measure jQM 1.4 master with 60fps Camera, regarding my PR.
+10:21 < _|Nix|_> Hyunsook: Especially in 1.4.
+10:21 < _|Nix|_> Hyunsook: That would definitely be useful.
+10:22 < Changsuk> Hyunsook: so we need to check the performance again?
+10:22 < _|Nix|_> Changsuk: We need to check the performance difference on upstream jQM.
+10:24 < Changsuk> _|Nix|_: the difference between upstream jQM and 1.2 version?
+10:24 < _|Nix|_> Changsuk: Yeah.
+10:24 < Changsuk> _|Nix|_: hmmmm...
+10:25 < _|Nix|_> Changsuk: I think it might be good to test upstream jQM with and without Hyunsook's PR.
+10:25 < _|Nix|_> Changsuk: I tried to test it, and I didn't get very reliable results.
+10:26 < Changsuk> _|Nix|_, Hyunsook: So, If you re-check the time, can we find any reasons about the difference between the PR on 1.4 and the PR on 1.2?
+10:26 < Changsuk> _|Nix|_, Hyunsook: you -> we. :)
+10:27 < Hyunsook> Changsuk: hmmmm.... well....
+10:28 < Changsuk> _|Nix|_, Hyunsook: If we can't find any reasons, I think, it seems to better to find another performance item but that PR. Am I right?
+10:29 < _|Nix|_> The question is not whether removing $.extend improves performance or not. It certainly improves performance. The question is: Is the performance improvement significant enough to warrant the reduction in readability/maintainability?
+10:30 < _|Nix|_> If it's a small performance improvement, then removing a single DOM manip may be just as good.
+10:30 < Changsuk> _|Nix|_: yes, I know. so I agreeded with your words above.
+10:31 < _|Nix|_> This certainly requires some more thinking. In the meantime, we should also talk about everybody else's work, and return to this topic if we have time left, and, if not, in email.
+10:32 < Changsuk> _|Nix|_: So how much performance improvement can move jQM teams' thought?
+10:32 < _|Nix|_> I'm also online sometimes late at night, so when you get to the office in the morning, I may still be around.
+10:32 < _|Nix|_> Changsuk: Well, DOM manip reduction in a widget is probably an important improvement.
+10:33 < _|Nix|_> Changsuk: Even in response to a click.
+10:33 < _|Nix|_> Changsuk: So, during _create(), or during a click handler.
+10:33 < _|Nix|_> Changsuk: _create() improves startup time, the click handler improves responsiveness.
+10:34 < _|Nix|_> Changsuk: Reducing the number of attached event handlers is also important.
+10:34 < _|Nix|_> Changsuk: The biggest problem with improving performance is that it's hard to measure just how much it has improved :/
+10:36 < Changsuk> _|Nix|_: yes, I think, all of us know that point.
+10:36 < Changsuk> hmm....
+10:36 < _|Nix|_> So, what do you guys think? Shall we talk about Minkyeong's and Kangsik's work next?
+10:38 < Changsuk> Hyunsook, _|Nix|_: I think, we need to find more data or information via re-checking the performance between 1.2 and 1.4. Shall we?
+10:38 < _|Nix|_> Please!
+10:39 < Changsuk> _|Nix|_: and I can fully understand your mind.
+10:39 < _|Nix|_> When you test 1.4, please test master.
+10:40 < Changsuk> Hyunsook: When you re-check it, please go over the codes with Woosung.
+10:40 < Changsuk> Hyunsook: and Kangsik.
+10:41 < Changsuk> Hyunsook: I think they may give you any ideas.
+10:42 < Hyunsook> _|Nix|_, Changsuk: Yes, I see.
+10:42 < Changsuk> All: anyway, I'm sorry that I used many time. please go next. :)
+10:43 < _|Nix|_> Kangsik: So, you delivered the new sizzle?
+10:43 < Kangsik> _|Nix_: Yes.. I and my co-worker make new sizzle.
+10:43 < _|Nix|_> Kangsik: Very nice!
+10:44 < _|Nix|_> Kangsik: Congratulations!
+10:44 < Kangsik> _|Nix|_:  jQuery's performance has been improved when applying new sizzle.
+10:44 < Kangsik> _|Nix|_: If You want to see test result. please visit here :
+10:44 < Kangsik> _|Nix|_: https://docs.google.com/presentation/d/1kOD8ktbYeCEHChzgZHiB6qDGTUumhpGq986dA3XD7zw/edit?usp=sharing
+10:44 < Changsuk> _|Nix|_: If you got some trouble for me, please understand my words. because there are many things in front of my team. So I told you like that.
+10:45 < _|Nix|_> Changsuk: Relax. All is well. We're all pretty busy :)
+10:47 < _|Nix|_> Kangsik: Looks good.
+10:47 < Kangsik> _|Nix|_: Thanks :-)
+10:47 < Changsuk> _|Nix|_: I thought you was nervous. :)
+10:48 < _|Nix|_> Changsuk: No. Don't worry! Any and all help you guys can give jQM is highly appreciated. All the testing and research you do is very important and very valuable.
+10:49 < _|Nix|_> That's true for Hyunsook, Kangsik, Minkyeong and everybody else involved as well!
+10:49 < Changsuk> _|Nix|_: Thanks a lot. :)
+10:49 < _|Nix|_> Minkyeong: What have you been up to?
+10:49 < Hyunsook> _|Nix|_: Thanks.
+10:50 < Changsuk> _|Nix|_: Your words can really help them to do their job. Thank~! :)
+10:50 < _|Nix|_> :)
+10:50 < Minkyeong> I have something to say.. you guys got a minute?
+10:51 < Changsuk> Minkyeong: Sure~
+10:51 < Minkyeong> Changsuk: Thanks :)
+10:52 < Changsuk> Minkyeong: I'm ready to listen to your talk. :)
+10:52 < Minkyeong> I and Mr. Woosung Sohn had improved DOM manipulation of jQuery.
+10:54 < _|Nix|_> Minkyeong: Cool!
+10:54 < Minkyeong> As a result, widget launching time is reduced about 60ms.
+10:54 < _|Nix|_> Minkyeong: So you guys did the rest of jQuery while Kangsik did sizzle, eh?
+10:55 < Minkyeong> _|Nix|_: Right
+10:55 < _|Nix|_> Minkyeong: Are your changes applicable upstream?
+10:55 < Changsuk> Minkyeong: It's nice~!
+10:55 < _|Nix|_> Minkyeong: That is, are they the kind of changes you could submit in a PR to jQuery core?
+10:57 < Minkyeong> _|Nix|_: I don't think so. We did not consider browser compatiabilities for the performance.
+10:58 < _|Nix|_> Minkyeong: OK. Fair enough.
+10:58 < _|Nix|_> Changsuk: How about yourself? What have you been up to?
+10:59 < Changsuk> me? ah........
+11:00 < Changsuk> All: As you know, I'm developing Tizen Browser engine using Chromium.
+11:00 < _|Nix|_> Changsuk: I guess that's keeping you pretty busy. Cool!
+11:01 < Changsuk> All: The new engine displayed a web site First~! last week.
+11:01 < _|Nix|_> Changsuk: First light. :)
+11:01 < _|Nix|_> Very cool!
+11:01 < _|Nix|_> Changsuk: Good work!
+11:01 < Hyunsook> Changsuk: Cool~!
+11:01 < Changsuk> _|Nix|_: yes, exactly right.
+11:02 < _|Nix|_> As for me, well ... we released jQM 1.4.0-beta.1! Yaaay \o/
+11:02 < Changsuk> All: and the other team developing the engine will start to develope the remain browser features in next week. :)
+11:03 < Changsuk> _|Nix|_: wow~~ You made it~!
+11:03 < Hyunsook> _|Nix|_: WOW~~~!!!
+11:03 < _|Nix|_> Changsuk: Very cool! Let us know how Web UI FW rund on it :)
+11:03 < Minkyeong> _|Nix|_: Wow~~
+11:03 < _|Nix|_> Yeah, rc.1 should be next Wednesday ...
+11:03 < Kangsik> _|Nix|_: awesome.... :)
+11:03 < Changsuk> _|Nix|_: rund? you mean run?
+11:03 < _|Nix|_> Changsuk: Sorry! "runs"
+11:04 < _|Nix|_> OK. So, I guess, in conclusion, lots of good work all round!
+11:04 < Changsuk> _|Nix|_: So should we run all of web-ui-fw widgets on the 1.4? right?
+11:04 < _|Nix|_> Changsuk: Eventually, yes.
+11:04 < _|Nix|_> Changsuk: That's a big job.
+11:05 < _|Nix|_> Changsuk: We should start porting widgets again.
+11:05 < _|Nix|_> Changsuk: Make web-ui-fw 0.3.0.
+11:05 < Changsuk> _|Nix|_: so, actuall I want to talk about our web-ui-fw.
+11:05 < Changsuk> _|Nix|_: yes, right~!
+11:06 < Changsuk> _|Nix|_: But the closing time is coming to us.
+11:06 < _|Nix|_> Changsuk: I know ... it's end of the year, right?
+11:06 < _|Nix|_> Changsuk: Let's see how many widgets we can squeeze in.
+11:06 < _|Nix|_> Changsuk: ... and let's see if we can move to 1.4.
+11:08 < Changsuk> All : yes, we can go over our web-ui-fw widgets via email or here, anytime you can write your ideas.
+11:08 < _|Nix|_> Yeah. I really need to get my head out of jQM 1.4.0. I'll try to get some web-ui-fw work in for next week.
+11:09 < Changsuk> All : after we write each ideas on here or email, shall we talk about it on next meeting?
+11:09 < _|Nix|_> Sounds good!
+11:09 < Changsuk> _|Nix|_: yes, I'll try to do like you. :)
+11:10 < Hyunsook> _|Nix|_, Changsuk: Good.
+11:10 < _|Nix|_> Alrighty then! Good work, everybody!
+11:10 < _|Nix|_> Let's all have a good weekend, and meet up next week!
+11:11 < Changsuk> _|Nix|_: you too~ :) and have a nice weekend and see you on next meeting; focusing web-ui-fw. :)
+11:11 < Minkyeong> All: See you next week~
+11:11 < Hyunsook> Have a good weekend~!
+11:11 < Kangsik> Have a good week end~ :)
+11:11 < Changsuk> All : All you guys, have such a nice weekend~~
+11:14 < _|Nix|_> Have a good weekend, all!
+--- Log closed Wed Oct 02 11:14:38 2013
