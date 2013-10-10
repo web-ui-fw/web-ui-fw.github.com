@@ -1,0 +1,172 @@
+--- Log opened Thu Oct 10 10:00:07 2013
+10:00 -!- Irssi: Log file ~/2013-10-10.txt opened
+10:00 #web-ui-fw: < _|Nix|_> Hey, all!
+10:00 #web-ui-fw: < Hyunsook> Hi~~ :)
+10:00 #web-ui-fw: < _|Nix|_> Are we ready for an exciting meeting? Yaaaay! :)
+10:00 #web-ui-fw: < Hyunsook> Haha~
+10:00 #web-ui-fw: < _|Nix|_> It's been a busy week.
+10:01 #web-ui-fw: < Hyunsook> Sorry, but Kangsik cannot attend our meeting today.
+10:01 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has quit [Remote host closed the connection]
+10:01 #web-ui-fw: < _|Nix|_> Hyunsook: That's fine.
+10:01 #web-ui-fw: < Hyunsook> He was married last Sunday.
+10:01 #web-ui-fw: < Hyunsook> So, now he is on a honeymoon in Bali, a tropical island in the Indonesian archipelago.
+10:02 #web-ui-fw: < Hyunsook> _|Nix|_: And.. Changsuk is returning now after attending another meeting at SEC.
+10:02 #web-ui-fw: < _|Nix|_> Hyunsook: Nice!
+10:02 #web-ui-fw: < Hyunsook> _|Nix|_: He will be late about... 20 mins.
+10:02 #web-ui-fw: < Hyunsook> _|Nix|_: :)
+10:02 #web-ui-fw: < _|Nix|_> I see that you pitched TOSE to Dave ... I'm curious what he'll say ...
+10:03 #web-ui-fw: < _|Nix|_> Hyunsook: I'm sorry the $.extend thing didn't work out.
+10:04 #web-ui-fw: < Hyunsook> _|Nix|_: Oh. He didn't feedback yet.
+10:05 #web-ui-fw: < Hyunsook> _|Nix|_: Yes... :(
+10:05 #web-ui-fw: < Hyunsook> _|Nix|_: But, I'll upload another issue or PR!
+10:05 #web-ui-fw: < _|Nix|_> Hyunsook: Please! Those are always welcome!
+10:06 #web-ui-fw: < Hyunsook> _|Nix|_: Haha~
+10:06 #web-ui-fw: < Hyunsook> _|Nix|_: Ah. Before we talk about web-ui-fw 0.3.0, I have a question regarding to jQM 1.4.0.
+10:07 #web-ui-fw: < Hyunsook> _|Nix|_, uGoMobi: Was almost the whole bug of jQM 1.4.0-beta.1 already exposed and fixed?
+10:07 #web-ui-fw: < Hyunsook> _|Nix|_, uGoMobi: ..... Or Do you still need to debug them?
+10:08 #web-ui-fw: < _|Nix|_> Hyunsook: https://github.com/jquery/jquery-mobile/issues?direction=desc&milestone=20&page=1&sort=updated&state=open
+10:08 #web-ui-fw: < _|Nix|_> Those are the ones that need to be fixed for 1.4.0.
+10:09 #web-ui-fw: < _|Nix|_> arschmitz already has fixes for https://github.com/jquery/jquery-mobile/issues/6581 and https://github.com/jquery/jquery-mobile/issues/6573
+10:09 #web-ui-fw: < _|Nix|_> There's probably not much we can do about https://github.com/jquery/jquery-mobile/issues/6500 ... :*
+10:09 #web-ui-fw: < _|Nix|_> Gah! :(
+10:10 #web-ui-fw: < _|Nix|_> arschmitz also has something underway for https://github.com/jquery/jquery-mobile/issues/6214 ...
+10:10 #web-ui-fw: < _|Nix|_> Hyunsook: We'll decide on rc.1 tonight.
+10:10 #web-ui-fw: < Hyunsook> _|Nix|_: Ah....
+10:11 #web-ui-fw: < _|Nix|_> uGoMobi did the right thing in keeping the library in beta while we update demos and API docs. We found a lot of bugs and inconsistencies, and we can fix them because we're not in RC yet.
+10:12 #web-ui-fw: < _|Nix|_> Hyunsook: So, we'll probably go rc.1 when we've gone through the demos and API docs.
+10:13 #web-ui-fw: < _|Nix|_> We have a meeting on November 4th and 5th in Amsterdam. We're hoping 1.4.0 will be out by then.
+10:13 #web-ui-fw: < Hyunsook> _|Nix|_: Oh~! That's good news.
+10:13 #web-ui-fw: < _|Nix|_> That way, we can spend the meeting roadmapping 1.5.0 and our continuing merge with jQuery UI.
+10:14 #web-ui-fw: < _|Nix|_> We have /a ton/ of things to do going forward, and not all will likely fit inside 1.5.0.
+10:15 #web-ui-fw: < _|Nix|_> ... and, of course, we're all hoping no major issues will crop up.
+10:16 #web-ui-fw: < Hyunsook> _|Nix|_: I'll hope, too.
+10:17 #web-ui-fw: < Hyunsook> _|Nix|_: Hmmm... What is things we can do for you?
+10:18 #web-ui-fw: < Hyunsook> _|Nix|_: If you still need to debug jQM 1.4.0-beta.1, I will do it.
+10:18 #web-ui-fw: < Changsuk> Hi!~ all. I'm sorry that I'm late.
+10:18 #web-ui-fw: < _|Nix|_> Hyunsook: Well, if you have time for jQM, you can help by testing it.
+10:19 #web-ui-fw: < Hyunsook> _|Nix|_: Can you give me guide to test effectively?
+10:20 #web-ui-fw: < Hyunsook> _|Nix|_: Testing widgets of Demo page? Or ....
+10:20 #web-ui-fw: < _|Nix|_> Hyunsook: I'm looking for the link ...
+10:20 #web-ui-fw: < Hyunsook> _|Nix|_: My team can have time for jQM.
+10:21 #web-ui-fw: < _|Nix|_> Hyunsook: Basically, you can make sure that widgets work consistently as you change their options.
+10:21 -!- matiasnu [~matiasnu@195.178.184.50] has joined #jqueryui-dev
+10:21 #web-ui-fw: < _|Nix|_> Hyunsook: For 1.4.0, we've concentrated a lot on making widget options work.
+10:22 #web-ui-fw: < _|Nix|_> Hyunsook: We've intentionally left some widgets out, because we didn't have time for all options of all widgets.
+10:22 -!- jquicommit [~jquicommi@192.30.252.52] has joined #jqueryui-dev
+10:22 #jqueryui-dev: < jquicommit> [download.jqueryui.com] ende76 closed issue #170: 502 Bad Gateway response from download builder  http://git.io/ad_rXw
+10:22 -!- jquicommit [~jquicommi@192.30.252.52] has left #jqueryui-dev []
+10:23 #web-ui-fw: < _|Nix|_> Hyunsook: Knowing which options work and which don't would be good, because we can then tell for each option whether we intentionally left it out, or whether it's a bug that it doesn't work.
+10:23 #web-ui-fw: < _|Nix|_> So, basically, do a lot of $( ".abc" ).controlgroup( "option", "type", "vertical" ); $( ".abc" ).controlgroup( "option", "type", "horizontal" );
+10:24 #web-ui-fw: < _|Nix|_> etc., and make sure it does what it's supposed to.
+10:24 #web-ui-fw: < _|Nix|_> Hyunsook: In beta we can't really make massive changes, but if you find bugs, that would be awesome!
+10:25 #web-ui-fw: < _|Nix|_> Hyunsook: Another approach would be to test whether enhanced: true can really handle all types of initial conditions.
+10:25 #web-ui-fw: < Changsuk> _|Nix|_: I'm sorry that I intrrupt you guys.
+10:25 #web-ui-fw: < Changsuk> Hyunsook: I'm sorry, I missed you.
+10:25 #web-ui-fw: < _|Nix|_> Changsuk: I'm also sorry! I did notice your joining. Hey!
+10:26 #web-ui-fw: < _|Nix|_> Hyunsook: We need to make sure that, when providing pre-rendered content for any combination of options, the widget picks that up correctly.
+10:26 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: so I think my team can contribute jQM with testing and finding bugs and doing PRs first.
+10:27 #web-ui-fw: < Hyunsook> _|Nix|_: (now I'm reading your words. I'm sorry for the late reply. )
+10:27 #web-ui-fw: < Changsuk> _|Nix|_: NP. ;)
+10:27 #web-ui-fw: < _|Nix|_> That help would be most welcome!
+10:27 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: Ok, I see.
+10:28 #web-ui-fw: < _|Nix|_> Also remember that, just because we're in beta doesn't mean that you cannot submit PRs which we cannot merge before 1.4.0. If you submit a PR with more intrusive changes, it's still welcome, but we can only merge it after 1.4.0.
+10:28 #web-ui-fw: < _|Nix|_> Perf improvement PRs are also very good.
+10:28 #web-ui-fw: < Changsuk> _|Nix|_: Yes, right.
+10:29 #web-ui-fw: < _|Nix|_> For example, you could go over the library and identify all the places where we insert into the DOM and then change things like add/remove classes.
+10:29 #web-ui-fw: < _|Nix|_> That's bad, because it causes reflows.
+10:29 #web-ui-fw: < _|Nix|_> We should create the final dom structure with classes, properties, contained elements, and everything, and only then add to the DOM.
+10:29 #web-ui-fw: < Changsuk> _|Nix|_: ha~~ yes... but I think that it's not easy to find and understand most of jQM members.
+10:30 #web-ui-fw: < _|Nix|_> ... and, of course, if you can identify places where DOM manip can be reduced, that would be awesome!
+10:30 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: but some members like Kangsik can do a PR regarding perf. improvement.
+10:31 #web-ui-fw: < _|Nix|_> Another thing you could help with is to test just how much performance improvement one gains by using enhanced: true.
+10:31 #web-ui-fw: < Changsuk> _|Nix|_: yes. If my team can find that, I must be a nice thing.
+10:31 #web-ui-fw: < _|Nix|_> It's not always easy to test that with jsperf, because the pre-rendered DOM is sometimes large, and so you need to add/remove, add/remove, add/remove and that distorts jsperf results.
+10:32 #web-ui-fw: < Hyunsook> _|Nix|_: jsperf... yes, right.
+10:33 #web-ui-fw: < _|Nix|_> Anyway, I've listed quite a few things here, so if you need help remembering, I'll post this meeting at http://web-ui-fw.github.io/irc-logs/web-ui-fw.meeting.2013-10-10.txt after we're done.
+10:33 #web-ui-fw: < _|Nix|_> So, yeah ... we need lots of help :)
+10:33 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: I think that my team can support jQM team doing test work, then do PRs with fixes and can find DOM manipulation problems or other thing to improve perf.
+10:34 #web-ui-fw: < _|Nix|_> Changsuk: Awesome! Thank you so much!
+10:34 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: So, I think Hyunsook will make some schedules regarding those to contribute jQM.
+10:34 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: will or can. :)
+10:35 #web-ui-fw: < Hyunsook> _|Nix|_: _|Nix|_: Ok, I'll read the log again after ending meeting.
+10:35 #web-ui-fw: < Hyunsook> Changsuk: Yes, right.
+10:35 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I'll see that log after this meeting.
+10:36 #web-ui-fw: < _|Nix|_> Great!
+10:36 #web-ui-fw: < Changsuk> _|Nix|_: Ok, then what shall we talk about it?
+10:36 #web-ui-fw: < Hyunsook> _|Nix|_: And if I have any questions after reading the log, I'll send email to you and Jasper.
+10:36 #web-ui-fw: < _|Nix|_> Hyunsook: OK.
+10:37 #web-ui-fw: < Hyunsook> _|Nix|_, Changsuk: About new widget regarding web-ui-fw 0.3.0.
+10:37 #web-ui-fw: < Changsuk> Hyunsook : ah~ yes.
+10:37 #web-ui-fw: < _|Nix|_> Changsuk: Is that (^) what you meant?
+10:37 #web-ui-fw: < _|Nix|_> Changsuk: ... that we should talk about?
+10:37 #web-ui-fw: < _|Nix|_> Because, definitely, we /should/ talk about it :)
+10:37 #web-ui-fw: < Changsuk> Hyunsook: Did you tell about a Subway widget?
+10:38 #web-ui-fw: < Changsuk> _|Nix|_: ah.. Im sorry. :)
+10:38 #web-ui-fw: < Changsuk> _|Nix|_: I meant, what subject will we talk about?. :)
+10:39 #web-ui-fw: < Hyunsook> All: I wrote information for new widget on Wiki. : https://github.com/web-ui-fw/web-ui-fw/wiki/New-widgets:-Subway-Map
+10:39 #web-ui-fw: < Changsuk> or what titles are left. ;)
+10:40 #web-ui-fw: < Changsuk> Hyunsook: Wow~~~
+10:40 #web-ui-fw: < Hyunsook> All: Can you look at it now?
+10:41 #web-ui-fw: < _|Nix|_> Ooooh ... sounds cool!
+10:41 #web-ui-fw: < _|Nix|_> Wow! Looks cool, too!
+10:41 #web-ui-fw: < Minkyeong> Hyunsook: Sure! I'm ready ;)
+10:42 #web-ui-fw: < Hyunsook> _|Nix|_: Haha~ Thanks~
+10:43 #web-ui-fw: < _|Nix|_> Wow! That's insanely complicated! Is that both bus and metro routes?
+10:43 #web-ui-fw: < Changsuk> _|Nix|_: actually Minkyeong and Hyunsook saw that a few days ago and my team decided that, if we can, it's better to contribute Subway widget to web-ui-fw or jQM.
+10:44 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, right. If there is DB of JSON format, it's possible.
+10:44 #web-ui-fw: < _|Nix|_> Hyunsook: So, the x,y coordinates of the stations, and the connecting lines are actually computed from the JSON?
+10:47 #web-ui-fw: < Hyunsook> _|Nix|_: If user have json file like https://github.com/wonseop/jquery-mobile-routes/blob/master/data/seoul_metro.json
+10:48 #web-ui-fw: < Hyunsook> _|Nix|_: ... and the json file is included x,y coordinates of stations, and label data to display station name on screen, and etc,
+10:49 #web-ui-fw: < _|Nix|_> Hyunsook: Right. Seeing that now. Very cool!
+10:49 #web-ui-fw: < Hyunsook> _|Nix|_: ... the Subway map widget will be drawn lines between stations automatically.
+10:49 #web-ui-fw: < _|Nix|_> Hyunsook: Is this kind of JSON format standard?
+10:49 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: If jQM team likes that widget, I think it'll be better to add route widget to web-ui-fw's widget.
+10:50 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: what do you think about it?
+10:50 #web-ui-fw: < _|Nix|_> Is this JSON format standard?
+10:50 #web-ui-fw: < Changsuk> _|Nix|_: and Can you ask Jasper about that?
+10:50 #web-ui-fw: < Hyunsook> _|Nix|_: Yes.
+10:52 #web-ui-fw: < Hyunsook> Changsuk: I think do that.
+10:52 #web-ui-fw: < Hyunsook> _|Nix|_: Can  you ask Jasper about that?
+10:53 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: Many things should be developed for users to use that widget in reality but I think that my team can make it.
+10:53 #web-ui-fw: < _|Nix|_> We can always implement it in web-ui-fw, and jQM can pick it up when it's ready to go.
+10:54 #web-ui-fw: < Changsuk> _|Nix|_: yes, right.
+10:54 #web-ui-fw: < _|Nix|_> Thing is, jQM is now busy restructuring widgets so they work with jQuery UI, so if we make any new widget it should work with jQuery UI as well as jQuery Mobile.
+10:54 #web-ui-fw: < Changsuk> _|Nix|_: but I think that it would better to make widgets what jQM team needs or wants.
+10:55 #web-ui-fw: < _|Nix|_> Changsuk: Right ... I guess I can ask uGoMobi tonight.
+10:55 #web-ui-fw: < _|Nix|_> Changsuk: I think he's at a conference today.
+10:55 #web-ui-fw: < Changsuk> _|Nix|_: thanks a lot~ :)
+10:55 #web-ui-fw: < _|Nix|_> Changsuk: I'll ask him and I'll let you know.
+10:55 #web-ui-fw: < Hyunsook> Changsuk: +1
+10:56 #web-ui-fw: < Hyunsook> _|Nix|_: Thanks~! :)
+10:56 #web-ui-fw: < _|Nix|_> This is actually a really good idea! We can work on widgets in web-ui-fw and jQM has more time for improving the base.
+10:57 #web-ui-fw: < _|Nix|_> However, we must make sure that our web-ui-fw widgets can work with jQuery UI in the future.
+10:57 #web-ui-fw: < _|Nix|_> Wow! Seoul has an enormous subway system ...
+10:57 #web-ui-fw: < Changsuk> _|Nix|_: If Jasper likes the route widgtet, yes, right, we should improve the widget to add jQuery UI.
+10:57 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, right.
+10:58 #web-ui-fw: < Changsuk> _|Nix|_: ha~~ yes.
+10:58 #web-ui-fw: < Hyunsook> _|Nix|_: haha... yes.
+10:59 #web-ui-fw: < Changsuk> _|Nix|_: There are 9 lines just in Seoul and the more lines are connected between Seoul and other cities.
+11:00 #web-ui-fw: < _|Nix|_> Here's Helsinki: http://en.wikipedia.org/wiki/File:Helsinki_metro_map_2007.png
+11:00 #web-ui-fw: < _|Nix|_> Don't laugh too hard :)
+11:00 #web-ui-fw: < Changsuk> _|Nix|_: ha~~ just one or two? :)
+11:00 #web-ui-fw: < Hyunsook> _|Nix|_: Haha~
+11:01 #web-ui-fw: < _|Nix|_> Yeah ... not much going on here :)
+11:01 #web-ui-fw: < Hyunsook> _|Nix|_: Just simple~
+11:02 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has joined #jquery-meeting
+11:02 #web-ui-fw: < _|Nix|_> Alright. I'll ask uGoMobi during today's meeting about new widgets and about the subway map, and I'll let you guys know by email.
+11:02 #web-ui-fw: < Changsuk> _|Nix|_: thanks~!! :)
+11:03 #web-ui-fw: < Hyunsook> _|Nix|_: You are not lost in subway. :)
+11:03 #web-ui-fw: < Changsuk> ha ha~
+11:03 #web-ui-fw: < Hyunsook> _|Nix|_: Thanks a lot. ;)
+11:03 #web-ui-fw: < _|Nix|_> NP. jQM needs all the help it can get.
+11:03 #web-ui-fw: < _|Nix|_> As does web-ui-fw.
+11:04 #web-ui-fw: < _|Nix|_> So, unless we have other topics to talk about, let's call this a meeting. What say you?
+11:04 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. I just hope that Hyunsook and her members can do PRs and help jQM team.
+11:05 #web-ui-fw: < Changsuk> _|Nix|_: Ok~
+11:05 #web-ui-fw: < _|Nix|_> I also hope so :)
+11:05 #web-ui-fw: < _|Nix|_> Alright. In that case, have a good weekend, all!
+11:06 #web-ui-fw: < Changsuk> Have such a nice weekend~!!! bye~~~~
+11:06 #web-ui-fw: < Minkyeong> All: Have a nice weekend :)
+11:06 #web-ui-fw: < Hyunsook> Have a good weekend, all~~~!
+11:10 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has quit [Ping timeout: 264 seconds]
+--- Log closed Thu Oct 10 11:13:35 2013
