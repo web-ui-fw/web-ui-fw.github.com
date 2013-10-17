@@ -42,7 +42,6 @@
 10:11 #web-ui-fw: < _|Nix|_> Hyunsook: Well, that's whay I've been working on.
 10:11 #web-ui-fw: < _|Nix|_> Hyunsook: It's not merged yet.
 10:11 #web-ui-fw: < Hyunsook> _|Nix|_: ahha~!
-10:12 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has joined #jquery-meeting
 10:12 #web-ui-fw: < _|Nix|_> I found the commit that removes depend: https://github.com/jquery/jquery-mobile/commit/49c5dda032cbf60b029b9953cd0c9c6087bd065c
 10:12 #web-ui-fw: < _|Nix|_> I'll have to do the same in web-ui-fw.
 10:13 #web-ui-fw: < Hyunsook> _|Nix|_: I understood at first that web-ui-fw project was moved into jQM project. Phew ~~
@@ -59,22 +58,18 @@
 10:19 #web-ui-fw: < _|Nix|_> Like cordova platform add tizen
 10:19 #web-ui-fw: < _|Nix|_> cordova build tizen
 10:19 #web-ui-fw: < _|Nix|_> etc.
-10:20 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has joined #jqueryui-dev
 10:20 #web-ui-fw: < Hyunsook> _|Nix|_: Wow~~ you are doing a lot of things!
 10:21 #web-ui-fw: < Hyunsook> _|Nix|_: :)
 10:21 #web-ui-fw: < _|Nix|_> Hyunsook: I know, and it's not like I have any more time to do them in ...
 10:21 #web-ui-fw: < Kangsik> _|Nix|_: Good!!!! :-)
 10:22 #web-ui-fw: < _|Nix|_> Kangsik: You mean about Cordova? I guess ...
 10:22 #web-ui-fw: < _|Nix|_> Kangsik: I guess there're a lot of apps that use it and so it needs to work on Tizen.
-10:23 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has quit [Ping timeout: 260 seconds]
 10:24 #web-ui-fw: < Kangsik> _|Nix|_: No... I have been praised for your passion about opensource.
 10:24 #web-ui-fw: < Kangsik> _|Nix|_: :)
 10:25 #web-ui-fw: < Minkyeong> _|Nix|_: Wow, that's coooooool.. I must add, both Cordova and your job are cool
-10:25 -!- fikst [~fikst@84.196.66.213] has joined #jquery-meeting
 10:26 #web-ui-fw: < _|Nix|_> Thanks!
 10:26 #web-ui-fw: < _|Nix|_> So, that's basically it from me.
 10:27 #web-ui-fw: < _|Nix|_> Kangsik: Have you been up to anything other than getting a tan? :) Bali sounds like it's a lot closer to Korea than it is to Finland. From here it sounds really, really far away :)
-10:27 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has quit [Ping timeout: 259 seconds]
 10:27 #web-ui-fw: < _|Nix|_> Kangsik: ... but I should check Google Maps.
 10:28 #web-ui-fw: < Hyunsook> _|Nix|_: Sorry, I don't know much about Cordova. I'll read links you let me know later.
 10:28 #web-ui-fw: < _|Nix|_> Kangsik: Oh yeah - waaay closer :)
@@ -114,18 +109,14 @@
 10:47 #web-ui-fw: < _|Nix|_> Hyunsook: ... and then you have to look at js/widgets/forms/button.js to fix that bug.
 10:47 #web-ui-fw: < Hyunsook> _|Nix|_: As I alread word, I know it's deprecated, and I asked to uGoMobi about that before submitting PR.
 10:48 #web-ui-fw: < _|Nix|_> Hyunsook: js/widgets/forms/button.js is not deprecated. js/jquery.mobile.buttonMarkup.js is deprecated.
-10:49 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has joined #jquery-meeting
 10:49 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, right. buttonMarkup is deprecated.
 10:50 #web-ui-fw: < Hyunsook> _|Nix|_:  If PR-6618 is not helpful for you, you can close it.
 10:51 #web-ui-fw: < Hyunsook> _|Nix|_: I'll submit about the other bugs.
 10:51 #web-ui-fw: < _|Nix|_> Hyunsook: OK. Thanks for testing!
 10:52 #web-ui-fw: < _|Nix|_> We've made a lot of changes to the widgets, so I'm sure there will be bugs. If we find them before 1.4.0, it will be all the better, because people won't have to wait for 1.4.1 before they are fixed.
-10:52 -!- Krinkle is now known as Krinkle|detached
-10:52 -!- Krinkle is now known as Krinkle|detached
 10:53 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, I do think so.
 10:53 #web-ui-fw: < Hyunsook> _|Nix|_: Ah! One more question about button widget. short..
 10:53 #web-ui-fw: < _|Nix|_> Sure! Go ahead.
-10:54 -!- markelog [~markelog@dhcp234-224-red.yandex.net] has joined #jquery-meeting
 10:55 #web-ui-fw: < Hyunsook> _|Nix|_: Does jQM 1.4.0 Button widget support version of IE?
 10:55 #web-ui-fw: < Hyunsook> _|Nix|_: Pro IE7 ?
 10:57 #web-ui-fw: < _|Nix|_> Hyunsook: No. I believe we have dropped support for IE7, because it doesn't support pseudoselectors.
@@ -137,7 +128,6 @@
 11:01 #web-ui-fw: < Hyunsook> _|Nix|_: Ok, I see. Thanks~
 11:01 #web-ui-fw: < _|Nix|_> Awesome! Thank you!
 11:01 #web-ui-fw: < Hyunsook> _|Nix|_: :)
-11:01 -!- fikst [~fikst@84.196.66.213] has quit [Quit: Leaving]
 11:01 #web-ui-fw: < _|Nix|_> OK. So, if we have no further topics, let's call this one. Have a good weekend, all, and thanks a lot for your help!
 11:03 #web-ui-fw: < Hyunsook> That's all. Have a good weekend. :)
 11:03 #web-ui-fw: < Minkyeong> Have a good weekend! :-)
@@ -146,3 +136,63 @@
 11:10 #jqueryui-dev: < jqmobilecommit> [jquery-mobile] gabrielschulhof closed pull request #6618: buttonMarkup: Fix bugs that buttonMarkup doesn't set options properly and doesn't get a value of options. (master...pr-1.4-buttonmarkup)  http://git.io/8v5T-A
 11:10 -!- jqmobilecommit [~jqmobilec@192.30.252.51] has left #jqueryui-dev []
 --- Log closed Thu Oct 17 11:11:01 2013
+11:27:32 < Changsuk> _|Nix|_: Hi
+11:28:03 < Changsuk> _|Nix|_: I read the meeting log. I thnk, Things go well...
+11:28:44 < Changsuk> _|Nix|_: anyway, I have a question about contributors' name on web-ui-fw GH.
+11:29:40 < Changsuk> _|Nix|_: I can't find Hyunsook and Kangsik on the contributors page. do you know why?
+11:31:10 < _|Nix|_> Changsuk: That's weird. I dunno ... lessee ...
+11:31:50 < _|Nix|_> Changsuk: Maybe it's because we're not working on master.
+11:32:06 < _|Nix|_> Changsuk: However, I think it's safe that we move jqm to master.
+11:32:11 < _|Nix|_> Changsuk: What do you think?
+11:38:42 < Changsuk> _|Nix|_: exactly jqm 1.4? right?
+11:40:03 < Changsuk> _|Nix|_: I saw jqm1.4 branch you made, then you mean that it can be better to move jqm1.4 branch to master, right?
+11:40:56 < Changsuk> _|Nix|_: If that's right, I really agree with your idea. :)
+11:41:20 < _|Nix|_> OK. Cool. I'll do that, then.
+11:42:16 < Hyunsook> Changsuk, _|Nix|_: +1
+11:42:34 < _|Nix|_> Bam! Done.
+11:42:46 < Hyunsook> Wow~
+11:42:47 < Changsuk> _|Nix|_: Thanks a lot ~!! :) and I have a concern about what we do next. Do you have any nice idea about what we'll do first and then?
+11:43:05 < _|Nix|_> Changsuk: I think we should make things work with jQM 1.4.0.
+11:43:18 < _|Nix|_> Changsuk: Then, we should decide what widgets to add to 0.3.0.
+11:43:35 < _|Nix|_> Changsuk: I was thinking things like progress bar, option header.
+11:43:57 < _|Nix|_> Changsuk: I think option header is a good one, but it may turn out to be quite involved.
+11:45:02 < Changsuk> _|Nix|_: quite involved? what was that mean?
+11:45:26 < _|Nix|_> Changsuk: Well, for one, there's the styling. I'm not sure how we're going to do that reverse triangle nicely.
+11:45:46 < _|Nix|_> Changsuk: Then, there're probably lots of complications with fixed toolbars and stuff.
+11:45:56 < Changsuk> _|Nix|_: And IMHO, it'd better to add 0.2.0 widgets to 0.3.0. what do you think about it?
+11:46:23 < _|Nix|_> Changsuk: Well, those are already there. We just need to fix them up to work with jQM 1.4.0.
+11:47:39 < _|Nix|_> Changsuk: I have merged jqm into master, but I have not yet merged jqm-1.4 into master, because I want the unit tests to pass first, which means I have to fix the build, because some stuff has changed in jQM.
+11:47:42 < Changsuk> _|Nix|_: Ok, I see... Some features are left on option header.
+11:47:55 < _|Nix|_> Changsuk: It'll be an interesting challenge.
+11:48:29 < _|Nix|_> Changsuk: I for one would love to see it done.
+11:48:57 < _|Nix|_> Changsuk: ... and I think the widget is pretty useful and also pretty spectacular in an app.
+11:49:12 < Changsuk> _|Nix|_: Ok, then will you do the merging job? or Shall we?
+11:49:42 < Changsuk> _|Nix|_: ah... I see.
+11:50:44 < _|Nix|_> Changsuk: Sure! If you could port progressbar and optionheader, that'd be great!
+11:51:27 < _|Nix|_> Changsuk: However, please work on jqm-1.4, because, although the build is broken, the demos work fine. So, when I fix the build, we can merge the fixed build as well as optionheader and progressbar into master.
+11:52:35 < Hyunsook> _|Nix|_: I have a question. If we fix 0.2.0 widgets up to work with jQM 1.4.0,  should we add the widgets fixed on jqm-1.4 branch? or master branch?
+11:53:07 < Changsuk> _|Nix|_: Ok, So can my team do that work in next Thesday?
+11:53:35 < Changsuk> Hyunsook: _|Nix|_ already moved to master. :)
+11:53:43 < Changsuk> _|Nix|_: right?
+11:53:46 < _|Nix|_> Changsuk: Hyunsook is right.
+11:53:53 < _|Nix|_> Please work on jqm-1.4
+11:54:14 < Changsuk> _|Nix|_: ah...  I see. I was confused.
+11:54:18 < _|Nix|_> I will merge jqm-1.4 into master when the build works and the widgets are fixed.
+11:55:07 < _|Nix|_> Changsuk: Currently, master is still on jQM 1.3, so that's old. All my fixes are on jqm-1.4, but I still have to make more fixes there.
+11:55:23 < _|Nix|_> Changsuk: When jqm-1.4 works nicely, we can merge it into master.
+11:55:25 < Hyunsook> We work on jqm-1.4, and then if our the works complete, we will merge jqm-1.4 to master. right?
+11:55:37 < _|Nix|_> Hyunsook: Correct.
+11:55:55 < Changsuk> _|Nix|_, Hyunsook: Ok, I see. My team will move the two widgets in next Thuesday. Are you OK?
+11:57:09 < _|Nix|_> Sounds good! Thanks!
+11:58:21 < Changsuk> _|Nix|_: Ok, I see, your welcome. We are one team. :)
+11:58:45 < Hyunsook> _|Nix|_, Changsuk: Ok, I see.
+11:59:07 < Hyunsook> :)
+12:00:21 < Changsuk> _|Nix|_, Hyunsook: After we make a moving job, Shall we make a meeting for making new widgets for jQM 1.5.0 and web-ui-fw 0.3.0?
+12:01:14 < Changsuk> _|Nix|_, Hyunsook: Also we can/should select nice widgets to be developed on that meeting.
+12:01:59 < Hyunsook> Changsuk, _|Nix|_: Oh, I agree.
+12:02:52 < Changsuk> _|Nix|_, Hyunsook: TIA, I'm sorry that I talk to you guys after regular meeting.
+12:03:18 < Changsuk> _|Nix|_, Hyunsook: Have a nice weekend and Talk to you on next meeting. bye~~
+12:03:27 < _|Nix|_> Changsuk: OK. Have a good one!
+12:03:36 < _|Nix|_> Changsuk: Don't worry about it!
+12:03:47 < Hyunsook> Changsuk: NP. :)
+12:04:16 < Hyunsook> Have a good weekend! :)
