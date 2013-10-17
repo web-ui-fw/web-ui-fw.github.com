@@ -1,0 +1,148 @@
+--- Log opened Thu Oct 17 09:55:41 2013
+09:55 -!- Irssi: Log file ~/2013-10-17.txt opened
+09:56 #web-ui-fw: < _|Nix|_> Hey, alll! If we're all here, we might as well get started. What d'you think?
+09:56 #web-ui-fw: < Hyunsook> _|Nix|_: Hi~
+09:57 #web-ui-fw: < Minkyeong> Yay~ :D
+09:57 #web-ui-fw: < Minkyeong> ALL: Hi~~
+09:57 #web-ui-fw: < Kangsik> Hi :)
+09:57 #web-ui-fw: < Hyunsook> _|Nix|_: Maybe Changsuk cannot attend our meeting today.
+09:58 #web-ui-fw: < _|Nix|_> Hyunsook: I read. That's fine.
+09:58 #web-ui-fw: < Hyunsook> _|Nix|_: Ah~ OK.
+09:59 #web-ui-fw: < _|Nix|_> So, who wants to go first?
+09:59 #web-ui-fw: < _|Nix|_> Kangsik: Welcome back!
+09:59 #web-ui-fw: < Hyunsook> _|Nix|_: Can you start first? I wonder whether you and uGoMobi discussed new widgets after 1.4.0.
+10:00 #web-ui-fw: < _|Nix|_> Hyunsook: OK.
+10:01 #web-ui-fw: < Kangsik> _|Nix|_: Thanks :)
+10:01 #web-ui-fw: < _|Nix|_> I raised the topic at last week's meeting, and the consensus was that we want to release 1.4.0 before we start roadmapping for 1.5.0 and beyond. So, if we take on any new widgets, we'll decide then. If, at that time, your help is still available, then we will take into account the fact that we can do more.
+10:02 #web-ui-fw: < _|Nix|_> We still have a pile of refactoring to do, as well as removing deprecated stuff.
+10:02 #web-ui-fw: < _|Nix|_> We also have to work to make our widgets more compatible with jQuery UI.
+10:03 #web-ui-fw: < _|Nix|_> So, if you guys could work on new widgets while we do all that, we can make 1.5.0 even better.
+10:03 #web-ui-fw: < _|Nix|_> In other news, I moved web-ui-fw up to jQM 1.4.0.
+10:03 #web-ui-fw: < Hyunsook> _|Nix|_: ah....
+10:04 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, Right.
+10:04 #web-ui-fw: < _|Nix|_> I didn't get the unit tests working yet, because jQM has removed the "depend" requirejs plugin from the library, so I'll have to check how that's been done.
+10:04 #web-ui-fw: < Hyunsook> _|Nix|_: Really?
+10:05 #web-ui-fw: < _|Nix|_> Hyunsook: Yeah. It used to be !depend[jquery.ui.widget] because jquery.ui.widget.js did not work as an AMD module.
+10:05 #web-ui-fw: < _|Nix|_> However, IIRC requirejs has changed to be able to accommodate modules which are not themselves AMD modules - or something like that.
+10:05 #web-ui-fw: < _|Nix|_> Either way, the depend plugin is no longer needed.
+10:06 #web-ui-fw: < _|Nix|_> I'm looking at the git log for 1.4.0.
+10:06 #web-ui-fw: < _|Nix|_> In the meantime, if you wanna see how the demos look with 1.4.0, check out branch jqm-1.4.0
+10:06 #web-ui-fw: < _|Nix|_> There're some styling issues with the tokentextarea too ...
+10:07 #web-ui-fw: < Hyunsook> _|Nix|_: hmmm.... I'm sorry but I didn't understand your words: I moved web-ui-fw up to jQM 1.4.0.
+10:07 #web-ui-fw: < _|Nix|_> I'm planning on merging jqm-1.4.0 into jqm after I get the unit tests working.
+10:07 #web-ui-fw: < _|Nix|_> Hyunsook: cd jqm; git checkout master;
+10:07 #web-ui-fw: < _|Nix|_> Hyunsook: Or more precisely: cd jqm; git checkout master; git pull origin master;
+10:07 #web-ui-fw: < _|Nix|_> :)
+10:08 #web-ui-fw: < _|Nix|_> Hyunsook: Then fix everything that broke.
+10:08 #web-ui-fw: < Hyunsook> _|Nix|_: just moment please.
+10:08 #web-ui-fw: < _|Nix|_> We actually did fairly well. I didn't have to change a lot of things to make web-ui-fw work with jQM 1.4.0.
+10:09 #web-ui-fw: < Hyunsook> Exactly.
+10:10 #web-ui-fw: < Hyunsook> _|Nix|_: Do your words mean that jQM version to use on web-ui-fw changed from 1.3 to 1.4.0?
+10:11 #web-ui-fw: < _|Nix|_> Hyunsook: Yes.
+10:11 #web-ui-fw: < _|Nix|_> Hyunsook: Well, that's whay I've been working on.
+10:11 #web-ui-fw: < _|Nix|_> Hyunsook: It's not merged yet.
+10:11 #web-ui-fw: < Hyunsook> _|Nix|_: ahha~!
+10:12 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has joined #jquery-meeting
+10:12 #web-ui-fw: < _|Nix|_> I found the commit that removes depend: https://github.com/jquery/jquery-mobile/commit/49c5dda032cbf60b029b9953cd0c9c6087bd065c
+10:12 #web-ui-fw: < _|Nix|_> I'll have to do the same in web-ui-fw.
+10:13 #web-ui-fw: < Hyunsook> _|Nix|_: I understood at first that web-ui-fw project was moved into jQM project. Phew ~~
+10:14 #web-ui-fw: < Hyunsook> _|Nix|_: OK, I see.
+10:15 #web-ui-fw: < _|Nix|_> Hyunsook: D0000d! Woah ...
+10:15 #web-ui-fw: < _|Nix|_> :)
+10:15 #web-ui-fw: < Hyunsook> _|Nix|_: hehe~~ :)
+10:15 #web-ui-fw: < _|Nix|_> So, yeah ... doing pretty well on the migration.
+10:16 #web-ui-fw: < Hyunsook> _|Nix|_: I'll look into your works on web-ui-fw after meeting.
+10:17 #web-ui-fw: < _|Nix|_> Hyunsook: OK.
+10:18 #web-ui-fw: < _|Nix|_> Another news item from me: I've started working on making Cordova work with the Tizen SDK.
+10:18 #web-ui-fw: < Hyunsook> _|Nix|_: Oh~!
+10:18 #web-ui-fw: < _|Nix|_> So, basically, my job is to make the workflow illustrated at http://cordova.apache.org/docs/en/3.1.0/guide_cli_index.md.html#The%20Command-line%20Interface work with tizen.
+10:19 #web-ui-fw: < _|Nix|_> Like cordova platform add tizen
+10:19 #web-ui-fw: < _|Nix|_> cordova build tizen
+10:19 #web-ui-fw: < _|Nix|_> etc.
+10:20 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has joined #jqueryui-dev
+10:20 #web-ui-fw: < Hyunsook> _|Nix|_: Wow~~ you are doing a lot of things!
+10:21 #web-ui-fw: < Hyunsook> _|Nix|_: :)
+10:21 #web-ui-fw: < _|Nix|_> Hyunsook: I know, and it's not like I have any more time to do them in ...
+10:21 #web-ui-fw: < Kangsik> _|Nix|_: Good!!!! :-)
+10:22 #web-ui-fw: < _|Nix|_> Kangsik: You mean about Cordova? I guess ...
+10:22 #web-ui-fw: < _|Nix|_> Kangsik: I guess there're a lot of apps that use it and so it needs to work on Tizen.
+10:23 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has quit [Ping timeout: 260 seconds]
+10:24 #web-ui-fw: < Kangsik> _|Nix|_: No... I have been praised for your passion about opensource.
+10:24 #web-ui-fw: < Kangsik> _|Nix|_: :)
+10:25 #web-ui-fw: < Minkyeong> _|Nix|_: Wow, that's coooooool.. I must add, both Cordova and your job are cool
+10:25 -!- fikst [~fikst@84.196.66.213] has joined #jquery-meeting
+10:26 #web-ui-fw: < _|Nix|_> Thanks!
+10:26 #web-ui-fw: < _|Nix|_> So, that's basically it from me.
+10:27 #web-ui-fw: < _|Nix|_> Kangsik: Have you been up to anything other than getting a tan? :) Bali sounds like it's a lot closer to Korea than it is to Finland. From here it sounds really, really far away :)
+10:27 -!- kinblas [~kinblas@c-98-210-201-219.hsd1.ca.comcast.net] has quit [Ping timeout: 259 seconds]
+10:27 #web-ui-fw: < _|Nix|_> Kangsik: ... but I should check Google Maps.
+10:28 #web-ui-fw: < Hyunsook> _|Nix|_: Sorry, I don't know much about Cordova. I'll read links you let me know later.
+10:28 #web-ui-fw: < _|Nix|_> Kangsik: Oh yeah - waaay closer :)
+10:28 #web-ui-fw: < _|Nix|_> Hyunsook: Cordova is an API for accessing device functions via HTML5.
+10:29 #web-ui-fw: < _|Nix|_> Hyunsook: It uses a WebView to show an HTML5 front end with JS bindings into the native stuff.
+10:29 #web-ui-fw: < _|Nix|_> Hyunsook: It has implementations for all major platforms.
+10:29 #web-ui-fw: < Hyunsook> _|Nix|_: ah~~
+10:30 #web-ui-fw: < _|Nix|_> Hyunsook: Tizen, of course, needs no native stuff, because we have the Tizen APIs. We just need to add a polyfill so they look like Cordova.
+10:30 #web-ui-fw: < Hyunsook> _|Nix|_: ahha~
+10:30 #web-ui-fw: < _|Nix|_> Hyunsook: ... and so Tizen doesn't need the Web view either, because we have the Tizen Web Runtime.
+10:31 #web-ui-fw: < _|Nix|_> Hyunsook: So, packaging for Tizen should be really simple.
+10:32 #web-ui-fw: < Hyunsook> _|Nix|_: Oh, Good!
+10:32 #web-ui-fw: < _|Nix|_> How about you, Minkyeong? What have you been working on?
+10:32 #web-ui-fw: < Hyunsook> _|Nix|_: Thank you for explanation. ;)
+10:34 #web-ui-fw: < Minkyeong> _|Nix|_: Ah.. I'm lost in jQM 1.4.0-beta. Making sample pages, testing it..
+10:35 #web-ui-fw: < Hyunsook> _|Nix|_: My team is debugging jQM 1.4.0 (master branch). Minkyeong does it, too.
+10:35 #web-ui-fw: < _|Nix|_> Oh, that's great!
+10:36 #web-ui-fw: < Hyunsook> _|Nix|_: My team found bugs on buttonMarkup, so I submitted PR about that.
+10:36 #web-ui-fw: < _|Nix|_> Hyunsook: I saw your PR about buttonMarkup. I'm afraid that buttonMarkup was never really intended to be a widget.
+10:36 #web-ui-fw: < _|Nix|_> Hyunsook: It was supposed to be a simple class manipulation utility. Basically, like .toggleClass() but with more features.
+10:37 #web-ui-fw: < _|Nix|_> Hyunsook: Only widgets have the "option" method.
+10:40 #web-ui-fw: < Hyunsook> _|Nix|_: Yes.... But If so, I think API document will be modified. Becuase API seems to explain like the button can set and get option by buttonMarkup.
+10:41 #web-ui-fw: < _|Nix|_> Hyunsook: I'm sorry about that. The API document refers to button widgets, not buttonMarkup. This confusion is our fault. This is precisely the reason why we want buttonMarkup to go away.
+10:42 #web-ui-fw: < _|Nix|_> Hyunsook: If you want to make something, anything, look like a button, all you have to do is add class="ui-btn ui-corner-all ui-shadow"
+10:42 #web-ui-fw: < _|Nix|_> Hyunsook: However, if you have an <input type="button"></input> you cannot simply add class="ui-btn ui-corner-all ui-shadow", because it will not have a label.
+10:42 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, I know.
+10:43 #web-ui-fw: < _|Nix|_> Hyunsook: That's why we need the button widget.
+10:43 #web-ui-fw: < _|Nix|_> Hyunsook: It wraps the <input> into a <div class="ui-btn ui-corner-all ui-shadow">Button Label<input type="button" value="Button Label"></input></div>
+10:44 #web-ui-fw: < _|Nix|_> Hyunsook: And because it's a widget, it has all those options.
+10:44 #web-ui-fw: < _|Nix|_> Hyunsook: However, buttonMakrup is not used anymore anywhere in the library, because it's deprecated.
+10:44 #web-ui-fw: < _|Nix|_> Hyunsook: Earlier, when I started working on jQM, I modified buttonMarkup to be more like a widget in that you can modify options later on.
+10:45 #web-ui-fw: < _|Nix|_> Hyunsook: Then, I used buttonMarkup from the button widget to basically bridge the widget options to buttonMarkup options.
+10:45 #web-ui-fw: < _|Nix|_> Hyunsook: However, I quickly realized that buttonMarkup needs to go away, because it doesn't really do anything. The button widget can handle the options on its own.
+10:46 #web-ui-fw: < Hyunsook> _|Nix|_: I testd samples regarding to PR-6618, options set on button was unkept, like class="ui-btn ui-corner-all ui-shadow". But it's issue I didn't checked properly. I will check again.
+10:46 #web-ui-fw: < _|Nix|_> Hyunsook: OK. If the button widget is not behaving properly, then that's definitely a bug!
+10:47 #web-ui-fw: < _|Nix|_> Hyunsook: Like, if you have $( ".something" ).button(); $( ".something" ).button( "option", "corners", false ); and it doesn't turn off corners, then that's a big bug!
+10:47 #web-ui-fw: < _|Nix|_> Hyunsook: ... and then you have to look at js/widgets/forms/button.js to fix that bug.
+10:47 #web-ui-fw: < Hyunsook> _|Nix|_: As I alread word, I know it's deprecated, and I asked to uGoMobi about that before submitting PR.
+10:48 #web-ui-fw: < _|Nix|_> Hyunsook: js/widgets/forms/button.js is not deprecated. js/jquery.mobile.buttonMarkup.js is deprecated.
+10:49 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has joined #jquery-meeting
+10:49 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, right. buttonMarkup is deprecated.
+10:50 #web-ui-fw: < Hyunsook> _|Nix|_:  If PR-6618 is not helpful for you, you can close it.
+10:51 #web-ui-fw: < Hyunsook> _|Nix|_: I'll submit about the other bugs.
+10:51 #web-ui-fw: < _|Nix|_> Hyunsook: OK. Thanks for testing!
+10:52 #web-ui-fw: < _|Nix|_> We've made a lot of changes to the widgets, so I'm sure there will be bugs. If we find them before 1.4.0, it will be all the better, because people won't have to wait for 1.4.1 before they are fixed.
+10:52 -!- Krinkle is now known as Krinkle|detached
+10:52 -!- Krinkle is now known as Krinkle|detached
+10:53 #web-ui-fw: < Hyunsook> _|Nix|_: Yes, I do think so.
+10:53 #web-ui-fw: < Hyunsook> _|Nix|_: Ah! One more question about button widget. short..
+10:53 #web-ui-fw: < _|Nix|_> Sure! Go ahead.
+10:54 -!- markelog [~markelog@dhcp234-224-red.yandex.net] has joined #jquery-meeting
+10:55 #web-ui-fw: < Hyunsook> _|Nix|_: Does jQM 1.4.0 Button widget support version of IE?
+10:55 #web-ui-fw: < Hyunsook> _|Nix|_: Pro IE7 ?
+10:57 #web-ui-fw: < _|Nix|_> Hyunsook: No. I believe we have dropped support for IE7, because it doesn't support pseudoselectors.
+10:57 #web-ui-fw: < _|Nix|_> Hyunsook: ... and doing buttonMarkup without additional divs requires :after
+10:58 #web-ui-fw: < Hyunsook> _|Nix|_: Oh. sorry.  Pro IE7 is typo.
+10:59 #web-ui-fw: < _|Nix|_> NP. What did you mean?
+11:00 #web-ui-fw: < Hyunsook> _|Nix|_:  I want to know IE versions I should test .
+11:00 #web-ui-fw: < _|Nix|_> Hyunsook: IE8.
+11:01 #web-ui-fw: < Hyunsook> _|Nix|_: Ok, I see. Thanks~
+11:01 #web-ui-fw: < _|Nix|_> Awesome! Thank you!
+11:01 #web-ui-fw: < Hyunsook> _|Nix|_: :)
+11:01 -!- fikst [~fikst@84.196.66.213] has quit [Quit: Leaving]
+11:01 #web-ui-fw: < _|Nix|_> OK. So, if we have no further topics, let's call this one. Have a good weekend, all, and thanks a lot for your help!
+11:03 #web-ui-fw: < Hyunsook> That's all. Have a good weekend. :)
+11:03 #web-ui-fw: < Minkyeong> Have a good weekend! :-)
+11:03 #web-ui-fw: < Kangsik> Have a good weekend! See you again. :-)
+11:10 -!- jqmobilecommit [~jqmobilec@192.30.252.51] has joined #jqueryui-dev
+11:10 #jqueryui-dev: < jqmobilecommit> [jquery-mobile] gabrielschulhof closed pull request #6618: buttonMarkup: Fix bugs that buttonMarkup doesn't set options properly and doesn't get a value of options. (master...pr-1.4-buttonmarkup)  http://git.io/8v5T-A
+11:10 -!- jqmobilecommit [~jqmobilec@192.30.252.51] has left #jqueryui-dev []
+--- Log closed Thu Oct 17 11:11:01 2013
