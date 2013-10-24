@@ -1,0 +1,196 @@
+--- Log opened Thu Oct 24 10:00:12 2013
+10:00 -!- Irssi: Log file ~/2013-10-24.txt opened
+10:00 #web-ui-fw: < _|Nix|_> Hey, all!
+10:00 #web-ui-fw: < _|Nix|_> How are y'all doing?
+10:01 #web-ui-fw: < _|Nix|_> Thanks for all the bugs/PRs!
+10:01 #web-ui-fw: < Minkyeong> Hi, all :D
+10:01 #web-ui-fw: < Kangsik> Hi. :-)
+10:01 #web-ui-fw: < Hyunsook> Hi~
+10:02 #web-ui-fw: < Kangsik> _|Nix|_: We are one team. :-)
+10:02 #web-ui-fw: < _|Nix|_> Kangsik: Indeed!
+10:02 #web-ui-fw: < _|Nix|_> Kangsik: So, you wanna start today?
+10:03 #web-ui-fw: < Changsuk> Hi~ All~~
+10:03 #web-ui-fw: < _|Nix|_> Changsuk: Hey!
+10:03 #web-ui-fw: < Changsuk> _|Nix|_: I got your comment a few minutes ago. :)
+10:04 #web-ui-fw: < Changsuk> _|Nix|_: OK~ I see.
+10:04 #web-ui-fw: < Changsuk> Hyunsook, Kangsik: Can you read Gabriels's comment for me?
+10:04 #web-ui-fw: < Changsuk> Hyunsook, Kangsik: Here it is -> <_|Nix|_> Changsuk: If optionheader is not in tizen, then let's move progressbar first and then we can pick another widget from Tizen Web UI FW.
+10:05 #web-ui-fw: < Hyunsook> Changsuk: Ah~ yes, i read.
+10:06 #web-ui-fw: < Kangsik> Changsuk: Yes, i read it.
+10:06 #web-ui-fw: < Hyunsook> Changsuk, _|Nix|_: Ah! Minkyeong has a question about Progressbar widget picked in last meeting. Right?
+10:06 #web-ui-fw: < Minkyeong> Hyunsook: Yes!
+10:07 #web-ui-fw: < Changsuk> Minkyeong: yes... Can you describe about it for us?
+10:08 #web-ui-fw: < Minkyeong> I'm porting Progressbar widget now..
+10:08 #web-ui-fw: < Minkyeong> In the past, Progressbar was show the progress percentage only.
+10:08 #web-ui-fw: < Minkyeong> http://web-ui-fw.github.io/#progressbar-demo
+10:09 #web-ui-fw: < Minkyeong> But now, Progressbar has two styles.
+10:09 #web-ui-fw: < Minkyeong> 1st, shows the progress percentage same as the old one.
+10:09 #web-ui-fw: < _|Nix|_> Minkyeong: You mean the Knight Rider mode, where the bar goes back and forth?
+10:10 #web-ui-fw: < Changsuk> _|Nix|_: Knight Rider mode? I'm sorry that I can't understand the word... :) what was that mean?
+10:11 #web-ui-fw: < Minkyeong> _|Nix|_: What is the Knight Rider mode? Yeh.. I don't understand well ;(
+10:11 #web-ui-fw: < _|Nix|_> Changsuk: http://i253.photobucket.com/albums/hh69/RUIXARUTO/Diversos/SCANNER-KITT-KNIGHT-RIDER-PORTUG-1.gif
+10:11 #web-ui-fw: < Changsuk> Minkyeong: Then what is the second style?
+10:12 #web-ui-fw: < _|Nix|_> http://www.newsbiscuit.com/wp-content/uploads/2013/07/Knight-Rider.jpg
+10:12 #web-ui-fw: < Minkyeong> Changsuk, _|Nix|_: 2nd style, 'Pending' style shows striped bar and not indicates the percentage.
+10:12 #web-ui-fw: < Changsuk> _|Nix|_: ah~ I got it. Thanks~!! :)
+10:13 #web-ui-fw: < _|Nix|_> Minkyeong: Oh, OK ... that's actually a third style: 1. [XXXXX     ], 2. [  <--XXXXX-->  ], 3. [/////////////]
+10:13 #web-ui-fw: < Changsuk> Minkyeong: Can you show us an example?
+10:14 #web-ui-fw: < Minkyeong> _|Nix|_: 2nd style, I mean, your 3rd style.  [///////]
+10:14 #web-ui-fw: < _|Nix|_> Minkyeong: 1. Is classic, 2. is Knight Rider, 3. is stripes.
+10:15 #web-ui-fw: < Minkyeong> _|Nix|_: Oh.. I got a new knowledge :-)
+10:15 #web-ui-fw: < Changsuk> _|Nix|_, Minkyeong: ah... I can get the difference between No. 1 and 3. :)
+10:15 #web-ui-fw: < _|Nix|_> Minkyeong: OK. I dunno ... I think the best way would probably be to organize this the same way as table.
+10:16 #web-ui-fw: < Minkyeong> Changsuk: That's right.
+10:16 #web-ui-fw: < _|Nix|_> Minkyeong: I think the basic progress bar should be style 1.
+10:17 #web-ui-fw: < _|Nix|_> Minkyeong: Then we can write an extension for style 2., and another one for style 3.
+10:17 #web-ui-fw: < Changsuk> Minkyeong: Anyway, What is your concern or problem?
+10:17 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. I think so.
+10:18 #web-ui-fw: < Minkyeong> Changsuk: Well.. Unfortunately, the classic and striped styles are different widgets in Tizen.
+10:18 #web-ui-fw: < Minkyeong> So I should be determined to include the 'striped' style or exclude it.
+10:18 #web-ui-fw: < Changsuk> Minkyeong: Huh? really?
+10:19 #web-ui-fw: < Changsuk> Hyunsook: Why those sytles are seperated with two widgets? Do you know a reason?
+10:20 #web-ui-fw: < Minkyeong> Changsuk: Classic style is Progressbar widget, and striped style is Progress widget. These are completely different ;(
+10:20 #web-ui-fw: < Changsuk> Minkyeong: Sounds too bad...
+10:21 #web-ui-fw: < Hyunsook> Changsuk: No, I'm sorry. Currently, SEC folks are managing the widget.
+10:21 #web-ui-fw: < Changsuk> Minkyeong: Hmmm... I think that it can be better to make One widget getting the two styles.
+10:21 #web-ui-fw: < _|Nix|_> Yeah, I agree.
+10:21 #web-ui-fw: < Hyunsook> Changsuk: So, I donno histories for the widget.
+10:22 #web-ui-fw: < Hyunsook> +1
+10:22 #web-ui-fw: < Minkyeong> Changsuk: I agree :)
+10:22 #web-ui-fw: < Changsuk> Hyunsook: Ok, I can understand that.
+10:22 #web-ui-fw: < _|Nix|_> Where can I check out the Tizen Web UI FW code?
+10:23 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook : I think Hyunsook may upload the codes to web-ui-fw GH. Hyunsook, right?
+10:24 #web-ui-fw: < _|Nix|_> Changsuk: I've found something: https://review.tizen.org/git/
+10:25 #web-ui-fw: < Hyunsook> Changsuk: Yeah!
+10:25 #web-ui-fw: < _|Nix|_> Argh! I hate this!
+10:25 #web-ui-fw: < _|Nix|_> https://review.tizen.org/git/?p=framework/web/web-ui-fw.git;a=tree shows the repo, but I dunno how to clone it!
+10:26 #web-ui-fw: < Changsuk> _|Nix|_: As I know, that site is a public code review site not private or up-to-date.
+10:26 #web-ui-fw: < Hyunsook> Changsuk: Oh! I'm sorry. I uploaded Tizen Web UIFW demos on my repository just now.
+10:27 #web-ui-fw: < _|Nix|_> Changsuk: Well, I'm mostly looking for the progress/progressbar API just to see if we can unify it.
+10:27 #web-ui-fw: < Hyunsook> Here are demos of Tizen Web UIFW 0.2.52 included on Tizen SDK 2.2.: http://hyunsook.github.io/tizen-winsets/index.html
+10:27 #web-ui-fw: < Changsuk> Hyunsook: Thanks~!
+10:27 #web-ui-fw: < _|Nix|_> Oh, I see!
+10:27 #web-ui-fw: < _|Nix|_> "progress" is actually the spinner!
+10:28 #web-ui-fw: < Hyunsook> Changsuk: You're welcome.
+10:29 #web-ui-fw: < _|Nix|_> OK, so if we look at http://hyunsook.github.io/tizen-winsets/widgets/progressbar.html the last item is a spinner.
+10:29 #web-ui-fw: < Hyunsook> _|Nix|_: Here is progress API. : https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.uiwidget.apireference%2Fhtml%2Fwidgets%2Fwidget_progress.htm
+10:29 #web-ui-fw: < _|Nix|_> That's weird.
+10:29 #web-ui-fw: < Changsuk> Minkyeong: hmmm... I think that Progress widget doen't look like ProgressBar widget.
+10:30 #web-ui-fw: < Minkyeong> _|Nix|_, Changsuk: 2nd item in 'Progressbar demo page' is 'Progress' widget, not 'Progressbar' ;(
+10:30 #web-ui-fw: < _|Nix|_> OK. This is easy.
+10:30 #web-ui-fw: < Hyunsook> _|Nix|_: ... and this is progressbar API. : https://developer.tizen.org/help/index.jsp?topic=%2Forg.tizen.web.uiwidget.apireference%2Fhtml%2Fwidgets%2Fwidget_progressbar.htm
+10:31 #web-ui-fw: < Changsuk> All: I think that we may/should get progress bar widget not progress widget. right?
+10:31 #web-ui-fw: < _|Nix|_> I have an idea.
+10:31 #web-ui-fw: < Changsuk> _|Nix|_: yes.
+10:31 #web-ui-fw: < _|Nix|_> We make the progress bar widget and it can do everything that progress and progressbar can do, except the spinner.
+10:32 #web-ui-fw: < _|Nix|_> Then, we set the initSelector so that it creates a progress bar whenever it's not a spinner.
+10:32 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. I told about it.
+10:32 #web-ui-fw: < Changsuk> _|Nix|_: Right.
+10:32 #web-ui-fw: < Minkyeong> _|Nix|_: Okay, I agree.
+10:33 #web-ui-fw: < Hyunsook> +1
+10:33 #web-ui-fw: < _|Nix|_> Then, we set $.data( this.element[ 0 ], "mobile-progress", this ) whenever users expect a progress and not a progressbar.
+10:33 #web-ui-fw: < Changsuk> All: I think that Progress widget is a different what we thought.
+10:33 #web-ui-fw: < _|Nix|_> So then progressbar will be a bar, and progress will be a spinner.
+10:34 #web-ui-fw: < _|Nix|_> Yeah.
+10:34 #web-ui-fw: < _|Nix|_> Why can progress be both a bar and a circle ...
+10:34 #web-ui-fw: < _|Nix|_> ?
+10:34 #web-ui-fw: < _|Nix|_> It should be called spinner, not progress ...
+10:35 #web-ui-fw: < Changsuk> _|Nix|_: Yes, I agreed with your idea but It'd better to get ProgressBar widget's feature first.
+10:35 #web-ui-fw: < _|Nix|_> Changsuk: Yes, I agree.
+10:35 #web-ui-fw: < Changsuk> _|Nix|_, Minkyeong: After that, we can add spinning feature to that.
+10:36 #web-ui-fw: < _|Nix|_> Changsuk: Yep.
+10:36 #web-ui-fw: < Minkyeong> Changsuk: Yes
+10:36 #web-ui-fw: < _|Nix|_> Changsuk: ... and to stay in line with jQM styling, I think we should use the style from flipswitch as a base.
+10:37 #web-ui-fw: < _|Nix|_> http://view.jquerymobile.com/master/demos/flipswitch/
+10:37 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I'll keep it in my mind.
+10:37 #web-ui-fw: < _|Nix|_> The reason I say that is that the flipswitch has an inset shadow.
+10:38 #web-ui-fw: < _|Nix|_> ... except for the progress bar the button should be ui-btn-active.
+10:38 #web-ui-fw: < Changsuk> _|Nix|_: Inset shadow? what is it?
+10:39 #web-ui-fw: < _|Nix|_> Changsuk: A shadow that is cast /into/ the widget.
+10:39 #web-ui-fw: < _|Nix|_> Changsuk: Just like textinput.
+10:40 #web-ui-fw: < Changsuk> _|Nix|_: You mean... Are the grey colors on left and top corners?
+10:40 #web-ui-fw: < _|Nix|_> Changsuk: So, basically, a progress bar is a long flipswitch with an active button.
+10:41 #web-ui-fw: < _|Nix|_> Changsuk: I'll try to make something on jsbin.com
+10:41 #web-ui-fw: < Changsuk> _|Nix|_: ah... Looks like a wide~~ flipswitch?
+10:42 #web-ui-fw: < Changsuk> _|Nix|_: Huh? really? anyway thanks so much for making an example. :)
+10:43 #web-ui-fw: < _|Nix|_> Yeah. Basically. A wide flipswitch.
+10:43 #web-ui-fw: < _|Nix|_> I think that'd be perfect.
+10:44 #web-ui-fw: < Changsuk> Minkyeong, Hyunsook: Did you get Gabriel's words? Is there any concern to make the style?
+10:44 #web-ui-fw: < _|Nix|_> ... and we should reuse as many of jQM's classes as possible, like ui-corner-all, ui-shadow-inset, ui-bar-x for the swatch, etc.
+10:44 #web-ui-fw: < Changsuk> _|Nix|_: Ok~ I see.
+10:45 #web-ui-fw: < Changsuk> _|Nix|_: Yes, right. I think so.
+10:46 #web-ui-fw: < Minkyeong> Changsuk, _|Nix|_: Okay, I understood it.
+10:46 #web-ui-fw: < Changsuk> Minkyeong: OK~~ Thanks~
+10:46 #web-ui-fw: < _|Nix|_> http://jsbin.com/ofuhaw/688/edit
+10:46 #web-ui-fw: < Hyunsook> Changsuk: I got his words.
+10:47 #web-ui-fw: < Changsuk> _|Nix|_: Looks nice~! Thanks for your effort. ;)
+10:48 #web-ui-fw: < _|Nix|_> Changsuk: That's basically just to illustrate the point.
+10:48 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: Ok, then, I think that we shoud/will choose other Tizen Web UIFW widgets to apply web-ui-fw first.
+10:48 #web-ui-fw: < _|Nix|_> We should also consider that the widget could be based on an input type="range".
+10:49 #web-ui-fw: < Hyunsook> Changsuk: Yes, right.
+10:49 #web-ui-fw: < _|Nix|_> So, we might have to set the value, and take min and max into consideration.
+10:49 #web-ui-fw: < _|Nix|_> ... except that it'll be a read-only range, not a slider.
+10:50 #web-ui-fw: < _|Nix|_> That could be yet another extension.
+10:50 #web-ui-fw: < _|Nix|_> So, the most important thing to keep in mind is this: Don't add too many features to the widget.
+10:50 #web-ui-fw: < _|Nix|_> Make a basic widget, and add extensions for more features.
+10:50 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: so if your guys include me have some, pls go over it and leave your ideas on this channel.
+10:51 #web-ui-fw: < Changsuk> _|Nix|_: Ok~ thanks for your guides~! :)
+10:51 #web-ui-fw: < Minkyeong> _|Nix|_: Okay :-)
+10:51 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: I'll also leave my idea what widget we can get.
+10:52 #web-ui-fw: < _|Nix|_> Awesome, all!
+10:52 #web-ui-fw: < _|Nix|_> We'll have the super-bestest progress bar ever! :)
+10:53 #web-ui-fw: < _|Nix|_> The progress bar to end all progress bars :)
+10:53 #web-ui-fw: < Minkyeong> _|Nix|_: I hope so! (lol)
+10:53 #web-ui-fw: < _|Nix|_> So, ... progress?
+10:53 #web-ui-fw: < _|Nix|_> No, just kidding :)
+10:54 #web-ui-fw: < Changsuk> _|Nix|_: We hope so. and we should/will choose other Tizen widgets.
+10:54 #web-ui-fw: < _|Nix|_> Changsuk: OK.
+10:55 #web-ui-fw: < Hyunsook> _|Nix|_: Make a basic widget, and add extensions for more features. => hmmmm... Do you mean that widgets is extended by extend()? Or do you mean we create the widget having basic and light features, and then we add another fetures into the widget?
+10:56 #web-ui-fw: < _|Nix|_> Hyunsook: $.widget( "mobile.progressbar", $.mobile.progressbar, { /* extra feature */ });
+10:56 #web-ui-fw: < _|Nix|_> Hyunsook: Exactly. First, we have $.widget( "mobile.progressbar", { /* basic progress bar */ });
+10:57 #web-ui-fw: < _|Nix|_> Hyunsook: Then, $.widget( "mobile.progressbar", $.mobile.progressbar, { /* stripes feature */ });
+10:57 #web-ui-fw: < Kangsik> _|Nix|_: For example. basic widget is listview, extension is listview.autodivers.js
+10:57 #web-ui-fw: < _|Nix|_> Kangsik: Exactly.
+10:57 #web-ui-fw: < _|Nix|_> Kangsik: Or table, and table.reflow, and table.columntoggle.
+10:58 #web-ui-fw: < Hyunsook> _|Nix|_: Oh, I got it.
+10:58 #web-ui-fw: < _|Nix|_> Hyunsook: Each extension should be in a different file.
+10:58 #web-ui-fw: < _|Nix|_> Hyunsook: ... and use AMD to link them.
+10:58 #web-ui-fw: < Hyunsook> _|Nix|_: Yes. I understood. :)
+10:59 #web-ui-fw: < _|Nix|_> OK. Sounds like this is gonna be a lotta fun :)
+11:00 #web-ui-fw: < Changsuk> Hyunsook: How about route widget? Did you decide a plan to make that widget's features?
+11:01 #web-ui-fw: < Hyunsook> Changsuk: Yeah! I'm typing that now. ;)
+11:01 #web-ui-fw: < Hyunsook> _|Nix|_: My team discussed Route map widget (Subway map widget) featrues.
+11:02 #web-ui-fw: < _|Nix|_> http://jsbin.com/ofuhaw/689/ Figured out the margins and padding.
+11:02 #web-ui-fw: < Hyunsook> _|Nix|_, Changsuk: ... and I and Wonseop kim have updated Wiki for Route map widget. : https://github.com/web-ui-fw/web-ui-fw/wiki/New-widgets:-Route-Map-(or-Subway-Map)
+11:02 #web-ui-fw: < Changsuk> _|Nix|_: Looks like a perfect widget. :)
+11:02 #web-ui-fw: < _|Nix|_> Changsuk: Yeah, so the style is pretty simple.
+11:03 #web-ui-fw: < Changsuk> Minkyeong: when you move the codes, pls refer the URL first.
+11:03 #web-ui-fw: < Minkyeong> Changsuk: Yes, I will.
+11:04 #web-ui-fw: < _|Nix|_> OK. Subway map looks cool!
+11:06 #web-ui-fw: < Hyunsook> :)
+11:06 #web-ui-fw: < Changsuk> Hyunsook: Thanks~
+11:06 #web-ui-fw: < Hyunsook> Changsuk: You're welcome.
+11:07 #web-ui-fw: < _|Nix|_> Alright. Do we have any other topics to discuss?
+11:07 #web-ui-fw: < Changsuk> All: I told you all things~
+11:08 #web-ui-fw: < Changsuk> All: for Now. ;)
+11:08 #web-ui-fw: < _|Nix|_> :)
+11:08 #web-ui-fw: < _|Nix|_> Good progress on progressbar :)
+11:08 #web-ui-fw: < Hyunsook> As far as I know, that's all.
+11:09 #web-ui-fw: < Hyunsook> _|Nix|_: Ah! One more.
+11:09 #web-ui-fw: < Hyunsook> _|Nix|_: Now I tryed to fix the build errors of web-ui-fw jqm-1.4 on my web-ui-fw repo forked, but.... it isn't easy. :(
+11:09 #web-ui-fw: < _|Nix|_> Hyunsook: I know ... I have to figure out how to configure requirejs.
+11:09 #web-ui-fw: < Hyunsook> _|Nix|_: I think you can fix the errors.
+11:10 #web-ui-fw: < _|Nix|_> Hyunsook: Yeah. I hope I'll have some time.
+11:10 #web-ui-fw: < _|Nix|_> Hyunsook: Fortunately the demos work.
+11:10 #web-ui-fw: < Hyunsook> _|Nix|_: Ok~ Thanks.
+11:10 #web-ui-fw: < Hyunsook> _|Nix|_: Yeap. I already checked that. :)
+11:11 #web-ui-fw: < _|Nix|_> Kangsik, Minkyeong: All set?
+11:11 #web-ui-fw: < Minkyeong> _|Nix|_: I told all :-)
+11:12 #web-ui-fw: < Kangsik> _|Nix|_ : Yes. :)
+11:12 #web-ui-fw: < Hyunsook> _|Nix|_: Now, I told you all things truly. ;)
+11:13 #web-ui-fw: < _|Nix|_> Alright. In that case, good work all round, and have a good weekend all!
+11:13 #web-ui-fw: < Hyunsook> Have a good weekend all~! Bye~
+11:13 #web-ui-fw: < Minkyeong> All: Have a nice weekend :-)
+11:13 #web-ui-fw: < Kangsik> Thanks.. Have a good weekend. :)
+11:14 #web-ui-fw: < Changsuk> All: I hope that we will make a nice way for each. Have a good weekend~~:)
+--- Log closed Thu Oct 24 11:14:45 2013
