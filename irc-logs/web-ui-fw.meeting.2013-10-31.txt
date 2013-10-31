@@ -1,0 +1,232 @@
+--- Log opened Thu Oct 31 08:27:17 2013
+09:01 < Hyunsook> _|Nix|_: Oh! I'm sorry.  I'm gone out for a few minute. My immediate superior calls me and Kangsik into his meeting room.
+09:02 < _|Nix|_> OK. I can wait.
+09:02 < _|Nix|_> Do let me know when we can start.
+09:04 < Hyunsook> _|Nix|_: I excused myself from the meeting.
+09:05 < _|Nix|_> OK. So, can we get going?
+09:06 < Hyunsook> _|Nix|_: Oh, please wait a moment.
+09:14 < _|Nix|_> Hey, if you guys are busy, we can always do it tomorrow ...
+09:20 < Hyunsook> _|Nix|_: Came back!
+09:20 < Hyunsook> _|Nix|_: sigh ...
+09:20 < Hyunsook> _|Nix|_: I had been so busy all day. :(
+09:21 < Minkyeong> Hi, all!
+09:21 < Hyunsook> _|Nix|_: Sorry to have kept you waiting.
+09:21 < Hyunsook> Kangsik: Are you there?
+09:22 < Hyunsook> Minkyeong: Hi~
+09:22 < Kangsik> Hyunsook: Yep!!
+09:22 < Kangsik> Hi.. All~ :)
+09:22 < Hyunsook> _|Nix|_: I think we can start now.
+09:23 < Kangsik> _|Nix|_: Oh. I am sorry to late.
+09:23 < Changsuk> All: Hi~ I'm sorry that i'm late. I wouldn;\
+09:23 < Changsuk> 't join this meeting~
+09:24 < _|Nix|_> OK.
+09:24 < _|Nix|_> Let's get going :)
+09:24 < Hyunsook> :)
+09:24 < Minkyeong> Yep.
+09:25 < Changsuk> All: I left my message before our meeting.
+09:25 < _|Nix|_> So, I fixed the build, but it requires changes to jQM.
+09:26 < Changsuk> All: And If we can, could we progress today meeting briefly?
+09:26 < Changsuk> _|Nix|_: Great~!
+09:26 < Hyunsook> _|Nix|_: Oh, Good~!
+09:26 < _|Nix|_> There are places where jQM references internal modules without a path, and that's no good, because then requirejs is assuming all kinds of things about them.
+09:27 < Kangsik> _|Nix|_: Goooooood...... Thank you. :)
+09:27 < _|Nix|_> So, I think I'll fix that for 1.4.1
+09:27 < Changsuk> _|Nix|_: You did such a nice work~! :)
+09:27 < _|Nix|_> Kangsik: Well, I'm not sure how to commit this. 
+09:27 < _|Nix|_> I have to commit to jQM as well.
+09:28 < Changsuk> _|Nix|_: Ok~
+09:28 < _|Nix|_> I could make a branch in my own jQM repo and we can use that until 1.4.0 is released.
+09:29 < Kangsik> _|Nix|_: Is it temporary?
+09:29 < _|Nix|_> Kangsik: Yes.
+09:30 < Changsuk> _|Nix|_: Ok, That's nice~
+09:30 < _|Nix|_> I'll try to make the build work and then I'll push everything.
+09:30 < Hyunsook> _|Nix|_: ah~~ If it's possible it, it's better to do so.
+09:31 < _|Nix|_> VirtualGrid may need some work, because page.sections is gone, and has been replaced by toolbar.
+09:31 < Changsuk> _|Nix|_: OK, then when you make the build module, pls let us know via IRC~
+09:31 < _|Nix|_> Changsuk: OK.
+09:31 < Hyunsook> _|Nix|_: Yes, right.
+09:32 < Hyunsook> _|Nix|_: VirtualGrid and Tokentextarea need to modify.
+09:32 < Kangsik> _|Nix|_:Yes, I know that. I will modify VG as soon as possible.
+09:32 < Changsuk> _|Nix|_: and, did you see Minkyeong's message?
+09:32 < _|Nix|_> Hyunsook: OK. I'll push the dependency changes ASAP.
+09:32 < _|Nix|_> Changsuk: Something about a schedule ... ? Is it in the wiki?
+09:33 < Hyunsook> _|Nix|_: No. It isn't wiki schedule.
+09:33 < Hyunsook> _|Nix|_: it means Progressbar developement schedue.
+09:33 < Minkyeong> _|Nix|_: I left the message here, IRC. :)
+09:33 < _|Nix|_> "06:57:15 < Minkyeong> Changsuk: The development will be done this week. And next week, I'll continue bug fixed."
+09:33 < Changsuk> _|Nix|_: ah, progressbar schedule.
+09:34 < Changsuk> _|Nix|_: yes, right. :)
+09:34 < Minkyeong> _|Nix|_: That's right
+09:34 < _|Nix|_> OK. Gotcha!
+09:34 < _|Nix|_> Minkyeong: Awesome!
+09:34 < _|Nix|_> Looking forward to it.
+09:34 < _|Nix|_> Minkyeong: Please don't forget the API docs and the demos!
+09:34 < Minkyeong> _|Nix|_: Sure
+09:35 < Changsuk> Minkyeong, _|Nix|_: exactly, right. API docs and the demos are important~!
+09:35 < _|Nix|_> We were just talking about our workflow in jQM. We're trying to adopt the lib-demos-apidocs approach there too.
+09:36 < _|Nix|_> So, as I saw with the routing widget, we're already ahead of jQM :)
+09:36 < Changsuk> _|Nix|_: ha~ Thanks for your word. :)
+09:36 < _|Nix|_> Wonseop did a great job putting it all in.
+09:37 < Changsuk> _|Nix|_: But I asked Hyunsook and him to improve it and add more features for jQM and commercial. ;)
+09:38 < _|Nix|_> Changsuk: Remember to keep it simple. If there should be new features, they should be added as extensions.
+09:38 < Changsuk> _|Nix|_: And, as I know, He and Hyunsook made a schedule for those.
+09:39 < Changsuk> _|Nix|_: Ok, Thanks~
+09:39 < Hyunsook> _|Nix|_: Thanks. I'm telling him what you said.
+09:39 < _|Nix|_> Every widget should be simple, with very few options, so that more options/APIs can be added via extensions.
+09:39 < _|Nix|_> This will make it easy to target the features you want and make a custom build that is as small as possible.
+09:39 < Changsuk> Hyunsook: If you're OK, can you introduce him to us on next meeting?
+09:40 < Hyunsook> _|Nix|_, Changsuk: I and he will develop simple the widghet. But as Chagsuk said, we need to improve.
+09:41 < Changsuk> _|Nix|_: yes, right. I always keep in mind what you wrote.
+09:41 < _|Nix|_> Hyunsook: OK.
+09:41 < Hyunsook> _|Nix|_: ... because the prototype is fitted on Korean.
+09:41 < _|Nix|_> Aha!
+09:41 < _|Nix|_> Hyunsook: I understand.
+09:41 < Hyunsook> _|Nix|_: :)
+09:41 < _|Nix|_> Let me give you an example:
+09:41 < Changsuk> Hyunsook: Thanks for your kins example
+09:42 < Hyunsook> Changsuk: You're welcome.
+09:42 < _|Nix|_> The popup widget already has an extension: The popup arrow.
+09:42 < _|Nix|_> However, I have filed bugs to remove things like navigation, orientation handling, and transition handling from the popup widget.
+09:42 < _|Nix|_> I will remove them, and re-add them as extensions.
+09:43 < _|Nix|_> That will help me clean up the code, and make it easy to customize the download.
+09:43 < Hyunsook> Changsuk, _|Nix|_: I will introduce Wonseop next meeting.
+09:44 < _|Nix|_> Excellent!
+09:44 < _|Nix|_> There's just one wrinkle.
+09:44 < _|Nix|_> Next meeting might have to be in two weeks, not one.
+09:44 < Changsuk> _|Nix|_: Oh~ a good example for simplification.
+09:44 < Hyunsook> _|Nix|_: :)
+09:44 < _|Nix|_> Next week I'm going to Canada to visit my family.
+09:44 < Hyunsook> Aha~!
+09:45 < Changsuk> _|Nix|_: ah~~ Ok~ but Canada?
+09:45 < Changsuk> _|Nix|_: your family lives in there?
+09:45 < _|Nix|_> Changsuk: Yeah, my parents and sister live there.
+09:45 < Changsuk> _|Nix|_: ah, I see.
+09:45 < _|Nix|_> Changsuk: My sister's getting married.
+09:45 < Changsuk> _|Nix|_: Congratulation~! :)
+09:45 < _|Nix|_> Changsuk: Thanks!
+09:46 < Minkyeong> _|Nix|_: Wow, congratulation!
+09:46 < _|Nix|_> Thanks, all :)
+09:46 < Kangsik> _:Nix|_: It is a good news. :) congratulation!
+09:46 < _|Nix|_> :)
+09:46 < Hyunsook> _|Nix|_: Congratulation! (envy....)
+09:47 < Changsuk> _|Nix|_: Ok, then We can meet here in two weeks.
+09:47 < _|Nix|_> Great!
+09:48 < _|Nix|_> I'll push the changes necessary for the build so that should give you a chance to write tests as well. I hope the existing ones pass :)
+09:48 < Changsuk> _|Nix|_: Great! Thank you~~
+09:48 < Hyunsook> _|Nix|_: Thanks~!
+09:49 < Hyunsook> _|Nix|_: Have a good time with your family. :)
+09:49 < _|Nix|_> Hyunsook: Thanks!
+09:49 < _|Nix|_> Do we have any other topics?
+09:49 < Changsuk> _|Nix|_: if we have some trouble and any issues, we'll give you an email not IRC. :)
+09:50 < _|Nix|_> Changsuk: Of course! I'm happy to help!
+09:50 < Changsuk> All: No, I told you all.
+09:51 < Changsuk> _|Nix|_: Have a nice trip in Canada and such a nice time with your sister~~
+09:52 < _|Nix|_> Thanks! Have a good weekend, all, and see you in two weeks!
+09:52 < Hyunsook> Have a good weekend, all~!
+09:52 < Minkyeong> Yep, have a nice weekend :)
+09:53 < Kangsik> Have a nice weekend. :)
+09:53 < Hyunsook> _|Nix|_: Oh!!!!! One question, please~!
+09:53 < _|Nix|_> Hyunsook: What's up?
+09:53 < Hyunsook> _|Nix|_: I think uGoMobi is not here and in jqueryui-dev room.
+09:54 < uGoMobi> I am here
+09:54 < _|Nix|_> Mornin'!
+09:54 < Hyunsook> uGoMobi: Ooooooops!
+09:54 < uGoMobi> morning _|Nix|_ 
+09:54 < uGoMobi> hi Hyunsook 
+09:54 < Hyunsook> uGoMobi: Hi~! hehe~ :)
+09:55 < Hyunsook> uGoMobi: Did you see Changsuk 's words in jqueryui-dev room?
+09:55 < uGoMobi> Hyunsook: yes, I just saw them
+09:55 < Hyunsook> uGoMobi: Changsuk asked to you about listview PR instead me.
+09:56 < uGoMobi> Hyunsook: I just had a quick look
+09:56 < Hyunsook> uGoMobi: Thanks :)
+09:56 < uGoMobi> Hyunsook: I think https://github.com/jquery/jquery-mobile/issues/6680 is about autodividers
+09:57 < uGoMobi> Hyunsook: and your PR will be about setOptions
+09:57 < Hyunsook> uGoMobi: Aha!
+09:57 < uGoMobi> Hyunsook: so I don't think it's the same
+09:57 < Hyunsook> uGoMobi: No. My PR is about the refresh method of Listview.
+09:58 < Hyunsook> uGoMobi: ... regarding the icon, inset, splitIcon, and splitTheme option.
+09:58 < uGoMobi> Hyunsook: sorry
+09:58 < _|Nix|_> Hyunsook: We haven't reviewed listview for 1.4. We left it to 1.5.
+09:58 < uGoMobi> Hyunsook: we don't even use setOptions in listview yet
+09:58 < Hyunsook> uGoMobi: NP.
+09:58 < uGoMobi> but it is about dynamically changing an option :)
+09:59 < _|Nix|_> Hyunsook: ... which means we are not promising that _setOptions will work in 1.4.
+09:59 < _|Nix|_> Hyunsook: However, if you make _setOptions() work in your PR, that'd be great for 1.5.
+09:59 < Hyunsook> uGoMobi: http://hyunsook.github.io/jqm-debug/latest/listview-option-icon.html
+10:00 < uGoMobi> Hyunsook: yes, looking at the script you used in there
+10:00 < uGoMobi> $( "#icon" ).listview( "option", "icon", "gear" ).listview( "refresh" );
+10:00 < Hyunsook> uGoMobi: Although I set the icon, inset, splitIcon, and splitTheme option and call the refresh method, listview isn't updated properly.
+10:00 < uGoMobi> that is setOption
+10:02 < uGoMobi> actually I think you don't even have to call refresh method if setOptions would work
+10:02 < _|Nix|_> uGoMobi: Exactly. It should call it for you.
+10:02 < uGoMobi> yup
+10:02 < _|Nix|_> uGoMobi: ... or do whatever is necessary for the changes to appear.
+10:02 < uGoMobi> so this is part of listview review
+10:02 < _|Nix|_> uGoMobi: In fact, I think refresh() wouldn't even work, because we short-circuit already-enhanced items.
+10:04 < uGoMobi> _|Nix|_: I think it's better if Hyunsook wait with a PR for now
+10:04 < _|Nix|_> Hyunsook: Calling refresh() should not update the listview like that.
+10:05 < _|Nix|_> Hyunsook: You should do something like this.element.childre().not("[data-icon]").children( "a" ).removeClass( "ui-icon-" + this.options.icon ).addClass( "ui-icon-" + options.icon );
+10:06 < _|Nix|_> Hyunsook: You should do that inside _setOptions.
+10:06 < uGoMobi> _|Nix|_ Hyunsook : we will discuss the jQuery Mobile roadmap next week in Amsterdam, then we will decide when we are going to do listview widget review
+10:06 < uGoMobi> before we start working on it (PRs) we should agree on what the widget has to look like
+10:07 < uGoMobi> Hyunsook: I just want to avoid that you do work for nothing
+10:08 < Changsuk> I think that a user call setOption(), then a widget's icons or stuffs should be changed automatically.
+10:08 < _|Nix|_> Changsuk: Yes, and that's a long-standing problem with jQM widgets.
+10:08 < uGoMobi> hi Changsuk
+10:09 < uGoMobi> Changsuk: correct
+10:09 < Changsuk> uGoMobi: Hi~ :)
+10:09 < _|Nix|_> Changsuk: We've fixed many of them, but listview is really complex, so we decided to fix it later.
+10:09 < uGoMobi> we are working on it :)
+10:09 < _|Nix|_> uGoMobi: Are we still considering the possibility of doing CSS-only listviews?
+10:09 < Changsuk> _|Nix|_: ah... I see.
+10:09 < Hyunsook> Changsuk: Yes, right. But current some widgets doesn't work so.
+10:10 < _|Nix|_> Hyunsook: That's true. I think we've skipped panels, pages, and listviews ...
+10:10 < _|Nix|_> Hyunsook: ... and tables ...
+10:11 < uGoMobi> I think listview, selectmenu, panel, table, navbar, slider, and rangeslider are the widgets that don't use _setOptions() yet
+10:11 < Changsuk> All: hmmm... It seems like a big issue.
+10:11 < Hyunsook> Changsuk, uGoMobi, _|Nix|_: I don't know what is the standard.
+10:11 < _|Nix|_> Hyunsook: The standard is that options work.
+10:12 < _|Nix|_> Hyunsook: jQM has ignored the standard for a long time.
+10:12 < _|Nix|_> Hyunsook: Now we are catching up.
+10:12 < uGoMobi> slider widget is going to be replaced and rangeslider is based on that widget
+10:12 < Hyunsook> _|Nix|_: Ok, I see.
+10:12 < uGoMobi> navbar widget is getting a big refactor
+10:14 < _|Nix|_> Hyunsook: I think you can help us most if you do the listview PR after we've had a chance to discuss how we want to handle making the listview work.
+10:14 < uGoMobi> right
+10:14 < _|Nix|_> Hyunsook: If we can then leave it up to you to implement the changes via a PR, that would be of great help to us!
+10:15 < Changsuk> uGoMobi: I think, jQM team's plan is relieved and My team will wait for jQM team's decision.
+10:16 < uGoMobi> Changsuk: we will discuss our roadmap next week in Amsterdam
+10:16 < _|Nix|_> Changsuk: You guys are already helping us a lot with issues filed and PRs submitted. 
+10:16 < uGoMobi> Changsuk: we will share it with your team
+10:16 < Changsuk> _|Nix|_, uGoMobi: ? so Should my team upload PRs related with listview or other widgets?
+10:17 < Hyunsook> _|Nix|_, uGoMobi: Ah. Ok, I see. Can you tell me after we discuss them? Then I will PR for listview.
+10:17 < _|Nix|_> Changsuk: However, since you've offered to help more substantially, we want to make sure we do not waste your work.
+10:17 < uGoMobi> Changsuk: I would wait until we have made a new roadmap
+10:17 < uGoMobi> Changsuk: we don't merge anything at the moment
+10:18 < uGoMobi> because we are on RC
+10:18 < uGoMobi> unless you notice a blocker issue of course
+10:18 < _|Nix|_> Changsuk: We have a meeting in Amsterdam on monday and tuesday.
+10:18 < _|Nix|_> Changsuk: We will discuss the roadmap then and there.
+10:18 < uGoMobi> when we have a new roadmap it will be clear what widgets are getting a big refactor
+10:19 < Changsuk> _|Nix|_, uGoMobi: Ok~ I see. :)
+10:19 < Hyunsook> uGoMobi, _|Nix|_: Ok, I see.
+10:19 < uGoMobi> like _|Nix|_ said we don't want you to spend time on a PR for a widget that we are going to replace anyway
+10:20 < _|Nix|_> Changsuk, Hyunsook: Actually, it might not be such a bad idea to have a meeting next week.
+10:20 < _|Nix|_> Changsuk: I'll try to find some time.
+10:20 < _|Nix|_> Changsuk: I dunno how the timezones work between Canada and Korea, but I'll try to fit it in, and I'll let you know by email.
+10:21 < uGoMobi> _|Nix|_: are you going to Canada after Amsterdam?
+10:21 < _|Nix|_> uGoMobi: Yeah. Sister's wedding.
+10:21 < Changsuk> uGoMobi: Always thanks for your kind reply. I'll ask my team wait for jQM team's decision. :)
+10:21 < uGoMobi> cool
+10:21 < _|Nix|_> Changsuk: That way, we can discuss the conclusions of our Amsterdam meeting.
+10:22 < Changsuk> _|Nix|_: Thanks, I'll wait for your notice whether we have next week meeting or not. :)
+10:22 < _|Nix|_> Cool!
+10:22 < Hyunsook> uGoMobi, _|Nix|_: Thank you. :)
+10:22 < uGoMobi> thanks all!
+10:22 < Changsuk> _|Nix|_: Sounds nice.
+10:23 < _|Nix|_> Yeah, great work!
+10:23 < Changsuk> uGoMobi: Always thanks~! :)
+10:23 < uGoMobi> :)
+10:23 < Changsuk> _|Nix|_: Nice trip~! :)
+10:23 < _|Nix|_> Changsuk: Thanks! I hope so ...
+--- Log closed Thu Oct 31 10:25:01 2013
