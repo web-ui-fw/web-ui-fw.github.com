@@ -1,0 +1,170 @@
+--- Log opened Thu Nov 14 09:00:25 2013
+09:00 < _|Nix|_> Hey, all!
+09:00 < _|Nix|_> How's it going?
+09:00 < Hyunsook> Hi~ ^^
+09:00 < Minkyeong> Hi
+09:00 < Changsuk> Hi~~~! All~
+09:01 < Kangsik> Hi.. :-)
+09:01 < Changsuk> _|Nix|_: Did you came to your home? How's your trip?
+09:02 < Changsuk> _|Nix|_: came... -> come.
+09:02 < _|Nix|_> Changsuk: It was good, but it was short and packed.
+09:02 < _|Nix|_> Changsuk: Lots to do with little time to do it in.
+09:03 < Changsuk> _|Nix|_: You might be in a tight schedule. :)
+09:03 < _|Nix|_> Changsuk: Always.
+09:03 < _|Nix|_> Anyway ... let's get going ... 
+09:03 < Changsuk> _|Nix|_: yes, I can imagine your status. ha~
+09:04 < _|Nix|_> As far as Amsterdam is concerned, we haven't really had time to go over our own (jQM) schedule, because we spent so much time talking about the Mobile/UI merger ...
+09:04 < _|Nix|_> So, I'm afraid I still can't give you a definitive answer about working on listview.
+09:05 < _|Nix|_> We want to try to get rid of style-related options like corners and inset, and theme, and just have people add classes.
+09:05 < Changsuk> _|Nix|_: Is there any concerns or undefined items?
+09:05 < _|Nix|_> Changsuk: The idea is that we make changes in 1.5, 1.6, etc. that support our ultimate merger in 2.0.
+09:06 < _|Nix|_> ... and we start using more and more of UI's widgets in mobile.
+09:06 < _|Nix|_> For example, we want to replace popup with UI's dialog widget.
+09:06 < Changsuk> _|Nix|_: ah I see.
+09:06 < Changsuk> _|Nix|_: Ok, got it.
+09:07 < _|Nix|_> So, that's about it.
+09:07 < _|Nix|_> In the meantime, however, we also need to concentrate on new features and bug fixes.
+09:07 < Changsuk> _|Nix|_: I can guess about that issues, but how about new widgets? next version of jQM and jQuery UI needs new things?
+09:08 < _|Nix|_> Exactly!
+09:08 < _|Nix|_> It's gonna have to be a balancing act.
+09:09 < Changsuk> _|Nix|_: Ah~! I'll introduce Wonseop to you and Jasper. :)
+09:09 < wonseop> Hi
+09:09 < Changsuk> _|Nix|_: He made Route widget.
+09:09 < _|Nix|_> Changsuk: I don't think Jasper's in the channel right now.
+09:09 < _|Nix|_> wonseop: Hey! Welcome to the team :)
+09:09 < Changsuk> _|Nix|_: ah.. I see.
+09:09 < wonseop> Thank you.
+09:09 < _|Nix|_> wonseop: Good work!
+09:10 < _|Nix|_> I've also noticed that gseguin has made some changes to jQM that can help web-ui-fw.
+09:11 < Changsuk> _|Nix|_: I know that he'is adding some new features and stablizing the widget hardly.
+09:11 < _|Nix|_> I was having trouble with the build because some of the jQM modules' dependencies were not declared to be local.
+09:11 < _|Nix|_> Just remember: Don't let the widget become too big. If you add features, consider adding them as extensions.
+09:12 < Changsuk> _|Nix|_: ah~ I see.
+09:13 < Changsuk> _|Nix|_, wonseop: Yes, right.
+09:13 < Changsuk> _|Nix|_, wonseop: I know that Wonseop is adding essential features.
+09:16 < Changsuk> _|Nix|_: And as your Amsterdam's talks, when can we get some fixed information about fixed jQM 1.5 schedule and features?
+09:17 < _|Nix|_> Changsuk: Well, when we know it ourselves :) Hopefully, we'll have time to talk about it this evening during our meeting.
+09:17 < _|Nix|_> Changsuk: Basically, I think we'll finish the widget review, and we'll clean up the navigation some more.
+09:17 < _|Nix|_> Changsuk: We need to clean up table and listview at least, IIRC.
+09:18 < Changsuk> _|Nix|_: Ok~ I see.
+09:18 < Changsuk> _|Nix|_: IIRC? what was that mean?
+09:18 < _|Nix|_> Changsuk: I-f I R-ecall C-orrectly
+09:18 < Changsuk> _|Nix|_: ah~~ Thanks~~! :)
+09:19 < _|Nix|_> Changsuk: https://docs.google.com/document/d/14q5--b27B0DoJFqes4MX0LFOxXuBBqDYIkxT_IOYxWs/edit
+09:19 < _|Nix|_> Changsuk: ... and https://docs.google.com/document/d/1N7XTqfU9dgIX_r3IxZu9OxA-4VdHIhPKC-NjmaSXeQo/edit#
+09:20 < Hyunsook> _|Nix|_: Oh~! Thank you~
+09:20 < Changsuk> Hyunsook: Did you wrapped up what widget will we add in web-ui-fw for jQM?
+09:20 < Changsuk> Hyunsook: If you have it, pls tell us.
+09:20 < Hyunsook> _|Nix|_: I wonder about jQM future plans after the jQM meeting last week in Amsterdam.
+09:20 < Kangsik> _|Nix|_: Thank you for sharing informations.
+09:21 < _|Nix|_> Changsuk: If you look at the second link, it says table requires a rewrite. That's probably something we'll do in 1.5.
+09:21 < _|Nix|_> NP!
+09:21 < Changsuk> _|Nix|_: Thanks for your link~ ;)
+09:21 < Hyunsook> _|Nix|_: Thank you for link
+09:22 < _|Nix|_> NP.
+09:22 < Hyunsook> Changsuk, _|Nix|_: I sent email to _|Nix|_ last week about new widgets.
+09:22 < Hyunsook> _|Nix|_: Did you read it?
+09:23 < Changsuk> _|Nix|_: pls, give me some time to go over those meeting logs.
+09:23 < _|Nix|_> Hyunsook: I saw that ...
+09:23 < Changsuk> Hyunsook: I'm sorry that I missed you.
+09:24 < Hyunsook> Changsuk: NP.
+09:24 < Hyunsook> _|Nix|_: What do you think about that?
+09:24 < _|Nix|_> Hyunsook: Can you show me a demo of the swipe widget?
+09:24 < _|Nix|_> Hyunsook: I mean, we have a swipe event. Why does there need to be a swipe widget?
+09:25 < _|Nix|_> Hyunsook: Do you have a demo of the swipe widget?
+09:25 < Hyunsook> _|Nix|_: http://hyunsook.github.io/tizen-winsets/index.html
+09:26 < Hyunsook> _|Nix|_: You can see the widget in the demo link.
+09:26 < _|Nix|_> Hyunsook: Oh, that widget!
+09:26 < _|Nix|_> Hyunsook: Yes! Very nice!
+09:26 < _|Nix|_> Hyunsook: We should build that as an extension to listview.
+09:27 < Hyunsook> _|Nix|_: Yes, right.
+09:27 < _|Nix|_> Hyunsook: jQM may find that very interesting as well.
+09:27 < Hyunsook> _|Nix|_: Fastscroll widget also is built as an extension to listview.
+09:27 < _|Nix|_> Hmm ... uGoMobi is not in #jqueryui-dev either ...
+09:28 < _|Nix|_> Hyunsook: Oh yeah, now I remember.
+09:28 < _|Nix|_> Hyunsook: The problem is, we need to do fastscroll without scrollview.
+09:28 < _|Nix|_> Hyunsook: We cannot rely on scrollview.
+09:28 < Hyunsook> _|Nix|_:  Exactly!
+09:29 < _|Nix|_> Hyunsook: I suspect that fastscroll may be complicated, because we'll have to rely on position: fixed to make it work.
+09:29 < Hyunsook> _|Nix|_: I think it's possible implement without scrollview.
+09:30 < _|Nix|_> Hyunsook: OK, in that case, doing these two sounds like a good idea.
+09:32 < Hyunsook> _|Nix|_: Can I add the two widgets in web-ui-fw for jQM?
+09:32 < _|Nix|_> Hyunsook: You mean, submit PRs to jQM?
+09:32 < Hyunsook> _|Nix|_: No.
+09:32 < _|Nix|_> Hyunsook: OK, I understand now,.
+09:33 < _|Nix|_> Hyunsook: Sorry!
+09:33 < Changsuk> _|Nix|_, Hyunsook: It seems that Gabriel agreeded with adding Swipe widget and if it is OK, Hyunsook, could you email Jasper and us about the widget?
+09:33 < Hyunsook> _|Nix|_: NP. ;)
+09:33 < _|Nix|_> Hyunsook: Yes, please add them!
+09:33 < _|Nix|_> Hyunsook: I'm not sure how swipe currently works, but it would be interesting to do it using CSS transitions.
+09:34 < _|Nix|_> Hyunsook: That way, we could get H/W acceleration ...
+09:34 < Hyunsook> Changsuk, _|Nix|_: OK, I see.
+09:35 < _|Nix|_> Hyunsook: Does swipelist currently use jQuery animations?
+09:36 < Hyunsook> _|Nix|_:
+09:36 < Minkyeong> _|Nix|_, Hyunsook: Yes. It uses jQuery animate().
+09:37 < _|Nix|_> OK. That's fine.
+09:37 < _|Nix|_> I think we can wait with the CSS animations.
+09:37 < _|Nix|_> Let's first convert the widget to a listview extension.
+09:38 < _|Nix|_> Make sure the refresh() method chains up correctly.
+09:38 < Minkyeong> _|Nix|_: Okay.
+09:38 < _|Nix|_> We may not even want to overwrite the refresh() method.
+09:38 < Hyunsook> Minkyeong: Thank you answer instead me. :)
+09:38 < _|Nix|_> Listview has extension points that are called before and after refresh.
+09:39 < _|Nix|_> There's _beforeListviewRefresh(), and _afterListviewRefresh()
+09:39 < _|Nix|_> So, we can also use those.
+09:40 < _|Nix|_> Sounds like an interesting project though :)
+09:40 < Minkyeong> _|Nix|_: Aha.. I see.
+09:41 < Changsuk> _|Nix|_: +1 :)
+09:42 < Changsuk> Minkyeong: Gabriel's guide can help you improve swipe widget?
+09:42 < _|Nix|_> I was also wondering whether it might not be simpler to use the children of an LI directly, instead of having :jqmData(role='swipe-item-cover') and jqmData(role='swipe-item')
+09:42 < Minkyeong> Changsuk: Sure :-) It's reeaaallllly helpful.
+09:43 < Hyunsook> Minkyeong: haha~
+09:43 < _|Nix|_> So, if you have <li>This is the title<div>Item 1</div><div>Item 2</div></li>, then we have three items: 1. The text node "This is the title", 2. <div>Item 1</div>, and 3. <div>Item 2</div>
+09:44 < _|Nix|_> ... and we can do a carousell inside the list item.
+09:45 < _|Nix|_> So there is no cover, per se, and there are only items.
+09:45 < _|Nix|_> If that's too complicated we don't need to do that.
+09:45 < Minkyeong> _|Nix|_: Hmm.. I'll check it again.
+09:45 < Hyunsook> _|Nix|_: Thanks for your guide. :)
+09:47 < _|Nix|_> I guess if we wanted to give up the carousell idea, it might be faster to use :first-child and :last-child
+09:48 < Changsuk> Hyunsook: After Minkyeong and Kangsik add those widgets, pls give us an email about those widgets. :)
+09:48 < _|Nix|_> I mean for this:
+09:48 < _|Nix|_> 			covers = this.element.find(':jqmData(role="swipe-item-cover")');
+09:48 < _|Nix|_> 			item = this.element.find(':jqmData(role="swipe-item")');
+09:49 < _|Nix|_> We could change that to: covers = this.element.children().children(":first-child")
+09:49 < Hyunsook> Changsuk: Sure~! :)
+09:49 < Changsuk> _|Nix|_: I think that Minkyeong and Hyunsook already thought a same codes like yours. :)
+09:49 < _|Nix|_> That might be faster for large lists.
+09:49 < _|Nix|_> We should avoid doing .find()
+09:49 < Changsuk> _|Nix|_: Yes, I think so~ Thanks~! so much~
+09:49 < _|Nix|_> But anyway, I guess the big idea is to keep performance in mind as well.
+09:50 < Changsuk> _|Nix|_: yes, right.
+09:50 < Minkyeong> _|Nix|_: Right
+09:50 < Hyunsook> _|Nix|_: Yes, right.
+09:50 < Kangsik> _|Nix|_: Yes. I agree your words.
+09:51 < _|Nix|_> Also, not using swipe-item-cover and swipe-item reduces the amount of markup. Relying on DOM order is not so bad, right?
+09:51 < Changsuk> All: I'm sorry that I have to leave this meeting because I have another meeting.
+09:51 < _|Nix|_> Changsuk: Have fun :)
+09:51 < _|Nix|_> Changsuk: ... and a good weekend!
+09:51 < Minkyeong> Changsuk: See you next time :-)
+09:52 < Changsuk> All: ah.... My talk means that... So if we don't have any left items,  Could we close our meeting?
+09:53 < _|Nix|_> Yeah, that's cool by me. I don't think I have anything else.
+09:53 < Minkyeong> _|Nix|_: Yes, I'll keep in mind.
+09:53 < Changsuk> All : I will left around 5 P.M. :)
+09:53 < Changsuk> left -> leave. :)
+09:53 < _|Nix|_> Well, do we have any topics left for this week?
+09:54 < _|Nix|_> I'll show uGoMobi the swipe-list demo. See if he likes it ...
+09:54 < Changsuk> No~ I told you all~
+09:54 < Hyunsook> _|Nix|_, Changsuk: The widgets's imprement for web-ui-fw is completed, I'll send email.
+09:54 < Minkyeong> Haha..
+09:54 < _|Nix|_> Cool!
+09:54 < Changsuk> _|Nix|_: Thanks~ pls tell him about the widget nicely~ :)
+09:54 < _|Nix|_> Changsuk: You bet!
+09:55 < Changsuk> _|Nix|_: ;) l0l
+09:55 < _|Nix|_> Alright ... so, I guess, if we have no other topics, then I'll wish y'all a good weekend, and I'll see y'all next week!
+09:56 < Changsuk> All: See you on next meeting and have a nice weekend~~!! :)
+09:56 < Minkyeong> Yep, have a nice weekend, all :-)
+09:56 < Hyunsook> Have a good weekend, all~!
+09:56 < Hyunsook> Byebye~~
+09:56 < Kangsik> All: Yep. Have a good weekend..
+09:56 < wonseop> bye
+--- Log closed Thu Nov 14 09:59:33 2013
