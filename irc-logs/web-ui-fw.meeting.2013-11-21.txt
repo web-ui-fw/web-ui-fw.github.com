@@ -1,0 +1,190 @@
+--- Log opened Thu Nov 21 08:58:42 2013
+08:59 < Changsuk> Hi~all~~
+08:59 < _|Nix|_> Hey!
+08:59 < Minkyeong> Hi!
+09:00 < Kangsik> Hi~~ all :)
+09:00 < Hyunsook> Hi all~
+09:00 < Changsuk> ha~ hi, _|Nix|_. Are you waiting for me? ha~ :)
+09:00 < _|Nix|_> Not really ... more waiting for 09:00 ...
+09:00 < _|Nix|_> But now it's here. Welcome, 09:00 :)
+09:01 < Changsuk> ah~ ;)
+09:01 < Changsuk> Hi, Minkyeong, Kangsik and Hyunsook.
+09:01 < Hyunsook> Changsuk: Hi~
+09:01 < Minkyeong> Changsuk: Hi, hi~
+09:01 < Hyunsook> Ah! One news~!
+09:02 < Hyunsook> Wonseop's wife gave birth to their first baby this morning. :)
+09:02 < _|Nix|_> Congratulations!
+09:02 < _|Nix|_> Boy or girl?
+09:02 < Hyunsook> So he cannot attend this meeting.
+09:02 < Hyunsook> girl~
+09:02 < _|Nix|_> NP.
+09:02 < Changsuk> ;0 lol~
+09:02 < _|Nix|_> Awesome!
+09:02 < Hyunsook> :)
+09:02 < _|Nix|_> I guess the whirlwind has started for him as well :)
+09:03 < Hyunsook> haha~
+09:04 < Minkyeong> _|Nix|_: Really good wind for him :-)
+09:04 < Changsuk> yes, right. _|Nix|_ can understand Wonseop's status. ;)
+09:04 < Changsuk> _|Nix|_ is already a father. ;)
+09:05 < _|Nix|_> Yeah ... tons of fun :)
+09:05 < _|Nix|_> Anyhoo ... on that cheery note, I've been trying to get the unit web-ui-fw tests to pass ...
+09:06 < _|Nix|_> I noticed that Kangsik has modified the virtualgrid test.
+09:07 < _|Nix|_> Kangsik: Would it be possible to grab the logos for the virtualgrid from a local source?
+09:07 < Kangsik> _|Nix|_: eyp?
+09:07 < Kangsik> _|Nix|_: yep?
+09:07 < _|Nix|_> Kangsik: 944b345 Test: Virtualgrid: Modify test case.
+09:08 < _|Nix|_> Kangsik: Running the tests should not require a connection to the Internet.
+09:08 < Kangsik> _|Nix|_: hmm. it is possible. I will modify it.
+09:08 < Kangsik> _|Nix|_: I have a question!
+09:08 < _|Nix|_> Kangsik: Also, for some strange reason, the tests in the terminal (phantomjs) still time out for virtualgrid, although the tests work in Chrome.
+09:09 < Kangsik> _|Nix|_: Really?? I will recheck it.. sorry :-(
+09:09 < _|Nix|_> Kangsik: NP. I cleaned up all the npm stuff, so maybe that's why.
+09:10 < _|Nix|_> Kangsik: If the tests pass for you, do a git clean -x -d -f -f; cd jqm; git clean -x -d -f -f; cd ..; npm install; grunt test
+09:10 < _|Nix|_> Kangsik: ... and see if they still pass.
+09:10 < _|Nix|_> Kangsik: Oh, sorry ... don't forget npm cache clean; before npm install;
+09:11 < _|Nix|_> Kangsik: I'll try to figure it out as well, if I have some time.
+09:11 < _|Nix|_> Kangsik: It sucks that it fails in phantomjs, but not in Chrome :(
+09:12 < Kangsik> _|Nix|_: Yes.. Thank you for your advice. :0
+09:12 < Kangsik> _|Nix|_: I will recheck it.
+09:12 < _|Nix|_> Kangsik: Thanks a lot!
+09:13 < Changsuk> _|Nix|_: hmmm... sounds interesting. There may be some platform or framework dependencies.
+09:13 < _|Nix|_> So, in jQM news, we have only one issue left before 1.4.0, and it's a demo issue. I think uGoMobi is still working on the Theme Roller. I guess it's quite a job.
+09:13 < Kangsik> _|Nix|_: Anyway. I have a question.
+09:13 < Kangsik> _|Nix|_: I did write the new test page(by jsbin) in the past time.  ( https://github.com/jquery/jquery-mobile/pull/6731 )
+09:13 < Kangsik> _|Nix|_: Is it possible to reopen ?
+09:14 < _|Nix|_> Kangsik: Done.
+09:14 < Kangsik> _|Nix|_: Thank you :-)
+09:15 < _|Nix|_> Kangsik: ... but, looking at the commit you wish to merge, you took out + ( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) )
+09:15 < Changsuk> Hyunsook: If uGoMobi has some trouble while he's working on Theme Roller, Can we help him to complete that?
+09:15 < _|Nix|_> Kangsik: That has to stay, because data-role="collapsibleset" may not always be present.
+09:16 < _|Nix|_> Changsuk: I'm not sure, actually. I dunno anything about Theme Roller.
+09:16 < uGoMobi> hey all
+09:16 < Changsuk> Hi, uGoMobi. :)
+09:16 < Minkyeong> uGoMobi: Hi :-)
+09:16 < _|Nix|_> Kangsik: If you create the collapsibleset at runtime, you don't need to add data-role="collapsibleset"
+09:16 < uGoMobi> thanks for the offer to help with ThemeRoller
+09:16 < Changsuk> I heard about your status from _|Nix|_.
+09:17 < uGoMobi> I will continue to work on it today and push some changes later
+09:17 < Changsuk> uGoMobi: ah~ i see.
+09:17 < uGoMobi> would be great if you can help
+09:18 < Changsuk> uGoMobi: you've almost done it.?
+09:18 < uGoMobi> no, I wouldn't say it's almost done
+09:18 < uGoMobi> slow progress :(
+09:18 < _|Nix|_> Kangsik: https://github.com/allsteady/jquery-mobile/commit/5b9589af11caca72197695c2d9e08ebcc174ca71#commitcomment-4661588
+09:18 < Changsuk> uGoMobi: ah... I see. I'm sorry that I told you.
+09:19 < Kangsik> _|Nix|_: Yes. Thank you.. I change the code...
+09:19 < uGoMobi> I will open a ticket at the ThemeRoller repo with info about the problems we need to resolve
+09:19 < Changsuk> Kangsik, Hyunsook: Do your guys know about Theme Roller a lot?
+09:20 < uGoMobi> the hard part is that we do not only make it work with 1.4 markup and changes in theming
+09:21 < uGoMobi> but also make it possible to upgrade 1.3 theme to 1.4
+09:21 < uGoMobi> some examples: in 1.4 we have page *and* body theme, in 1.4 we have active and focus style for each theme swatch
+09:22 < uGoMobi> people that used gradients in 1.3 should be able to keep those in 1.4 where the default theme doesn't have gradients
+09:22 < uGoMobi> etc etc
+09:23 < _|Nix|_> uGoMobi: I'll try to jump in as well ...
+09:23 < Changsuk> uGoMobi: ok... it seems not easy to cover those versions.
+09:24 < uGoMobi> like I said, I can push the changes I made so far at the end of the day and then we maybe can discuss this tomorrow
+09:24 < uGoMobi> thanks _|Nix|_ 
+09:24 < Changsuk> _|Nix|_: wow... you
+09:24 < Changsuk> re nice man~
+09:25 < _|Nix|_> uGoMobi: Should we maybe add a 1.4.0 milestone for TR?
+09:25 < Changsuk> Hyunsook, Kangsik: After this meeting, can you guys go over Theme Roller with uGoMobi's requests.?
+09:25 < uGoMobi> _|Nix|_: sorry, what do you mean exactly?
+09:26 < _|Nix|_> uGoMobi: We have such a milestone in jQM.
+09:26 < uGoMobi> _|Nix|_: in the issue tracker you mean?
+09:26 < _|Nix|_> uGoMobi: Yeah.
+09:27 < uGoMobi> _|Nix|_: sure we can create a milestone for tickets
+09:28 < Changsuk> uGoMobi: if you could, could you give Hyunsook and Kangsik 1~2 issues on GH to cover that problem?
+09:28 < Hyunsook> Changsuk, uGoMobi: now I dunno anything about Theme Roller. I'm sorry. But if you can give us something guideline for that, we'll do that, I think.
+09:28 < uGoMobi> I really feel bad about this ThemeRoller update is holding up the 1.4 release, so I am really really really happy with help here :)
+09:29 < uGoMobi> Hyunsook: sure
+09:29 < _|Nix|_> uGoMobi: Don't feel bad! The release has to be done right. You're doing the right thing!
+09:30 < Changsuk> uGoMobi, _|Nix|_: I think Hyunsook, Kangsik and Minkyeong may/can support you because they have some experience about theming in Tizen Web UIFW.
+09:30 < uGoMobi> Hyunsook, Kangsik: maybe you can take a look at the ThemeRoller repo to see how it works
+09:31 < uGoMobi> the app.js file in perticular
+09:32 < uGoMobi> _|Nix|_ Changsuk: how about having a short meeting about the ThemeRoller at this channel, same time tomorrow
+09:32 < _|Nix|_> uGoMobi: OK.
+09:32 < uGoMobi> I just think it's easier when everyone has taken a look at it first
+09:33 < Changsuk> Hyunsook: Can you tell us about the new widgets' schedule on GH?
+09:33 < uGoMobi> so people have an idea how it works
+09:33 < Changsuk> uGoMobi: Ok, I'll join the meeting. :)
+09:33 < uGoMobi> great!
+09:33 < Changsuk> Kangsik, Hyunsook: Can you guys join the meeting?
+09:34 < Hyunsook> uGoMobi, Changsuk: I also can join the meeting.
+09:34 < Kangsik> Changsuk : Yes. :-)
+09:34 < Changsuk> _|Nix|_, uGoMobi: Actually, Kangsik and Hyunsook and Minkyeong know about jQuery, jQM so much more than me.
+09:35 < Changsuk> Hyunsook, Kangsik: Thanks~! guys. ;)
+09:35 < uGoMobi> awesome, I really appreciate the help! Thanks!
+09:35 < Hyunsook> :)
+09:35 < Changsuk> uGoMobi: not at all~ :)
+09:36 < Kangsik> uGoMobi : It is my pleasure to help you. :-)
+09:36 < Hyunsook> Next topic! I changed the existing "schedule" page to "0.2.0 schedule" page
+09:36 < Hyunsook> ... and created new "0.3.0 schedule" page.: https://github.com/web-ui-fw/web-ui-fw/wiki/0.3.0-schedule
+09:37 < uGoMobi> I'll open a ticket and push some changes to "1.4-update" branche in the TR repo later today
+09:37 < Hyunsook> ... and I created pages for Fastscroll and Swipe. :
+09:37 < Hyunsook> https://github.com/web-ui-fw/web-ui-fw/wiki/New-widget:-Fast-scroll
+09:37 < Hyunsook> https://github.com/web-ui-fw/web-ui-fw/wiki/New-widget:-Swipe
+09:37 < Hyunsook> Let me know if there are contents to modify after looking into them.
+09:37 < Changsuk> All: We're live different time zone, so uGoMobi, Could you adjust our meeting time?
+09:37 < _|Nix|_> Hyunsook: Looking good!
+09:38 < Changsuk> Hyunsook: Looks nice~
+09:38 < Hyunsook> _|Nix|_, Changsuk: Thanks. :)
+09:38 < uGoMobi> start at 5pm in Seoul?
+09:39 < uGoMobi> (8am here in Amsterdam)
+09:39 < Changsuk> All: I'm Ok at that time. :)
+09:39 < Hyunsook> uGoMobi: I'm Ok.
+09:39 < _|Nix|_> +1
+09:40 < Kangsik> +1
+09:40 < uGoMobi> wait, daylight saving time, I am confused... what time is it in Seoul now?
+09:40 < Changsuk> ha ha~~ just type "+1" So~~ Cool~~~
+09:40 < _|Nix|_> http://www.timeanddate.com/worldclock/
+09:40 < Hyunsook> Now, 04:40 PM.
+09:40 < Minkyeong> uGoMobi: 5pm in Seoul === 9am in Amsterdam
+09:40 < uGoMobi> right
+09:41 < uGoMobi> I was mistaken one hour
+09:41 < uGoMobi> what do you prefer? 4pm or 5pm Korea time?
+09:41 < Changsuk> uGoMobi: which ever you like. :)
+09:42 < uGoMobi> ok, then we stick to 5pm
+09:42 < uGoMobi> everyone +1'd already :)
+09:42 < Changsuk> uGoMobi: Ok~
+09:42 < _|Nix|_> OK. Sounds good.
+09:42 < uGoMobi> +1
+09:42 < uGoMobi> :)
+09:42 < _|Nix|_> :)
+09:42 < Hyunsook> Ok
+09:42 < Changsuk> uGoMobi: ha ha~~ :)
+09:42 < uGoMobi> thanks all, and sorry for disturbing your meeting ;)
+09:42 < Changsuk> uGoMobi: not at all~
+09:42 < _|Nix|_> uGoMobi: You're always welcome here!
+09:43 < _|Nix|_> uGoMobi: Not disturbing at all!
+09:43 < Changsuk> _|Nix|_, uGoMobi: yes, right. ;)
+09:43 < _|Nix|_> uGoMobi: Or, as they say in the wild west: "Your money's no good here!"
+09:43 < uGoMobi> haha
+09:43 < Changsuk> haha~~
+09:43 < Hyunsook> kkk~
+09:44 < _|Nix|_> On that cheery note, and re: https://github.com/web-ui-fw/web-ui-fw/wiki/0.3.0-schedule, it sounds like we're steaming ahead with these widgets. Awesome!
+09:46 < Changsuk> _|Nix|_: yes, right. Hyunsook made such a nice document.
+09:46 < Hyunsook> _|Nix|_: Yes, right.
+09:47 < Hyunsook> Changsuk: ha~ Thanks. ;)
+09:47 < Changsuk> All: And we're already doing those work.
+09:48 < _|Nix|_> That's great! We'll have some nice extensions for listview.
+09:48 < Changsuk> _|Nix|_: You have an expensive vocabulary.
+09:48 < Changsuk> ~!
+09:49 < _|Nix|_> An "expensive vocabulary"?
+09:51 < Changsuk> _|Nix|_: you're such a good~~ speaker, I mean. ;)
+09:51 < _|Nix|_> Oh :)
+09:51 < _|Nix|_> I took one of those online IQ tests once, and it called me a "Word Warrior" O_o
+09:52 < Changsuk> _|Nix|_: Oh~~ haha~~
+09:52 < _|Nix|_> Yeah ... anyway ... I guess if we have no other topics, we should all go look at theme roller now, eh?
+09:52 < Kangsik> _|Nix|_: lol :-)
+09:53 < Changsuk> _|Nix|_: yes, right. from now on.
+09:53 < Hyunsook> _|Nix|_: yes.
+09:53 < Kangsik> _|Nix|_: I think so.
+09:53 < Minkyeong> _|Nix|_: Yep
+09:53 < _|Nix|_> Alright. In that case, I'll see y'all tomorrow!
+09:54 < Changsuk> _|Nix|_: See you tomorrow and have a nice day~~ :)
+09:54 < Hyunsook> See you tomorrow~
+09:54 < Kangsik> All : See you tomorrow :-)
+09:54 < Minkyeong> All: See you next time!
+09:54 < Changsuk> All: See you tomorrow~ and have a nice tonight~
+09:55 < _|Nix|_> Have a good one!
+--- Log closed Thu Nov 21 09:55:29 2013
