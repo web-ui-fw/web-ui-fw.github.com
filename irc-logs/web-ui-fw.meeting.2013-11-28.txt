@@ -1,0 +1,59 @@
+09:02 < Changsuk> All: Hi~~
+09:02 < Hyunsook> Hi all~
+09:02 < Minkyeong> Hi, all :-)
+09:03 < Kangsik> Hi all... :-)
+09:05 < _|Nix|_> Hey, sorry, all!
+09:05 < _|Nix|_> I'm here now ...
+09:05 < _|Nix|_> :)
+09:05 < Minkyeong> _|Nix|_: Welcome!
+--- Log opened Thu Nov 28 09:05:34 2013
+09:06 < _|Nix|_> Thanks for all your help on Theme Roller! Looks awesome, and it's live: http://jquerymobile.com/themeroller
+09:06 < Changsuk> _|Nix|_: you seem to busy on jqueryui-dev channel.
+09:06 < Changsuk> _|Nix|_: I really appreciate Hyunsook and Kangsik. :)
+09:07 < Hyunsook> _|Nix|_: You're welcome.
+09:07 < _|Nix|_> Changsuk: Yeah, I think we forgot to mark the icons in the preview as selectable.
+09:07 < Changsuk> _|Nix|_: ah~ I see.
+09:08 < _|Nix|_> Yeah ... such a small thing, and yet I dunno if uGoMobi will want to deploy again just for such a minor change.
+09:09 < Changsuk> _|Nix|_: Did you see that uGoMobi's messages with me yesterday?
+09:09 < Hyunsook> _|Nix|_: Oh~! TR site was released as RC.1!
+09:09 < Changsuk> _|Nix|_: ah ha. I can understand what is your concern.
+09:11 < Changsuk> _|Nix|_: uGoMobi suggested me that we can/may combine our meeting to discuss about jQM 1.5 roadmap.
+09:11 < Changsuk> _|Nix|_: Did he tell you about it?
+09:12 < _|Nix|_> I should've read your discussion to the end :_
+09:12 < _|Nix|_> :)
+09:12 < _|Nix|_> There won't be a jQM meeting tonight because it's Thanksgiving in the USA.
+09:12 < Changsuk> _|Nix|_: ah..  I see. :)
+09:13 < Changsuk> _|Nix|_: yes, right. he was concerning about that.
+09:13 < _|Nix|_> ... and uGoMobi may still be sleeping, because he hasn't answered my messages on #jqueryui-dev ...
+09:13 < Changsuk> _|Nix|_: haha~
+09:16 < Changsuk> _|Nix|_: IMHO, Can we have our meeting with him to talk about his suggestion tomorrow or next monday?
+09:16 < _|Nix|_> Sure!
+09:17 < Changsuk> _|Nix|_: Thanks~! and If you can, could you tell him about my suggestions?
+09:17 < _|Nix|_> Depends on him, though ... I can talk to him later on and send you guys an email about it.
+09:17 < _|Nix|_> Might be an hour later than this meeting though.
+09:17 < _|Nix|_> ... like we did last Friday.
+09:17 < Changsuk> _|Nix|_: Ok~ Thank you~~!!
+09:17 < _|Nix|_> Either way, I'll let you know by email.
+09:18 < Changsuk> yes, I can have a meeting tomorrow 5 P.M. :)
+09:18 < _|Nix|_> OK.
+09:18 < Changsuk> Hyunsook, Kangsik, Minkyeong: Can you guys, OK?
+09:19 < Hyunsook> Yes, OK.
+09:19 < Minkyeong> Chansuk: Okay
+09:19 < Kangsik> Yes.. Ok :-)
+09:21 < Minkyeong> Changsuk: Sorry, typo.. ;( Chansuk* -> Changsuk
+09:21 < _|Nix|_> OK ...
+09:21 < Changsuk> All: Ok, then, See you all tomorrow or next week. Thanks for your email in advance, _|Nix|_. :)
+09:22 < _|Nix|_> OK, I guess we've all been busy with TR, eh?
+09:22 < _|Nix|_> No other topics?
+09:22 < Changsuk> _|Nix|_: yes, right. and I don't have any other issues. :)
+09:23 < Hyunsook> _|Nix|_: Yes, right.
+09:23 < Kangsik> _|Nix|_: Yes. I have no topic.
+09:23 < Hyunsook> _|Nix|_, Changsuk: +1 ^^;
+09:23 < _|Nix|_> OK. In that case, have a nice weekend, all! I'll let you know about the meeting as soon as I know myself.
+09:24 < Hyunsook> Thanks~!
+09:24 < Minkyeong> Okay :D
+09:24 < Changsuk> _|Nix|_: Thanks a lot~! and Have a nice weekend or talk to you tomorrow~~ :)
+09:25 < Hyunsook> See you tomorrow or next week.
+09:25 < Minkyeong> Have a nice weekend, all! ..or a nice day :-)
+09:25 < Kangsik> Have a nice weekend. :-)
+--- Log closed Thu Nov 28 09:30:40 2013
