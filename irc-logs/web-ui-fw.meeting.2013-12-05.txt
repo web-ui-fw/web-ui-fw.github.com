@@ -1,0 +1,40 @@
+09:01 < Changsuk> All: Hi~
+09:02 < Changsuk> All: Did you get my email? Please share your thought about it. TIA~
+09:04 < _|Nix|_> Hey!
+09:04 < _|Nix|_> Sorry I'm late!
+09:04 < Changsuk> _|Nix|_: Hi~~~ :)
+09:04 < Changsuk> _|Nix|_: NP.
+--- Log opened Thu Dec 05 09:04:39 2013
+09:04 -!- Irssi: Log file ~/2013-12-05.txt opened
+09:05 < Changsuk> _|Nix|_: I sent you an email about today meeting.
+09:05 < _|Nix|_> Changsuk: Looking for it ...
+09:06 < Hyunsook> Hi~
+09:06 < _|Nix|_> Changsuk: OK, you wanna move the meeting to next Monday? That's fine with me.
+09:06 < Changsuk> All: I think that it can be better to have our meeting with Jasper.
+09:06 < _|Nix|_> I will try to add CSS to the web-ui-fw build in the meantime.
+09:06 < Changsuk> _|Nix|_: yes, right. Thanks~
+09:07 < Hyunsook> _|Nix|_: OK, I see.
+09:07 < _|Nix|_> Hyunsook: To answer your email, yes, we should make our next commits on master.
+09:07 < Hyunsook> _|Nix|_: I also sent email to you about our working branch. ^^
+09:07 < _|Nix|_> Hyunsook: ;)
+09:07 < Hyunsook> _|Nix|_: OK~
+09:08 < Changsuk> _|Nix|_, Hyunsook: Sounds nice~~! :)
+09:08 < _|Nix|_> I would actually like to delete the jqm-1.4 branch, if nobody has any extra work on it. If you do, please rebase onto master.
+09:11 < Hyunsook> _|Nix|_: I think nodody has any extra wok. I'll ask the other guys.
+09:11 < _|Nix|_> OK. Please ask ... 
+09:11 < Changsuk> All, _|Nix|_: Ok, and I agreed with Gabriel's word. If any things to left on jqm-1.4 branch, pls move it to master, and then give us an email or tell it here.
+09:12 < _|Nix|_> Yeah, that's a good plan.
+09:12 < Changsuk> Hyunsook: ah~ thanks Hyunsook.
+09:13 < Minkyeong> All: Hi, hi. I'm sorry I'm too late ;(
+09:13 < _|Nix|_> jqm-1.4 will cease to exist in my local copy and on GH. After you've moved any work you may have from jqm-1.4 to master, you can git branch -D jqm-1.4 and then git remote prune origin, IINM.
+09:13 < _|Nix|_> Minkyeong: NP. This will be a short meeting anyway, because the main meeting will be on Monday, after the jQM roadmap discussion.
+09:13 < Hyunsook> _|Nix|_: I'll leave message after I ask them.
+09:13 < _|Nix|_> Hyunsook: OK. Thanks!
+09:14 < Minkyeong> _|Nix|_: Okay :)
+09:14 < _|Nix|_> OK, so if we're all set, and have no other topics for today, then let's all have a good weekend, and meet back here with uGoMobi on Monday!
+09:15 < Changsuk> _|Nix|_: I got it~~! Thanks
+09:16 < Changsuk> All: Have such a nice weekend and have a mind blowing things~~
+09:16 < Minkyeong> Yep. See you Monday, all :-)
+09:16 < _|Nix|_> See y'all on Monday *wave*
+09:17 < Hyunsook> haha~ See you on Monday ^^
+--- Log closed Thu Dec 05 09:19:31 2013
