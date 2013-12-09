@@ -1,0 +1,353 @@
+--- Log opened Mon Dec 09 10:07:12 2013
+10:07 -!- Irssi: Log file ~/2013-12-09.txt opened
+10:07 #web-ui-fw: < Hyunsook> _|Nix|_: :)
+10:07 #web-ui-fw: < _|Nix|_> OK ...
+10:07 #web-ui-fw: < Kangsik> Changsuk: welcome!! :-)
+10:07 #web-ui-fw: < _|Nix|_> uGoMobi: Ping!
+10:07 #web-ui-fw: < _|Nix|_> https://docs.google.com/document/d/1B1faJXMvk_G6pZNwRCXhSry7Q20zmzS4sFlm-piDH3k/edit
+10:07 #web-ui-fw: < _|Nix|_> https://docs.google.com/document/d/1N7XTqfU9dgIX_r3IxZu9OxA-4VdHIhPKC-NjmaSXeQo/edit#heading=h.k6yuw6vsdt6o
+10:08 #web-ui-fw: < _|Nix|_> I think those are the docs.
+10:08 #web-ui-fw: < Changsuk> _|Nix|_: Ok, Thanks. I
+10:08 #web-ui-fw: < Changsuk> I'll go over it. :)
+10:09 #web-ui-fw: < wonseop> <_|Nix|_> Hi.
+10:09 #web-ui-fw: < _|Nix|_> uGoMobi and I spoke briefly about how our team might help, and one of the items that we talked about was that we might be able to tackle the issue of removing style options from listview. It's quite tricky, because we have to retain all the features, but move the application of the features completely into CSS.
+10:09 #web-ui-fw: < _|Nix|_> wonseop: Hey!
+10:10 -!- Bernardao [~iago@stcugat.grupointercom.com] has joined #jqueryui-dev
+10:12 #web-ui-fw: < Changsuk> _|Nix|_: Hmmm...There are many things to do in the docs.
+10:12 #web-ui-fw: < _|Nix|_> Changsuk: Yep ... 
+10:13 -!- diffalot [~diffalot@unaffiliated/papyromancer] has quit [Ping timeout: 260 seconds]
+10:13 #web-ui-fw: < Changsuk> _|Nix|_: Where is the issue of removing style options in docs?
+10:13 #web-ui-fw: < _|Nix|_> Changsuk: 1.5 - point https://github.com/jquery/jquery-mobile/issues/4
+10:13 #web-ui-fw: < _|Nix|_> Gah!
+10:14 #web-ui-fw: < _|Nix|_> Point number 4
+10:14 -!- gseguin|away is now known as gseguin
+10:14 -!- gseguin|away is now known as gseguin
+10:15 #web-ui-fw: < Changsuk> _|Nix|_: It seems closed. right?
+10:15 #web-ui-fw: < _|Nix|_> Changsuk: Nono ... sorry ... not the issue.
+10:16 #web-ui-fw: < _|Nix|_> Changsuk: In the document (https://docs.google.com/document/d/1B1faJXMvk_G6pZNwRCXhSry7Q20zmzS4sFlm-piDH3k/edit) please look at bullet point number 4.
+10:16 #web-ui-fw: < _|Nix|_> Changsuk: "Remove style options, use classes"
+10:17 #web-ui-fw: < _|Nix|_> Changsuk: That means all widgets that have options like "corners", "shadow", "inset", etc. Those options must be removed.
+10:17 #web-ui-fw: < _|Nix|_> Changsuk: It should be possible to style those widgets with classes alone.
+10:17 #web-ui-fw: < Changsuk> _|Nix|_: OK~ i got it. :)
+10:18 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. I think so.
+10:19 #web-ui-fw: < Changsuk> _|Nix|_: We should cover all widgets. right?
+10:20 #web-ui-fw: < Hyunsook> _|Nix|_: Or only listview?
+10:21 -!- Changsuk [~Changsuk@121.133.176.50] has joined #jqueryui-dev
+10:22 -!- kmiles_ [~kmiles@66.192.217.158] has joined #cordova
+10:22 #web-ui-fw: < Changsuk> _|Nix|_: I heard about jQM roadmap from Jasper and Todd, they told me that some of new widgets may be add in 1.5.
+10:23 -!- Dragooon [~shitiz@122.177.215.136] has quit [Quit: Dragooon]
+10:24 #web-ui-fw: < Changsuk> _|Nix|_: But, any new widgets are not seen in the 1.5 roadmap...hmmm...
+10:24 -!- gseguin is now known as gseguin|away
+10:24 -!- gseguin is now known as gseguin|away
+10:25 #web-ui-fw: < Changsuk> _|Nix|_: jQM's plan seems changed. right?
+10:26 #web-ui-fw: < _|Nix|_> Changsuk: Well, we want to concentrate on merging with UI, so if we do add new widgets, they'll likely be coming from UI.
+10:26 #web-ui-fw: < _|Nix|_> Changsuk: However, I'm sure we'll also want new features.
+10:26 #web-ui-fw: < _|Nix|_> Changsuk: So we may end up with brand new, never-before-seen widgets.
+10:26 -!- kmiles_ [~kmiles@66.192.217.158] has quit [Ping timeout: 260 seconds]
+10:27 #web-ui-fw: < Changsuk> _|Nix|_: yes, I can understand jQM status.
+10:27 #web-ui-fw: < _|Nix|_> Changsuk: The roadmap is not set in stone. We must still respond to feature requests and.
+10:27 #web-ui-fw: < _|Nix|_> we must continue to triage and fix bugs, etc.
+10:28 #web-ui-fw: < Changsuk> _|Nix|_: Ok~. But there are many things to make 1.5 version, so i think, it isn't easy to add any new widgets in 1.5.
+10:29 #web-ui-fw: < Changsuk> _|Nix|_: and could you answer about Hyunsook's question above?
+10:30 #jqueryui-dev: < Changsuk> uGoMobi: Ping~
+10:31 #web-ui-fw: < Hyunsook> _|Nix|_: "Remove style options, use classes" <-- Its task scope is all widgets? or only listview?
+10:31 #web-ui-fw: < Hyunsook> Changsuk: Thanks :)
+10:32 #web-ui-fw: < Changsuk> _|Nix|_: I sent a ping message to Jasper on  #jqueryui-dev. but... he is not there... hmm... Did you get any messages from Jasper?
+10:32 #web-ui-fw: < _|Nix|_> Changsuk: No, sorry :/
+10:32 #web-ui-fw: < Changsuk> _|Nix|_: NP. :)
+10:33 #web-ui-fw: < _|Nix|_> Changsuk: The scope for that bullet point is all widgets.
+10:33 #web-ui-fw: < _|Nix|_> Changsuk: So, basically we need to provide all the widget features using CSS alone.
+10:33 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I see...
+10:34 #web-ui-fw: < _|Nix|_> Changsuk: For listview, there will be challenges like all the different themes, like divider theme, countTheme, dividerTheme, splitTheme, etc.
+10:34 #web-ui-fw: < _|Nix|_> s/diviver theme, //
+10:34 #web-ui-fw: < Changsuk> _|Nix|_: yes.
+10:34 #web-ui-fw: < _|Nix|_> Changsuk: All those will need to be done in CSS, with overrides possible per-list item.
+10:35 #web-ui-fw: < _|Nix|_> Changsuk: So, I'm not 100% sure it will be possible to do entirely in CSS.
+10:35 #web-ui-fw: < _|Nix|_> Changsuk: A similar problem exists for controlgroup and collapsibleset.
+10:36 #web-ui-fw: < _|Nix|_> Changsuk: Inheritance of option values in collapsibleset is currently done entirely in JS, IINM.
+10:36 #web-ui-fw: < _|Nix|_> Changsuk: It's a mess.
+10:36 #web-ui-fw: < _|Nix|_> We need to get rid of it and do it in CSS.
+10:36 -!- diffalot [~diffalot@c-76-107-128-104.hsd1.ms.comcast.net] has joined #cordova
+10:37 #web-ui-fw: < Changsuk> _|Nix|_: yes, I can understand what you talk. I think, I or Hyunsook can give you and Jasper what widgets we can change... by this week.
+10:38 #web-ui-fw: < _|Nix|_> Changsuk: Excellent!
+10:38 #web-ui-fw: < _|Nix|_> Do let us know!
+10:38 #web-ui-fw: < Changsuk> _|Nix|_: Ah, Do you know the 1.5 release schedule?
+10:39 #web-ui-fw: < _|Nix|_> Changsuk: We were thinking roughly half a year.
+10:39 #web-ui-fw: < _|Nix|_> Changsuk: We really don't want to stick to a set of features, but to a calendar schedule.
+10:40 #web-ui-fw: < Changsuk> _|Nix|_:Ok, I see. So shoul we meet the schedule?
+10:40 #web-ui-fw: < _|Nix|_> Changsuk: So, like, develop for about 4 months, then stop, and release whatever you have.
+10:40 #web-ui-fw: < Changsuk> _|Nix|_: ah~~ I see~
+10:41 #web-ui-fw: < _|Nix|_> Changsuk: We should develop on branches, which are rebased frequently, and we should  write tests, docs, and demos in parallel.
+10:41 #web-ui-fw: < _|Nix|_> Changsuk: ... just like we've been doing on web-ui-fw.
+10:42 #web-ui-fw: < Changsuk> _|Nix|_: then, we should change widgets until the last day in February, next year. and then we will cover issues regarding that. right?
+10:42 #web-ui-fw: < _|Nix|_> Changsuk: Yeah, that sounds about right.
+10:43 #web-ui-fw: < Changsuk> _|Nix|_: Ok~
+10:43 #web-ui-fw: < Changsuk> _|Nix|_: Ah~ How can we submit our codes?
+10:44 #web-ui-fw: < _|Nix|_> Changsuk: PRs.
+10:44 #web-ui-fw: < Changsuk> _|Nix|_: hew~~
+10:44 #jqueryui-dev: < agcolom> uGoMobi: Will the gradient option still exist in 1.4.0 themeroller? (I saw a guy complain on twitter), not in a very nice way...
+10:44 #web-ui-fw: < Changsuk> _|Nix|_: It's so hard to submit with PRs.
+10:44 #web-ui-fw: < _|Nix|_> Changsuk: There's a trick.
+10:44 #web-ui-fw: < Changsuk> _|Nix|_: Huh?
+10:45 #jqueryui-dev: < agcolom> https://twitter.com/dkarlins/status/407960053413462016
+10:45 #jqueryui-dev: < b-ot> agcolom: @dkarlins: The #jQueryMobile team removed the OPTION of gradients from #themes "to give it a more modern look." Can an adult get appointed to the team?
+10:45 #web-ui-fw: < _|Nix|_> Changsuk: If you need to make changes after you've submitted a PR, then you can even rebase, if you then force-push.
+10:46 #web-ui-fw: < _|Nix|_> Changsuk: The PR will be updated automatically, so it behaves just like a branch on jQM itself.
+10:46 #web-ui-fw: < _|Nix|_> Changsuk: I'm looking for the force-push syntax ... hold on ...
+10:47 #web-ui-fw: < Changsuk> _|Nix|_: yes... but I think that it must be better to use any new repo. likes "jQM 1.5".
+10:47 #web-ui-fw: < Changsuk> _|Nix|_: Is there any way to submit codes easily?
+10:48 #web-ui-fw: < _|Nix|_> Changsuk: Well, I suppose we could start a clone of jQM to which we all have access, and then we push to the clone and submit all the PRs from the same clone.
+10:49 #web-ui-fw: < _|Nix|_> Changsuk: The thing is, any changes we make should probably be reviewed before they go in. I can review some things, but there are widgets I'm not familiar with, in which case either arschmitz or uGoMobi would have to review those.
+10:49 #web-ui-fw: < _|Nix|_> Changsuk: .. and the best way to present changes for review is a PR.
+10:50 #web-ui-fw: < _|Nix|_> Changsuk: When we start using the new workflow, everybody will be working on branches, so I'm pretty sure we'll all be doing PRs.
+10:51 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. I already know the PR's reason. But making a PR seems additional work to develope 1.5 codes.
+10:52 #web-ui-fw: < _|Nix|_> Changsuk: I'm not so sure. frequent did many PRs for 1.4 for table and for filterable, and the way he submitted them was helpful in the end.
+10:53 #web-ui-fw: < _|Nix|_> Changsuk: He basically helped us with table and filterable in 1.4.
+10:53 #web-ui-fw: < _|Nix|_> Changsuk: ... and he did it via PRs.
+10:53 -!- diffalot [~diffalot@c-76-107-128-104.hsd1.ms.comcast.net] has quit [Changing host]
+10:53 -!- diffalot [~diffalot@unaffiliated/papyromancer] has joined #cordova
+10:53 #web-ui-fw: < Hyunsook> _|Nix|_: hmmmm..... Because arschmitz or uGoMobi may need to review codes, we should submit via PRs instead of push/commit. do you mean that?
+10:53 #web-ui-fw: < _|Nix|_> Hyunsook: Yes.
+10:54 #web-ui-fw: < Changsuk> _|Nix|_: yes... I can understand what you told me.
+10:54 #web-ui-fw: < _|Nix|_> I wouldn't be surprised if arschmitz and uGoMobi and I also worked via PRs.
+10:54 #web-ui-fw: < _|Nix|_> Specifically because we need to review.
+10:55 #web-ui-fw: < Changsuk> _|Nix|_, Hyunsook: Yes, right. I think, Gabriel's words seems right.
+10:55 #web-ui-fw: < _|Nix|_> The basic idea is that you work on a branch, then, when you think it's ready, you squash, rebase, and do a PR.
+10:55 #web-ui-fw: < _|Nix|_> If during the review it is determined that you must make changes, then you make the changes, squash, rebase, and force-push the branch.
+10:56 #web-ui-fw: < Changsuk> _|Nix|_: yes~
+10:56 #web-ui-fw: < Hyunsook> _|Nix|_, Changsuk: Yes, right.
+10:56 #web-ui-fw: < _|Nix|_> I think force push is like this: git push -f origin the-feature-branch:the-feature-branch
+10:56 #web-ui-fw: < _|Nix|_> The PR understands that and shows only the new commits.
+10:57 #web-ui-fw: < _|Nix|_> So, basically, when the PR gets merged, it is fast-forwarded, so the commit history remains linear.
+10:57 #web-ui-fw: < Changsuk> Hyunsook: So I think that we will make "Removing style options" plan regarding that issue - doing PRs.
+10:57 #web-ui-fw: < Changsuk> Hyunsook: will -> should/will :)
+10:58 -!- kmiles [~kmiles@cpe-66-8-172-60.hawaii.res.rr.com] has quit [Remote host closed the connection]
+10:58 #web-ui-fw: < _|Nix|_> :)
+10:58 #web-ui-fw: < Changsuk> _|Nix|_: yes, right. History is so important. :)
+10:59 -!- kmiles [~kmiles@cpe-66-8-172-60.hawaii.res.rr.com] has joined #cordova
+10:59 #web-ui-fw: < Changsuk> Hyunsook: After this meeting, Can we make our plan how many widgets can we make?
+11:01 #web-ui-fw: < Changsuk> Hyunsook: and then we can give Gabriel and Jasper our plan by this week.
+11:01 #web-ui-fw: < _|Nix|_> Remember when we remove style options, we need to provide a deprecation period of one version during which the style option is still present, but all it does is .addClass()
+11:01 #web-ui-fw: < _|Nix|_> Or, rather, .toggleClass( "classname", optionValue )
+11:02 #web-ui-fw: < _|Nix|_> But that should be trivial once it is possible to do the styling entirely via CSS.
+11:02 #web-ui-fw: < Hyunsook> Changsuk: Sure.
+11:03 #web-ui-fw: < Changsuk> _|Nix|_: Ok, I see.
+11:03 -!- kmiles [~kmiles@cpe-66-8-172-60.hawaii.res.rr.com] has quit [Ping timeout: 265 seconds]
+11:05 #web-ui-fw: < _|Nix|_> After we release 1.4 we cannot immediately start working on these features, because many issues have accumulated that are milestoned for 1.4.1. We must fix them first, and reduce the number of open issues before we can really get started.
+11:06 #web-ui-fw: < _|Nix|_> Changsuk: However, your team /can/ get started immediately.
+11:06 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has joined #jquery-meeting
+11:06 #web-ui-fw: < Changsuk> _|Nix|_: Ok~ thanks.
+11:08 #web-ui-fw: < Changsuk> Hyunsook, Kangsik, Minkyeong, wonseop: Are there other items which you want to get?
+11:09 #web-ui-fw: < Changsuk> Hyunsook, Kangsik, Minkyeong, wonseop: or is there any troubles to cover that issue - Removing style options. ?
+11:10 -!- xored [~xored@freiburg.digitalpatrioten.com] has joined #cordova
+11:11 #cordova: < xored> Anybody experiences issues with crodova 3.2 upgrades and android and "Class not found" when starting the app?
+11:11 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has quit [Ping timeout: 264 seconds]
+11:11 #web-ui-fw: < _|Nix|_> Changsuk: It may turn out to be quite complicated. I would suggest that the best way to determine what is possible is by trying it.
+11:12 #web-ui-fw: < uGoMobi> hi all
+11:12 #web-ui-fw: < _|Nix|_> uGoMobi: Hey!
+11:12 #web-ui-fw: < uGoMobi> I am so sorry I missed the meeting
+11:12 #web-ui-fw: < uGoMobi> :(
+11:12 #web-ui-fw: < uGoMobi> hey _|Nix|_ 
+11:12 #web-ui-fw: < Minkyeong> uGoMobi: hi
+11:12 #web-ui-fw: < Changsuk> Hyunsook, Kangsik, Minkyeong, wonseop: if you have any things to told us, pls tell me in our local meeting. :)
+11:12 #web-ui-fw: < _|Nix|_> uGoMobi: We were talking about removing style options.
+11:12 #web-ui-fw: < Hyunsook> uGoMobi: Hi
+11:12 #web-ui-fw: < wonseop> uGoMobi, Hi
+11:12 #web-ui-fw: < Kangsik> Changsuk : I think we must consider the backward compatibility.
+11:12 #web-ui-fw: < uGoMobi> was in hospital until late in the night (not for myself) and I forgot to set my alarm clock
+11:13 #web-ui-fw: < Changsuk> uGoMobi: Hi~ We're waiting for you. :)
+11:13 #web-ui-fw: < Changsuk> Kangsik: Sure~! :)
+11:13 #web-ui-fw: < uGoMobi> hi Changsuk Hyunsook wonseop Minkyeong Kangsik 
+11:14 #web-ui-fw: < Changsuk> uGoMobi: Can I ask you who is in the hospital?
+11:14 #web-ui-fw: < Hyunsook> Changsuk: I'm sorry but I don't have any thought yet. :/ I think.... we need time to think about that. ^^;
+11:15 #web-ui-fw: < uGoMobi> Changsuk: it's the little boy of my best friend
+11:15 -!- gseguin|away is now known as gseguin
+11:15 -!- gseguin|away is now known as gseguin
+11:16 #web-ui-fw: < Changsuk> uGoMobi: ah... yes. thanks for your answer.
+11:16 #web-ui-fw: < Hyunsook> uGoMobi: ah...
+11:16 #web-ui-fw: < uGoMobi> Changsuk _|Nix|_ : did you move the meeting?
+11:16 #web-ui-fw: < _|Nix|_> uGoMobi: My best wishes to him and his family!
+11:16 #web-ui-fw: < uGoMobi> I am reading back now
+11:16 #web-ui-fw: < Changsuk> _|Nix|_: If you can, could you told Jasper what we
+11:16 #web-ui-fw: < uGoMobi> _|Nix|_: thanks!
+11:16 #web-ui-fw: < Changsuk> 've talked?
+11:17 #web-ui-fw: < Minkyeong> Changsuk: I agree with Hyunsook. need more time :(
+11:17 #web-ui-fw: < _|Nix|_> uGoMobi: We didn't end up moving it because Changsuk's meeting ended early.
+11:17 #web-ui-fw: < uGoMobi> Can I have 5 minutes? I could use a coffee
+11:17 #web-ui-fw: < Changsuk> uGoMobi: My best wishes, too~! :)
+11:17 #web-ui-fw: < _|Nix|_> uGoMobi: But here we are, anyway, in the time frame we initially thought unnecessary :)
+11:17 #web-ui-fw: < Changsuk> uGoMobi: Sure~
+11:17 #web-ui-fw: < Hyunsook> uGoMobi: sure!
+11:17 #web-ui-fw: < uGoMobi> thanks Changsuk and Hyunsook 
+11:18 #web-ui-fw: < uGoMobi> ok I'll be right back
+11:20 #web-ui-fw: < Changsuk> _|Nix|_: while we
+11:20 -!- diffalot [~diffalot@unaffiliated/papyromancer] has quit [Ping timeout: 265 seconds]
+11:21 #web-ui-fw: < _|Nix|_> Changsuk: Hmmm?
+11:22 #web-ui-fw: < Changsuk> _|Nix|_: 're waiting for him, can we talk another things that is not regarding jQM issues? ;)
+11:24 #web-ui-fw: < _|Nix|_> Changsuk: Sure!
+11:24 #web-ui-fw: < _|Nix|_> What's up?
+11:25 #web-ui-fw: < Changsuk> all: hmm... I'm sorry that atually I can not think about any other topics.... ;(
+11:25 -!- ontologiae_ [~ontologia@crb44-6-83-155-75-126.fbx.proxad.net] has joined #cordova
+11:25 -!- gseguin is now known as gseguin|away
+11:25 -!- gseguin is now known as gseguin|away
+11:25 #web-ui-fw: < _|Nix|_> Changsuk: Don't worry :) We'll have plenty of topics once we get started :)
+11:26 #web-ui-fw: < Changsuk> _|Nix|_: Korea's whether seems to be changed recenlty how about your country?
+11:26 #web-ui-fw: < uGoMobi> I am back
+11:26 #web-ui-fw: < Changsuk> All : huh????
+11:26 #web-ui-fw: < uGoMobi> sorry again for keep you all waiting
+11:27 #web-ui-fw: < _|Nix|_> Changsuk: Yep. It's -6
+11:27 #web-ui-fw: < _|Nix|_> Changsuk: ... and getting colder.
+11:27 #web-ui-fw: < Changsuk> uGoMobi: NP. we just talk about another things~
+11:27 #web-ui-fw: < Minkyeong> uGoMobi: no problem :-)
+11:27 #web-ui-fw: < _|Nix|_> Changsuk: At long last ...
+11:29 -!- AzaToth [~azatoth@wikipedia/AzaToth] has joined #jqueryui-dev
+11:29 #web-ui-fw: < Changsuk> _|Nix|_: Yes...The temperature in Korea keep going high... So it was raining today in December.
+11:30 #web-ui-fw: < _|Nix|_> uGoMobi: So, basically, we were thinking of tackling the style option removal for the various widgets.
+11:30 #web-ui-fw: < _|Nix|_> uGoMobi: That way we can concentrate on the rest of the items.
+11:31 #web-ui-fw: < _|Nix|_> uGoMobi: For example, the table widget review should be quite a task.
+11:31 #web-ui-fw: < uGoMobi> _|Nix|_: right
+11:31 #web-ui-fw: < uGoMobi> _|Nix|_: yeah, style options removal is good one to start with
+11:32 #web-ui-fw: < Changsuk> uGoMobi: is ther any other things you
+11:32 #web-ui-fw: < Changsuk> 're considering?
+11:33 #web-ui-fw: < uGoMobi> _|Nix|_: it should be too complicated but we need to test the classes a lot because of edge cases
+11:33 #web-ui-fw: < uGoMobi> s/should/shouldn't/
+11:33 -!- _moon [~moon@20-91-190-109.dsl.ovh.fr] has joined #jqueryui-dev
+11:34 #web-ui-fw: < uGoMobi> Changsuk: as you noticed the roadmap doesn't contain any new widgets
+11:34 #web-ui-fw: < uGoMobi> Changsuk: some are new in Mobile but they are already in UI
+11:35 #web-ui-fw: < uGoMobi> we will rewrite almost all of the Mobile widgets and or replace them by a similar widget from UI
+11:35 #web-ui-fw: < _|Nix|_> uGoMobi: Agreed.
+11:35 #web-ui-fw: < uGoMobi> this is about the roadmap in general, not just 1.5
+11:35 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: Ok,~ thanks. and... Actually, I was asked about "Removing style~" issue from uGoMobi. So I think that my team have to discuss about whether we can cover it.
+11:36 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: so are there any other topics to ask my team?
+11:37 #web-ui-fw: < uGoMobi> We really want to focus on getting the current widgets in good shape, so that's why we won't add new widgets or add new features to widgets
+11:37 #web-ui-fw: < uGoMobi> Changsuk: besides style options the listview widget might be something you and your team can help with
+11:38 #web-ui-fw: < Changsuk> _|Nix|_, uGoMobi: I see....
+11:38 #web-ui-fw: < uGoMobi> _|Nix|_: I think I saw you already mentioned the listview widget
+11:38 #web-ui-fw: < Changsuk> uGoMobi: yes, right. he did it. :)
+11:39 #web-ui-fw: < _|Nix|_> uGoMobi: Yes, because it's likely to be the most complicated - what with all the them options 'n all ...
+11:39 #web-ui-fw: < _|Nix|_> uGoMobi: ... but controlgroup and collapsibleset won't be easy either, IMO.
+11:40 #web-ui-fw: < uGoMobi> _|Nix|_: I think we should just pick one or two things and see how long it takes
+11:40 #web-ui-fw: < uGoMobi> _|Nix|_: after that we can look again what will be the next thing to work on
+11:41 -!- diffalot [~diffalot@c-76-107-128-104.hsd1.ms.comcast.net] has joined #cordova
+11:41 #web-ui-fw: < _|Nix|_> uGoMobi: I mentioned our plan to just work for 4 months and release whatever we have in the subsequent two months.
+11:41 #web-ui-fw: < Changsuk> uGoMobi: Yes, Gabriel already told us about that and
+11:42 #web-ui-fw: < uGoMobi> removing style options, listview and table rewrite are some things that we could start with
+11:42 #web-ui-fw: < Changsuk> uGoMobi: I and my team will/can have a plan regarding that. :)
+11:42 -!- diffalot [~diffalot@c-76-107-128-104.hsd1.ms.comcast.net] has quit [Changing host]
+11:42 -!- diffalot [~diffalot@unaffiliated/papyromancer] has joined #cordova
+11:42 #web-ui-fw: < uGoMobi> Changsuk: great!
+11:42 #web-ui-fw: < _|Nix|_> Awesome!
+11:42 -!- txusinho [~txusinho@243.85-86-210.dynamic.clientes.euskaltel.es] has joined #cordova
+11:43 #web-ui-fw: < Hyunsook> _|Nix|_, uGoMobi, Changsuk: but.... actually I don't know well whether removing style options for all widgets within 4 months is possible or not.
+11:43 #web-ui-fw: < Changsuk> uGoMobi, _|Nix|_: Some test cases should be needed before we make a detail plan
+11:44 #web-ui-fw: < _|Nix|_> Changsuk: In the process of making changes, the demos as well as the existing automated tests should serve as test cases.
+11:44 -!- basz [~basz@62.21.178.223] has joined #cordova
+11:44 #web-ui-fw: < _|Nix|_> Changsuk: Feel free to add additional demos and please make sure to update the API docs as well.
+11:44 #web-ui-fw: < Changsuk> Hyunsook: Yes, right. So we have our local meeting after this meeting to talk about what widgets we can change.
+11:44 #web-ui-fw: < _|Nix|_> I believe that, with those four things in place, we should be able to ensure fairly high quality even during the first iteration.
+11:45 #web-ui-fw: < Changsuk> Hyunsook: have our local ~ => should have our~~ :)
+11:45 #web-ui-fw: < _|Nix|_> Hyunsook: We must do as much as we can. We will release whatever is stable.
+11:45 #web-ui-fw: < Hyunsook> Changsuk:  Yes.
+11:46 #web-ui-fw: < Changsuk> uGoMobi: So we should go over the demos to check our codes. right?
+11:46 #web-ui-fw: < Hyunsook> _|Nix|_: I see.
+11:47 #web-ui-fw: < Changsuk> uGoMobi: Or should make examples for demo?
+11:47 #web-ui-fw: < uGoMobi> Changsuk: one moment, I am looking for a document
+11:47 #web-ui-fw: < Changsuk> uGoMobi: ok~
+11:47 #web-ui-fw: < uGoMobi> https://docs.google.com/document/d/1hZGlikXfhIEz9GUDJ1TLNHUVHaV-TlFC4zk_YgL3dUo/edit
+11:48 #web-ui-fw: < uGoMobi> that is a list arschmitz made
+11:48 #web-ui-fw: < Changsuk> uGoMobi: what dose mean of
+11:49 #web-ui-fw: < Changsuk> "Done"?
+11:49 #web-ui-fw: < Hyunsook> uGoMobi, _|Nix|_: I think.. we need to make  a realistic plan because we should cover code modification, APIs, demos, issues, and etc..
+11:49 #web-ui-fw: < uGoMobi> maybe you should ignore "done all" and "done none" because I am not sure if that's still applicable
+11:49 #web-ui-fw: < uGoMobi> Hyunsook: right
+11:49 #web-ui-fw: < uGoMobi> we have to this one widget at the time
+11:50 #web-ui-fw: < uGoMobi> not first change code of all widgets and then update all docs and demos
+11:50 #web-ui-fw: < uGoMobi> because if it turns out it takes more than 4 months we can just release
+11:50 #web-ui-fw: < Hyunsook> uGoMobi: Yes, right.
+11:51 #web-ui-fw: < uGoMobi> it would only mean that some widgets still have style options in 1.5
+11:51 #web-ui-fw: < uGoMobi> but that's not a big problem, we can continue for 1.6
+11:52 #web-ui-fw: < uGoMobi> Changsuk: that document is just so you have an overview of what style options have to be removed
+11:52 -!- jquicommit [~jquicommi@192.30.252.53] has joined #jqueryui-dev
+11:52 #jqueryui-dev: < jquicommit> [jquery-ui] golbin closed pull request #1148: Fix the problem of CJK IME (master...master) http://git.io/qWje_Q
+11:52 -!- jquicommit [~jquicommi@192.30.252.53] has left #jqueryui-dev []
+11:52 #web-ui-fw: < uGoMobi> in most cases style options is only about adding a class
+11:52 #web-ui-fw: < Changsuk> uGoMobi: Ok~ I see.
+11:53 #web-ui-fw: < Hyunsook> uGoMobi: Ok, I see.
+11:54 #web-ui-fw: < uGoMobi> so I think the right approach is to first remove the JS that adds the style class and then check if the right styles are applied when you add/remove a class manually in the markup (we can use the demos for that)
+11:55 #web-ui-fw: < uGoMobi> if we add the style class to an element that is generated by the widget we have to look into making it work if you add it to the native element or a container
+11:56 #web-ui-fw: < Changsuk> uGoMobi: Sure~ They are experts~! :)
+11:57 #web-ui-fw: < uGoMobi> Changsuk: I know, that's why it's great that you and your team are willing to help us with this :)
+11:57 #web-ui-fw: < Changsuk> uGoMobi: I think that they(Hyunsook and others) already know thar process. :)
+11:57 #web-ui-fw: < Changsuk> uGoMobi: ha~ you're welcome~.
+11:59 #web-ui-fw: < Changsuk> uGoMobi, _|Nix|_:  So I or Hyunsook can/will give you and Gabriel a plan of removing style options by this Friday or next Monday after my team's meeting.
+11:59 #web-ui-fw: < uGoMobi> Changsuk: that would be great
+11:59 #web-ui-fw: < uGoMobi> One other thing...
+11:59 #web-ui-fw: < Changsuk> uGoMobi: :)
+12:00 #web-ui-fw: < Changsuk> uGoMobi: Sure, pls feel free to ask us.
+12:00 #web-ui-fw: < uGoMobi> After we released 1.4 final we will first work on fixing some bugs for 1.4.1 and merging PR's
+12:00 #web-ui-fw: < Changsuk> uGoMobi: yes.
+12:01 #web-ui-fw: < uGoMobi> I want to do a 1.4.1 release beginning of January
+12:02 #web-ui-fw: < uGoMobi> so we won't be doing much development for 1.5 until then
+12:02 #jqueryui-dev: < doesallmagic2> Project jQuery UI - git core build #609: STILL UNSTABLE in 1 min 3 sec: http://jenkins.jquery.com/job/jQuery%20UI%20-%20git%20core/609/
+12:02 #web-ui-fw: < uGoMobi> but we can do some planning
+12:03 #web-ui-fw: < Changsuk> uGoMobi: yes...so?
+12:03 #jqueryui-dev: < doesallmagic2> Project jQuery UI 1-9-stable - git core build #400: STILL UNSTABLE in 1 min 2 sec: http://jenkins.jquery.com/job/jQuery%20UI%201-9-stable%20-%20git%20core/400/
+12:04 #web-ui-fw: < uGoMobi> Changsuk: that was it... I just wanted to inform you about where the Mobile team is working/focussing on :)
+12:04 -!- miketaylr [~miketaylr@192.241.222.35] has quit [Ping timeout: 260 seconds]
+12:04 #web-ui-fw: < Changsuk> uGoMobi: ah~~~ Ok, I see.
+12:04 #web-ui-fw: < Hyunsook> uGoMobi: OK, I see.
+12:04 #web-ui-fw: < Changsuk> uGoMobi: then I will just make a plan. NP. :)
+12:05 #web-ui-fw: < uGoMobi> great
+12:05 #web-ui-fw: < uGoMobi> anything else we need to discuss?
+12:06 #web-ui-fw: < Changsuk> uGoMobi: No~ I think, I told you all.
+12:06 #web-ui-fw: < uGoMobi> ok
+12:06 #web-ui-fw: < _|Nix|_> Excellent!
+12:06 #web-ui-fw: < Changsuk> _|Nix|_: you're here~ :) ha~
+12:06 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has joined #jquery-meeting
+12:06 #web-ui-fw: < _|Nix|_> Changsuk, Hyunsook, Kangsik, wonseop, Minkyeong: I guess I'll see y'all on Thursday then, right?
+12:07 #web-ui-fw: < uGoMobi> Thanks everyone
+12:07 #web-ui-fw: < Changsuk> _|Nix|_: Ok, We can talk about more things about 1.5 topics on our meeting. :)
+12:07 #web-ui-fw: < Changsuk> uGoMobi: You're welcome~~
+12:08 #web-ui-fw: < Minkyeong> _|Nix|_: okay. see you on Thursday :)
+12:08 #web-ui-fw: < Hyunsook> uGoMobi: you're welcome.
+12:08 -!- nj3ma is now known as nj3ma_Zzz
+12:08 #web-ui-fw: < Changsuk> All: Talk to you on Thursday(not uGoMobi. ;) ) and have a nice day~!!! ;)
+12:09 #web-ui-fw: < Hyunsook> _|Nix|_: Ok.
+12:09 #web-ui-fw: < uGoMobi> Changsuk: thanks, you too
+12:09 #web-ui-fw: < Changsuk> uGoMobi: not -> but. :)
+12:09 #web-ui-fw: < _|Nix|_> Alright. Talk to y'all then!
+12:09 -!- peteyg_ [~peteyg@192.241.205.231] has quit [Read error: Operation timed out]
+12:10 #web-ui-fw: < Hyunsook> Have a good day~!
+12:10 #web-ui-fw: < Changsuk> uGoMobi: I'm sorry that i'm not fluent in English. :0
+12:10 #web-ui-fw: < Changsuk> uGoMobi: Talk to you later~~
+12:10 #web-ui-fw: < Kangsik> _|Nix|_: Have a nice day! See you later. :)
+12:10 #web-ui-fw: < uGoMobi> Changsuk: no worries, neither am I
+12:10 #web-ui-fw: < wonseop> See you again.:)
+12:10 #web-ui-fw: < uGoMobi> have a great day all
+12:11 -!- miketaylr [~miketaylr@192.241.222.35] has joined #jquery-meeting
+12:11 #web-ui-fw: < Hyunsook> :)
+12:11 -!- heff [~heff@50-0-204-52.dsl.static.sonic.net] has quit [Ping timeout: 245 seconds]
+12:11 #web-ui-fw: < Kangsik> Have a good day. :-)
+12:11 #web-ui-fw: < Changsuk> _|Nix|_: Have such a nice day with your family~ :)
+12:11 #web-ui-fw: < Minkyeong> have a nice day all :D..
+12:11 #web-ui-fw: < Changsuk> _|Nix|_: day -> weekend. ;)
+12:13 #jqueryui-dev: < uGoMobi> agcolom: re: gradient option in TR... no it won't (https://github.com/jquery/web-jquery-mobile-theme-roller/issues/149)
+12:13 -!- nj3ma_Zzz is now known as nj3ma
+12:13 #web-ui-fw: < Changsuk> _|Nix|_: ah.. I'm sorry...Not weekend... we will meet again... haha~
+12:15 -!- MGyveR [~mgyver@247.235.208.46.dyn.plus.net] has joined #cordova
+12:16 -!- peteyg [~peteyg@192.241.205.231] has joined #cordova
+12:16 #jqueryui-dev: < uGoMobi> agcolom: that's a nice tweet indeed ;)
+12:16 -!- gseguin|away is now known as gseguin
+12:16 -!- gseguin|away is now known as gseguin
+12:18 -!- xored [~xored@freiburg.digitalpatrioten.com] has quit [Quit: Leaving.]
+12:19 -!- xored [~xored@freiburg.digitalpatrioten.com] has joined #cordova
+12:20 -!- fikst [~fikst@d54C442D5.access.telenet.be] has joined #jquery-meeting
+12:20 -!- Dragooon [~shitiz@122.177.215.136] has joined #jqueryui-dev
+12:23 -!- kmiles [~kmiles@66.192.217.158] has joined #cordova
+12:24 #web-ui-fw: < _|Nix|_> :)
+12:26 -!- gseguin is now known as gseguin|away
+12:26 -!- gseguin is now known as gseguin|away
+12:27 -!- kmiles [~kmiles@66.192.217.158] has quit [Ping timeout: 245 seconds]
+12:27 -!- Allyz_ [~Allyz@113x33x180x18.ap113.ftth.ucom.ne.jp] has quit [Remote host closed the connection]
+12:27 -!- fikst [~fikst@d54C442D5.access.telenet.be] has quit [Quit: Leaving]
+--- Log closed Mon Dec 09 12:40:10 2013
