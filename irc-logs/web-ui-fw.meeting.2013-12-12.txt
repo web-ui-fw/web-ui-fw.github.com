@@ -1,0 +1,169 @@
+--- Log opened Thu Dec 12 09:59:48 2013
+10:00 < _|Nix|_> Hey, all!
+10:00 < _|Nix|_> How's everybody this fine day?
+10:00 < Minkyeong> _|Nix|_: hi :)
+10:00 < Kangsik> Hi :-)
+10:00 < Hyunsook> Hi, all~
+10:01 < Minkyeong> hi all :)
+10:01 < wonseop> Hi, all :)
+10:02 < Hyunsook> It's snowing heavily outside.
+10:02 < _|Nix|_> Hyunsook: Lucky you ... we had some snow, but it melted, and now there's ice everywhere :(
+10:03 < Hyunsook> Ooops~
+10:03 < Minkyeong> _|Nix|_: aw.. be careful :(
+10:03 < _|Nix|_> Yeah ... well, hopefully we'll get some more cold Real Soon Now™
+10:05 < _|Nix|_> Anyhoo ... I guess we don't have too many topics ... you guys have been divvying up the style-option-reduction work, right?
+10:05 < _|Nix|_> I've been busy rebasing the 1.4 API docs onto master ... I'm still not 100% sure I did it correctly, so I asked uGoMobi to go over the docs ...
+10:06 < Hyunsook> Not yet.
+10:07 < _|Nix|_> I'm also sorry to say that I haven't gotten around to making the CSS build work for web-ui-fw yet :(
+10:07 < Hyunsook> We should prepare internal seminar this week and next week, so we cannot start that.
+10:08 < Hyunsook> that -> the style-option-reducation work
+10:10 < Hyunsook> ah~
+10:10 < _|Nix|_> OK. Undderstood.
+10:11 < Changsuk> All: Hi~ I'm sorry that i'm late. :)
+10:11 < _|Nix|_> Changsuk: NP ...
+10:11 < Hyunsook> Hi Changsuk~
+10:11 < Minkyeong> Changsuk: hi :)
+10:12 < Kangsik> Changsuk : hi :)
+10:12 < wonseop> Changsuk: hi~
+10:14 < Changsuk> _|Nix|_, Hyunsook: yes, Hyunsook's word is right. Hyunsook's team has prepared another job so her team doesn't start to dig CSS style-option job yet.
+10:14 < _|Nix|_> That's fine. I haven't had much time either ...
+10:14 < _|Nix|_> Hopefully next week will be better.
+10:15 < _|Nix|_> So, I guess, unless we have some other topics, we can call it a meeting ...
+10:16 < Changsuk> _|Nix|_: ok, and I think that we can start uGoMobi's request around tomorrow so I or Hyunsook can let you know the plan in next Friday or 23th.
+10:17 < _|Nix|_> That's cool!
+10:18 < _|Nix|_> In that case, have a good weekend y'all, and we'll see each other next week!
+10:18 < Changsuk> _|Nix|_: Ok~~ ah~!
+10:19 < Changsuk> uGoMobi: may are you here?
+10:19 < uGoMobi> Changsuk: I am
+10:19 < Changsuk> uGoMobi: haha~ Hi~
+10:19 < uGoMobi> hi Changsuk 
+10:19 < Changsuk> uGoMobi: Did you get my word about the schedule?
+10:20 < Changsuk> uGoMobi: Is there any concerns?
+10:20 < uGoMobi> Changsuk: Yes. Sounds good. Thanks!
+10:20 < Changsuk> Is -> Are.
+10:20 < uGoMobi> Changsuk: No, not at all
+10:20 < Changsuk> uGoMobi, _|Nix|_: Thanks~. :)
+10:20 < Hyunsook> uGoMobi: Thanks~
+10:22 < uGoMobi> Thanks Changsuk and Hyunsook! Enjoy your evening!
+10:22 < Changsuk> All : Talk to you on next Thursday and Have such a weekend with your friends or family. :)
+10:22 < _|Nix|_> Have a good one, all!
+10:22 < Minkyeong> yep. see you next week, all :)
+10:22 < Hyunsook> Oh! One another news.
+10:22 < Changsuk> _|Nix|_: thanks, Gabriel~. :)
+10:22 < Hyunsook> Sorry~ ^^;
+10:23 < Changsuk> Hyunsook: Ok, I'm here.
+10:23 < Hyunsook> My team completed modification and demo task for swipe and fastscroll, and than we have stopped the other tasks for them today.
+10:23 < Hyunsook> ... because new widgets isn't added on 1.5 roadmap
+10:24 < Hyunsook> ...  and we should make a plan to remove style options for widgets, as you already know.
+10:24 < Changsuk> Hyunsook: yes, right.
+10:24 < Hyunsook> ... the modifications for the widgets was uploaded on repo of Kangsik and Minkyeong themselves
+10:24 < _|Nix|_> Hyunsook: Does that mean you won't contribute fastscroll and swipe to web-ui-fw?
+10:25 < _|Nix|_> Hyunsook: Oh, NM ...
+10:25 < _|Nix|_> Hyunsook: Just saw the commits :)
+10:25 < _|Nix|_> Wait, no ... those are just routemap.
+10:25  * _|Nix|_ needs coffee ...
+10:25 < Hyunsook> ... and wasn't uploaded master branch of web-ui-fw repo yet.
+10:26 < Hyunsook> _|Nix|_: Yes. Routemap is uploaded codes on web-ui-fw repo. :)
+10:26 < Changsuk> Hyunsook: What things are you worring?
+10:26 < _|Nix|_> Routemap demo looks cool!
+10:26 < Hyunsook> _|Nix|_: 1st development for routemap is completed.
+10:27 < Hyunsook> _|Nix|_: is -> was
+10:27 < Changsuk> worrying. ;)
+10:28 < _|Nix|_> Woah ... clicking on "View Source" in the routemap demo and then clicking "JS" causes the page to die.
+10:28 < _|Nix|_> I guess there must be a lot of code ...
+10:28 < Hyunsook> _|Nix|_: Really?
+10:29 < Hyunsook> wonseop: Can you check it after meeting?
+10:29 < _|Nix|_> wonseop: I used Chrome 31.0.1650.63 on Fedora 19 ...
+10:30 < wonseop> Ok. I'll check it.
+10:30 < _|Nix|_> wonseop: Thanks!
+10:31 < wonseop> You're welcome.
+10:31 < Changsuk> _|Nix|_, Hyunsook: If uploading swipe and fastscroll is some hard work, How about we will stop to upload them and then start to investigate CSS sytle work?
+10:32 < _|Nix|_> Changsuk: +1
+10:32 < Changsuk> _|Nix|_: thanks~ ;)
+10:32 < Changsuk> Hyunsook: How do you think about that?
+10:32 < Hyunsook> Changsuk: +1 :)
+10:32 < Changsuk> Hyunsook: thanks~ ;)
+10:33 < Hyunsook> Changsuk: you're welcome. :)
+10:33 < Changsuk> Hyunsook: then did you clear your worries?
+10:34 < Hyunsook> Changsuk: No. that is all.
+10:34 < Hyunsook> Changsuk: Clear!  Thanks!
+10:34 < Changsuk> Hyunsook: Ok~ haha~ :)
+10:35 < _|Nix|_> That's great, all! Looking forward to the demos!
+10:36 < Changsuk> _|Nix|_: +1 ~!
+10:38 < _|Nix|_> Alright ... do we have any other topics?
+10:38 < Changsuk> uGoMobi, _|Nix|_: No. but I just have a simple question about being a board member in jQM. If you guys are have a minute, can I ask you about qualification for a board member in jQM?
+10:39 < Changsuk> uGoMobi: I think that you can give us a guide for that. :)
+10:39 < _|Nix|_> Changsuk: Do you mean on the jQuery Foundation?
+10:40 < Changsuk> _|Nix|_: No. Just being a member of jQM development team.
+10:40 < _|Nix|_> Oh! OK :) Yeah, I think uGoMobi is the right person to answer that question.
+10:41 < _|Nix|_> Changsuk: I can tell you my story though, if you're interested ...
+10:42 < Changsuk> _|Nix|_: Sure~! :)
+10:42 < Hyunsook> _|Nix|_: +1 !
+10:42 < Changsuk> _|Nix|_: It may/will be very helpful for us.
+10:43 < Changsuk> _|Nix|_: Your story may be mind blowing things. ;)
+10:43 < _|Nix|_> Changsuk: Well, actually, it's not much of a story: When I first presented web-ui-fw to toddmparker, he was very interested in the popup widget. So, I made a PR. Eventually, the PR ended up in a branch. I kept making PRs to address the concerns reagarding popup raised by the rest of the jQM team, until it became clear that it'd be easier to just let me commit directly. Well, that, and I also made a couple of PRs against buttonMarkup.
+10:46 < uGoMobi> Changsuk: sorry I was in a call
+10:46 < _|Nix|_> Changsuk: So, if my story is any indication, focusing on a single, major feature during a development cycle should "do the trick" - if one can say that. However, I'm not sure if we have any cut-and-dried rules for becoming a team member.
+10:47 < Changsuk> _|Nix|_: Thanks~!! Actually I made a guess what you did, and my guesses are similar with your efforts. Hmmmm~ Yes, I really can understand what you did and how could you make it. ~! :0
+10:47 < Changsuk> ;)
+10:47 < uGoMobi> Changsuk: nice to hear that you are interested in joining the team
+10:47 < Changsuk> uGoMobi: Not at all~
+10:47 < Changsuk> uGoMobi: Really? Thanks~! :)
+10:48 < uGoMobi> Changsuk: so like _|Nix|_ said, it all starts with contributing code (PR's) and commenting on tickets in the issue tracker
+10:49 < Changsuk> uGoMobi: A board member should be dedicated to jQM all day?
+10:49 < uGoMobi> Changsuk: team member, the Mobile team doesn't have a board :)
+10:49 < uGoMobi> Changsuk: no, not all day
+10:50 < _|Nix|_> I have an ironing board ...
+10:50 < Changsuk> uGoMobi: ah~ yes.
+10:50 < uGoMobi> Changsuk: but team members have to be committed to the project
+10:50 < Changsuk> _|Nix|_: what's that? an ironing board?
+10:51 < _|Nix|_> Changsuk: https://www.google.com/search?site=&tbm=isch&source=hp&biw=1920&bih=967&q=ironing+board&oq=ironing+board&gs_l=img.3..0l10.1556.4196.0.4322.13.9.0.4.4.0.93.522.9.9.0....0...1ac.1.32.img..0.13.541.4ack46C_MbU
+10:51 < uGoMobi> Changsuk: I mean contributing over a long period of time, not only once and a a while
+10:51 < _|Nix|_> uGoMobi: Come to think of it, it might be difficult for Changsuk and his team to join our meetings, unless we change the meeting time.
+10:52 < Changsuk> _|Nix|_: yes, I know... but I can't understand what did you mean with that expression.
+10:52 < uGoMobi> _|Nix|_: right, that's something we could look into
+10:52 < _|Nix|_> Changsuk: It was a joke ... a bad joke. Sorry!
+10:53 < Changsuk> _|Nix|_: No, I think my team can change meeting time for yours.
+10:53 < _|Nix|_> uGoMobi: If/when someone from Korea joins the team, the sun will literally never set on the jQM team :)
+10:53 < uGoMobi> Changsuk: when someone does a lot good contributions we invite him or her to our weekly meetings and ask to hangout on the IRC channel
+10:53 < uGoMobi> _|Nix|_: lol
+10:54 < uGoMobi> Changsuk: also keep in mind that from now on new team members will be UI/Mobile team members
+10:54 < Changsuk> _|Nix|_: huh? what did you mean that? the sun will never set?
+10:55 < _|Nix|_> Changsuk: Since you and I are 6/7 hours apart in one direction and arschmitz and I are 7 hours apart in the other direction, if you become a team member, it will always be daylight in one of the locations where we have team members.
+10:56 < _|Nix|_> Changsuk: uGoMobi makes a good point. When you join the jQM team, you're also joing the UI team.
+10:56 < Changsuk> uGoMobi: yes, I can understand what did you mean. And I think that some members in Hyunsook's team may/can contribute to jQM with a bunch/huge of PRs.
+10:57 < Changsuk> _|Nix|_: Yes, right. I can make a guess.
+10:58 < Changsuk> uGoMobi: anyway, many PRs will be very important point. I think.
+10:59 < uGoMobi> Changsuk: most important is the quality of the PR's of course
+10:59 < Changsuk> _|Nix|_: And thanks for your description~. ;)
+11:00 < Changsuk> uGoMobi: Exactly, Sure~! :)
+11:00 < uGoMobi> Changsuk: it's not that you can only become team member when you did tons of PR's or very big ones
+11:01 < Changsuk> uGoMobi: yes, right. I can guess that it needs other things.
+11:02 < Changsuk> uGoMobi: making commucations between team members and PR's qualifications and so on.
+11:02 < uGoMobi> Changsuk: the thing is that often people say they are interested and they are very active for a couple weeks and then suddenly they are gone
+11:03 < uGoMobi> ... after we already invest a lot of time in them
+11:03 < Changsuk> uGoMobi: Huh? gone? a bad guy....
+11:03 < uGoMobi> Changsuk: I am not worried about this in case of you and your team, but I am just explaining
+11:04 < Changsuk> uGoMobi: Thanks for your considering and your directions. :)
+11:04 < uGoMobi> well I am not saying it's a bad guy, but maybe people underestimate what it means to be a team member
+11:04 < uGoMobi> Changsuk: you are welcome
+11:05 < uGoMobi> Changsuk: and thanks for your interest!
+11:05 < Changsuk> _|Nix|_: Also really thanks for your case.
+11:05 < _|Nix|_> Changsuk: NP!
+11:05 < Changsuk> uGoMobi: you're welcome~
+11:05 < uGoMobi> ok, I have to finish my work on the new web site so we can release 1.4 final today
+11:06 < _|Nix|_> uGoMobi: Awesome!
+11:06 < Hyunsook> _|Nix|_, uGoMobi: Thanks for the explanation. :)
+11:06 < Changsuk> uGoMobi: Ah~! I'm sorry that I interrputed you.
+11:06 < uGoMobi> Changsuk: no problem at all
+11:06 < Changsuk> uGoMobi, _|Nix|_: Takes care and have such a nice weekend~
+11:06 < _|Nix|_> Have a good weekend!
+11:07 < uGoMobi> Changsuk: thanks, you too!
+11:07 < Hyunsook> uGoMobi, _|Nix|_: Have a good weekend~! :)
+11:07 < uGoMobi> and you as well Hyunsook :)
+11:07 < wonseop> uGoMobi, _|Nix|_: Have a nice weekend!
+11:08 < Hyunsook> uGoMobi: ;)
+11:08 < uGoMobi> thank you wonseop, you too!
+11:08 < Kangsik> Have a good weekend! :-)
+11:08 < Minkyeong> All: have a good weekend, and see you next week :)
+--- Log closed Thu Dec 12 11:11:54 2013
