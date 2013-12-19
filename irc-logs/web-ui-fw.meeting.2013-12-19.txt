@@ -1,0 +1,113 @@
+09:00:31 < Changsuk> All: Ding~Dong~~ Hi~
+09:00:58 < Minkyeong> Changsuk: hi
+09:01:05 < wonseop> All: Hi~ :)
+09:01:36 < Changsuk> uGoMobi: Hi~
+09:01:50 < Minkyeong> hi wonseop :-)
+09:02:02 < Changsuk> uGoMobi, _|Nix|_: Did you get my email?
+09:02:26 < Hyunsook> Hi~
+09:02:50 -!- Kangsik [~Kangsik@121.133.176.4] has joined #web-ui-fw
+09:24:37 < Changsuk> _|Nix|_: I think that you forgot today meeting. ;)
+09:26:57 < Changsuk> _|Nix|_: I think, it can be better to cancel today meeting and discuss "remove sytle options" work via email or here later. :)
+09:27:36 < Hyunsook> Changsuk: +1
+09:27:45 < uGoMobi> hi Changsuk and Hyunsook 
+09:28:06 < uGoMobi> I just saw your email, thanks!
+09:28:08 < Changsuk> uGoMobi: hi~
+09:28:12 < Hyunsook> uGoMobi: Hi~ haha~
+09:28:14 < Minkyeong> uGoMobi: hi
+09:28:21 < uGoMobi> hi Minkyeong 
+09:28:24 < wonseop> uGoMobi: hi~:)
+09:28:25 < Kangsik> uGoMobi : hi~ :)
+09:28:42 < uGoMobi> hi wonseop and Kangsik 
+09:28:55 < Changsuk> uGoMobi: I would just off IRC window a few second ago. haha~
+09:29:56 < uGoMobi> Great that you can work on removing style options from those 10 widgets
+09:30:02 < Changsuk> uGoMobi: You said "hello~" at a good time. :)
+09:30:09 < uGoMobi> :)
+09:30:23 < Changsuk> uGoMobi: Not at all~
+09:30:55 < Changsuk> uGoMobi: I'd like to thank to Hyunsook and other guys.
+09:31:04 < uGoMobi> right
+09:31:10 < uGoMobi> thanks Hyunsook and team :)
+09:31:34 < Hyunsook> uGoMobi: Not at all~ :)
+09:31:53 < Hyunsook> Changsuk: You're welcome.
+09:32:11 < uGoMobi> Hyunsook: how do you want to proceed?
+09:33:08 < uGoMobi> Hyunsook: do you need input from the jQuery Mobile team before you can work on this?
+09:33:51 < Changsuk> uGoMobi: I think that the first PR may be uploaded in next week.
+09:34:54 < Changsuk> uGoMobi: Hyunsook's team started to go over ListView first.
+09:35:14 < uGoMobi> ok great
+09:35:31 < uGoMobi> Hyunsook: are you creating a branch for each widget?
+09:36:19 < Hyunsook> uGoMobi: I'll send email target widgets and its style options
+09:36:28 < Hyunsook> uGoMobi: ... please check them.
+09:37:03 < uGoMobi> There is one thing that will cause merge conflicts: we are going to make changes in the file structure, but not before end of January
+09:38:07 < Changsuk> uGoMobi: I can answer your question - jQM team's input. I think that Hyunsook's team can do it on their own. If they have find any questions, 
+                     Hyunsook/I will ask you it.
+09:38:30 < uGoMobi> Changsuk: ok that sounds good
+09:39:39 < uGoMobi> Hyunsook: I also want to point you add http://contribute.jquery.org/commits-and-pull-requests/
+09:39:53 < uGoMobi> http://contribute.jquery.org/commits-and-pull-requests/#commit-guidelines
+09:39:59 < uGoMobi> "Commit Guidelines"
+09:40:06 < Changsuk> uGoMobi: But the conflicts may be occurred so Hyunsook will send you an email with some questions and concepts.
+09:40:39 < uGoMobi> We recently changed the standard for commit messages for all jQuery projects
+09:40:54 < Hyunsook> Changsuk: Thank you for talking to him instead of me.
+09:41:01 < Hyunsook> uGoMobi: ahha~
+09:41:44 < Changsuk> Hyunsook: I think uGoMobi's URL help us to commit PRs so much~ ;)
+09:41:47 < Hyunsook> uGoMobi: I see. We'll check the link and follow new guidelines.
+09:41:56 < Changsuk> uGoMobi: Thanks~! :)
+09:42:14 < Hyunsook> uGoMobi: Thanks.
+09:42:30 < uGoMobi> you're welcome
+09:42:54 < uGoMobi> we changed this so we can also use the same script to generate changelogs
+09:43:32 < uGoMobi> A heads-up about the jQuery Mobile 1.4 final release...
+09:43:54 < uGoMobi> Everything is ready, including new website, but we ran into some infrastructure problems
+09:44:14 < Changsuk> Hyunsook: As uGoMobi's guides there may be code conflicts when we commit codes, so I think that you sould have a plan to commit our codes without 
+                     conflicts.
+09:44:24 < uGoMobi> as soon as the infrastructure team resolved those we will release (hopefully today)
+09:45:22 < uGoMobi> Changsuk: I don't think Hyunsook can avoid these conflicts
+09:46:00 < Changsuk> uGoMobi: Great~! I hope that the infra. problem today and release 1.4 Final~!! :)
+09:46:19 < uGoMobi> We will work on bug fixes until end of January and then release 1.4.1
+09:46:22 < Changsuk> problem today -> problem will resolve today. :)
+09:46:56 < uGoMobi> after 1.4.1 release we need to change file structure which will affect all widgets
+09:47:36 < uGoMobi> this is because we are going to use the same download builder as jQuery UI so we also need to use same file structure
+09:48:14 < Changsuk> hmmm....
+09:48:30 < Changsuk> So there will many changes in file structure?
+09:48:34 < Changsuk> will be
+09:49:54 < Changsuk> uGoMobi: I think,  while Hyunsook's team is working we should have to talk to each other as many as we can.
+09:50:00 < uGoMobi> Changsuk: all JS files will be in the same directory
+09:50:41 < Changsuk> uGoMobi: just in One folder?
+09:50:43 < uGoMobi> so js/widgets/listview.js will become js/jquery.mobile.listview.js
+09:51:12 < Changsuk> Ok.... I see. just in "js" folder.
+09:51:43 < uGoMobi> yes, or maybe it's going to be called "mobile" instead of "js"
+09:51:46 < uGoMobi> see https://github.com/jquery/jquery-ui/tree/master/ui
+09:51:59 < uGoMobi> that shows the jQuery UI file structure
+09:52:29 < uGoMobi> Changsuk: yes, it is important that we communicate a lot during development
+09:53:29 < Changsuk> uGoMobi: Ok. yes, right. and if you have other important things for us to check, could you give those us via email?
+09:53:42 < uGoMobi> Changsuk Hyunsook : Besides changing file structure we are also going to remove deprecated code at the end of January, after 1.4.1 has been released
+09:53:50 < Changsuk> give us those. ;)
+09:53:56 < uGoMobi> Changsuk: sure, I will
+09:54:03 < Changsuk> uGoMobi: Thanks~
+09:55:42 < Changsuk> uGoMobi: Ok, I see... we should check that change around at that time.
+09:56:28 < Hyunsook> uGoMobi: OK, I see..
+09:56:28 < uGoMobi> Hyunsook Changsuk : Maybe we can wait with those big changes (file structure and removing deprecated code) until after you are ready with removing 
+                    style options from those 10 widgets
+09:56:40 < Changsuk> Hyunsook: If you can, please keep in touch with uGoMobi and check the schedules and changes.
+09:56:50 < Hyunsook> Changsuk: I do think so..
+09:57:04 < uGoMobi> yes, I will
+09:57:32 < Hyunsook> uGoMobi, Changsuk: yes, I will. :)
+09:59:30 < uGoMobi> Ok great
+09:59:46 < uGoMobi> Changsuk Hyunsook: Anything else we need to discuss?
+10:00:31 < Changsuk> uGoMobi, Hyunsook: Ok~ so if we get any changes or items to talk, please share/talk to each other via email or IRC.
+10:00:51 < Changsuk> uGoMobi: I tald you all~
+10:00:59 < Changsuk> told.
+10:01:12 < Hyunsook> Changsuk: Yes, right.
+10:01:47 < uGoMobi> Thanks Changsuk and Hyunsook 
+10:01:57 < uGoMobi> I wish you a great weekend!
+10:02:18 < Hyunsook> uGoMobi: Have a good weekend~ :)
+10:02:31 < uGoMobi> Thanks Hyunsook  :)
+10:02:46 < Kangsik> uGoMobi : Have a good weekend! :)
+10:02:57 < uGoMobi> Thanks Kangsik, you too!
+10:03:06 < Minkyeong> all: have a nice weekend. and happy holidays :)
+10:03:34 < Changsuk> uGoMobi: Not at all and have such a nice weekend~
+10:03:36 < uGoMobi> Thanks Minkyeong, enjoy you holidays!
+10:03:44 < wonseop> uGoMobi: Have a nice weekend~!!
+10:03:58 < uGoMobi> Thanks Changsuk and wonseop 
+10:04:04 < uGoMobi> ok, talk to you later all
+10:10:05 -!- wonseop [~wonseop@121.133.176.52] has quit [Quit:  HydraIRC -> http://www.hydrairc.com <- It'll be on slashdot one day...]
+11:51:06 -!- Kangsik [~Kangsik@121.133.176.4] has quit [Read error: Connection reset by peer]
+11:51:50 -!- Kangsik [~Kangsik@121.133.176.4] has joined #web-ui-fw
+12:28:01 < _|Nix|_> Changsuk, Kangsik, wonsop, Hyunsook Minkyeong: I'm so, so, so sorry! I really did forget! I'll read what you've talked about with uGoMobi ...
