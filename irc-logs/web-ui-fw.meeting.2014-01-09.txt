@@ -1,0 +1,164 @@
+--- Log opened Thu Jan 09 08:58:47 2014
+09:00 < _|Nix|_> Heya folks! How's the year so far?
+09:01 < Hyunsook> Hi~
+09:02 < Minkyeong> hi, all
+09:02 < Kangsik> Hi all :-)
+09:02 < _|Nix|_> How's it going?
+09:03 < Hyunsook> Changsuk suddenly go to another meeting right now and  he's not here.
+09:05 < _|Nix|_> Hyunsook: That's fine.
+09:06 < _|Nix|_> We can just talk amongst ourselves :)
+09:07 < _|Nix|_> Anyway, along those lines, I've basically been submitting a few bug fixes that I had piled up during 1.4.0. I converted them over to the new workflow - which is to submit PRs for review.
+09:07 < Hyunsook> _|Nix|_: I'm so overworked these days due to early year... :/
+09:07 < Hyunsook> _|Nix|_: .... and I don't really know what I'm doing.
+09:08 < _|Nix|_> Hyunsook: Hang in there!
+09:08 < Hyunsook> _|Nix|_: Thansk~ :)
+09:09 < Hyunsook> _|Nix|_: I saw your email.
+09:10 < _|Nix|_> I wrote an email? I don't even remember :)
+09:10  * _|Nix|_ go check Sent folder :)
+09:11 < Hyunsook> _|Nix|_: You sent URL for PRs via email.
+09:11 < _|Nix|_> Hyunsook: Right. Saw it now.
+09:11 < Hyunsook> _|Nix|_: :)
+09:11 < _|Nix|_> Hyunsook: Did we end up answering your question regarding the 1.5.0 branch?
+09:12 < Hyunsook> _|Nix|_: No...
+09:13 < _|Nix|_> Hyunsook: OK. I think I have the answer.
+09:13 < _|Nix|_> Hyunsook: We decided to keep working on fixes for 1.4.1 until the end of January, so, until then, master is still free of 1.5.0-related changes.
+09:14 < _|Nix|_> Hyunsook: When we release 1.4.1 we will create 1.4-stable, and then master will become the home for 1.5.0-related changes.
+09:14 < Hyunsook> _|Nix|_: Ah~~ I got it.
+09:15 < _|Nix|_> However, I don't believe that should be a showstopper if you wanna get started on the style option removal.
+09:16 < _|Nix|_> If you rebase often as we approach 1.4.1 you should be able to catch a lot of the conflicts (if any) early.
+09:17 < Hyunsook> _|Nix|_: Yes... It is worrying for me.
+09:17 < uGoMobi> good morning all
+09:17 < _|Nix|_> uGoMobi: Morning!
+09:17 < uGoMobi> Hyunsook: I just replied to your email
+09:17 < Hyunsook> uGoMobi: Good Morning uGoMobi ~ ^^
+09:17 < Minkyeong> uGoMobi: hi
+09:19 < _|Nix|_> uGoMobi: That's great! (Re: holding off with the file moves.)
+09:19 < Hyunsook> uGoMobi: Oh! I'll check it. plz wait a 1s.
+09:19 < uGoMobi> _|Nix|_: yeah, the main reason we rename and move files is because of switching to UI's download builder for 1.5
+09:20 < uGoMobi> _|Nix|_: so there is no rush
+09:20 < Hyunsook> uGoMobi: OK, I see. Thanks~
+09:21 < uGoMobi> One additional note...
+09:22 < uGoMobi> We don't merge branches into master until the tests, demos and docs (PR in different repo) are updates as well
+09:23 < uGoMobi> We should also create a 1.5-update branch for the ThemeRoller already
+09:23 < _|Nix|_> uGoMobi: That's a good point (about TR) since the style option removal is almost certainly going to modify the CSS significantly.
+09:23 < uGoMobi> And in the jquerymobile.com repo I will create a 1.5-upgrade-guide branch
+09:24 < uGoMobi> _|Nix|_: Yes, and it's so much easier to do those things while you are making the changes in the library
+09:28 < Hyunsook> uGoMobi: Thank you for the explanation.
+09:29 < Hyunsook> uGoMobi: I have a question. I want to know whether my team entirely understand the style options removal task.
+09:29 < _|Nix|_> Hyunsook: So that's why I was saying that it's OK to go ahead with 1.5-related work, even though no 1.5-related branch is available yet.
+09:30 < uGoMobi> Hyunsook: sure
+09:30 < Hyunsook> uGoMobi: Here is one sample for the task : http://allsteady.github.io/demo_widget/button/jqm-button.html
+09:31 < Hyunsook> uGoMobi: "New" is that style options replace with classes.
+09:32 < uGoMobi> Hyunsook: is data-byclass="true" only for demo purposes?
+09:32 < _|Nix|_> uGoMobi: Were we not talking about removing the wrapper for the new button widget?
+09:33 < Hyunsook> uGoMobi: Yes.
+09:33 < _|Nix|_> Hyunsook: The button widget currently has a data-wrapperclass option, which will apply classes to the wrapper.
+09:33 < _|Nix|_> Hyunsook: You could probably achieve the same thing with data-wrapperclass="..."
+09:33 < uGoMobi> _|Nix|_: Yeah, we will probably not support icons for input buttons any longer so we don't need a wrapper anymore
+09:34 < uGoMobi> _|Nix|_: better to use button element instead of input button anyway
+09:35 < _|Nix|_> uGoMobi: I guess we need to deprecate the input button icon option in 1.5 and remove it in 1.6, right?
+09:35 < uGoMobi> _|Nix|_: I think we simply need to deprecate the whole widget before replacing it
+09:35 < _|Nix|_> uGoMobi: Bam!
+09:36 < uGoMobi> _|Nix|_: but I am not sure when the new button widget will land
+09:37 < _|Nix|_> uGoMobi: Right, so I'm thinking that for 1.5 at least, the wrapper will stay, so the classes can go into data-wrapperclass, right?
+09:37 < uGoMobi> _|Nix|_: depends a bit on what we do with icons (span vs. :after)
+09:38 < _|Nix|_> uGoMobi: If we go with span, can we not address the span with .ui-icon.ui-icon-home > span.ui-button-icon {} or something? So, the actual choice of icon can still go in the wrapper div.
+09:39 < _|Nix|_> uGoMobi: Meaning that, in terms of how we implement style option removal it doesn't matter whether we use span or :after.
+09:40 < uGoMobi> _|Nix|_: I think for removing style options we should just look at the current situation where icons using the :after pseudo element
+09:40 < _|Nix|_> OK. Sounds good!
+09:40 < uGoMobi> _|Nix|_: We won't change that for 1.5
+09:41 < uGoMobi> _|Nix|_: And yes data-wrapperclass can be used to add the style class to a generated wrapper
+09:42 < uGoMobi> Hyunsook: That demo of removing style options for the button widget looks good to me
+09:42 < _|Nix|_> Hyunsook: I think in the case of button it's sufficient to simply mark the style options as deprecated and update the API docs to reflect that.
+09:43 < uGoMobi> Hyunsook: Just use data-wrapperclass like _|Nix|_ said
+09:43 < _|Nix|_> Right.
+09:44 < uGoMobi> _|Nix|_: Yeah, you're right. In case of the button widget we only have to add deprecated notes in the library and change API docs and demos
+09:44 < _|Nix|_> Oh, right! Demos! Forgot about those!
+09:45 < uGoMobi> And some instructions for the upgrade guide
+09:47 < _|Nix|_> Hyunsook: You'll be pioneering the new breadth-first approach to updating the library :)
+09:47 < Hyunsook> uGoMobi, _|Nix|_: hmmm..... do you mean that style options replace with data-wrapperclass instead of my sample/demo?
+09:47 < uGoMobi> Hyunsook: It depends on what widget
+09:48 < uGoMobi> Hyunsook: In case of the button widget, data-wrapperclass is the solution
+09:48 < Hyunsook> uGoMobi, _|Nix|_: ah~ I got it.
+09:48 < _|Nix|_> Hyunsook: With 1.4.0 you can do <input type="button" data-wrapper-class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon ui-btn-icon-left ui-icon-home"></input>
+09:48 < uGoMobi> Hyunsook: Well, I have to rephrase that a bit
+09:49 < uGoMobi> People can use option "enhanced"
+09:49 < uGoMobi> If they do they won't use data-wrapperclass but simply add the classes to the wrapper in their markup
+09:49 < _|Nix|_> uGoMobi: Nono, that's not entirely correct.
+09:50 < _|Nix|_> uGoMobi: If you use option "enhanced", then any options that have non-default values must also be written into the markup.
+09:50 < _|Nix|_> uGoMobi: Otherwise setting options later on will not work properly.
+09:51 < uGoMobi> _|Nix|_: can you give an example?
+09:51 < _|Nix|_> uGoMobi: Thinking ...
+09:52 < _|Nix|_> Any option that does more than a simple toggleClass may not work.
+09:53 < _|Nix|_> ... and I'm looking for such an option.
+09:54 < uGoMobi> _|Nix|_: aren't all style options a matter of toggleClass?
+09:54 < _|Nix|_> uGoMobi: Ideally ...
+09:55 < _|Nix|_> uGoMobi: However, in the case of things like inset, you need to turn corners on/off as well.
+09:55 < uGoMobi> _|Nix|_: Ah ok
+09:55 < uGoMobi> _|Nix|_: Maybe that is something we can manage in the CSS
+09:56 < _|Nix|_> uGoMobi: So, for example if your pre-rendered markup has inset set to true and leaves off corners as a result, but the option is set to false, then adding corners will actually add corners.
+09:56 < uGoMobi> _|Nix|_: when it's non-inset, we set border-radius to 0 even if there is a class "ui-corner-all"
+09:56 < _|Nix|_> uGoMobi: Well, absolutely. Once the style options are gone, CSS is all we'll have.
+09:57 < uGoMobi> _|Nix|_: right
+09:57 < uGoMobi> _|Nix|_: So the logic from the JS have to been "converted" to CSS logic
+09:57 < _|Nix|_> uGoMobi: But while the style options are still in the code, we need to make sure that the option values reflect what's actually in the markup.
+09:57 < uGoMobi> s/have/has/
+09:58 < uGoMobi> _|Nix|_: Yeah, we need to deal with both until 1.6
+09:58 < _|Nix|_> Exactly.
+10:00 < _|Nix|_> Hyunsook: Actually, for the button you should document that if somebody uses data-wrapperclass, then they shouldn't use data-corners/shadow/inline/icon/etc. because the value of one option may override the value of the other.
+10:01 < _|Nix|_> Hyunsook: For example, if you say data-wrapper-class="... ui-corner-all ... " data-corners="false" will you or will you not have corners?
+10:01 < _|Nix|_> Hyunsook: So, to avoid this, you need to update the API docs to say "either use data-wrapper-class or use the deprecated style options, but don't use both."
+10:02 < Hyunsook> _|Nix|_: Yes, right. I do think so.
+10:03 < Hyunsook> _|Nix|_, uGoMobi: We already know that Demo and API Docs also need to update after changing codes for the task. :)
+10:03 < uGoMobi> Hyunsook: good :)
+10:05 < Hyunsook> uGoMobi: By the way.... I'm sorry but, actually I don't know why the style options removal task should be need in jQM yet. ^^;;;
+10:05 < Hyunsook> uGoMobi: .. Ddue to performance? or due to merge with jQuery UI ? or another reason? Why does jQM have to do the task?
+10:05 < uGoMobi> Hyunsook: performance
+10:05 < Hyunsook> uGoMobi: Ddue -> Due*
+10:05 < _|Nix|_> Hyunsook: http://api.jquerymobile.com/buttonMarkup/ -> "We do not recommend mixing styling based on data attributes and class-based styling during the deprecation period."
+10:06 < _|Nix|_> Hyunsook: Performance is one.
+10:06 < Hyunsook> uGoMobi: performance..... hmmm.....
+10:06 < _|Nix|_> Hyunsook: We have too many options which are trivial.
+10:06 < uGoMobi> Hyunsook: And I think in general it's not good to use JS for style
+10:06 < uGoMobi> because that's a CSS thing
+10:06 < _|Nix|_> Hyunsook: ... and we have a crazy mess of option inheritance with collapsible and controlgroup.
+10:07 < uGoMobi> Right, too many options
+10:07 < Hyunsook> _|Nix|_: a crazy mess... haha... ;;;
+10:08 < _|Nix|_> Hyunsook: Believe me. I've tried wrapping my head around it, and we still have bugs :/
+10:08 < uGoMobi> Hyunsook: Good idea to a demo for the button widget first
+10:08 < uGoMobi> Hyunsook _|Nix|_ : Let's first be sure what is the right way to do it, before working on all widgets
+10:09 < uGoMobi> _|Nix|_: Let's also discuss this during today's Mobile meeting
+10:09 < Hyunsook> uGoMobi: I agree jQM widgets have too many options. But I don't sure the task is able to improve performance.
+10:10 < _|Nix|_> uGoMobi: Absolutely. Button is simply well-suited for this, because it doesn't really need code changes. All it needs is API docs notices, and the corresponding demo and site updates.
+10:10 < Hyunsook> uGoMobi: Yes, right. I do think so.
+10:11 < _|Nix|_> Hyunsook: With fewer options you'll be making fewer DOM queries during startup.
+10:11 < uGoMobi> Hyunsook: Maybe the performance benefit is not that big for all widgets
+10:11 < uGoMobi> Hyunsook: But we have to think about consistency too
+10:11 < _|Nix|_> Hyunsook: Looping over each option and checking whether it's set in the DOM is a big part of startup.
+10:11 < _|Nix|_> Hyunsook: Also, having a lot of code that simply does .toggleClass() is useless.
+10:12 < uGoMobi> Hyunsook: link buttons and button elements can be styled with data- attributes and by simply adding the classes in 1.4
+10:12 < uGoMobi> Hyunsook: We will drop the data- attributes
+10:13 < Hyunsook> uGoMobi: Yes. the perfomance improvement is not for all widgets, I think.
+10:13 < _|Nix|_> uGoMobi: Oooh! We can actually do that for 1.5.0 ... can't wait! We can get rid of the whole js/jquery.mobile.buttonMarkup.js file!
+10:13 < _|Nix|_> Buahahahahaha!
+10:13 < uGoMobi> yup
+10:14 < uGoMobi> Hyunsook: In cases where we need the JS to add the style class to a generated wrapper the benefit is probably less big
+10:14 < _|Nix|_> "Shot down in a blaze of glory^Wdeprecation" :)
+10:14 < uGoMobi> :)
+10:15 < _|Nix|_> uGoMobi: We still get the benefit, because we won't be reading so many DOM attributes.
+10:15 < uGoMobi> _|Nix|_: Ah, that's true
+10:15 < _|Nix|_> uGoMobi: Well, we get /a/ benefit.
+10:18 < _|Nix|_> Anyhoo ... I guess we should probably wrap up for today.
+10:19 < _|Nix|_> If there are no other topics, then I wish everybody a good weekend, and thanks again for looking into the style options!
+10:19 < uGoMobi> Ok, have a great day all
+10:20 < Hyunsook> Ok, have a good weekend.
+10:20 < Kangsik> Yep, have a good weekend.
+10:20 < Changsuk> All: I'm so~ sorry that I didn't join this meeting.
+10:20 < Hyunsook> If we have any questions, I'll leave messages in this IRC room.
+10:21 < Minkyeong> see y'all next week :-)
+10:21 < Hyunsook> Changsuk: Hi~
+10:21 < Hyunsook> Changsuk: haha..
+10:21 < Changsuk> All: I'll follow-up today issues with Hyunsook and I'll join the next meeting.
+10:22 < _|Nix|_> Changsuk: Hey! NP! See you next week!
+10:22 < _|Nix|_> Changsuk: I'll post the log from the meeting in a second.
+--- Log closed Thu Jan 09 10:22:31 2014
