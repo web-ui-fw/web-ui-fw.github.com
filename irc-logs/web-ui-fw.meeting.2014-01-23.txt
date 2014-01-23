@@ -1,0 +1,79 @@
+--- Log opened Thu Jan 23 09:03:00 2014
+09:03 < Hyunsook> _|Nix|_: Hi~ :)
+09:03 < Kangsik> Hi~~ :-)
+09:03 < _|Nix|_> How's it going?
+09:04 < Minkyeong> hi, all
+09:04 < Hyunsook> Changsuk is attending to another meeting now.
+09:05 < _|Nix|_> That's fine.
+09:06 < _|Nix|_> How is your work?
+09:06 < _|Nix|_> I've been super busy with all kinds of 1.4.1 bug fixing.
+09:06 < Hyunsook> Hmm... our office is setting up bussiness plan for this year.
+09:07 < Hyunsook> So it is in a chaotic condition.
+09:07 < Hyunsook> _|Nix|_: Oh!
+09:07 < _|Nix|_> Chaotic? Like chairs flying? :)
+09:07 < Kangsik> Yes... So i did not spend  my time to JQM. Sorry .. :-(
+09:08 < Kangsik> _|Nix|_: lol :-)
+09:08 < _|Nix|_> :)
+09:08 < Hyunsook> _|Nix|_: haha... yes..
+09:08 < _|Nix|_> Kangsik: That's alright ...
+09:08 < Hyunsook> _|Nix|_: Sorry but, my team don't have topic to discuss or share yet.
+09:08 < Hyunsook> _|Nix|_: Is there news that you will update or share to us today?
+09:09 < _|Nix|_> Well, maybe one thing: https://github.com/jquery/jquery-mobile/issues/6898
+09:09 < _|Nix|_> If you guys have any ideas, please comment there.
+09:09 < _|Nix|_> It seems to be a really complicated issue.
+09:09 < _|Nix|_> Basically: With autogrow, if you have a lot of text in a textarea, whenever you type, the window scrolls to the top.
+09:10 < Hyunsook> _|Nix|_, uGoMobi: My team is on standby to work the style options removal, now..
+09:10 < Hyunsook> _|Nix|_: Sure.
+09:11 < Hyunsook> _|Nix|_: After looking into the issue, I or another member will comment there.
+09:11 < _|Nix|_> So far, I've tried two things: Save the scrollTop() before resizing the textare, and then $.mobile.silentScroll( savedScrollTop ); - but that's really ugly, because the whole thing jumps around as you type.
+09:11 < _|Nix|_> The other thing is to .clone() the textarea and then make calculations on the clone.
+09:12 < _|Nix|_> The basic reason for the problem is that you have to set this.element.css({ height: 0, "min-height": 0, "max-height": 0 }) before you can read the various heights that you need for calculating what the final height of the textarea should be.
+09:13 < _|Nix|_> If you don't set the height to 0 first, things will be incorrect in firefox.
+09:13 < _|Nix|_> Anyway, please give it some thought if you have some time.
+09:13 < _|Nix|_> I guess that's all that I have.
+09:14 < _|Nix|_> So, if we have no other topics, then have a good weekend, and see y'all next week!
+09:15 < Hyunsook> _|Nix|_: If I remember.... I saw a issue like this case on Tizen.
+09:15 < _|Nix|_> Hyunsook: Oh, awesome! I hope you found a really cool and elegant solution :)
+09:15 < Kangsik> _|Nix|_: Yep.. I will think about it .
+09:16 < _|Nix|_> Awesome! Thank you so much!
+09:17 < Hyunsook> _|Nix|_: ... we will comment after I remember the fixed method/way.
+09:17 < _|Nix|_> Hyunsook: Excellent! Thanks a lot!
+09:17 < Hyunsook> _|Nix|_: :)
+09:19 < _|Nix|_> Alright. I guess we've covered our topics for today, right?
+09:19 < Hyunsook> ah! Can you share progress about working for the ThemeRoller regarding 1.5?
+09:20 < _|Nix|_> I haven't done any work on the topic. Let's see if uGoMobi is awake. Maybe he has some news.
+09:20 < _|Nix|_> uGoMobi: ^
+09:20 < _|Nix|_> .o0o.o0o.o0o.o0o.o0o.o0o.o0o.
+09:21 < Hyunsook> _|Nix|_: haha~
+09:21 < _|Nix|_> :)
+09:21 < Hyunsook> _|Nix|_: I think.... he isn't here.
+09:21 < _|Nix|_> Nope ... guess not.
+09:22 < Hyunsook> Yep.
+09:22 < _|Nix|_> I guess we're all concentrating on fixing 1.4.1 bugs.
+09:22 < _|Nix|_> We've discussed 1.5-related topics only sparingly so far.
+09:22 < Hyunsook> OK, I see.
+09:22 < _|Nix|_> The new workflow is working out pretty well.
+09:23 < _|Nix|_> We submit PRs and arschmitz checks them and approves them or makes comments as to what needs to be changed.
+09:24 < Hyunsook> _|Nix|_: ah~
+09:24 < _|Nix|_> Yeah, it's cool.
+09:25 < _|Nix|_> When arschmitz says :+1:, you know you can rebase/squash/push-to-master ...
+09:25 < Hyunsook> _|Nix|_: He is also very busy..
+09:25 < _|Nix|_> Oh, for sure.
+09:27 < Hyunsook> Well.. I guess we've covered our topics for today.
+09:27 < Hyunsook> Ah! The Lunar New Year, which is one of the biggest holidays in Korea, is next week.
+09:28 < _|Nix|_> Well, Happy New Year! :)
+09:28 < Hyunsook> So, we will postpone our meeting.
+09:28 < Hyunsook> Thanks~! Happy New Year! ^^
+09:28 < Kangsik> _|Nix|_: Thanks ! :-)
+09:28 < _|Nix|_> OK. That's fine. Have a good celebration! Don't party too hard :)
+09:29 < Hyunsook> If you or jQM team have any news or topic, please send email to us.
+09:29 < _|Nix|_> For sure!
+09:29 < Hyunsook> haha~ OK.
+09:29 < Hyunsook> ^^
+09:30 < Hyunsook> Have a nice weekend~
+09:30 < _|Nix|_> Y'all have a nice weekend, too! I'll see you all in two weeks!
+09:31  * _|Nix|_ puts on a colourful party hat and starts blowing a whistle :)
+09:31 < Minkyeong> have a nice weekend. and see y'all next month :-)
+09:31 < Kangsik> have a nice weekend. :-)
+09:31 < Minkyeong> _|Nix|_: (lol)
+--- Log closed Thu Jan 23 09:34:47 2014
