@@ -77,3 +77,16 @@
 09:31 < Kangsik> have a nice weekend. :-)
 09:31 < Minkyeong> _|Nix|_: (lol)
 --- Log closed Thu Jan 23 09:34:47 2014
+09:47:38 < uGoMobi> _|Nix|_ Hyunsook : I am here now
+09:47:56 < uGoMobi> What was the question about the ThemeRoller for 1.5?
+10:06:01 < _|Nix|_> uGoMobi: Whether we had done any work on it.
+10:06:09 < _|Nix|_> uGoMobi: "< Hyunsook> ah! Can you share progress about working for the ThemeRoller regarding 1.5?"
+10:07:12 < uGoMobi> _|Nix|_: We didn't plan on doing any work on it
+10:07:50 < uGoMobi> _|Nix|_: We only need to make sure that it still works after we make changes in the library (remove style options, etc.)
+10:08:29 < _|Nix|_> uGoMobi: Right - part of the horizontal development policy.
+10:08:33 < uGoMobi> _|Nix|_: And there are some bugs we need to fix, but that doesn't need to wait until 1.5
+10:08:44 < uGoMobi> _|Nix|_: exactly
+10:09:05 < _|Nix|_> uGoMobi: I should become a manager. I'm a buzzword factory :)
+10:09:11 < uGoMobi> _|Nix|_: Because we will replace the whole ThemeRoller for 2.0 anyway we shouldn't spend too much time on it
+10:09:18 < uGoMobi> _|Nix|_: :D
+10:10:29 < _|Nix|_> Alright. Sounds good!
