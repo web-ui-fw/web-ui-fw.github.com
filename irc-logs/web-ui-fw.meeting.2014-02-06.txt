@@ -1,0 +1,56 @@
+--- Log opened Thu Feb 06 08:58:20 2014
+09:00 < _|Nix|_> Hey, all!
+09:01 < Hyunsook> Hi~ All~!
+09:01 < _|Nix|_> Another exciting year ahead, eh?
+09:01 < Minkyeong> hi, all
+09:01 < _|Nix|_> ... cue action music ... :)
+09:01 < Hyunsook> haha~
+09:02 < Hyunsook> Yes, right.
+09:02 < Hyunsook> How did you spend last week?
+09:02 < Hyunsook> _|Nix|_: How did you spend last week?
+09:02 < _|Nix|_> Busy ... both at home, and at work ...
+09:03 < Hyunsook> _|Nix|_: I guess you worked hard to fix jQM bugs. right?
+09:03 < _|Nix|_> Yep ...
+09:03 < _|Nix|_> I'm looking at, like, 11 PRs ...
+09:03 < Hyunsook> Wow~!
+09:04 < Hyunsook> Ve~~~~ry worked hard.....
+09:04 < _|Nix|_> Yeah, well, it's ongoing ...
+09:05 < Hyunsook> Are jQM proceeding as planned?
+09:05 < Hyunsook> I think ..
+09:05 < Hyunsook> ... jQM 1.4.1 wasn't released 1.4.1 yet
+09:05 < Hyunsook> ...  and source tree was chaged and some bugs was fixed.
+09:05 < _|Nix|_> No, that's right. I'll ask about that during tonight's meeting.
+09:06 < _|Nix|_> We were gonna release this week, but I doubt that's gonna happen - although I've counted, and we've already fixed, like, 32 issues since 1.4.0, so we might just release.
+09:07 < Hyunsook> Ah....
+09:08 < _|Nix|_> Kangsik: I looked at https://github.com/jquery/jquery-mobile/issues/6735 ... I decided to fix it differently, because I didn't want to pass arguments to refresh() ... so, I decided to store the rendered options instead. I still used your typo-fix though (#7045).
+09:08 < Hyunsook> _|Nix|_, uGoMobi: Did you have another recent jQM progress/news to share with us?
+09:08 < Hyunsook> _|Nix|_, uGoMobi: ... If jQM plan was changed, please share new plan.
+09:09 < _|Nix|_> Hyunsook: I don't think it has changed.
+09:09 < _|Nix|_> We're still working towards 1.4.1.
+09:09 < Hyunsook> _|Nix|_: OK. I see.
+09:09 < _|Nix|_> I pretty sure we'll clamp down this week or next and then release.
+09:10 < Kangsik> _|Nix|_: Yes. I respect your opinion. :-)
+09:10 < _|Nix|_> Hyunsook: Then we can start with the refactoring ...
+09:10 < _|Nix|_> Kangsik: Thanks!
+09:10 < Hyunsook> _|Nix|_: Ah~ Ok. Thanks.
+09:10 < _|Nix|_> How about you guys? Did you plan out the year?
+09:10 < Kangsik> _|Nix|_: :-)
+09:11 < Hyunsook> No.... It's still planning.
+09:11 < Hyunsook> All are working hard for it.
+09:13 < _|Nix|_> OK. Glad to hear it!
+09:13 < Hyunsook> But, some  colleagues wend to work during Lunar New Year's Day.
+09:15 < Hyunsook> Maybe the plan will be fix in February.
+09:16 < _|Nix|_> Good stuff! Looking forward to it!
+09:16 < Hyunsook> Me too. ^^
+09:17 < _|Nix|_> OK. So, in that case, I guess we've pretty much covered every topic for the week, right? Is there anything else we need to talk about?
+09:18 < Hyunsook> No. That's all. :)
+09:18 < _|Nix|_> Alright. In that case, have a good weekend, and see you next week!
+09:19 < Hyunsook> After jQM meeting, please share news or progress with us via email or IRC room.
+09:19 < _|Nix|_> Hyunsook: OK. Will do.
+09:19 < Hyunsook> Thanks~
+09:19 < _|Nix|_> NP!
+09:19 < Hyunsook> Have a nice weekend~!
+09:19 < _|Nix|_> Have a good one, all!
+09:20 < Minkyeong> yep.. see y'all next week :-)
+09:20 < Kangsik> Yep.. Have a good weekend.
+--- Log closed Thu Feb 06 09:21:31 2014
