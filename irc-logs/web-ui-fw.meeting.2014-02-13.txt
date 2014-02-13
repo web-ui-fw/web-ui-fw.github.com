@@ -1,0 +1,59 @@
+--- Log opened Thu Feb 13 08:45:55 2014
+08:50 -!- Hyunsook [~Hyunsook@121.133.176.4] has quit [Quit:  HydraIRC -> http://www.hydrairc.com <- Nine out of ten l33t h4x0rz prefer it]
+08:51 -!- Hyunsook [~Hyunsook@121.133.176.4] has joined #web-ui-fw
+09:01 < _|Nix|_> Hey, all!
+09:01 < Minkyeong> hi, all :-)
+09:01 < Hyunsook> Hi~ all!
+09:01 < _|Nix|_> Ready for another eye-popping, edge-of-your-seat meeting?
+09:01 < Kangsik> hi~ :)
+09:01 < Hyunsook> Yep!
+09:02 < _|Nix|_> Awesome!
+09:02 < Hyunsook> I saw jQM 1.4.1 have released early today. Congratulations! :)
+09:02 < Hyunsook> _|Nix|_, uGoMobi: I'm sure you and guys will be so tired now...!!!
+09:03 < Kangsik> Congratulations!! :-)
+09:03 < _|Nix|_> Hyunsook: Oh, really? Wow! I didn't know :)
+09:03 < _|Nix|_> Hyunsook: I must've been sleeping :)
+09:03 < Hyunsook> _|Nix|_: ahha~!
+09:03 < Hyunsook> _|Nix|_: haha~
+09:04 < Kangsik> _|Nix|_ :  Take a rest. :-)
+09:05 < _|Nix|_> Kangsik: No rest for the wicked.
+09:05 < _|Nix|_> Kangsik: BTW: I'm really sorry about https://github.com/jquery/jquery-mobile/pull/6731 ... I should've checked before I went ahead and made the same change :/
+09:07 < Kangsik> _|Nix|_: Yep!  I understand it. :-)
+09:07 < _|Nix|_> Anyhoo ... I'm glad things are released. I guess that means we can start working on 1.5-related things.
+09:07 < Hyunsook> _|Nix|_, uGoMobi: (
+09:08 < Hyunsook> Ooops!
+09:08 < _|Nix|_> Hyunsook: I think uGoMobi's out partying ... it's 23:06 where he is :) - unless he didn't go to San Diego - which I doubt.
+09:08 < Hyunsook> _|Nix|_: ah~~~
+09:09 < _|Nix|_> Timezones are incredible ... I think between us we're spanning a full day.
+09:09 < Hyunsook> _|Nix|_: http://events.jquery.org/2014/san-diego/ ?
+09:10 < _|Nix|_> Hyunsook: Yep.
+09:12 < Hyunsook> _|Nix|_: Oh, Alex is speaker, too!
+09:12 < _|Nix|_> Yep.
+09:12 < _|Nix|_> About performance, no less.
+09:13 < Hyunsook> _|Nix|_: Cool!
+09:13 < _|Nix|_> Anyhoo ... how about you guys? How's your planning going?
+09:14 < Hyunsook> _|Nix|_: The plan is changing every day... :/
+09:15 < Hyunsook> _|Nix|_: So we are confused.
+09:15 < _|Nix|_> *sigh* ... hang in there! I also hate it when that happens.
+09:16 < Hyunsook> _|Nix|_: Yes, right...
+09:17 < Hyunsook> _|Nix|_: Oh!
+09:17 < Hyunsook> _|Nix|_: I saw that the branch isn't moved from master to 1.4-stable branch yet.
+09:18 < Hyunsook> _|Nix|_: Do you know a schedule regarding next task - code refactoring or theme roller?
+09:19 < _|Nix|_> I'm afraid not. I'd have to ask uGoMobi ...
+09:19 < Hyunsook> _|Nix|_: OK, I see.
+09:20 < _|Nix|_> Since I'm not there, I can only imagine that they've decided on a plan and they'll share it when they get back - or maybe later today. I'll try to ask uGoMobi about it when he wakes up.
+09:20 < _|Nix|_> Actually, I'll start an email thread.
+09:20 < Hyunsook> Ok~ I see. Thanks.
+09:23 < Hyunsook> I think, we should discuss when we start the style option removal task for widgets, via email or next week meeting.
+09:23 < _|Nix|_> Hyunsook: Bam! Email's out.
+09:23 < _|Nix|_> Sure. Let's do that.
+09:24 < _|Nix|_> I think we'll have the schedule pinned down by then.
+09:24 < Hyunsook> _|Nix|_: :)
+09:24 < _|Nix|_> In that case I guess we've covered all our topics. right?
+09:25 < Hyunsook> I do think so.
+09:25 < _|Nix|_> Awesome! In that case, I'll see you next week! Have a good weekend!
+09:25 < Hyunsook> Have a good weekend~! :)
+09:26 < Kangsik> Have a good weekend~! :) See you again.
+09:26 < _|Nix|_> All: Have a good one *wave*
+09:26 < Minkyeong> Have a good weekend, guys :)
+--- Log closed Thu Feb 13 09:29:28 2014
