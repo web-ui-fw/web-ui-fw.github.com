@@ -1,0 +1,66 @@
+--- Log opened Thu Feb 20 09:01:55 2014
+09:01 < _|Nix|_> Hey, all!
+09:02 < Minkyeong> Hi!
+09:02 < _|Nix|_> Ding, ding, ding! It's meetin' time, folks!
+09:03 < _|Nix|_> How's everybody?
+09:04 < Minkyeong> Hyunsook, Kangsik: taptap!
+09:04 < Hyunsook> Hi~!
+09:05 < Kangsik> Hi~!
+09:05 < Hyunsook> ^^
+09:06 < Hyunsook> _|Nix|_: Do you have any topics to discuss or share with us or news?
+09:06 < _|Nix|_> Hyunsook: TBH, not really. Just hacking along towards 1.4.2.
+09:07 < _|Nix|_> arschmitz mentioned that he would like to merge all outstanding 1.4.2 PRs before doing the Great Renaming™
+09:07 < _|Nix|_> That way, we won't break all those PRs.
+09:07 < _|Nix|_> This, should happen during the next week or so.
+09:07 < _|Nix|_> After that, it's open season on 1.5.0.
+09:08 < Hyunsook> _|Nix|_: ahha~ I see.
+09:08 < _|Nix|_> Other than that, it's all in the email thread.
+09:08 < Hyunsook> _|Nix|_: Thanks
+09:08 < _|Nix|_> It's gonna be a lot of fun :)
+09:09 < Hyunsook> _|Nix|_: OK
+09:09 < _|Nix|_> I'm definitely looking forward to getting rid of all thar JS.
+09:09 < _|Nix|_> s/thar/that/
+09:09 < _|Nix|_> So, that's basically it.
+09:10 < Hyunsook> _|Nix|_: hmmm..... "getting rid of all that JS"? What do you mean?
+09:11 < Hyunsook> _|Nix|_: I'm sorry, I don't understand. ^^;
+09:11 < _|Nix|_> Hyunsook: When we get rid of style-related options, it will mean removing a lot of Javascript.
+09:11 < _|Nix|_> Hyunsook: For example, option-setting in collapsible/collapsibleset is a nightmare, because of inheritance.
+09:12 < _|Nix|_> Hyunsook: If we can solve even a part of that using CSS, then I will be extremely happy!
+09:12 < Hyunsook> _|Nix|_: ahha~ You mean a lot of JavaScript codes, right? I understood JS files for "all that JS".
+09:13 < _|Nix|_> Hyunsook: Well, the files have to stay, but they will be a lot smaller :)
+09:13 < Hyunsook> _|Nix|_: Yes, right.
+09:13 < _|Nix|_> We'll have lots of fun with this. I'm looking forward to it.
+09:14 < Hyunsook> _|Nix|_: I understood your words just now.
+09:14 < _|Nix|_> ... and hopefully we can also improve performance.
+09:14 < Hyunsook> _|Nix|_: Yep! ^^
+09:14 < _|Nix|_> We add a lot of style-related classes during startup. Hopefully by cutting that out we'll be able to improve startup time.
+09:16 < Hyunsook> I really hope it too.
+09:17 < _|Nix|_> Actually, it would be good to keep an eye on the performance improvement, because that could be an excellent selling point for 1.5.0.
+09:19 < _|Nix|_> That work you guys did earlier with the high-speed camera could really help quantify the performance difference.
+09:20 < _|Nix|_> ... testing things like start-page-has-large-listview, or start-page-has-lots-of-buttons or stuff like that.
+09:20 < _|Nix|_> ... and comparing 1.4.x to 1.5.0.
+09:20 < Hyunsook> hmmm... I'm afraid if usability might reduces due to the style option removal.
+09:21 < Kangsik> Yep. I think so. But we need to consider usability. I think that this job will make a confusion for users.
+09:21 < _|Nix|_> Hyunsook: You may be right. In addition, we also have to provide a period of deprecation.
+09:21 < _|Nix|_> Yeah, I know.
+09:21 < _|Nix|_> Think about it like this: In 1.5.0, you should be able to add style classes by hand, but you should also be able to set style options, because those will be deprecated, but not removed.
+09:22 < Hyunsook> Yes, it's important point.
+09:22 < _|Nix|_> So, ironically, in 1.5.0 we may end up with more JS, not less :)
+09:22 < _|Nix|_> ... but we'll be able to remove it all in 1.6.0.
+09:23 < _|Nix|_> Kangsik: And of course, we should maintain feature parity.
+09:24 < Kangsik> _|Nix|_: hmm....
+09:24 < Hyunsook> _|Nix|_: Yes, I think so. we can/may not remove it all in 1.5.0...
+09:26 < _|Nix|_> Hyunsook: The same thing happened in 1.4.0 with widget reviews. We intended to review all widgets, but in the end we didn't have time for the major ones: Table, listview, and panel - and we made lots of mistakes, introducing regressions.
+09:27 < _|Nix|_> Hyunsook: But I think that, even if we make mistakes along the way, people will report them and we'll have a chance to fix them by 1.5.1 or 1.5.2, and then we'll be golden - again.
+09:29 < Hyunsook> _|Nix|_: Yes, I know. So we - jQM team and my team - should the style option removal task carefully, via step by step.
+09:30 < Hyunsook> _|Nix|_: OK, I see.
+09:30 < _|Nix|_> Yep, and our new workflow - with PRs and reviews should help make sure that we reduce mistakes.
+09:30 < Hyunsook> Yep!
+09:32 < Hyunsook> I guess we've covered all our topics. right?
+09:32 < _|Nix|_> Yep.
+09:33 < _|Nix|_> Have a good weekend, and see y'all next week! Really wanna get cracking on all these interesting topics :)
+09:33 < Hyunsook> Have a good weekend~! :)
+09:34 < Minkyeong> Have a good weekend :)
+09:34 < Kangsik> Yep. Have a good weekend.!
+09:34 < Hyunsook> Bye bye~
+--- Log closed Thu Feb 20 09:42:08 2014
