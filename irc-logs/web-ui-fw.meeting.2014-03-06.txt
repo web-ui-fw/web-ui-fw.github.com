@@ -1,0 +1,101 @@
+--- Log opened Thu Mar 06 09:00:07 2014
+09:00 < _|Nix|_> Hey, all!
+09:00 < _|Nix|_> How's about a meetin'?
+09:00 < Hyunsook> Hi~
+09:00 < Kangsik> Hi, :-)
+09:01 < Hyunsook> _|Nix|_: Jasper cannot join meeting today, right?
+09:02 < _|Nix|_> Hyunsook: I don't even see him on IRC at all ...
+09:02 < _|Nix|_> Hyunsook: Maybe it has something to do with the IRC service some of the guys are using ... it seems to be having trouble.
+09:04 < Hyunsook> _|Nix|_: ah... if I remember aright, he told us that he cannot join meeting today at last meeting.
+09:04 < _|Nix|_> Oh, OK. Well, there ya go :)
+09:05 < Hyunsook> _|Nix|_: Kangsik and Minkyeong updated the Style option removal doc. in GH Wiki : https://github.com/jquery/jquery-mobile/wiki/1.5-Style-options-removal
+09:05 < _|Nix|_> Hyunsook: Yeah, I'm just reading that.
+09:05 < _|Nix|_> Kangsik: Interesting point about collapsed-icon and expanded-icon.
+09:06 < _|Nix|_> Kangsik: I guess it would be possible to do via CSS, but I think it would be extremely ugly.
+09:07 < Kangsik> _|Nix|_: Yep. I agree your opinion.
+09:07 < _|Nix|_> Kangsik: It would inflate the CSS a lot.
+09:08 < _|Nix|_> Kangsik: I think it's safe to say those two options should stay for now.
+09:08 < Kangsik> _|Nix|_: I think that these options are keep current state.
+09:09 < Kangsik> _|Nix|_: Yep :-)
+09:09 < _|Nix|_> Yeah.
+09:09 < _|Nix|_> I guess they're state-dependent options
+09:09 < _|Nix|_> ... and state is implemented in JS.
+09:10 < _|Nix|_> ... although even that could be implemented in CSS.
+09:10 < _|Nix|_> You could toggle a class named ui-collapsible-expanded on the outermost element, and it could do everything via CSS.
+09:11 < _|Nix|_> The problem is that if we push too much into CSS, then the startup time will be worse because of all the CSS.
+09:12 < Hyunsook> _|Nix|_: Yes, right.
+09:13 < _|Nix|_> ... although I think we already have class .ui-collapsible-collapsed ...
+09:15 < Kangsik> _|Nix|_: Yes. We agree your words. :-)
+09:17 < _|Nix|_> I added a note about this to the collapsible section.
+09:18 < _|Nix|_> Maybe we should move the widget-specific questions/answers to the widget section.
+09:19 < _|Nix|_> Done that too.
+09:20 < _|Nix|_> have you had a chance to look at any other widgets?
+09:21 < _|Nix|_> Listview ought to be ... fun ... :/
+09:22 < Hyunsook> we already looked at the 10 widget about 1.5 month ago, like preview.
+09:23 < _|Nix|_> Right.
+09:23 < Hyunsook> ... so Kangsik and Minkyeong left questions and comments with our preview result this week.
+09:24 < _|Nix|_> RIght. I'm reading those, and the only widget-specific ones I'm seeing are those related to collapsible.
+09:24 -!- ilkka____ [uid14014@gateway/web/irccloud.com/x-xzwsqftnklmkmjns] has joined #web-ui-fw
+09:25 < Hyunsook> _|Nix|_: Yep.
+09:25 < _|Nix|_> OK. Then, I guess we're off to a good start.
+09:25 < Hyunsook> _|Nix|_: Oh, do you know who create/make new first issue ticket for the style option?
+09:26 < Hyunsook> _|Nix|_: ... Can we make the issue ticket for first target widget? Or.....
+09:26 < Hyunsook> _|Nix|_: ... theretofore, should we discuss which to choose as first target widget.....?
+09:27 < _|Nix|_> Hyunsook: Sure. Which one do you think is the easiest?
+09:27 < Hyunsook> _|Nix|_: ... I'm not sure we can choose the widget.
+09:27 < _|Nix|_> Hyunsook: If you make tickets for each widget then you can work in parallel.
+09:29 < Hyunsook> _|Nix|_: I think, for each widget we should create a ticket in the issue tracker.
+09:30 < _|Nix|_> Hyunsook: Right, yes. But that also means that you can work on each widget in parallel.
+09:30 < Hyunsook> _|Nix|_: ... and if I remember aright, Jasper also agreed it.
+09:31 < Hyunsook> _|Nix|_: Ah. no.
+09:31 < _|Nix|_> Why not?
+09:31 < Hyunsook> _|Nix|_: one widget at the time
+09:32 < Hyunsook> _|Nix|_: I think, that is how to reduce risk.
+09:32 < _|Nix|_> OK, I guess that makes sense. Better to have one finished widget than two unfinished ones.
+09:33 < Hyunsook> _|Nix|_: Yes, right.
+09:35 < Hyunsook> _|Nix|_: ... and when we work the removal, there are some issues which need to discuss each widget.
+09:36 < Hyunsook> _|Nix|_: ... in the case, better to discuss for one widget.
+09:36 < _|Nix|_> I think the button might be a relatively simple widget with which to start.
+09:36 < _|Nix|_> The only problem there is the shadow.
+09:37 < _|Nix|_> Would it be possible to always add shadow to the buttons and create a class like ui-no-shadow to turn it off?
+09:38 < _|Nix|_> That way, we could keep the current mechanism where there is a shadow by default.
+09:39 < Hyunsook> _|Nix|_: hmmm... with the shadow problem in button, do you mean issue for the default value?
+09:40 < _|Nix|_> Yes.
+09:41 < Hyunsook> _|Nix|_: Ahha, the issue already Jasper answered to us about that.
+09:42 < Hyunsook> _|Nix|_: Ooops! Grammar of my words is bad. :/
+09:43 < Kangsik> You can see the answer in  wiki(Q&A).
+09:44 < _|Nix|_> Right, I'm just wondering if there's a way to avoid having to change the defaults.
+09:44 < _|Nix|_> The reason I'm wondering is that, when changing defaults, I don't think there is a way to provide a period of deprecation.
+09:44 < _|Nix|_> The default has to change from true to false. Boom! That's it.
+09:45 < _|Nix|_> You cannot have a deprecation period where the default is false but you still get a shadow :)
+09:46 < _|Nix|_> ... but I guess I can talk to Jasper about that ...
+09:49 < _|Nix|_> OK. Sounds good so far! Do we have any other topics for today?
+09:52 < Kangsik> _|Nix|_: Hmm. It is good solution. but it make a some problem.
+09:53 < _|Nix|_> Kangsik: How do you mean?
+09:53 < Kangsik> _|Nix|_:Users must know many class. So, it  too hard to use jQM.
+09:54 < _|Nix|_> Kangsik: Well, if we replace each option with a class, then we can document the classes instead of the options.
+09:54 < _|Nix|_> Kangsik: You're right though. Because these are classes, some users may assume that every widget supports every class.
+09:55 < _|Nix|_> Kangsik: I think though that that's the trend with all the other frameworks.
+09:56 < _|Nix|_> OTOH, I'm worried about startup time if we add a lot of CSS.
+09:57 < Hyunsook> _|Nix|_: hmm... I think, if you want, better to discuss the issue with Jasper next week or next meeting.
+09:57 < Hyunsook> _|Nix|_, Kangsik: hmm... I think, if you want, better to discuss the issue with Jasper next week or next meeting.
+09:58 < Kangsik> _|Nix|_: Yes. :-)
+09:59 < _|Nix|_> Yeah. I'll talk about this in the evening.
+09:59 < _|Nix|_> These are excellent points!
+09:59 < Hyunsook> _|Nix|_: Ah, Ok, thanks.
+10:02 < _|Nix|_> Can you see https://docs.google.com/spreadsheet/ccc?key=0AskujzE4Ig0QdG5nSmZiSUhjYm4ya29CdjhLZmJwSWc&usp=sharing&pli=1#gid=12
+10:03 < _|Nix|_> ?
+10:04 < _|Nix|_> OK, I think you can see it. Did I forget anything?
+10:04 < Hyunsook> Yes, I can see it.
+10:05 < Hyunsook> no, I guess.
+10:05 < Hyunsook> Well, we told all topic.
+10:05 < Kangsik> Yep.. all topic.
+10:05 < _|Nix|_> Great! This is actually an excellent way to add discussion to the evening meeting
+10:06 < Hyunsook> ^^
+10:06 < _|Nix|_> If we realize that we have questions in the morning, we can add them to that document, and we will then talk about them in the evening meeting. Bam! Great success!
+10:06 < _|Nix|_> :)
+10:07 < Hyunsook> _|Nix|_: Yes, I do think so.
+10:07 < _|Nix|_> Alright. I don't have anything else, either. Have a good weekend, all!
+10:08 < Hyunsook> Have a good weekend, all~!
+10:08 < Kangsik> Have a good weekend. all.~
+--- Log closed Thu Mar 06 11:15:11 2014
