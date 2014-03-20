@@ -1,0 +1,256 @@
+--- Log opened Tue Mar 18 08:53:57 2014
+09:00 < _|Nix|_> Hey, all! It's open season on 1.5.0!
+09:01 -!- Hyunsook [~Hyunsook@121.133.176.4] has joined #web-ui-fw
+09:01 < Kangsik> Hi All~~ :-)
+09:01 < Minkyeong> YAHHH
+09:01 < Minkyeong> Hi, all!
+09:02 < Hyunsook> Hi~ All~
+09:03 < Hyunsook> _|Nix|_: Do you know about 1.5 schedule/plan?
+09:03 < uGoMobi_> hi all
+09:03 < Hyunsook> Oh! uGoMobi, Hi~ ^^
+09:04 < Hyunsook> uGoMobi: eh? Did you change your nick name, right?
+09:04 < _|Nix|_> Hyunsook: Only what's on our roadmap - and even that seems like a tall order right now.
+09:04 < _|Nix|_> uGoMobi_: Are you having ghost issues?
+09:04 < uGoMobi_> ah
+09:04 -!- uGoMobi_ is now known as uGoMobi
+09:04 < Hyunsook> uGoMobi: ^^
+09:05 < uGoMobi> :)
+09:05 < _|Nix|_> there we go :)
+09:05 < Hyunsook> _|Nix|_: ah, ok, I see.
+09:05 < _|Nix|_> IRC is a haunted place ...
+09:06 < _|Nix|_> Alright.
+09:06 < _|Nix|_> So, what's new?
+09:06 < _|Nix|_> Have you had a chance to look at the button widget?
+09:06 < Hyunsook> uGoMobi: Currently, Kangsik is working the style option removal for Button widget.
+09:07 < uGoMobi> great!
+09:07 < _|Nix|_> That's awesome!
+09:07 < Hyunsook> uGoMobi, _|Nix|_, Kangsik: Maybe he will create new issue for Button widget, and then upload modifications via PR.
+09:08 < Hyunsook> uGoMobi, _|Nix|_, Kangsik: Kangsik, right?
+09:08 < _|Nix|_> Yep, that's right.
+09:08 < uGoMobi> ok
+09:08 < _|Nix|_> I mean, that's the process.
+09:08 < uGoMobi> did we already take a look at the JS and CSS of all widgets where we are going to remove style options?
+09:09 < Kangsik> Hyunsook : Yep. I am doing...
+09:09 < uGoMobi> to see if we might run into issues
+09:09 < Kangsik> All : Please check my code, when i commit to github.
+09:09 < Kangsik> All : and talk to your opinion.
+09:09 < _|Nix|_> Absolutely. Looking forward to it.
+09:09 < _|Nix|_> Kangsik: Will you also remove iconshadow?
+09:10 < _|Nix|_> Kangsik: That option is already deprecated, so you can just remove the code entirely.
+09:11 < _|Nix|_> Kangsik: All the places where code can be removed are marked with /* TODO: Deprecated in 1.4, remove in 1.5. */
+09:11 < Hyunsook> uGoMobi: hmm... my team looked at JS and CSS for all widgets we're going to remove.
+09:11 < Kangsik> _|Nix|_: i ignore default option like a shadow.
+09:11 < uGoMobi> Hyunsook: perfect, thanks
+09:12 < _|Nix|_> Kangsik: How do you mean? I'm talking about iconshadow, not shadow.
+09:12 < Hyunsook> uGoMobi: ... and we will check continuously/again when we remove style option of one widget.
+09:13 < Kangsik> _|Nix|_: Ahh.... I am sorry. shadow == iconshadow.
+09:13 < uGoMobi> Hyunsook: that's great
+09:13 < _|Nix|_> Kangsik: OK, then I will remove the options separately.
+09:13 < _|Nix|_> Kangsik: I mean, I will remove the iconshadow option separately.
+09:14 < Hyunsook> uGoMobi: ... I mean that all widget is 10 widget that we already discussed.
+09:14 < uGoMobi> when Kangsik's PR for button is up we should take some time to review
+09:14 < _|Nix|_> Yeah, for sure!
+09:15 < _|Nix|_> uGoMobi: We also agreed to provide classes that negate the effect of the defaults, which will now be hardcoded, right?
+09:15 < uGoMobi> besides Alex we should ask Scott and Jorn to look at it too
+09:15 < Hyunsook> _|Nix|_: In case of iconshadow, Kangsik will remove that.
+09:15 < uGoMobi> _|Nix|_: yes, for convenience
+09:16 < _|Nix|_> Hyunsook: Oh, that's great!
+09:16 < uGoMobi> _|Nix|_: see https://github.com/jquery/jquery-mobile/wiki/1.5-Style-options-removal#notes
+09:16 < Hyunsook> _|Nix|_: ^^
+09:16 < _|Nix|_> Right, right ... gotcha ...
+09:17 < uGoMobi> Hyunsook Kangsik _|Nix|_ : maybe we do have to remove iconShadow separately
+09:18 < _|Nix|_> Oh, let's not forget to update the demos and API docs as well!
+09:18 < uGoMobi> because we will squash all commits of a PR that removes the style options from one widget, but iconShadow removal has to land in a separate commit
+09:18 < uGoMobi> because it has to be in the changelog
+09:18 < Hyunsook> _|Nix|_: Sure.
+09:19 < Hyunsook> uGoMobi: ah.....
+09:19 < _|Nix|_> uGoMobi: A PR can fix two issues. We also don't have to squash all the commits.
+09:19 < _|Nix|_> uGoMobi: But OK, either way's fine.
+09:20 < uGoMobi> _|Nix|_: yes, it's fine if it's in one PR, just have to make sure it is done in a separate commit and we don't squash that one
+09:20 < _|Nix|_> Exactly, and we need a separate issue for the iconshadow removal.
+09:20 < uGoMobi> _|Nix|_: yes
+09:20 < Hyunsook> uGoMobi: Then, we will ignore iconshadow.
+09:21 < _|Nix|_> OK, let's just make it two PRs then.
+09:21 < _|Nix|_> Not that much more overhead.
+09:21 < uGoMobi> ok
+09:21 < Hyunsook> agreed!
+09:21 < _|Nix|_> Looking forward to the PR!
+09:21 < Kangsik> Yep. I see :-)
+09:22 < _|Nix|_> How will we coordinate the API docs PR and the library PR?
+09:22 < uGoMobi> I think selectmenu is the only other widget with option iconShadow
+09:22 < _|Nix|_> Yep.
+09:22 < _|Nix|_> uGoMobi: Do we just cross-reference the issues?
+09:23 < Hyunsook> _|Nix|_, uGoMobi: It is worrying for me.
+09:23 < uGoMobi> _|Nix|_: for the API docs we don't need an issue ticket for all commits
+09:23 < _|Nix|_> Hyunsook: What is worrying for you?
+09:23 < uGoMobi> _|Nix|_: we can just create a PR with the changes
+09:24 < _|Nix|_> uGoMobi: Oh, OK. I've been following the same process as the library. I guess I can skip issue creation.
+09:24 < Hyunsook> _|Nix|_: ah. your word, "How will we coordinate the API docs PR and the library PR?"
+09:25 < _|Nix|_> Hyunsook: Oh, don't worry about it. A PR against the API docs is sufficient. You can refer to the issue against the library from the PR comments.
+09:25 < _|Nix|_> Hyunsook: Like, "This provides the API docs portion for the button widget style option removal (https://github.com/jquery/jquery-mobile/issues/nnnn)"
+09:25 < uGoMobi> the only important thing is that we do one widget at the time
+09:26 < _|Nix|_> uGoMobi: ... and land one widget at a time.
+09:26 < Hyunsook> _|Nix|_: ah. ok.
+09:26 < uGoMobi> _|Nix|_: yes
+09:26 < Hyunsook> uGoMobi: Yep.
+09:27 < Hyunsook> _|Nix|_, uGoMobi: Right.
+09:28 < Hyunsook> _|Nix|_, uGoMobi: we didn't forget that - one widget at the time. ^^
+09:28 < uGoMobi> besides updating demos and API docs I also want to update 1.5 upgrade guide before moving on
+09:28 -!- [2]Minkyeong [~Minkyeong@121.133.176.4] has joined #web-ui-fw
+09:29 < uGoMobi> I will make a branch for that at the jquerymobile.com repo
+09:29 -!- [2]Minkyeong [~Minkyeong@121.133.176.4] has quit [Client Quit]
+09:29 < uGoMobi> and we need to test the ThemeRoller
+09:29 -!- [1]Minkyeong [~Minkyeong@121.133.176.4] has joined #web-ui-fw
+09:29 < uGoMobi> so we need a 1.5 branch at the TR repo as well
+09:30 < uGoMobi> [0]Minkyeong  ?
+09:30 < Hyunsook> uGoMobi: ah, I see.
+09:30 < uGoMobi> ;-)
+09:30 < Hyunsook> Minkyeong is ghost.....?
+09:30 < _|Nix|_> uGoMobi: Maybe we should make a checklist.
+09:30 < uGoMobi> I see a count down
+09:30 < _|Nix|_> Who you gonna call? GHOSTBUSTERS!
+09:30 < uGoMobi> _|Nix|_: let's add this at the top of the wiki page if it's not already there
+09:31 < Kangsik> _|Nix|_:  Ha Ha . :-)
+09:31 -!- Minkyeong [~Minkyeong@121.133.176.4] has quit [Ping timeout: 264 seconds]
+09:31 -!- [1]Minkyeong is now known as Minkyeong
+09:31 < _|Nix|_> uGoMobi: I was gonna suggest a spreadsheet: [Button][link to lib PR][link to API doc PR][link to TR PR][link to upgrade guide PR]
+09:31 < uGoMobi> hehe welcome back Minkyeong 
+09:31 < Minkyeong> all: I'm sorry my network status is ghost
+09:31 < _|Nix|_> uGoMobi: We can paint the cells red for not-yet-landed, and green for has-landed.
+09:32 < uGoMobi> Minkyeong: no worries
+09:32 < uGoMobi> _|Nix|_: sure
+09:32 < _|Nix|_> uGoMobi: We don't even need to add all the widgets ahead of time. We can just add them as we start working on them.
+09:32 < uGoMobi> _|Nix|_: yeah
+09:33 < _|Nix|_> uGoMobi: I'll link the spreadsheet from the wiki page.
+09:33 < Hyunsook> _|Nix|_: Yes
+09:33 < uGoMobi> other thing is tests
+09:34 < _|Nix|_> uGoMobi: Well, if we /did/ test whether a given style option works, then that test will almost certainly fail.
+09:34 < uGoMobi> when I changed theme inheritance from JS to CSS I added some tests that checks if an element had the right style
+09:34 < uGoMobi> with .css()
+09:35 < _|Nix|_> uGoMobi: Actually, the tests shouldn't be change until we actually /remove/ the style options.
+09:35 < _|Nix|_> uGoMobi: In 1.5.0 they still have to work.
+09:35 < _|Nix|_> uGoMobi: so, .button( "option", "corners", false ) must still result in the removal of the ui-corner-all class.
+09:36 < uGoMobi> _|Nix|_: maybe we could/should add tests if the new way works as well?
+09:37 < _|Nix|_> uGoMobi: I guess the only test we could add is to make sure that the corner radius on a button wrapper that has the ui-no-corners class is 0.
+09:37 < uGoMobi> what I wanted to say is that I used the values from the default theme in my theme inheritance tests...
+09:37 < _|Nix|_> Yeah, we have a few tests against RGB values.
+09:37 < uGoMobi> but every change in the default theme breaks the tests
+09:37 < _|Nix|_> uGoMobi: ... but the addition of the ui-no-corners class is a separate change from the style option removal, right?
+09:38 < uGoMobi> so we might want to add a custom theme to tests/ for testing
+09:39 < uGoMobi> _|Nix|_: yes, it's basically a new feature
+09:40 < _|Nix|_> uGoMobi: OK ... it must be that I haven't had breakfast yet, but what exactly are the JS changes for button? I mean, aside from adding comments that corner and shadow are deprecated, no JS changes need to be made, because the code still has to work in 1.5.0.
+09:41 < uGoMobi> hmm
+09:41 < _|Nix|_> uGoMobi: The real work will be to make sure that you can still turn off corners with the ui-no-corners class, that the TR works, and that the demos are updated to use the ui-no-corners class instead of data-corners="false"
+09:42 < _|Nix|_> ... and that the API docs are updated to mark options corners and shadow as deprecated, and that they document the alternative.
+09:42 < _|Nix|_> So, to accomplish style option /deprecation/ for the button widget, the ui-no-corners class is a prerequisite.
+09:42 < uGoMobi> deprecating changes like this is not easy :(
+09:43 < _|Nix|_> Basically, we need to update all our repos to not use data-corners="false"
+09:43 < _|Nix|_> uGoMobi: This is actually similar to the following change we made in 1.4: data-role="content" -> class="ui-content" role="main"
+09:44 < _|Nix|_> uGoMobi: It's not so much a code change as a CSS/demos/API docs/TR change.
+09:44 < _|Nix|_> uGoMobi: The code change will come in 1.6, where we simply delete the lines marked with the deprecated comment.
+09:44 < uGoMobi> _|Nix|_: yeah it looks like it
+09:45 < _|Nix|_> But Kangsik is here to make sure that this really is the way I said it.
+09:45 < uGoMobi> "In case the default for a style option is true, the corresponding class will always be added by the widget after removing that option."
+09:45 < uGoMobi> ^^^ that is something that needs to wait until 1.6
+09:46 < uGoMobi> right _|Nix|_ ?
+09:47 < _|Nix|_> Yes
+09:47 < _|Nix|_> That code is already in place in button._enhance(). It will stay there.
+09:47 < _|Nix|_> The code that will be removed in 1.6 is the _setOptions() switch that removes the class.
+09:50  * _|Nix|_ is grepping the lib for occurrences of data-corners="false"
+09:51 < _|Nix|_> We have exactly one button widget in the demos that turns off corners: ./demos/button/index.php:57
+09:52 < _|Nix|_> So, you just have to replace data-corners="false" with data-wrapper-class="ui-no-corners"
+09:52 < _|Nix|_> But, as I said, having ui-no-corners is a prerequisite for that.
+09:52 < uGoMobi> _|Nix|_: right
+09:53 < uGoMobi> _|Nix|_: or use one of the other possible ways that I described
+09:53 < uGoMobi> overwrite in CSS for example
+09:53 < _|Nix|_> uGoMobi: Well, the CSS could be made part of the demo and added as a CSS tab to the View Source button for the demo.
+09:54 < uGoMobi> _|Nix|_: yes
+09:54 < uGoMobi> _|Nix|_: it's good that we start with the button widget which has most style options
+09:55 < _|Nix|_> uGoMobi: After all, the ui-corner-none or ui-no-corners or whatever we are going to call it will be a convenience class in the absence of which you can call your class whatever.
+09:55 < uGoMobi> _|Nix|_: true
+09:55 < _|Nix|_> uGoMobi: We can later update the demo to use the convenience class and remove the CSS tab from the "View Source" popup.
+09:55 < _|Nix|_> uGoMobi: The point is you can turn off corners without using JS.
+09:55 < uGoMobi> _|Nix|_: yeah
+09:56 < _|Nix|_> ... and you can do it per-widget.
+09:56 < _|Nix|_> ... or you can do it per-theme from TR.
+09:56 < uGoMobi> _|Nix|_: might be good to create a PR for buttonMarkup removal already
+09:57 < _|Nix|_> I think we already have an issue about that.
+09:57 < _|Nix|_> We do have some places where we <a href="#" data-role="button"> in the demos - despite our best efforts.
+09:57 < uGoMobi> _|Nix|_: if we land that we can rebase the "button-widget-style-options-removal-branch"
+09:58 < _|Nix|_> Yeah.
+09:58 < uGoMobi> _|Nix|_: yeah, we will notice after removing the code
+09:58 < _|Nix|_>  https://github.com/jquery/jquery-mobile/issues/6568
+09:58 < uGoMobi> _|Nix|_: ok great
+09:58 < _|Nix|_> That issue makes references to other issues to check when landing.
+09:59 < uGoMobi> perfect
+10:00 < _|Nix|_> I'll take the issue.
+10:00 < _|Nix|_> I've wanted to get rid of buttonMarkup for so long ... *sniff*
+10:00  * _|Nix|_ wipes a tear from the corner of his eye
+10:00 < uGoMobi> lol
+10:01 < uGoMobi> _|Nix|_: are we still in a meeting here? :)
+10:01 < _|Nix|_> I guess ... 
+10:02 < _|Nix|_> ... but if everybody agrees that we've discussed all topics sufficiently, then we can call it.
+10:02 < _|Nix|_> uGoMobi: I was thinking to keep buttonMarkup tests, but to convert them to CSS tests.
+10:02 < uGoMobi> _|Nix|_: sounds good
+10:03 < uGoMobi> _|Nix|_: do you think we should separate those from the other tests?
+10:03 < _|Nix|_> They are separate.
+10:03 < Hyunsook> _|Nix|_, uGoMobi: hmmm..... I'm very sorry, but .... can you explan us your discussion point and result?
+10:03 < Hyunsook> _|Nix|_, uGoMobi: .... I'm having difficulty following your discussion...
+10:04 < _|Nix|_> Hyunsook: We've deprecated .buttonMarkup() so now we have to remove it.
+10:04 < uGoMobi> _|Nix|_: I meant in separate directory
+10:04 < _|Nix|_> uGoMobi: We already have tests/unit/button-markup
+10:04 < uGoMobi> _|Nix|_: tests/css/buttons I mean
+10:04 < _|Nix|_> uGoMobi: Exactly what I was thinking.
+10:04 < _|Nix|_> uGoMobi:  You beat me to it :)
+10:05 < _|Nix|_> Touché!
+10:05 < uGoMobi> :)
+10:05 < uGoMobi> _|Nix|_: there we could add a static custom theme
+10:05 < Hyunsook> _|Nix|_: ah..... I se...
+10:06 < Hyunsook> _|Nix|_: Oops! I se -> I see.*
+10:07 < _|Nix|_> Hyunsook: However, we would like to keep button-markup-related tests, but turn them into css tests - like deepEqual( $( "#test-inline.ui-btn-inline" ).css( "display" ), "inline-block", "Button with ui-btn-inline class has display inline-block" );
+10:07 < _|Nix|_> uGoMobi: Well, actually, I would say that we should test structure.
+10:07 < _|Nix|_> uGoMobi: The example I give Hyunsook above is more structural than theme.
+10:08 < _|Nix|_> uGoMobi: ... and we can test corners like this: ok( $( "#test-corners.ui-corner-all" ).css( "border-radius" ) != 0, "Border radius is not zero" );
+10:08 < _|Nix|_> uGoMobi: So, we don't actually care what the border radius is, as long as it's not 0.
+10:08 < uGoMobi> yes
+10:09 < _|Nix|_> There might be places where we have to test against specific values, but I'd try to avoid them.
+10:09 < _|Nix|_> Or at least minimize their number.
+10:09 < uGoMobi> _|Nix|_: but that's more a test to check if the JS didn't mess up the style
+10:10 < _|Nix|_> uGoMobi: Well, no, it's a test to make sure the CSS works, because no JS is involved in <a id="test-inline" href="#" class="ui-btn ui-btn-inline">Blah</a>
+10:10 < uGoMobi> well, actually it's also testing if the class works
+10:10 < _|Nix|_> Exactly.
+10:10 < uGoMobi> right
+10:11 < uGoMobi> ok sounds good
+10:11 < _|Nix|_> OK. I think this is a separate issue from style option removal, because this is already in the removal phase rather than the deprecation phase, so we can talk more about this in -dev.
+10:11 < _|Nix|_> Let's wrap this up for the week.
+10:12 < _|Nix|_> Hyunsook, Kangsik, Minkyeong: Have we covered all topics in sufficient detail?
+10:13 < Hyunsook> _|Nix|_, uGoMobi: I think, we told you and uGoMobi all topics for the style option removal.
+10:13 < uGoMobi> ok
+10:13 < _|Nix|_> Excellent!
+10:13 < _|Nix|_> Have a good weekend, all! Let's talk more next week!
+10:13 < uGoMobi> thanks everyone
+10:13 < uGoMobi> _|Nix|_: weekend?
+10:14 < uGoMobi> it's not Thursday
+10:14 < Hyunsook> _|Nix|_, uGoMobi: if there are any topics or issues this week or next week, I'll tell you via email or IRC room.
+10:14 < _|Nix|_> Well, there's a weekend in-between this meeting and the next.
+10:14 < uGoMobi> Hyunsook: perfect, thanks!
+10:14 < _|Nix|_> Hyunsook: Yeah.
+10:14 < Kangsik> Yep. Have a nice day. :-)
+10:14 < _|Nix|_> Have an eventual nice weekend :)
+10:14 < _|Nix|_> ... and nice days until then.
+10:14 < Minkyeong> See y'all next week :)
+10:14 < _|Nix|_> , all.
+10:14 < _|Nix|_> :)
+10:14 < Hyunsook> _|Nix|_, uGoMobi: haha~
+10:15 < Hyunsook> Have a nice days~ ^^
+10:15 < uGoMobi> have a nice Monday evening _|Nix|_ 
+10:15 < _|Nix|_> :)
+10:15 < uGoMobi> bye all
+13:14 -!- ilkka_____ [uid14014@gateway/web/irccloud.com/x-gooigalyzlvnxurr] has joined #web-ui-fw
+20:23 -!- Minkyeong [~Minkyeong@121.133.176.4] has quit [Read error: Connection reset by peer]
+20:42 -!- uGoMobi [uid6652@gateway/web/irccloud.com/x-pkhsczikajaduoae] has quit [Quit: Connection closed for inactivity]
+23:24 -!- uGoMobi [uid6652@gateway/web/irccloud.com/x-bzxraogkmmohnupf] has joined #web-ui-fw
+--- Day changed Wed Mar 19 2014
+17:45 -!- ilkka_____ [uid14014@gateway/web/irccloud.com/x-gooigalyzlvnxurr] has quit [Quit: Connection closed for inactivity]
+18:30 -!- ilkka_____ [uid14014@gateway/web/irccloud.com/x-xgqwhcofqtecztzg] has joined #web-ui-fw
+--- Log closed Wed Mar 19 21:32:29 2014
