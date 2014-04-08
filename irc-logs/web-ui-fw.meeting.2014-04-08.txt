@@ -1,0 +1,95 @@
+--- Log opened Tue Apr 08 10:07:16 2014
+10:07 < Hyunsook> _|Nix|_: Thanks ^^
+10:07 < Kangsik> Hi all.. :)
+10:07 < _|Nix|_> Alrighty then. Hey, Kangsik!
+10:07 < _|Nix|_> So, how's it going with everybody?
+10:08 < Hyunsook> _|Nix|_: My team dosen't new issue ticket for Button widget regarding to the style option removal yet.
+10:09 < _|Nix|_> Hyunsook: Right. Have you been running into trouble?
+10:09 < Hyunsook> _|Nix|_: Today, I or Kangsik will create the ticket and upload its PR.
+10:09 < _|Nix|_> Oh, OK :) No trouble then :) Excellent!
+10:09 < _|Nix|_> Looking forward to it!
+10:10 < Hyunsook> _|Nix|_: I'm sorry for the delay
+10:10 < _|Nix|_> Hyunsook: NP! We're busy with all kinds of things anyway.
+10:11 < _|Nix|_> I, for one, am trying to slowly merge in all the PRs, because we have, like, 31 of them now.
+10:11 < Hyunsook> _|Nix|_: Oh~
+10:12 < _|Nix|_> Hyunsook: Yeah, otherwise, when we try to release 1.4.3 we'll have a lot of PRs to review, and arschmitz already has his hands pretty full.
+10:12 < Hyunsook> _|Nix|_: When is the due date for merging ?
+10:13 < _|Nix|_> Hyunsook: I don't believe there is a due date, other than IIRC uGoMobi saying that we should release 1.4.3 by the end of April.
+10:14 < Hyunsook> _|Nix|_: ah~ ok.
+10:15 < Hyunsook> _|Nix|_: Is there another news of jQM team?
+10:15 < _|Nix|_> Yeah. Page events are a mess :)
+10:15  * _|Nix|_ is looking for the URL
+10:16 < _|Nix|_> https://docs.google.com/spreadsheets/d/10FBrCSUFCmLIbJlODJCXvLNmKSUqQesWIX41H26YWsc/edit
+10:16 < Hyunsook> _|Nix|_: Wow~
+10:16 < _|Nix|_> When we released 1.4.0, we included the new pagecontainer widget and we deprecated pretty much all page events other than pagecreate (which is really a widget event, not a page life cycle -related event).
+10:17 < _|Nix|_> Hyunsook: Yeah, when johnbender left the team, he left us with an almost-complete implementation of the pagecontainer widget. **/Almost/** complete :)
+10:17 < _|Nix|_> ... and we released it.
+10:17 < _|Nix|_> ... and we deprecated everything for which pagecontainer provided a replacement.
+10:18 < _|Nix|_> ... and we realized it doesn't provide a complete replacement.
+10:18 < _|Nix|_> ... so we wanna fix it in 1.4.3 or 1.4.(>3)
+10:18 < Hyunsook> _|Nix|_: ah... really...
+10:19 < _|Nix|_> Yeah, it's important. The API is currently broken. Like, badly broken.
+10:19 < _|Nix|_> ... but arschmitz has identified the problems, and he's gonna make the events work the way that spreadsheet describes.
+10:19 < Hyunsook> _|Nix|_: Yes, right. I think it's important.
+10:20 < _|Nix|_> ... and each event is gonna have a data.fromPage and a data.toPage, so it's always clear which page you're coming from and which page you're going to.
+10:22 < _|Nix|_> ... and arschmitz will write an external plugin which allows you to bind to page events the way you used to do it in 1.3.
+10:22 < _|Nix|_> This plugin will not be part of the library.
+10:23 < _|Nix|_> So yeah - tons of work, both for 1.4.3 and for 1.5.0.
+10:23 < _|Nix|_> https://www.youtube.com/watch?v=btPJPFnesV4
+10:23 < Hyunsook> _|Nix|_:  hmm... I think.... the name of new events is long. ^^;
+10:25 < _|Nix|_> Hyunsook: Yeah, that's part of the problem.
+10:25 < Hyunsook> _|Nix|_: ah~ I see.
+10:25 < _|Nix|_> The fact is, it has to be that way, because the name of the widget is long :/ "pagecontainer"
+10:26 < Hyunsook> _|Nix|_: yes... :/
+10:26 < _|Nix|_> Still, You can always myPageContainer.pagecontainer({ beforechange: function() {}, beforetransition: function() {}, ... });
+10:26 < _|Nix|_> ... or you can use arschmitz' plugin.
+10:27 < Hyunsook> _|Nix|_: ah~ I see.
+10:28 < _|Nix|_> I think the event names being long is certainly a problem, but I don't believe it's as big of a problem as the fact that they're all messed up. Sometimes no fromPage, sometimes no toPage, sometimes the event is missing entirely, etc.
+10:28 < _|Nix|_> We need to make the events consistent, and then we can worry about the name - or not, if arschmitz' plugin becomes popular.
+10:29 < Hyunsook> _|Nix|_: Yes, right.
+10:30 < Hyunsook> _|Nix|_: BTW, thanks for the explanation~
+10:30 < _|Nix|_> NP!
+10:30 < _|Nix|_> So, that's basically it for jQM. I've been kind of in-and-out of work, because I've had vacation, and I've gotten a new laptop from work, so I've been busy setting it up.
+10:32 < _|Nix|_> Have you had a chance to look at the style options for other widgets yet?
+10:32 < Hyunsook> _|Nix|_: oh~
+10:32  * _|Nix|_ is just curious
+10:33 < Kangsik> Good!! I envy you!
+10:34 < _|Nix|_> Kangsik: Yeah, it's a monster. 32 GB of RAM, 8 cores, 120GB SSD. It's insane! Also, really, really loud when it's going at 100%.
+10:34 < _|Nix|_> It's big an heavy.
+10:34 < Hyunsook> Kangsik: do you envy _|Nix|_'s new laptop ? haha~
+10:34 < _|Nix|_> A laptop only in name.
+10:34 < Hyunsook> _|Nix|_: haha~~~
+10:35 < _|Nix|_> Yeah. If you put it on your back and ride your bike, it's like there are two people on the bike :)
+10:35 < Hyunsook> _|Nix|_: haha~
+10:36 < _|Nix|_> But hey! Who cares, if it opens firefox, like, instantly.
+10:36 < Hyunsook> _|Nix|_: I don't envy you. kkk~
+10:36 < _|Nix|_> Oh, and the best part: The keyboard is US104.
+10:36 < Minkyeong> I need a vacation.. not a laptop :(
+10:36 < _|Nix|_> Minkyeong: I hear ya!
+10:37 < Hyunsook> Minkyeong: +1
+10:37 < _|Nix|_> Minkyeong: Don't be too envious of me. My vacation wasn't really a vacation. I just had a few days of vacation left, and the new vacation allocation starts in April, so I wanted to use them before April.
+10:37 < _|Nix|_> So, I basically caught up with work around the house.
+10:37 < _|Nix|_> Like, we cleaned the shed, threw out some furniture, that kind of thing.
+10:38 < _|Nix|_> We didn't actually go anywhere.
+10:39 < Hyunsook> _|Nix|_: Even so, I envy you for the vacation. ^^;
+10:39 < _|Nix|_> :)
+10:39 < _|Nix|_> Alright. I don't wanna hold up the show with stories of my cleaning the shed :)
+10:40 < Hyunsook> _|Nix|_: hehe, yes.
+10:40 < _|Nix|_> So, do we have any other topics we need to talk about?
+10:41 < Hyunsook> That' all, I think.
+10:41 < Hyunsook> That's *
+10:42 < _|Nix|_> Alright. Good work, everybody! Thanks a lot for your help! Looking forward to the button issue/PR!
+10:43 < Hyunsook> Have a good week and weekend~!
+10:43 < _|Nix|_> Let's have a good week, followed by a relaxing weekend!
+10:43 < Hyunsook> _|Nix|_: Thanks~ ^^
+10:43 < Minkyeong> Yep, see y'all next week :)
+10:43 < Minkyeong> ..and enjoy your cleaning, _|Nix|_!
+10:43 < _|Nix|_> Minkyeong: Yeah :) For sure :)
+10:44 < Kangsik> Yep. Have a nice day. :-)
+10:52 < Changsuk> All: Hi.... but the meeting was already closed.
+10:53 < Changsuk> All: I'm sorry that I'm late because I had another meeting.
+10:53 < Changsuk> All: Talk to you later
+10:59 < _|Nix|_> Changsuk: Don't worry about it! Have a good week, followed by a relaxing weekend!
+11:00 < Hyunsook> Changsuk: Hi~
+11:01 < Hyunsook> Changsuk: If you don't read logs above, I'll send email it. Please let me know if you need.
+--- Log closed Tue Apr 08 12:10:41 2014
