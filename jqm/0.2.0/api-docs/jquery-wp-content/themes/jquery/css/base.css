@@ -1227,7 +1227,6 @@ iframe {
 #container {
 	background: #0769AD;
 	margin: 0 auto;
-	padding: 0 20px;
 
 }
 
@@ -1257,11 +1256,6 @@ iframe {
 
 #content-wrapper {
 	background-color: #fff;
-	-webkit-box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
-	box-shadow: -3px 0 5px -3px rgba(1, 1, 1, 0.87), 3px 0 5px -3px rgba(1, 1, 1, 0.87);
-	padding: 20px 0;
-	border-top: 1px solid #333;
-	border-radius: 0 0 10px 10px;
 	position: relative;
 }
 .no-boxshadow #content-wrapper {
@@ -1280,7 +1274,7 @@ iframe {
 
 #content {
 	float: left;
-	width: 71%;
+	width: 81%;
 }
 
 .content-right #content {
@@ -1302,7 +1296,7 @@ iframe {
 .sidebar-left,
 .sidebar-right {
 	padding: 20px;
-	width: 29%;
+	width: 19%;
 }
 
 #sidebar,
@@ -1310,11 +1304,7 @@ iframe {
 	float: right;
 	margin-right: -25px;
 	position: relative;
-	-webkit-border-image: -webkit-linear-gradient(#ffffff, #e7e7e7 15%, #e7e7e7 85%, #ffffff);
-	border-image: linear-gradient(#ffffff, #e7e7e7 15%, #e7e7e7 85%, #ffffff);
-	box-shadow: inset 15px 0 5px -16px #e7e7e7;
-	background-image: -webkit-radial-gradient(left, #f2f2f2, #ffffff 80%);
-	background-image: radial-gradient(left, #f2f2f2, #ffffff 80%);
+	background: #ffffff;
 	border: 0;
 	border-left: 1px solid #efefef;
 }
@@ -1326,11 +1316,7 @@ iframe {
 	border-left: 0;
 	border-right: 1px solid #e7e7e7;
 	margin: -20px 0 0 -25px;
-	-webkit-border-image: -webkit-linear-gradient(#ffffff, #e7e7e7 15%, #e7e7e7 85%, #ffffff);
-	border-image: linear-gradient(#ffffff, #e7e7e7 15%, #e7e7e7 85%, #ffffff);
-	box-shadow: inset 15px 0 5px -16px #e7e7e7;
-	background-image: -webkit-radial-gradient(right, #f2f2f2, #ffffff 80%);
-	background-image: radial-gradient(right, #f2f2f2, #ffffff 80%);
+	background: #ffffff;
 }
 
 .entry-summary p {
@@ -1689,18 +1675,6 @@ h2.logo a {
 #logo-events aside {
 	float: right;
 	margin-bottom: -20px;
-}
-
-nav#main {
-	background-color: rgba(0, 0, 0, 0.18);
-	border-radius: 10px 10px 0 0;
-	border-right: 1px solid rgba(2, 2, 2, 0.28);
-	border-left: 1px solid rgba(2, 2, 2, 0.28);
-	border-top: 1px solid rgba(250, 250, 250, 0.27);
-	-webkit-box-shadow: rgba(255,255,255,0.3) 0 1px 0, rgba(0,0,0,0.3) 0 -1px 0;
-	box-shadow: rgba(255,255,255,0.3) 0 1px 0, rgba(0,0,0,0.3) 0 -1px 0;
-	-webkit-box-shadow: 0 0 3px rgba(1, 1, 1, 0.7);
-	box-shadow: 0 0 5px rgba(1, 1, 1, 0.7);
 }
 
 .jquery-ui nav#main,
@@ -2316,19 +2290,20 @@ input[type="submit"].dark:hover {
 
 #sidebar h3 {
 	font: 20px/18px;
-	background-image: -webkit-linear-gradient(left, #efefef, #f3f3f3);
-	background-image: linear-gradient(to right, #efefef, #f3f3f3);
+	background: #f3f3f3;
 	margin-left: -20px;
 	margin-right: -20px;
 	padding: 12px 20px;
 	text-shadow: 0 1px 0 #ffffff;
 }
 
-#sidebar li {
+#sidebar ul {
 	padding-left: 20px;
+}
+
+#sidebar li {
+	padding-left: 00px;
 	line-height: 15px;
-	list-style-type: none;
-	background: url(../images/bullet.png) no-repeat 0 14px;
 	text-shadow: 0 1px 0 #ffffff;
 }
 
@@ -2405,9 +2380,6 @@ footer .cdn strong {
 	text-shadow: #000 0 -1px 0;
 	font-weight: bold;
 	background-color: #7a7a7a;
-	background-image: -webkit-linear-gradient(#7a7a7a, #5e5e5e); /* Chrome 10+, Saf6 */
-	background-image: linear-gradient(top, #7a7a7a, #5e5e5e);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#7a7a7a', EndColorStr='#5e5e5e'); /* IE6–IE9 */
 	font-family: "klavika-web", "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
 }
 
@@ -2511,18 +2483,6 @@ footer .footer-icon-links li small {
 
 footer .footer-icon-links li:hover a:before {
 	color: #d1d1d1;
-}
-
-.multiplebgs.cssgradients footer {
-	background-image: -webkit-linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.0)), url(../images/bg-footer-noise.jpg); /* Chrome 10+, Saf6 */
-	background-image: linear-gradient(to bottom, rgba(0,0,0,.3), rgba(0,0,0,0)), url(../images/bg-footer-noise.jpg); /* Firefox 16+, IE 10+, Opera 12.50+ */
-	background-repeat: repeat-x, repeat;
-	background-size: 100px 15px, 140px 140px;
-}
-
-.no-multiplebgs footer, .no-cssgradients footer {
-	background-image: url(../images/bg-footer-noise.jpg);
-	background-repeat: repeat;
 }
 
 footer h3 {
@@ -2863,7 +2823,6 @@ footer li img {
 	color: white;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
 	letter-spacing: 0;
-	border-radius: 5px 5px 0 0;
 	font-weight: normal;
 	margin-bottom: 0;
 	overflow: hidden;
@@ -2944,9 +2903,6 @@ footer li img {
 
 #options header h2, #methods header h2, #events header h2, #quick-nav h2 {
 	background: #cccccc; /* Old browsers */
-	background: -webkit-linear-gradient(top, #ffffff 0%,#eeeeee 17%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
-	background: linear-gradient(to bottom, #ffffff 0%,#eeeeee 17%,#cccccc 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
 	margin: -10px -10px 10px -10px;
 	padding: 10px;
 }
@@ -3200,11 +3156,6 @@ footer li img {
 		font-size: 14px;
 	}
 	
-	#content-wrapper {
-		border-top-left-radius: 10px;
-		border-top-right-radius: 10px;
-	}
-
 	#banner-secondary {
 		border-top-left-radius: 9px;
 		border-top-right-radius: 9px;
@@ -3303,8 +3254,7 @@ footer li img {
 		padding-top: 2px;
 	}
 	
-	.constrain,
-	#container {
+	.constrain {
 		padding-left: 10px;
 		padding-right: 10px;
 	}
@@ -3527,7 +3477,6 @@ footer li img {
 /* The Grid ----------------------
 Based on Zurb Foundation's Grid
 */
-.row { width: 1240px; max-width: 100%; min-width: 768px; margin: 0 auto; }
 .row .row { width: auto; max-width: none; min-width: 0; margin: 0 -25px; }
 .row.collapse .column, .row.collapse .columns { padding: 0; }
 .row .row { width: auto; max-width: none; min-width: 0; margin: 0 -25px; }
