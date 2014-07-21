@@ -3263,11 +3263,13 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 				"keyup": "_processInput",
 				"paste": "_handlePaste",
 				"change": "_processInput",
-				"vclick a[href='#']": "_handleButtonClick",
-				"focusin": "_adjustWidth"
+				"vclick a[href='#']": "_handleButtonClick"
 			});
 			this._on( this.window, { "resize": "_adjustWidth" } );
-			this._on( outer, { "vmousedown": "_handleWidgetVMouseDown" } );
+			this._on( outer, {
+				"focusin": "_adjustWidth",
+				"vmousedown": "_handleWidgetVMouseDown"
+			});
 		}
 	},
 
@@ -3279,10 +3281,9 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 			outer = this.widget();
 			this._inputShadow = $( "<span class='ui-tokentextarea2-input-shadow'></span>" )
 				.appendTo( outer );
-			this._processInput( null, false );
-			outer = this.widget().addClass( "ui-tokentextarea2" +
-				( ( this.element.prevAll( "a.ui-btn" ).length > 0 ) ?
-					" initial" : "" ) );
+			this._processInput();
+			outer.addClass( "ui-tokentextarea2" +
+				( ( this.element.prevAll( "a.ui-btn" ).length > 0 ) ? " stretched-input" : "" ) );
 		}
 	},
 
@@ -3351,21 +3352,18 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 	},
 
 	_handleButtonClick: function( event ) {
-		this._removeButton( $( event.target ) );
+		this._removeButtonGracefully( $( event.target ) );
+		this._adjustWidth();
 	},
 
-	_processInput: function( event, adjustWidth ) {
+	_processInput: function( event ) {
 		var index, tokens, fragment, tokensLength,
 			value = this.element.val();
 		// 59, 186 : semicolon, colon
 
-		if ( arguments.length < 2 ) {
-			adjustWidth = true;
-		}
-
 		if ( event && event.keyCode === $.ui.keyCode.BACKSPACE &&
 			value === this._inputShadow.text() ) {
-				this._removeButton( this.element.prevAll( "a.ui-btn" ).first() );
+				this._removeButtonGracefully( this.element.prevAll( "a.ui-btn" ).first() );
 		} else {
 			if ( !event ||
 				event.keyCode === $.ui.keyCode.ENTER ||
@@ -3385,67 +3383,71 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 									this._button( tokens.tokens[ index ] )[ 0 ] );
 							}
 						}
+						this.element.val( tokens.leftover );
 						this._add( fragment );
 					}
-
-					this.element.val( tokens.leftover );
 			}
+			this._inputShadow.text( this.element.val() );
 			this.element.prevAll( "a.ui-btn.ui-btn-active" ).removeClass( "ui-btn-active" );
 		}
 
-		this._inputShadow.text( this.element.val() );
-		if ( adjustWidth ) {
-			this._adjustWidth();
-		}
+		this._adjustWidth();
 	},
 
-	_removeButton: function( button ) {
+	_remove: function( buttons ) {
+		buttons.remove();
+	},
+
+	_removeButtonGracefully: function( button ) {
 		if ( button.hasClass( "ui-btn-active" ) ) {
-			button.remove();
-			this.widget().toggleClass( "stretched-input",
-				this.element.prevAll( "a.ui-btn" ).length > 0 );
-			this._adjustWidth();
+			this._remove( button );
 		} else if ( this._trigger( "select", { value: button.jqmData( "value" ) } ) ) {
 			button.addClass( "ui-btn-active" );
 		}
 	},
 
 	_adjustWidth: function() {
-		var top, padding,
-			width = 0,
-			input = this.element,
+		var top, padding, containerWidth, buttons, width, input;
+
+		containerWidth = this.widget().width();
+
+		// If the container reports a width of 0, then we assume we're hidden and so we do nothing.
+		if ( containerWidth > 0 ) {
+			input = this.element;
 			buttons = input.prevAll( "a.ui-btn" );
+			width = 0;
+			if ( buttons.length > 0 ) {
+				buttons.each( function() {
+					var button = $( this ),
+						buttonTop = button.offset().top;
 
-		if ( buttons.length > 0 ) {
-			buttons.each( function() {
-				var button = $( this ),
-					buttonTop = button.offset().top;
+					if ( top === undefined ) {
+						top = buttonTop;
+					} else if ( top !== buttonTop ) {
+						return false;
+					}
 
-				if ( top === undefined ) {
-					top = buttonTop;
-				} else if ( top !== buttonTop ) {
-					return false;
+					width += button.outerWidth( true );
+				});
+
+				padding = ( input.outerWidth() - input.width() );
+
+				// Reusing the variable "width" here. Whereas before it was referring to the combined
+				// width of the buttons, it is now reassigned to refer to the width we desire for the
+				// input.
+				width = Math.max( 0, containerWidth - width - padding );
+				if ( width < this._inputShadow.width() + padding ) {
+					width = 0;
 				}
-
-				width += button.outerWidth( true );
-			});
-
-			padding = ( input.outerWidth() - input.width() );
-
-			// Reusing the variable "width" here. Whereas before it was referring to the combined
-			// width of the buttons, it is now reassigned to refer to the width we desire for the
-			// input.
-			width = Math.max( 0, this.widget().width() - width - padding );
-			if ( width < this._inputShadow.width() + padding ) {
-				width = 0;
 			}
-		}
 
-		// If the input width is insufficient to properly display its text or there are no buttons,
-		// unset the width. This will cause the input to have width 100% (set earlier in the CSS)
-		// and thus be alone on a line.
-		input.width( width || "" );
-		this.widget().toggleClass( "stretched-input", !!width && ( buttons.length > 0 ) );
+			// If the input width is insufficient to properly display its text or there are no buttons,
+			// unset the width. This will cause the input to have width 100% (set earlier in the CSS)
+			// and thus be alone on a line.
+			width = width || "";
+			input.width( width );
+			this.widget().toggleClass( "stretched-input", !!width );
+		}
 	},
 
 	_textFromButtons: function( buttons ) {
@@ -3485,14 +3487,13 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 			}
 		}
 
-		this.widget().addClass( "stretched-input" );
 		destination.before( ( typeof value === "string" ? this._button( value ) : value ) );
 	},
 
 	add: function( value, index ) {
 		if ( this.inputNeedsWrap ) {
-			this._add( value, index );
 			this._adjustWidth();
+			this._add( value, index );
 		}
 	},
 
@@ -3501,20 +3502,17 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 	},
 
 	remove: function( position ) {
-		var buttons, toRemove;
+		var buttons;
 
 		if ( this.inputNeedsWrap ) {
-			buttons = toRemove = this.element.prevAll( "a.ui-btn" );
+			buttons = this.element.prevAll( "a.ui-btn" );
 
 			if ( arguments.length > 0 && position >= 0 && position < buttons.length ) {
-				toRemove = $( buttons.get().reverse()[ position ] );
+				buttons = $( buttons.get().reverse()[ position ] );
 			}
 
-			toRemove.remove();
-			if ( buttons.not( toRemove ).length === 0 ) {
-				this._adjustWidth();
-				this.widget().removeClass( "stretched-input" );
-			}
+			this._remove( buttons );
+			this._adjustWidth();
 		}
 	},
 
@@ -3537,7 +3535,7 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 
 	refresh: function() {
 		this.remove();
-		this._processInput( null, this.element.is( ":focus" ) );
+		this._processInput();
 	},
 
 	_destroy: function() {
@@ -3553,6 +3551,81 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 // Textinputs that have data-role="tokentextarea2" are no longer to be enhanced as textinput
 $.mobile.reduceEnhancementScope( "mobile", "textinput",
 	"[data-" + $.mobile.ns + "role='tokentextarea2']" );
+
+})( jQuery, window, document );
+
+
+
+( function( $, window, document, undefined ) {
+
+$.widget( "mobile.tokentextarea2", $.mobile.tokentextarea2, {
+	options: {
+		master: null
+	},
+
+	_master: null,
+
+	_enhance: function() {
+		if ( this.inputNeedsWrap && this.options.master ) {
+			this._setSync( this.options.master );
+			if ( this._master ) {
+				this.element.val( this._master.val() );
+				this._master.val( "" );
+			}
+		}
+
+		return this._superApply( arguments );
+	},
+
+	_processInput: function() {
+		this._superApply( arguments );
+		this._syncToMaster();
+	},
+
+	_setSync: function( newSync ) {
+		if ( this._master ) {
+			this._off( this._master, "change" );
+			this._master = null;
+		}
+		newSync = $( newSync );
+		if ( newSync.length > 0 ) {
+			this._master = newSync;
+			this._on( this._master, { "change": "_syncFromMaster" } );
+		}
+	},
+
+	_setOptions: function( options ) {
+		if ( options.master !== undefined ) {
+			this._setSync( options.master );
+			this._syncFromMaster();
+		}
+
+		return this._superApply( arguments );
+	},
+
+	_add: function() {
+		this._superApply( arguments );
+		this._syncToMaster();
+	},
+
+	_remove: function() {
+		this._superApply( arguments );
+		this._syncToMaster();
+	},
+
+	_syncToMaster: function() {
+		if ( this._master ) {
+			this._master.val( this.inputText() );
+		}
+	},
+
+	_syncFromMaster: function() {
+		if ( this._master && this.inputText() !== this._master.val() ) {
+			this.inputText( this._master.val() );
+			this._master.val( this.inputText() );
+		}
+	}
+});
 
 })( jQuery, window, document );
 
