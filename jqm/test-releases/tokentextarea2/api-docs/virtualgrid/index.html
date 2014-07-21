@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8) ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Virtualgrid Widget | Web UI Framework API Documentation</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	
+	<!--[if lt IE 9]>
+	<script src="http://local.xyzzy/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	<link rel='stylesheet' id='twentyfourteen-lato-css'  href='http://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='../wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='../wp-content/themes/web-ui-fw-api-docs/style.css?ver=3.9.1' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='http://local.xyzzy/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='http://local.xyzzy/wp-includes/js/jquery/jquery.js?ver=1.11.0'></script>
+<script type='text/javascript' src='http://local.xyzzy/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://local.xyzzy/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Colorpalette Widget' href='../colorpalette/index.html' />
+<link rel='next' title='Tokentextarea2 Widget' href='../tokentextarea2/index.html' />
+<meta name="generator" content="WordPress 3.9.1" />
+<link rel='canonical' href='index.html' />
+	<script src="../wp-content/themes/web-ui-fw-api-docs/js/examples.js"></script>
+</head>
+
+<body class="single single-post postid-14 single-format-standard custom-background masthead-fixed full-width singular">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="../index.html" rel="home">Web UI Framework API Documentation</a></h1>
+
+			
+
+			
+		</div>
+
+		
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+</head>
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+			
+<article id="post-14" class="post-14 post type-post status-publish format-standard hentry category-widgets">
+	
+	<header class="entry-header">
+		<h1 class="entry-title">Virtualgrid Widget</h1>
+		<div class="entry-meta">
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<article id="virtualgrid1" class="entry widget">
+<h2 class="section-title">
+<span>Virtualgrid Widget</span><span class="version-details">version added: 0.2.0</span><br />
+</h2>
+<div class="entry-wrapper">
+<p class="desc"><strong>Description: </strong>A 2D array of items</p>
+<section id="quick-nav">
+<header>
+<h2>QuickNav<a href="index.html#entry-examples">Examples</a><br />
+</h2>
+</header>
+<div class="quick-nav-section">
+<h3>Options</h3>
+<div><a href="index.html#option-dataType">dataType</a></div>
+<div><a href="index.html#option-direction">direction</a></div>
+<div><a href="index.html#option-replaceHelper">replaceHelper</a></div>
+<div><a href="index.html#option-repository">repository</a></div>
+<div><a href="index.html#option-temlate">temlate</a></div>
+</div>
+<div class="quick-nav-section">
+<h3>Methods</h3>
+<div><a href="index.html#method-refresh">refresh</a></div>
+<div><a href="index.html#method-scrollTo">scrollTo</a></div>
+</div>
+<div class="quick-nav-section">
+<h3>Events</h3>
+<div><a href="index.html#event-create">create</a></div>
+</div>
+</section>
+<div class="longdesc" id="entry-longdesc">
+<h3>Virtualgrid</h3>
+<p>Displays an array of items tiled horizontally and vertically. The user can pan the list horizontally or vertically.</p>
+<p>Note</p>
+<p>You want to use a data on different domain server, you need to check whether to support CORS(Cross Origin Resources Sharing) in the server. </p>
+<p>If the server does not support CORS, virtualgrid would not work properly.</p>
+</p></div>
+<section id="options">
+<header>
+<h2>Options</h2>
+</header>
+<div id="option-dataType" class="api-item first-item">
+<h3>dataType<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#String">String</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>json</code>
+</div>
+<div>This attribute indicates the type of the referenced data. It supports &#8216;xml&#8217; or &#8216;json&#8217;.</div>
+<p><strong>Code examples:</strong>
+<p>Initialize the virtualgrid with the <code>dataType</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid({ dataType: json });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>dataType</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> dataType = $( <span class="string">".selector"</span> ).virtualgrid( <span class="string">"option"</span>, <span class="string">"dataType"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid( <span class="string">"option"</span>, <span class="string">"dataType"</span>, json );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="option-direction" class="api-item">
+<h3>direction<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#String">String</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>y</code>
+</div>
+<div>The axis along which the panning will take place. (note) Virtualgrid does not support both directions.</div>
+<p><strong>Code examples:</strong>
+<p>Initialize the virtualgrid with the <code>direction</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid({ direction: x });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>direction</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> direction = $( <span class="string">".selector"</span> ).virtualgrid( <span class="string">"option"</span>, <span class="string">"direction"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid( <span class="string">"option"</span>, <span class="string">"direction"</span>, x );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="option-replaceHelper" class="api-item">
+<h3>replaceHelper<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#String">String</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>null</code>
+</div>
+<div>If user want to process more efficiently what replacing DOM, User should define a function and set a function name to this attribute.</div>
+<p><strong>Code examples:</strong>
+<p>Initialize the virtualgrid with the <code>replaceHelper</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid({ replaceHelper: replaceHelper });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>replaceHelper</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> replaceHelper = $( <span class="string">".selector"</span> ).virtualgrid( <span class="string">"option"</span>, <span class="string">"replaceHelper"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid( <span class="string">"option"</span>, <span class="string">"replaceHelper"</span>, replaceHelper );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="option-repository" class="api-item">
+<h3>repository<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#String">String</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>null</code>
+</div>
+<div></div>
+<p><strong>Code examples:</strong>
+<p>Initialize the virtualgrid with the <code>repository</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid({ repository: ..<span class="regexp">/data.json });</span></code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>repository</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> repository = $( <span class="string">".selector"</span> ).virtualgrid( <span class="string">"option"</span>, <span class="string">"repository"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid( <span class="string">"option"</span>, <span class="string">"repository"</span>, ..<span class="regexp">/data.json );</span></code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="option-temlate" class="api-item">
+<h3>temlate<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#String">String</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>''</code>
+</div>
+<div>The template.</div>
+</div>
+</section>
+<section id="methods">
+<header>
+<h2>Methods</h2>
+</header>
+<div id="method-refresh">
+<div class="api-item first-item">
+<h3>refresh()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Rebuilds the virtual grid.</div>
+<ul>
+<li>
+<div class="null-signature">This method does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the refresh method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid( <span class="string">"refresh"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-scrollTo">
+<div class="api-item">
+<h3>scrollTo( x, y )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Scrolls to the pair of coordinates specified by the parameters.</div>
+<ul>
+<li>
+<div><strong>x</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Number">Number</a>
+</div>
+<div>The x-coordinate to which to scroll.</div>
+</li>
+<li>
+<div><strong>y</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Number">Number</a>
+</div>
+<div>The y-coordinate to which to scroll.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the  method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid( <span class="string">"scrollTo"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="events">
+<header>
+<h2>Events</h2>
+</header>
+<div id="event-create" class="api-item first-item">
+<h3>create( event, ui )<span class="returns">Type: <code>virtualgridcreate</code></span><br />
+</h3>
+<div>Triggered when a virtualgrid widget is created.</div>
+<ul>
+<li>
+<div><strong>event</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Event">Event</a>
+</div>
+<div></div>
+</li>
+<li>
+<div><strong>ui</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Object">Object</a>
+</div>
+<div></div>
+</li>
+</ul>
+<p><em>Note: The <code>ui</code> object is empty but included for consistency with other events.</em></p>
+<div>
+<strong>Code examples:</strong>
+<p>Initialize the virtualgrid with the create callback specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).virtualgrid({</code></div></div><div class="container"><div class="line"><code>  create: <span class="keyword">function</span>( event, ui ) {}</code></div></div><div class="container"><div class="line"><code>});</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bind an event listener to the virtualgridcreate event:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).on( <span class="string">"virtualgridcreate"</span>, <span class="keyword">function</span>( event, ui ) {} );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section class="entry-examples" id="entry-examples">
+<header>
+<h2>Example:</h2>
+</header>
+<div class="entry-example" id="example-0">
+<h4><span class="desc">A basic example of a page with a virtualgrid</span></h4>
+<div class="syntaxhighlighter xml ">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+<div class="line n6">6</div>
+<div class="line n7">7</div>
+<div class="line n8">8</div>
+<div class="line n9">9</div>
+<div class="line n10">10</div>
+<div class="line n11">11</div>
+<div class="line n12">12</div>
+<div class="line n13">13</div>
+<div class="line n14">14</div>
+<div class="line n15">15</div>
+<div class="line n16">16</div>
+<div class="line n17">17</div>
+<div class="line n18">18</div>
+<div class="line n19">19</div>
+<div class="line n20">20</div>
+<div class="line n21">21</div>
+<div class="line n22">22</div>
+<div class="line n23">23</div>
+<div class="line n24">24</div>
+<div class="line n25">25</div>
+<div class="line n26">26</div>
+<div class="line n27">27</div>
+<div class="line n28">28</div>
+<div class="line n29">29</div>
+<div class="line n30">30</div>
+<div class="line n31">31</div>
+<div class="line n32">32</div>
+<div class="line n33">33</div>
+<div class="line n34">34</div>
+<div class="line n35">35</div>
+<div class="line n36">36</div>
+<div class="line n37">37</div>
+<div class="line n38">38</div>
+<div class="line n39">39</div>
+<div class="line n40">40</div>
+<div class="line n41">41</div>
+<div class="line n42">42</div>
+<div class="line n43">43</div>
+<div class="line n44">44</div>
+<div class="line n45">45</div>
+<div class="line n46">46</div>
+<div class="line n47">47</div>
+<div class="line n48">48</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="doctype">&lt;!doctype html&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">head</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width, initial-scale=1"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">title</span>&gt;</span>virtualgrid demo<span class="tag">&lt;/<span class="title">title</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"//code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"//web-ui-fw.github.io/jqm/0.2.0/web-ui-fw.css"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//code.jquery.com/jquery-1.10.2.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//web-ui-fw.github.io/jqm/0.2.0/web-ui-fw.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">head</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">body</span>&gt;</span></code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"page"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"header"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"http://web-ui-fw.github.com/jqm/0.2.0/demos/widgets/virtualgrid/namecard.css"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Web UI Framework Example<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-content"</span>&gt;</span> </code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">script</span> <span class="attribute">id</span>=<span class="value">"tizen-demo-namecard"</span> <span class="attribute">type</span>=<span class="value">"text/x-jquery-tmpl"</span>&gt;</span><span class="javascript"></span></code></div></div><div class="container"><div class="line"><code>        &lt;div class=<span class="string">"ui-demo-rotation-namecard"</span>&gt;</code></div></div><div class="container"><div class="line"><code>          <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-demo-namecard-pic"</span>&gt;</span></span></code></div></div><div class="container"><div class="line"><code>            <span class="tag">&lt;<span class="title">img</span> <span class="attribute">class</span>=<span class="value">"ui-demo-namecard-pic-img"</span> <span class="attribute">src</span>=<span class="value">"${TEAM_LOGO}"</span>  /&gt;</span></code></div></div><div class="container"><div class="line"><code>          <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>          <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-demo-namecard-contents"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>          <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"name ui-li-text-main"</span>&gt;</span>${NAME}<span class="tag">&lt;/<span class="title">span</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>          <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>        <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></code></div></div><div class="container"><div class="line"><code>        <span class="keyword">var</span> replaceHelper = <span class="function"><span class="keyword">function</span> <span class="params">( elem, data )</span> {</span></code></div></div><div class="container"><div class="line"><code>          <span class="keyword">var</span> root = elem &amp;&amp; elem.get ? elem[ <span class="number">0</span> ] : elem,</code></div></div><div class="container"><div class="line"><code>            targetElem;</code></div></div><div class="container"><div class="line"><code>          targetElem = root.getElementsByTagName( <span class="string">"img"</span> )[ <span class="number">0</span> ];</code></div></div><div class="container"><div class="line"><code>          targetElem.setAttribute(<span class="string">"src"</span>, data.TEAM_LOGO );</code></div></div><div class="container"><div class="line"><code>          targetElem = root.getElementsByTagName( <span class="string">"span"</span> )[ <span class="number">0</span> ];</code></div></div><div class="container"><div class="line"><code>          targetElem.innerText = data.NAME;</code></div></div><div class="container"><div class="line"><code>          <span class="keyword">return</span> ;</code></div></div><div class="container"><div class="line"><code>        };</code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">id</span>=<span class="value">"virtualgrid-demo"</span> <span class="attribute">data-role</span>=<span class="value">"virtualgrid"</span>  <span class="attribute">data-template</span>=<span class="value">"tizen-demo-namecard"</span> <span class="attribute">data-repository</span>=<span class="value">"http://www.allsteady.p.ht/resources/json/getJson.php"</span> <span class="attribute">data-data-type</span>=<span class="value">"json"</span> <span class="attribute">data-replace-helper</span> =<span class="value">"replaceHelper"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="comment">&lt;!-- /virtualgrid--&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">body</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">html</span>&gt;</span></code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</section>
+</div>
+</article>
+	</div><!-- .entry-content -->
+	
+	</article><!-- #post-## -->
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="secondary">
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="categories-2" class="widget widget_categories"><h1 class="widget-title"> </h1>		<ul>
+	<li class="cat-item cat-item-2"><a href="../category/widgets/index.html" title="Web UI Framework offers additional widgets very similar in structure to jQuery Mobile widgets.">Widgets</a>
+</li>
+		</ul>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		</div><!-- #main -->
+
+	</div><!-- #page -->
+
+	<script type='text/javascript' src='../wp-content/themes/twentyfourteen/js/functions.js?ver=20140319'></script>
+</body>
+</html>

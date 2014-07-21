@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8) ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Routemap Widget | Web UI Framework API Documentation</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	
+	<!--[if lt IE 9]>
+	<script src="http://local.xyzzy/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	<link rel='stylesheet' id='twentyfourteen-lato-css'  href='http://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='../wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='../wp-content/themes/web-ui-fw-api-docs/style.css?ver=3.9.1' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='http://local.xyzzy/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='http://local.xyzzy/wp-includes/js/jquery/jquery.js?ver=1.11.0'></script>
+<script type='text/javascript' src='http://local.xyzzy/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://local.xyzzy/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Colorpalette Widget' href='../colorpalette/index.html' />
+<link rel='next' title='Tokentextarea2 Widget' href='../tokentextarea2/index.html' />
+<meta name="generator" content="WordPress 3.9.1" />
+<link rel='canonical' href='index.html' />
+	<script src="../wp-content/themes/web-ui-fw-api-docs/js/examples.js"></script>
+</head>
+
+<body class="single single-post postid-10 single-format-standard custom-background masthead-fixed full-width singular">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="../index.html" rel="home">Web UI Framework API Documentation</a></h1>
+
+			
+
+			
+		</div>
+
+		
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+</head>
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+			
+<article id="post-10" class="post-10 post type-post status-publish format-standard hentry category-widgets">
+	
+	<header class="entry-header">
+		<h1 class="entry-title">Routemap Widget</h1>
+		<div class="entry-meta">
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<article id="routemap1" class="entry widget">
+<h2 class="section-title">
+<span>Routemap Widget</span><span class="version-details">version added: 0.3.0</span><br />
+</h2>
+<div class="entry-wrapper">
+<p class="desc"><strong>Description: </strong>Creates a routemap widget.</p>
+<section id="quick-nav">
+<header>
+<h2>QuickNav<a href="index.html#entry-examples">Examples</a><br />
+</h2>
+</header>
+<div class="quick-nav-section">
+<h3>Options</h3>
+<div><a href="index.html#option-db">db</a></div>
+<div><a href="index.html#option-language">language</a></div>
+<div><a href="index.html#option-unit">unit</a></div>
+</div>
+<div class="quick-nav-section">
+<h3>Methods</h3>
+<div><a href="index.html#method-dishighlight">dishighlight</a></div>
+<div><a href="index.html#method-getIdsByName">getIdsByName</a></div>
+<div><a href="index.html#method-getNameById">getNameById</a></div>
+<div><a href="index.html#method-highlight">highlight</a></div>
+<div><a href="index.html#method-minimumTransfers">minimumTransfers</a></div>
+<div><a href="index.html#method-refresh">refresh</a></div>
+<div><a href="index.html#method-shortestRoute">shortestRoute</a></div>
+</div>
+<div class="quick-nav-section">
+<h3>Events</h3>
+<div><a href="index.html#event-create">create</a></div>
+<div><a href="index.html#event-select">select</a></div>
+</div>
+</section>
+<div class="longdesc" id="entry-longdesc">
+<h3>Route Map</h3>
+<p>Routemap is a jquery mobile plugin to render a route data.</p>
+<p>Routemap draws the lines between above two stations automatically, and it indicates a shortest or minimum transfer route between two stations that a user selected</p>
+<p>Routemap supports JSON for DB ( routemap data ), so it&#8217;s possible to set DB by setting a file path or a variable on widget, and it allows us to modify each style of stations, routes, and labels easily</p>
+<p>And also, it supports a multi-language.</p>
+<div class="syntaxhighlighter xml nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"routemap"</span> <span class="attribute">data-db</span>=<span class="value">"data.json"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To create a routemap, create a container and add the data-role=&#8221;routemap&#8221; attribute. Using data-db attribute allows you to set a DB for the lines, stations, label and each style.</p>
+</p></div>
+<section id="options">
+<header>
+<h2>Options</h2>
+</header>
+<div id="option-db" class="api-item first-item">
+<h3>db<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#String">String</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>null</code>
+</div>
+<div>
+<p>The URL of a JSON file or a javascript variable to load.</p>
+</p></div>
+<p><strong>Code examples:</strong>
+<p>Initialize the routemap with the <code>db</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap({ db: <span class="string">"data.json"</span> });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>db</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> db = $( <span class="string">".selector"</span> ).routemap( <span class="string">"option"</span>, <span class="string">"db"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap( <span class="string">"option"</span>, <span class="string">"db"</span>, <span class="string">"data.json"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="option-language" class="api-item">
+<h3>language<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#String">String</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>null</code>
+</div>
+<div>
+<p>Determine the current languauge. The values must be the abbreviation of language names(ex: English &gt; en )</p>
+</p></div>
+<p><strong>Code examples:</strong>
+<p>Initialize the routemap with the <code>language</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap({ language: <span class="string">"en"</span> });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>language</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> language = $( <span class="string">".selector"</span> ).routemap( <span class="string">"option"</span>, <span class="string">"language"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap( <span class="string">"option"</span>, <span class="string">"language"</span>, <span class="string">"en"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="option-unit" class="api-item">
+<h3>unit<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#Integer">Integer</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>1</code>
+</div>
+<div>
+<p>The length unit of the route map. If the value is 10 and a station coordinate is (1, 2)<br />
+					then the station will be displayed at (10, 20).</p>
+</p></div>
+<p><strong>Code examples:</strong>
+<p>Initialize the routemap with the <code>unit</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap({ unit: <span class="number">10</span> });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>unit</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> unit = $( <span class="string">".selector"</span> ).routemap( <span class="string">"option"</span>, <span class="string">"unit"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap( <span class="string">"option"</span>, <span class="string">"unit"</span>, <span class="number">10</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="methods">
+<header>
+<h2>Methods</h2>
+</header>
+<div id="method-dishighlight">
+<div class="api-item first-item">
+<h3>dishighlight( stations )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Removes a highlighting style from stations.
+			</div>
+<ul>
+<li>
+<div><strong>stations</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Array">Array</a>
+</div>
+<div>The array of staion id</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the dishighlight method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap( <span class="string">"dishighlight"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-getIdsByName">
+<div class="api-item">
+<h3>getIdsByName( name )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Gets an array of station/line ids associated with the specified station name or line name.
+			</div>
+<ul>
+<li>
+<div><strong>name</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+</div>
+<div>The name of station or line.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the getIdsByName method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap( <span class="string">"getIdsByName"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-getNameById">
+<div class="api-item">
+<h3>getNameById( id )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Gets a string of station or line name with associated the specified station or line id.
+			</div>
+<ul>
+<li>
+<div><strong>id</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+</div>
+<div>The id of station or line</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the getNameById method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap( <span class="string">"getNameById"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-highlight">
+<div class="api-item">
+<h3>highlight( stations )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Add highlight styles to station or line.
+			</div>
+<ul>
+<li>
+<div><strong>stations</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Array">Array</a>
+</div>
+<div>The array of staion id</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the highlight method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap( <span class="string">"highlight"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-minimumTransfers">
+<div class="api-item">
+<h3>minimumTransfers( source, destination )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Returns an array of station ids which is the route having minimum transfers from source to destination.
+			</div>
+<ul>
+<li>
+<div><strong>source</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+</div>
+<div>The staion id of source</div>
+</li>
+<li>
+<div><strong>destination</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+</div>
+<div>The staion id of destination</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the minimumTransfers method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap( <span class="string">"minimumTransfers"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-refresh">
+<div class="api-item">
+<h3>refresh( redraw )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Resizes&amp;redraws the widget, after having made some external modifications.
+			</div>
+<ul>
+<li>
+<div>
+<strong>redraw</strong> (default: <code>false</code>)</div>
+<div>Type: <a href="http://api.jquery.com/Types/#Boolean">Boolean</a>
+</div>
+<div>When set to true, the widget will redraw all of elements by a route data.<br/>Only re-layout the widget if set to false.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the refresh method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap( <span class="string">"refresh"</span>, options );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-shortestRoute">
+<div class="api-item">
+<h3>shortestRoute( source, destination )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Returns an array of station id which is the shortest route from source to destination.
+			</div>
+<ul>
+<li>
+<div><strong>source</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+</div>
+<div>a station id of source</div>
+</li>
+<li>
+<div><strong>destination</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+</div>
+<div>a station id of destination</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the shortestRoute method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap( <span class="string">"shortestRoute"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="events">
+<header>
+<h2>Events</h2>
+</header>
+<div id="event-create" class="api-item first-item">
+<h3>create( event, ui )<span class="returns">Type: <code>routemapcreate</code></span><br />
+</h3>
+<div>Triggered when a routemap is created
+			</div>
+<ul>
+<li>
+<div><strong>event</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Event">Event</a>
+</div>
+<div></div>
+</li>
+<li>
+<div><strong>ui</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Object">Object</a>
+</div>
+<div></div>
+</li>
+</ul>
+<p><em>Note: The <code>ui</code> object is empty but included for consistency with other events.</em></p>
+<div>
+<strong>Code examples:</strong>
+<p>Initialize the routemap with the create callback specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap({</code></div></div><div class="container"><div class="line"><code>  create: <span class="keyword">function</span>( event, ui ) {}</code></div></div><div class="container"><div class="line"><code>});</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bind an event listener to the routemapcreate event:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).on( <span class="string">"routemapcreate"</span>, <span class="keyword">function</span>( event, ui ) {} );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="event-select" class="api-item">
+<h3>select( event, id )<span class="returns">Type: <code>routemapselect</code></span><br />
+</h3>
+<div>Triggered when station or line are selected
+			</div>
+<ul>
+<li>
+<div><strong>event</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Event">Event</a>
+</div>
+<div></div>
+</li>
+<li>
+<div><strong>id</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+</div>
+<div>selected station or line id </div>
+</li>
+</ul>
+<p><em>Note: The <code>ui</code> object is empty but included for consistency with other events.</em></p>
+<div>
+<strong>Code examples:</strong>
+<p>Initialize the routemap with the select callback specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).routemap({</code></div></div><div class="container"><div class="line"><code>  select: <span class="keyword">function</span>( event, ui ) {}</code></div></div><div class="container"><div class="line"><code>});</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bind an event listener to the routemapselect event:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).on( <span class="string">"routemapselect"</span>, <span class="keyword">function</span>( event, ui ) {} );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section class="entry-examples" id="entry-examples">
+<header>
+<h2>Example:</h2>
+</header>
+<div class="entry-example" id="example-0">
+<h4><span class="desc">A basic example of a page with routemap.</span></h4>
+<div class="syntaxhighlighter xml ">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+<div class="line n6">6</div>
+<div class="line n7">7</div>
+<div class="line n8">8</div>
+<div class="line n9">9</div>
+<div class="line n10">10</div>
+<div class="line n11">11</div>
+<div class="line n12">12</div>
+<div class="line n13">13</div>
+<div class="line n14">14</div>
+<div class="line n15">15</div>
+<div class="line n16">16</div>
+<div class="line n17">17</div>
+<div class="line n18">18</div>
+<div class="line n19">19</div>
+<div class="line n20">20</div>
+<div class="line n21">21</div>
+<div class="line n22">22</div>
+<div class="line n23">23</div>
+<div class="line n24">24</div>
+<div class="line n25">25</div>
+<div class="line n26">26</div>
+<div class="line n27">27</div>
+<div class="line n28">28</div>
+<div class="line n29">29</div>
+<div class="line n30">30</div>
+<div class="line n31">31</div>
+<div class="line n32">32</div>
+<div class="line n33">33</div>
+<div class="line n34">34</div>
+<div class="line n35">35</div>
+<div class="line n36">36</div>
+<div class="line n37">37</div>
+<div class="line n38">38</div>
+<div class="line n39">39</div>
+<div class="line n40">40</div>
+<div class="line n41">41</div>
+<div class="line n42">42</div>
+<div class="line n43">43</div>
+<div class="line n44">44</div>
+<div class="line n45">45</div>
+<div class="line n46">46</div>
+<div class="line n47">47</div>
+<div class="line n48">48</div>
+<div class="line n49">49</div>
+<div class="line n50">50</div>
+<div class="line n51">51</div>
+<div class="line n52">52</div>
+<div class="line n53">53</div>
+<div class="line n54">54</div>
+<div class="line n55">55</div>
+<div class="line n56">56</div>
+<div class="line n57">57</div>
+<div class="line n58">58</div>
+<div class="line n59">59</div>
+<div class="line n60">60</div>
+<div class="line n61">61</div>
+<div class="line n62">62</div>
+<div class="line n63">63</div>
+<div class="line n64">64</div>
+<div class="line n65">65</div>
+<div class="line n66">66</div>
+<div class="line n67">67</div>
+<div class="line n68">68</div>
+<div class="line n69">69</div>
+<div class="line n70">70</div>
+<div class="line n71">71</div>
+<div class="line n72">72</div>
+<div class="line n73">73</div>
+<div class="line n74">74</div>
+<div class="line n75">75</div>
+<div class="line n76">76</div>
+<div class="line n77">77</div>
+<div class="line n78">78</div>
+<div class="line n79">79</div>
+<div class="line n80">80</div>
+<div class="line n81">81</div>
+<div class="line n82">82</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="doctype">&lt;!doctype html&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">head</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width, initial-scale=1"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">title</span>&gt;</span>routemap demo<span class="tag">&lt;/<span class="title">title</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"//code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"//web-ui-fw.github.io/jqm/0.2.0/web-ui-fw.css"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//code.jquery.com/jquery-1.10.2.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//web-ui-fw.github.io/jqm/0.2.0/web-ui-fw.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">head</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">body</span>&gt;</span></code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"page"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"header"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Web UI Framework Example<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-content"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></code></div></div><div class="container"><div class="line"><code>        <span class="keyword">var</span> DB_DATA = {</code></div></div><div class="container"><div class="line"><code>          <span class="string">"name"</span>: <span class="string">"Example Route Map"</span>,</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code>          <span class="string">"exchangeStyle"</span>: {</code></div></div><div class="container"><div class="line"><code>            <span class="string">"backgroundColor"</span>: <span class="string">"white"</span>,</code></div></div><div class="container"><div class="line"><code>            <span class="string">"borderColor"</span>: <span class="string">"gray"</span>,</code></div></div><div class="container"><div class="line"><code>            <span class="string">"width"</span> : <span class="number">12</span>,</code></div></div><div class="container"><div class="line"><code>            <span class="string">"height"</span> : <span class="number">12</span></code></div></div><div class="container"><div class="line"><code>          },</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code>          <span class="string">"lines"</span>: [{</code></div></div><div class="container"><div class="line"><code>            <span class="string">"id"</span>: <span class="string">"line1"</span>,</code></div></div><div class="container"><div class="line"><code>            <span class="string">"name"</span>: <span class="string">"Line 1"</span>,</code></div></div><div class="container"><div class="line"><code>            <span class="string">"style"</span>: {</code></div></div><div class="container"><div class="line"><code>              <span class="string">"line"</span> : { <span class="string">"stroke"</span>: <span class="string">"blue"</span> },</code></div></div><div class="container"><div class="line"><code>              <span class="string">"station"</span>: {</code></div></div><div class="container"><div class="line"><code>                <span class="string">"borderColor"</span>: <span class="string">"blue"</span>,</code></div></div><div class="container"><div class="line"><code>                <span class="string">"width"</span> : <span class="number">8</span>,</code></div></div><div class="container"><div class="line"><code>                <span class="string">"height"</span> : <span class="number">8</span></code></div></div><div class="container"><div class="line"><code>              }</code></div></div><div class="container"><div class="line"><code>            },</code></div></div><div class="container"><div class="line"><code>            <span class="string">"branches"</span>: [</code></div></div><div class="container"><div class="line"><code>              [</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"11"</span>, <span class="string">"coordinates"</span>: [ <span class="number">2</span>, <span class="number">1</span> ], <span class="string">"label"</span>: <span class="string">"ST1"</span>, <span class="string">"labelPosition"</span>: <span class="string">"ne"</span>, <span class="string">"labelAngle"</span>: <span class="number">45</span> },</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"12"</span>, <span class="string">"coordinates"</span>: [ <span class="number">2</span>, <span class="number">2</span> ], <span class="string">"label"</span>: <span class="string">"ST2"</span>, <span class="string">"labelPosition"</span>: <span class="string">"ne"</span>, <span class="string">"labelAngle"</span>: <span class="number">45</span> },</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"13"</span>, <span class="string">"coordinates"</span>: [ <span class="number">2</span>, <span class="number">3</span> ], <span class="string">"label"</span>: <span class="string">"ST3"</span>, <span class="string">"labelPosition"</span>: <span class="string">"ne"</span>, <span class="string">"labelAngle"</span>: <span class="number">45</span> },</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"14"</span>, <span class="string">"coordinates"</span>: [ <span class="number">3</span>, <span class="number">5</span> ], <span class="string">"label"</span>: <span class="string">"ST4"</span>, <span class="string">"labelPosition"</span>: <span class="string">"e"</span>, <span class="string">"labelAngle"</span>: <span class="number">0</span> }</code></div></div><div class="container"><div class="line"><code>              ], [</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"15"</span>, <span class="string">"coordinates"</span>: [ <span class="number">2</span>, <span class="number">3</span> ], <span class="string">"label"</span>: <span class="string">"ST3"</span>, <span class="string">"labelPosition"</span>: <span class="string">"ne"</span>, <span class="string">"labelAngle"</span>: <span class="number">45</span> },</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"16"</span>, <span class="string">"coordinates"</span>: [ <span class="number">1</span>, <span class="number">4</span> ], <span class="string">"label"</span>: <span class="string">"ST6"</span>, <span class="string">"labelPosition"</span>: <span class="string">"e"</span>, <span class="string">"labelAngle"</span>: <span class="number">0</span> }</code></div></div><div class="container"><div class="line"><code>              ]</code></div></div><div class="container"><div class="line"><code>            ]</code></div></div><div class="container"><div class="line"><code>          }, {</code></div></div><div class="container"><div class="line"><code>            <span class="string">"id"</span>: <span class="string">"line2"</span>,</code></div></div><div class="container"><div class="line"><code>            <span class="string">"name"</span>: <span class="string">"Line 2"</span>,</code></div></div><div class="container"><div class="line"><code>            <span class="string">"style"</span>: {</code></div></div><div class="container"><div class="line"><code>              <span class="string">"line"</span> : { <span class="string">"stroke"</span>: <span class="string">"red"</span> },</code></div></div><div class="container"><div class="line"><code>              <span class="string">"station"</span>: {</code></div></div><div class="container"><div class="line"><code>                <span class="string">"borderColor"</span>: <span class="string">"red"</span>,</code></div></div><div class="container"><div class="line"><code>                <span class="string">"width"</span> : <span class="number">8</span>,</code></div></div><div class="container"><div class="line"><code>                <span class="string">"height"</span> : <span class="number">8</span></code></div></div><div class="container"><div class="line"><code>              }</code></div></div><div class="container"><div class="line"><code>            },</code></div></div><div class="container"><div class="line"><code>            <span class="string">"branches"</span>: [</code></div></div><div class="container"><div class="line"><code>              [</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"21"</span>, <span class="string">"coordinates"</span>: [ <span class="number">1</span>, <span class="number">2</span> ], <span class="string">"label"</span>: <span class="string">"ST7"</span>, <span class="string">"labelPosition"</span>: <span class="string">"ne"</span>, <span class="string">"labelAngle"</span>: <span class="number">45</span> },</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"22"</span>, <span class="string">"coordinates"</span>: [ <span class="number">2</span>, <span class="number">2</span> ], <span class="string">"label"</span>: <span class="string">"ST2"</span>, <span class="string">"labelPosition"</span>: <span class="string">"ne"</span>, <span class="string">"labelAngle"</span>: <span class="number">45</span> },</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"23"</span>, <span class="string">"coordinates"</span>: [ <span class="number">3</span>, <span class="number">2</span> ], <span class="string">"label"</span>: <span class="string">"ST9"</span>, <span class="string">"labelPosition"</span>: <span class="string">"ne"</span>, <span class="string">"labelAngle"</span>: <span class="number">45</span> },</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"24"</span>, <span class="string">"coordinates"</span>: [ <span class="number">3</span>, <span class="number">3</span> ], <span class="string">"label"</span>: <span class="string">"ST10"</span>, <span class="string">"labelPosition"</span>: <span class="string">"ne"</span>, <span class="string">"labelAngle"</span>: <span class="number">45</span> },</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"25"</span>, <span class="string">"coordinates"</span>: [ <span class="number">3</span>, <span class="number">4</span> ], <span class="string">"label"</span>: <span class="string">"ST11"</span>, <span class="string">"labelPosition"</span>: <span class="string">"ne"</span>, <span class="string">"labelAngle"</span>: <span class="number">45</span> },</code></div></div><div class="container"><div class="line"><code>                { <span class="string">"id"</span>: <span class="string">"26"</span>, <span class="string">"coordinates"</span>: [ <span class="number">3</span>, <span class="number">5</span> ], <span class="string">"label"</span>: <span class="string">"ST4"</span>, <span class="string">"labelPosition"</span>: <span class="string">"ne"</span>, <span class="string">"labelAngle"</span>: <span class="number">45</span> }</code></div></div><div class="container"><div class="line"><code>              ]</code></div></div><div class="container"><div class="line"><code>            ]</code></div></div><div class="container"><div class="line"><code>          }]</code></div></div><div class="container"><div class="line"><code>        };</code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"routemap"</span> <span class="attribute">data-db</span>=<span class="value">"DB_DATA"</span> <span class="attribute">data-unit</span>=<span class="value">"50"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">body</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">html</span>&gt;</span></code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</section>
+</div>
+</article>
+	</div><!-- .entry-content -->
+	
+	</article><!-- #post-## -->
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="secondary">
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="categories-2" class="widget widget_categories"><h1 class="widget-title"> </h1>		<ul>
+	<li class="cat-item cat-item-2"><a href="../category/widgets/index.html" title="Web UI Framework offers additional widgets very similar in structure to jQuery Mobile widgets.">Widgets</a>
+</li>
+		</ul>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		</div><!-- #main -->
+
+	</div><!-- #page -->
+
+	<script type='text/javascript' src='../wp-content/themes/twentyfourteen/js/functions.js?ver=20140319'></script>
+</body>
+</html>

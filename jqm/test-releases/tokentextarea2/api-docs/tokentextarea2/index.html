@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8) ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Tokentextarea2 Widget | Web UI Framework API Documentation</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	
+	<!--[if lt IE 9]>
+	<script src="http://local.xyzzy/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	<link rel='stylesheet' id='twentyfourteen-lato-css'  href='http://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='../wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='../wp-content/themes/web-ui-fw-api-docs/style.css?ver=3.9.1' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='http://local.xyzzy/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='http://local.xyzzy/wp-includes/js/jquery/jquery.js?ver=1.11.0'></script>
+<script type='text/javascript' src='http://local.xyzzy/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://local.xyzzy/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Virtualgrid Widget' href='../virtualgrid/index.html' />
+<meta name="generator" content="WordPress 3.9.1" />
+<link rel='canonical' href='index.html' />
+	<script src="../wp-content/themes/web-ui-fw-api-docs/js/examples.js"></script>
+</head>
+
+<body class="single single-post postid-52 single-format-standard custom-background masthead-fixed full-width singular">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="../index.html" rel="home">Web UI Framework API Documentation</a></h1>
+
+			
+
+			
+		</div>
+
+		
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+</head>
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+			
+<article id="post-52" class="post-52 post type-post status-publish format-standard hentry category-widgets">
+	
+	<header class="entry-header">
+		<h1 class="entry-title">Tokentextarea2 Widget</h1>
+		<div class="entry-meta">
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<article id="tokentextarea21" class="entry widget">
+<h2 class="section-title">
+<span>Tokentextarea2 Widget</span><span class="version-details">version added: ***??????***</span><br />
+</h2>
+<div class="entry-wrapper">
+<p class="desc"><strong>Description: </strong>Creates a tokentextarea2</p>
+<section id="quick-nav">
+<header>
+<h2>QuickNav<a href="index.html#entry-examples">Examples</a><br />
+</h2>
+</header>
+<div class="quick-nav-section">
+<h3>Options</h3>
+<div><a href="index.html#option-disabled">disabled</a></div>
+<div><a href="index.html#option-enhanced">enhanced</a></div>
+</div>
+<div class="quick-nav-section">
+<h3>Methods</h3>
+<div><a href="index.html#method-add">add</a></div>
+<div><a href="index.html#method-destroy">destroy</a></div>
+<div><a href="index.html#method-inputText">inputText</a></div>
+<div><a href="index.html#method-length">length</a></div>
+<div><a href="index.html#method-remove">remove</a></div>
+<div><a href="index.html#method-select">select</a></div>
+</div>
+<div class="quick-nav-section">
+<h3>Events</h3>
+<div><a href="index.html#event-create">create</a></div>
+<div><a href="index.html#event-select">select</a></div>
+</div>
+</section>
+<div class="longdesc" id="entry-longdesc">
+<h2 id="introduction">Token Text Area 2</h2>
+<p>This widget changes a text item to a button. It can be comprised of a number of button widgets. As the user types text, the widget parses the text at each keystroke and creates a button when the user types a character that acts as a delimiter (<code>;</code> or <code>,</code>). A user can add the tokentextarea2 widget to a contact list, email list, or another list. The typical use of this widget is composing a number of contacts or phone numbers in a specific area of the screen.</p>
+<h2 id="structure">Structure</h2>
+<p>The widget derives from the jQuery Mobile <a href="http://api.jquerymobile.com/textinput">textinput</a> widget and works on an <code>input</code> of type text. Buttons are created from its initial value upon instantiation and if any text is left over it is set as the value of the input. To create a tokentextarea2 widget, add an <code>input</code> element to your markup:</p>
+<div class="syntaxhighlighter xml nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">input</span> <span class="attribute">type</span>=<span class="value">"text"</span> <span class="attribute">id</span>=<span class="value">"email-addresses"</span> <span class="attribute">data-role</span>=<span class="value">"tokentextarea2"</span>&gt;</span></code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="keyboard">Keyboard interaction</h2>
+<p>The user may type freely into the input. Whenever she types a delimiter character, the text is tokenized the same way as initially, resulting in new buttons being inserted immediately preceding the input.</p>
+<p>When the user types Backspace the button nearest the input will be selected in preparation for removal under the following circumstances:</p>
+<ul>
+<li>There is at least one button before the input.</li>
+<li>Pressing Backspace has not resulted in a change in the input&#8217;s value. That is, the value of the input is equal to the copy maintained in the visibility-hidden span used for calculating the width of the input (see <a href="index.html#layout">below</a>).</li>
+</ul>
+<h2 id="layout">Layout and styling</h2>
+<p>The buttons are placed side-by-side. They wrap to the next line. The input is placed after the last button and sized such that it fills up the rest of the line. As the user types, the widget ensures that the input has sufficient width for accommodating the text typed. It measures the width of the text by maintaining a copy of the input&#8217;s value in a visibility-hidden span. If the width of the text exceeds the width of the input, the input width is restored to the textinput widget&#8217;s default of 100%, causing it to wrap to the next line. The widget is styled with a text cursor, making it appear as a large input. Clicking anywhere inside the widget except on one of the buttons will cause the input to receive focus. This further establishes the widget&#8217;s appearance of being a large input.</p>
+<h2 id="button-interaction">Interacting with the buttons</h2>
+<p>In addition to being able to remove buttons by pressing Backspace, the user can also click on them. The first click on a button will select it, while the second click will remove it. It is possible to prevent selection of a button by attaching a handler to the widget&#8217;s <a href="index.html#event-select">select</a> event and preventing default on the event object.</p>
+<p>Whenever the user types, all buttons are deselected. The deselection is performed only after making sure that the selected button immediately preceding the input is removed in response to a Backspace keypress that does not modify the value of the input (as described above).</p>
+</p></div>
+<section id="options">
+<header>
+<h2>Options</h2>
+</header>
+<div id="option-disabled" class="api-item first-item">
+<h3>disabled<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>false</code>
+</div>
+<div>
+		Disables the tokentextarea2 if set to <code>true</code>.</p>
+<p>This option is also exposed as a data attribute: <code>data-disabled="true"</code>.</p>
+</p></div>
+<p><strong>Code examples:</strong>
+<p>Initialize the tokentextarea2 with the <code>disabled</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2({ disabled: <span class="literal">true</span> });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>disabled</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> disabled = $( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"disabled"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"disabled"</span>, <span class="literal">true</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="option-enhanced" class="api-item">
+<h3>enhanced<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#Boolean">Boolean</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>false</code>
+</div>
+<div>Indicates that the markup necessary for a tokentextarea2 widget has been provided as part of the original markup.</p>
+<p>This option is also exposed as a data attribute: <code>data-enhanced="true"</code>.</p>
+</p></div>
+<p><strong>Code examples:</strong>
+<p>Initialize the tokentextarea2 with the <code>enhanced</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2({ enhanced: <span class="literal">true</span> });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>enhanced</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> enhanced = $( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"enhanced"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"enhanced"</span>, <span class="literal">true</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="methods">
+<header>
+<h2>Methods</h2>
+</header>
+<div id="method-add">
+<div class="api-item first-item">
+<h3>add( value )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Insert a new button with the specified value immediately before the input.</div>
+<ul>
+<li>
+<div><strong>value</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+</div>
+<div></div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the  method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"add"</span>, <span class="string">"my.name@example.com"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="api-item">
+<h3>add( value, index )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Insert a new button with the specified value at the specified zero-based index among the existing tokens. The button at that index and all buttons following it will move up by one. If the index specified is out of bounds, the button will be inserted immediately before the input.</div>
+<ul>
+<li>
+<div><strong>value</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+</div>
+<div></div>
+</li>
+<li>
+<div><strong>index</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Number">Number</a>
+</div>
+<div></div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the  method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"add"</span>, <span class="string">"my.name@example.com"</span>, <span class="number">12</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-destroy">
+<div class="api-item">
+<h3>destroy()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>
+		Removes the tokentextarea2 functionality completely. This will return the element back to its pre-init state.
+	</div>
+<ul>
+<li>
+<div class="null-signature">This method does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the destroy method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"destroy"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-inputText">
+<div class="api-item">
+<h3>inputText()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#String">String</a></span><br />
+</h3>
+<div>Gets the string from the widget. The string consists of the <code>;</code>-separated list of button values, followed by the value of the input.</div>
+<ul>
+<li>
+<div class="null-signature">This signature does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the  method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"inputText"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="api-item">
+<h3>inputText( text )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Sets the value of the widget. All existing buttons are removed, the argument is tokenized, new buttons are created, and the leftover string is set as the input&#8217;s value.</div>
+<ul>
+<li>
+<div><strong>text</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#String">String</a>
+</div>
+<div>The new value the widget is to have.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the  method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"inputText"</span>, <span class="string">"my.name@example.com; your.name@"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-length">
+<div class="api-item">
+<h3>length()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#Number">Number</a></span><br />
+</h3>
+<div>Returns the number of the tokens.</div>
+<ul>
+<li>
+<div class="null-signature">This method does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the length method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"length"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-remove">
+<div class="api-item">
+<h3>remove()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Removes all tokens.</div>
+<ul>
+<li>
+<div class="null-signature">This signature does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the  method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"remove"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="api-item">
+<h3>remove( index )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Remove the button at the specified index.</div>
+<ul>
+<li>
+<div><strong>index</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Number">Number</a>
+</div>
+<div></div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the  method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"remove"</span>, <span class="number">12</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-select">
+<div class="api-item">
+<h3>select()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#String">String</a></span><br />
+</h3>
+<div>The values of the selected buttons are returned <code>;</code>-separated in a string.</div>
+<ul>
+<li>
+<div class="null-signature">This signature does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the  method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"select"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="api-item">
+<h3>select()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#Null">Null</a></span><br />
+</h3>
+<div>If no buttons are selected, <code>null</code> is returned.</div>
+<ul>
+<li>
+<div class="null-signature">This signature does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the  method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"select"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="api-item">
+<h3>select( index )<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Unconditionally selects the button at the zero-based index passed as the parameter. The <a href="index.html#event-select">select</a> event is not triggered.</div>
+<ul>
+<li>
+<div><strong>index</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Number">Number</a>
+</div>
+<div></div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the  method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"select"</span>, <span class="number">12</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="events">
+<header>
+<h2>Events</h2>
+</header>
+<div id="event-create" class="api-item first-item">
+<h3>create( event, ui )<span class="returns">Type: <code>tokentextarea2create</code></span><br />
+</h3>
+<div>
+		Triggered when the tokentextarea2 is created.
+	</div>
+<ul>
+<li>
+<div><strong>event</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Event">Event</a>
+</div>
+<div></div>
+</li>
+<li>
+<div><strong>ui</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Object">Object</a>
+</div>
+<div></div>
+</li>
+</ul>
+<p><em>Note: The <code>ui</code> object is empty but included for consistency with other events.</em></p>
+<div>
+<strong>Code examples:</strong>
+<p>Initialize the tokentextarea2 with the create callback specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2({</code></div></div><div class="container"><div class="line"><code>  create: <span class="keyword">function</span>( event, ui ) {}</code></div></div><div class="container"><div class="line"><code>});</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bind an event listener to the tokentextarea2create event:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).on( <span class="string">"tokentextarea2create"</span>, <span class="keyword">function</span>( event, ui ) {} );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="event-select" class="api-item">
+<h3>select( event, ui )<span class="returns">Type: <code>tokentextarea2select</code></span><br />
+</h3>
+<div>Triggered when a button is selected. Preventing default will prevent selection of the button.</div>
+<ul>
+<li>
+<div><strong>event</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Event">Event</a>
+</div>
+<div></div>
+</li>
+<li>
+<div><strong>ui</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Object">Object</a>
+</div>
+<div></div>
+<ul>
+<li>
+<div><strong>value</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#string">string</a>
+</div>
+<div>The value associated with the button.</div>
+</li>
+</ul>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Initialize the tokentextarea2 with the select callback specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2({</code></div></div><div class="container"><div class="line"><code>  select: <span class="keyword">function</span>( event, ui ) {}</code></div></div><div class="container"><div class="line"><code>});</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bind an event listener to the tokentextarea2select event:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).on( <span class="string">"tokentextarea2select"</span>, <span class="keyword">function</span>( event, ui ) {} );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section class="entry-examples" id="entry-examples">
+<header>
+<h2>Example:</h2>
+</header>
+<div class="entry-example" id="example-0">
+<h4><span class="desc">A basic example of a page with a tokentextarea2.</span></h4>
+<div class="syntaxhighlighter xml ">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+<div class="line n6">6</div>
+<div class="line n7">7</div>
+<div class="line n8">8</div>
+<div class="line n9">9</div>
+<div class="line n10">10</div>
+<div class="line n11">11</div>
+<div class="line n12">12</div>
+<div class="line n13">13</div>
+<div class="line n14">14</div>
+<div class="line n15">15</div>
+<div class="line n16">16</div>
+<div class="line n17">17</div>
+<div class="line n18">18</div>
+<div class="line n19">19</div>
+<div class="line n20">20</div>
+<div class="line n21">21</div>
+<div class="line n22">22</div>
+<div class="line n23">23</div>
+<div class="line n24">24</div>
+<div class="line n25">25</div>
+<div class="line n26">26</div>
+<div class="line n27">27</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="doctype">&lt;!doctype html&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">head</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width, initial-scale=1"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">title</span>&gt;</span>tokentextarea2 demo<span class="tag">&lt;/<span class="title">title</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"//code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"//web-ui-fw.github.io/jqm/0.2.0/web-ui-fw.css"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//code.jquery.com/jquery-1.10.2.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//web-ui-fw.github.io/jqm/0.2.0/web-ui-fw.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">head</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">body</span>&gt;</span></code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"page"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"header"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Web UI Framework Example<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-content"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">form</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>        <span class="tag">&lt;<span class="title">input</span> <span class="attribute">data-role</span>=<span class="value">"tokentextarea2"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;/<span class="title">form</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">body</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">html</span>&gt;</span></code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</section>
+</div>
+</article>
+	</div><!-- .entry-content -->
+	
+	</article><!-- #post-## -->
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="secondary">
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="categories-2" class="widget widget_categories"><h1 class="widget-title"> </h1>		<ul>
+	<li class="cat-item cat-item-2"><a href="../category/widgets/index.html" title="Web UI Framework offers additional widgets very similar in structure to jQuery Mobile widgets.">Widgets</a>
+</li>
+		</ul>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		</div><!-- #main -->
+
+	</div><!-- #page -->
+
+	<script type='text/javascript' src='../wp-content/themes/twentyfourteen/js/functions.js?ver=20140319'></script>
+</body>
+</html>

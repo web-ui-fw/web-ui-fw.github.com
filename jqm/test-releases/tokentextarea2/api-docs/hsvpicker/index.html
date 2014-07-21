@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8) ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>HSVPicker Widget | Web UI Framework API Documentation</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	
+	<!--[if lt IE 9]>
+	<script src="http://local.xyzzy/wp-content/themes/twentyfourteen/js/html5.js"></script>
+	<![endif]-->
+	<link rel='stylesheet' id='twentyfourteen-lato-css'  href='http://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='../wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='../wp-content/themes/web-ui-fw-api-docs/style.css?ver=3.9.1' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='http://local.xyzzy/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='http://local.xyzzy/wp-includes/js/jquery/jquery.js?ver=1.11.0'></script>
+<script type='text/javascript' src='http://local.xyzzy/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://local.xyzzy/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Colorpalette Widget' href='../colorpalette/index.html' />
+<link rel='next' title='Tokentextarea2 Widget' href='../tokentextarea2/index.html' />
+<meta name="generator" content="WordPress 3.9.1" />
+<link rel='canonical' href='index.html' />
+	<script src="../wp-content/themes/web-ui-fw-api-docs/js/examples.js"></script>
+</head>
+
+<body class="single single-post postid-8 single-format-standard custom-background masthead-fixed full-width singular">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title"><a href="../index.html" rel="home">Web UI Framework API Documentation</a></h1>
+
+			
+
+			
+		</div>
+
+		
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+</head>
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+			
+<article id="post-8" class="post-8 post type-post status-publish format-standard hentry category-widgets">
+	
+	<header class="entry-header">
+		<h1 class="entry-title">HSVPicker Widget</h1>
+		<div class="entry-meta">
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<article id="hsvpicker1" class="entry widget">
+<h2 class="section-title">
+<span>HSVPicker Widget</span><span class="version-details">version added: 0.2.0</span><br />
+</h2>
+<div class="entry-wrapper">
+<p class="desc"><strong>Description: </strong>Allows the user to specify a color by choosing the hue/saturation/value</p>
+<section id="quick-nav">
+<header>
+<h2>QuickNav<a href="index.html#entry-examples">Examples</a><br />
+</h2>
+</header>
+<div class="quick-nav-section">
+<h3>Options</h3>
+<div><a href="index.html#option-color">color</a></div>
+</div>
+<div class="quick-nav-section">
+<h3>Methods</h3>
+<div><a href="index.html#method-destroy">destroy</a></div>
+<div><a href="index.html#method-refresh">refresh</a></div>
+</div>
+<div class="quick-nav-section">
+<h3>Events</h3>
+<div><a href="index.html#event-colorchanged">colorchanged</a></div>
+<div><a href="index.html#event-hsvpickercreate">hsvpickercreate</a></div>
+</div>
+</section>
+<div class="longdesc" id="entry-longdesc">
+<h3>HSVPicker</h3>
+<p>The Hue/Saturation/Value picker displays three sliders &#8211; one for each channel. Whenever the user drags one of the sliders, the resulting colour is calculated and assigned to the widget&#8217;s &#8220;color&#8221; option. The &#8220;colorchanged&#8221; signal is emitted. In addition, if the widget is based on a form input, the &#8220;change&#8221; signal is triggered on the input.</p>
+<div class="syntaxhighlighter xml nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"hsvpicker"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<section id="options">
+<header>
+<h2>Options</h2>
+</header>
+<div id="option-color" class="api-item first-item">
+<h3>color<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#String">String</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>null</code>
+</div>
+<div>The color to display/modify.</div>
+<p><strong>Code examples:</strong>
+<p>Initialize the hsvpicker with the <code>color</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).hsvpicker({ color: #f7b29a });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>color</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> color = $( <span class="string">".selector"</span> ).hsvpicker( <span class="string">"option"</span>, <span class="string">"color"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).hsvpicker( <span class="string">"option"</span>, <span class="string">"color"</span>, #f7b29a );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="methods">
+<header>
+<h2>Methods</h2>
+</header>
+<div id="method-destroy">
+<div class="api-item first-item">
+<h3>destroy()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Destroys a hsvpicker. This causes the DOM elemenent on which it is based to be restored to the state in which it was before the widget was created. Any DOM elements created as part of the widget will be destroyed.</div>
+<ul>
+<li>
+<div class="null-signature">This method does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the destroy method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).hsvpicker( <span class="string">"destroy"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-refresh">
+<div class="api-item">
+<h3>refresh()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>Re-reads the color value from the native element and ensures the sliders&#8217; values reflect the color.</div>
+<ul>
+<li>
+<div class="null-signature">This method does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the refresh method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).hsvpicker( <span class="string">"refresh"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="events">
+<header>
+<h2>Events</h2>
+</header>
+<div id="event-colorchanged" class="api-item first-item">
+<h3>colorchanged( event )<span class="returns">Type: <code>colorchanged</code></span><br />
+</h3>
+<div>Triggered when the color changes.</div>
+<ul>
+<li>
+<div><strong>event</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Event">Event</a>
+</div>
+<div></div>
+</li>
+</ul>
+<p><em>Note: The <code>ui</code> object is empty but included for consistency with other events.</em></p>
+<div>
+<strong>Code examples:</strong>
+<p>Initialize the hsvpicker with the colorchanged callback specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).hsvpicker({</code></div></div><div class="container"><div class="line"><code>  colorchanged: <span class="keyword">function</span>( event, ui ) {}</code></div></div><div class="container"><div class="line"><code>});</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bind an event listener to the colorchanged event:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).on( <span class="string">"colorchanged"</span>, <span class="keyword">function</span>( event, ui ) {} );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="event-hsvpickercreate" class="api-item">
+<h3>hsvpickercreate( event, ui )<span class="returns">Type: <code>hsvpickercreate</code></span><br />
+</h3>
+<div>Triggered when a hsvpicker is created.</div>
+<ul>
+<li>
+<div><strong>event</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Event">Event</a>
+</div>
+<div></div>
+</li>
+<li>
+<div><strong>ui</strong></div>
+<div>Type: <a href="http://api.jquery.com/Types/#Object">Object</a>
+</div>
+<div></div>
+</li>
+</ul>
+<p><em>Note: The <code>ui</code> object is empty but included for consistency with other events.</em></p>
+<div>
+<strong>Code examples:</strong>
+<p>Initialize the hsvpicker with the hsvpickercreate callback specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).hsvpicker({</code></div></div><div class="container"><div class="line"><code>  hsvpickercreate: <span class="keyword">function</span>( event, ui ) {}</code></div></div><div class="container"><div class="line"><code>});</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bind an event listener to the hsvpickercreate event:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).on( <span class="string">"hsvpickercreate"</span>, <span class="keyword">function</span>( event, ui ) {} );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section class="entry-examples" id="entry-examples">
+<header>
+<h2>Example:</h2>
+</header>
+<div class="entry-example" id="example-0">
+<h4><span class="desc">A basic example of a page with a hsvpicker.</span></h4>
+<div class="syntaxhighlighter xml ">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+<div class="line n6">6</div>
+<div class="line n7">7</div>
+<div class="line n8">8</div>
+<div class="line n9">9</div>
+<div class="line n10">10</div>
+<div class="line n11">11</div>
+<div class="line n12">12</div>
+<div class="line n13">13</div>
+<div class="line n14">14</div>
+<div class="line n15">15</div>
+<div class="line n16">16</div>
+<div class="line n17">17</div>
+<div class="line n18">18</div>
+<div class="line n19">19</div>
+<div class="line n20">20</div>
+<div class="line n21">21</div>
+<div class="line n22">22</div>
+<div class="line n23">23</div>
+<div class="line n24">24</div>
+<div class="line n25">25</div>
+<div class="line n26">26</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="doctype">&lt;!doctype html&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">head</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"utf-8"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width, initial-scale=1"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">title</span>&gt;</span>hsvpicker demo<span class="tag">&lt;/<span class="title">title</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"//code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"//web-ui-fw.github.io/jqm/0.2.0/web-ui-fw.css"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//code.jquery.com/jquery-1.10.2.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//web-ui-fw.github.io/jqm/0.2.0/web-ui-fw.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">head</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">body</span>&gt;</span></code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"page"</span> <span class="attribute">id</span>=<span class="value">"page1"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"header"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Web UI Framework Example<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"content"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;<span class="title">div</span> <span class="attribute">data-role</span>=<span class="value">"hsvpicker"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>      <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">body</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">html</span>&gt;</span></code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4>Demo:</h4>
+<div class="demo code-demo"></div>
+</div>
+</section>
+</div>
+</article>
+	</div><!-- .entry-content -->
+	
+	</article><!-- #post-## -->
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="secondary">
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+		<aside id="categories-2" class="widget widget_categories"><h1 class="widget-title"> </h1>		<ul>
+	<li class="cat-item cat-item-2"><a href="../category/widgets/index.html" title="Web UI Framework offers additional widgets very similar in structure to jQuery Mobile widgets.">Widgets</a>
+</li>
+		</ul>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+
+		</div><!-- #main -->
+
+	</div><!-- #page -->
+
+	<script type='text/javascript' src='../wp-content/themes/twentyfourteen/js/functions.js?ver=20140319'></script>
+</body>
+</html>

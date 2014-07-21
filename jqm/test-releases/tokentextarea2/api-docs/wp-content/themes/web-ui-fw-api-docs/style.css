@@ -1,0 +1,236 @@
+/*
+Theme Name: Web UI Framework API Docs
+Template: twentyfourteen
+*/
+
+@import url("../twentyfourteen/style.css");
+
+/* Link font sizes to a global value */
+body {
+	font-size: 24px;
+}
+
+.site-title {
+	font-size: 112%;
+}
+
+.primary-sidebar .widget {
+	font-size: 75%;
+}
+
+.entry-title {
+	font-size: 200%;
+}
+
+.widget {
+	font-size: 87.5%;
+}
+
+.widget h2 {
+	font-size: 140%; /* of .widget */
+}
+
+.widget h3 {
+	font-size: 130%; /* of .widget */
+}
+
+.widget h4 {
+	font-size: 114%; /* of .widget */
+}
+
+.widget code {
+	font-size: 100%; /* of .widget */
+}
+
+.widget pre {
+	font-size: 100%; /* of .widget */
+}
+
+.widget pre code {
+	font-size: 100%; /* of .widget pre */
+}
+
+/* Unset max-width of parent theme */
+.site {
+	max-width: 100%;
+}
+
+.site-header {
+	max-width: 100%;
+}
+
+.site-content .entry-header,
+.site-content .entry-content,
+.site-content .entry-summary,
+.site-content .entry-meta,
+.page-content {
+	max-width: 100%;
+}
+
+.archive-header,
+.page-header {
+	max-width: 100%;
+}
+
+/* Basic settings */
+
+.entry-meta {
+	display: none;
+}
+
+.section-title {
+	border-bottom: 1px solid black;
+	padding-bottom: 5px;
+}
+
+.option-type,
+.returns,
+#quick-nav header a,
+.version-details {
+	float: right;
+}
+
+.default {
+	text-align: right;
+}
+
+.quick-nav-section {
+	float: left;
+	width: 33%;
+}
+
+#quick-nav {
+	overflow: auto;
+	padding-bottom: 10px;
+}
+
+article .entry-wrapper a {
+	color: black;
+}
+
+header h2 {
+	padding-bottom: 5px;
+	border-bottom: 1px solid black;
+}
+
+.entry-wrapper section {
+	margin-top: 15px;
+}
+
+.api-item {
+	padding-top: 48px;
+}
+
+.longdesc ul,
+.api-item ul {
+	list-style-type: initial;
+	margin-left: 1.5em;
+}
+
+.api-item > div:last-child {
+	padding-top: 10px;
+}
+
+/* Turn top border in list view back on */
+.list-view .site-content .hentry:first-of-type {
+	border-top: 1px solid rgba( 0, 0, 0, 0.1 );
+	padding-top: 48px;
+}
+
+/*
+ * Improves readability of pre-formatted text in all browsers.
+ * Note: Taken from jquery theme
+ */
+
+pre, code {
+	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	word-spacing: 0;
+}
+code {
+	padding: 0 3px;
+	background-color: #eee;
+	border-radius: 3px;
+}
+pre code {
+	background: none;
+	font-weight: bold;
+	white-space: pre;
+	word-wrap: normal;
+}
+
+/* Syntax highlighting values */
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter pre,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+	line-height: 1.3em;
+	width: auto;
+}
+
+
+.syntaxhighlighter {
+	border: gray;
+	background: #272727;
+	color: white;
+	overflow: auto;
+	border-radius: 5px;
+	padding: 10px;
+}
+.syntaxhighlighter table {
+	border: 0;
+	margin-bottom: 0;
+}
+
+.syntaxhighlighter td,
+.syntaxhighlighter td pre {
+	margin-bottom: 0;
+	border: none;
+	padding: 0;
+}
+
+.syntaxhighlighter table {
+	font-size: 100%;
+}
+
+.syntaxhighlighter td.gutter {
+	color: lightgray;
+	text-align: right;
+	font-weight: bold;
+	line-height: 1.5;
+	padding: 0 10px 0 0;
+	border-right: 2px solid #323232;
+}
+
+.syntaxhighlighter td.code {
+	padding: 0 0 0 10px;
+}
+
+.syntaxhighlighter.xml .doctype,
+.syntaxhighlighter.xml .tag {
+	color: orange;
+}
+
+.syntaxhighlighter.xml .tag .attribute {
+	color: magenta;
+}
+
+.syntaxhighlighter.xml .tag .value {
+	color: #00bfff;
+}
+
+.syntaxhighlighter.javascript .string {
+	color: #00bfff;
+}
+
+.syntaxhighlighter.javascript .keyword {
+	color: #cd5c5c;
+}
