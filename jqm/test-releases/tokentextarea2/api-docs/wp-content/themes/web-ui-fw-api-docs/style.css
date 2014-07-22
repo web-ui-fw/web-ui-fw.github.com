@@ -122,9 +122,16 @@ header h2 {
 }
 
 .longdesc ul,
-.api-item ul {
+.longdesc ol,
+.api-item ul,
+.api-item ol {
 	list-style-type: initial;
 	margin-left: 1.5em;
+}
+
+.longdesc ol,
+.api-item ol {
+	list-style-type: decimal;
 }
 
 .api-item > div:last-child {

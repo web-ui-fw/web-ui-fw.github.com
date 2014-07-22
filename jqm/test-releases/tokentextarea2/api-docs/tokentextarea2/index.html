@@ -78,6 +78,7 @@
 <h3>Options</h3>
 <div><a href="index.html#option-disabled">disabled</a></div>
 <div><a href="index.html#option-enhanced">enhanced</a></div>
+<div><a href="index.html#option-master">master</a></div>
 </div>
 <div class="quick-nav-section">
 <h3>Methods</h3>
@@ -125,6 +126,21 @@
 <h2 id="button-interaction">Interacting with the buttons</h2>
 <p>In addition to being able to remove buttons by pressing Backspace, the user can also click on them. The first click on a button will select it, while the second click will remove it. It is possible to prevent selection of a button by attaching a handler to the widget&#8217;s <a href="index.html#event-select">select</a> event and preventing default on the event object.</p>
 <p>Whenever the user types, all buttons are deselected. The deselection is performed only after making sure that the selected button immediately preceding the input is removed in response to a Backspace keypress that does not modify the value of the input (as described above).</p>
+<h2 id="synchronization">Synchronizing with another input</h2>
+<p>The basic tokentextarea2 widget does not progressively enhance an input. This means that you have to use different APIs to access the value typed in by the user depending on whether jQuery Mobile considers the browser it is running on to be grade A or grade B, or whether it avoids all enhancement by considering the browser to be grade C. In the case of grade A and grade B browsers, you must use the <a href="index.html#method-inputText">inputText()</a> method to retrieve the correct value from the input, because its <a href="http://api.jquery.com/val/">.val()</a> method does not retrieve any of the buttons.</p>
+<p>jQuery Mobile does not run on browsers that it detects to be grade C &#8211; in most cases these are older browsers. This means that an input marked for enhancement into a tokentextarea2 widget will not be enhanced. It will remain a plain text input. This, in turn, means that you must use the <a href="http://api.jquery.com/val/">.val()</a> method to retrieve the correct value from the input, because the <a href="index.html#method-inputText">inputText()</a> method has not been defined on the element.</p>
+<p>The <a href="index.html#option-master">master</a> option together with the convenience classes <code>ui-tokentextarea2-master</code> and <code>ui-tokentextarea2-slave</code> addresses this discrepancy. To progressively enhance an input into a tokentextarea2, proceed as follows:</p>
+<ol>
+<li>Add two inputs to your markup:
+<ol>
+<li>The first input is the one that you will use in your application. It is the input that holds the actual value you wish to retrieve, including all the buttons. You must give this input an <code>id</code> attribute (for example, <code>id="email-addresses"</code>).</li>
+<li>The second input is enhanced into a tokentextarea2 and has the <code>data-master</code> attribute with its value set to a selector for the first input (for example, <code>data-master="#email-addresses"</code>).</li>
+</ol>
+</li>
+<li>Add class <code>ui-tokentextarea2-master</code> to the first input&#8217;s <code>data-wrapper-class</code> attribute: <code>data-wrapper-class="ui-tokentextarea2-master"</code>. This will ensure that, whenever the tokentextarea2 widget is created, the master will not be shown.</li>
+<li>Add class <code>ui-tokentextarea2-slave</code> to the second input&#8217;s <code>class</code> attribute: <code>class="ui-tokentextarea2-slave</code>. This will ensure that the second input will not be shown on grade C browsers, but will be shown whenever the tokentextarea2 widget is created.</li>
+</ol>
+<p>The tokentextarea2 demos provide an example of using the <code>master</code> option and the convenience classes.</p>
 </p></div>
 <section id="options">
 <header>
@@ -215,6 +231,52 @@
 </td>
 <td class="code">
 <pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> enhanced = $( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"enhanced"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"enhanced"</span>, <span class="literal">true</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="option-master" class="api-item">
+<h3>master<span class="option-type"><strong>Type: </strong></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>null</code>
+</div>
+<div>Indicates that the tokentextarea2 is to update the value of the element identified by the option whenever its own <a href="index.html#method-inputText">inputText()</a> changes. It also indicates that the inputText() of the tokentextarea2 is to be updated whenever the value of the element identified by the option changes. The update is performed in response to a &#8220;change&#8221; event triggered on the element identified by the option.</p>
+<p>This option is provided by the <code>widgets/tokentextarea2.sync</code> extension.</p>
+<p>This option is also exposed as a data attribute: <code>data-master="#id-of-master"</code>.</p>
+</p></div>
+<p><strong>Code examples:</strong>
+<p>Initialize the tokentextarea2 with the <code>master</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2({ master: #id-of-master });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>master</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> master = $( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"master"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"master"</span>, #id-of-master );</code></div></div></pre>
 </td>
 </tr>
 </tbody>
