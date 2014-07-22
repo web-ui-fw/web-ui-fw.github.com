@@ -1,0 +1,94 @@
+13:01:20 < Hyunsook> Hi~
+13:01:24 < Minkyeong> hi all
+13:01:40 < gabriel_schulhof> Minkyeong: Hey!
+13:01:40 < Kangsik> Hi all :-)
+13:01:51 < Hyunsook> Yes
+13:02:18 < gabriel_schulhof> Do we have any jQM-related topics? If so, I'll open up #jquery-meeting.
+13:03:08 < Hyunsook> Hmmmm.... I guess my team don't have topics.
+13:03:38 < Hyunsook> Minkyeong, Kangsik: Right?
+13:04:00 < Kangsik> Hyunsook: Yes.
+13:04:10 < Minkyeong> Hyunsook: i agree
+13:04:13 < gabriel_schulhof> I'm asking arschmitz if he has anything for us.
+13:04:23 < Hyunsook> gabriel_schulhof: I see.
+13:04:47 < gabriel_schulhof> OK. arschmitz doesn't have anything either.
+13:04:52 < gabriel_schulhof> I, however, do have something.
+13:05:10 < gabriel_schulhof> web-ui-fw.github.io/jqm/test-releases/tokentextarea2/demos/
+13:05:13 < Hyunsook> gabriel_schulhof: Ah~ Ok.
+13:05:20 < gabriel_schulhof> http://web-ui-fw.github.io/jqm/test-releases/tokentextarea2/api-docs/
+13:05:35 < gabriel_schulhof> ... and, in particular, http://web-ui-fw.github.io/jqm/test-releases/tokentextarea2/api-docs/tokentextarea2/
+13:05:56 < gabriel_schulhof> ... and http://web-ui-fw.github.io/jqm/test-releases/tokentextarea2/demos/widgets/tokentextarea2/tokentextarea2.html
+13:06:17 < gabriel_schulhof> Hyunsook: Since you're responsible for tokentextarea, I wanted you to have a look at it.
+13:07:05 < gabriel_schulhof> Hyunsook: My intention is to prepare tokentextarea for 1.4.3 - with CSS theme inheritance, fewer custom classes, and more jqm-like styling.
+13:07:19 < gabriel_schulhof> Hyunsook: What do you think?
+13:08:19 < gabriel_schulhof> Eventually, I would like a link to web-ui-fw to appear here: http://jquerymobile.com/resources/#Plugins
+13:10:07 < gabriel_schulhof> Hyunsook: https://github.com/web-ui-fw/web-ui-fw/compare/master...tokentextarea2
+13:10:09 < Hyunsook> gabriel_schulhof: You means you want to include tokentextarea on jQM 1.4.3, right?
+13:10:48 < gabriel_schulhof> Hyunsook: Nono. I want web-ui-fw to stay a separate library, but I want to advertise it on http://jquerymobile.com/resources/#Plugins
+13:11:22 < gabriel_schulhof> Hyunsook: I'm hoping this means that more people will see it. However, this also means that it has to work extremely well with jQM 1.4.3.
+13:12:27 < gabriel_schulhof> Hyunsook: The API doc page (http://web-ui-fw.github.io/jqm/test-releases/tokentextarea2/api-docs/tokentextarea2/) describes the functionality pretty clearly.
+13:12:51 < gabriel_schulhof> I'm still missing two pieces: focusIn()/focusOut() and the contact list link.
+13:13:17 < gabriel_schulhof> Oh, and another thing needed for 1.4.3: data-enhanced
+13:13:41 < gabriel_schulhof> Most widgets in 1.4.3 understand the data-enhanced option, so our widgets should also understand it.
+13:13:52 < Hyunsook> gabriel_schulhof: hmmmm... I don't know I understood your words.
+13:14:11 < gabriel_schulhof> Hyunsook: I'm happy to explain.
+13:15:09 < Hyunsook> gabriel_schulhof: I understanding you want to advertise tokentextarea on http://jquerymobile.com/resources/#Plugins as 3rd party plugin.
+13:15:39 < gabriel_schulhof> Hyunsook: I want to advertise all of web-ui-fw as a set of third-party plugins, including tokentextarea.
+13:16:26 < Hyunsook> gabriel_schulhof: ... with API docs link that you've written.
+13:16:51 < Hyunsook> gabriel_schulhof: ahha~ all of web-ui-fw!
+13:16:55 < gabriel_schulhof> Hyunsook: Yes, I've been able to separate our API docs from the jQuery theme.
+13:20:01 < Hyunsook> Hmmm.... Is tokentextarea  impossible to include on jQM?
+13:20:13 < gabriel_schulhof> Hyunsook: Yes, I think so. At least right now.
+13:20:14 < Hyunsook> in future
+13:20:21 < gabriel_schulhof> Hyunsook: In the future, maybe.
+13:20:33 < Hyunsook> ah....
+13:20:39 < gabriel_schulhof> Hyunsook: Right now, jQM is busy merging with jQuery UI, so it's not the right time to add new widgets.
+13:20:50 < gabriel_schulhof> Hyunsook: This is exactly why a library like web-ui-fw is important.
+13:21:30 < gabriel_schulhof> Hyunsook: We can act more quickly than jQM, and, if we provide high quality widgets, other people may contribute their widget to our library, because it is easier to contribute to web-ui-fw than to jquery-mobile.
+13:22:03 < gabriel_schulhof> Hyunsook: I can, for example, talk to frequent, who has a bunch of extensions and widgets that he maintains. They might find a home in web-ui-fw.
+13:23:18 < Hyunsook> oh... yes...
+13:23:41 < gabriel_schulhof> Hyunsook: Anyway, this is a long-term plan. For now, I was hoping to make a PR against master, and asking you to have a look at tokentextarea2, and tell me if I'm missing anything important.
+13:24:15 < gabriel_schulhof> Hyunsook: I'll make the PR as soon as I have focusIn()/focusOut() and the contact list link working.
+13:24:28 < gabriel_schulhof> Hyunsook: I want the API to be slightly different.
+13:25:23 < gabriel_schulhof> Hyunsook: For example, I don't want to generate too many DOM elements. So, for example, I would like to leave adding the label to the dev. So, like <label for="the-tokentextarea2">Recipients:</label> will not be generated by the widget.
+13:25:42 < gabriel_schulhof> Hyunsook: That also makes it more like other jQM widgets.
+13:27:27 < gabriel_schulhof> Hyunsook: Anyway, you'll see the complete changes in the PR. I'm still not sure myself about all the changes I'll make.
+13:28:48 < gabriel_schulhof> Another question I have is this: Should we wait until we've fixed up all the web-ui-fw widgets before advertising, or should we just fix up one widget (like tokentextarea, for example), and then advertise, saying that in the future there will be more widgets?
+13:28:53 < gabriel_schulhof> Kangsik: ^
+13:28:55 < gabriel_schulhof> Minkyeong: ^
+13:29:00 < gabriel_schulhof> Hyunsook: ^
+13:29:00 < Hyunsook> gabriel_schulhof: OK, I've understood.
+13:29:16 < Hyunsook> gabriel_schulhof: Sorry for answer. ^^;;
+13:29:30 < gabriel_schulhof> Hyunsook: What do you mean "Sorry for answer"?
+13:29:48 < Hyunsook> Oops!
+13:31:03 < Hyunsook> I'm sorry my answer so late for your qustion
+13:31:13 < gabriel_schulhof> No problem.
+13:32:00 < gabriel_schulhof> What do you think about my last question? Should we advertise as soon as we have even a single widget ready for 1.4.3, and promise that we will have more widgets in the future, or should we make all widgets ready for 1.4.3 and only then advertise?
+13:32:50 < gabriel_schulhof> Right now I think we have 5 widgets: routemap, tokentextarea, colorpalette, virtualgrid, and hsvpicker.
+13:33:20 < Kangsik> Yes. I agree your word. It will be help to our project.
+13:33:54 < gabriel_schulhof> Kangsik: OK, but which one? Publish one widget that is ready, or make all widgets ready, and only then publish?
+13:34:45 < Hyunsook> gabriel_schulhof: I agree. But... can I have times to look in tokentextarea2?
+13:35:03 < gabriel_schulhof> Hyunsook: Yes, of course! I won't advertise anything until we have at least one widget :)
+13:35:52 < gabriel_schulhof> Hyunsook: Thanks!
+13:36:07 < Hyunsook> gabriel_schulhof: NP! ^^
+13:37:19 < gabriel_schulhof> Hyunsook: I'll make a PR that says we should update tokentextarea for jQuery Mobile 1.4.3. You can leave comments on the PR, and then I'll know what else needs to be done.
+13:38:54 < Hyunsook> gabriel_schulhof: And if you can wait for us my team will think about publishing one widget that is ready, or make all widgets ready.
+13:39:26 < gabriel_schulhof> Hyunsook: OK, great! Thanks for taking the time!
+13:39:29 < gabriel_schulhof> Hyunsook: https://github.com/web-ui-fw/web-ui-fw/pull/57
+13:39:32 < Hyunsook> gabriel_schulhof: OK
+13:40:12 < gabriel_schulhof> Oh, there's a new repo: https://github.com/web-ui-fw/web-ui-fw-api-docs/
+13:40:23 < gabriel_schulhof> I've moved the docs from web-ui-fw to this new repo.
+13:40:33 < gabriel_schulhof> We no longer need custom versions of jquery-wp-content.
+13:40:45 < Hyunsook> Wow! You did quite a lot of work!
+13:41:25 < gabriel_schulhof> Yeah. When I realized that it's possible to advertise on jquerymobile.com I figured "why let web-ui-fw linger around when we can advertise it and maybe get more people to use it?"
+13:41:33 < Hyunsook> OK, I see.
+13:42:58 < Hyunsook> ^^
+13:43:37 < gabriel_schulhof> Alright. So, I guess that was my only topic.
+13:43:59 < gabriel_schulhof> Hyunsook: One more thing: Please accept my sincerest condoleances on your loss!
+13:44:23 < Hyunsook> After I look into your PR, I'll reply my thought via email or comment.
+13:44:31 < gabriel_schulhof> Hyunsook: OK. Thanks!
+13:45:21 < gabriel_schulhof> If there's nothing else, then let's have a good week and a nice weekend!
+13:45:42 < Hyunsook> gabriel_schulhof: Thank you kindly. ^^
+13:46:02 < Hyunsook> Yap.
+13:46:09 < Hyunsook> Have a good weekend~
+13:46:11 < Minkyeong> yep, see y'all next week
+13:46:31 < Kangsik> Yep.. Have a good time~
