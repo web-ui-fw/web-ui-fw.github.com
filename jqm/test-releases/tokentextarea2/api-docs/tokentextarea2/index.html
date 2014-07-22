@@ -141,7 +141,43 @@
 <li>Add class <code>ui-tokentextarea2-slave</code> to the second input&#8217;s <code>class</code> attribute: <code>class="ui-tokentextarea2-slave</code>. This will ensure that the second input will not be shown on grade C browsers, but will be shown whenever the tokentextarea2 widget is created.</li>
 </ol>
 <p>The tokentextarea2 demos provide an example of using the <code>master</code> option and the convenience classes.</p>
-</p></div>
+<p>		<span></p>
+<h2 id="providing-pre-rendered-markup">Providing pre-rendered markup</h2>
+<p>You can improve the load time of your page by providing the markup that the tokentextarea2 widget would normally create during its initialization.</p>
+<p>By providing this markup yourself, and by indicating that you have done so by setting the attribute <code>data-enhanced="true"</code>, you instruct the tokentextarea2 widget to skip these DOM manipulations during instantiation and to assume that the required DOM structure is already present.</p>
+<p>When you provide such pre-rendered markup you must also set all the classes that the framework would normally set, and you must also set all data attributes whose values differ from the default to indicate that the pre-rendered markup reflects the non-default value of the corresponding widget option.</p>
+<p></span></p>
+<p>The tokentextarea2 widget has the same structure as the jQuery Mobile <a href="http://api.jquerymobile.com/textinput/#providing-pre-rendered-markup">textinput</a> widget with the following additional elements:</p>
+<ul>
+<li>In addition to the <code>textinput</code> classes, the wrapper also has the class <code>ui-tokentextarea2</code> and <code>stretched-input</code>.</li>
+<li>The initial input value must not contain any substrings that can be turned into buttons. If you wish the widget to initially contain buttons, place an anchor for each button before the input. The widget adds a data item to each anchor it creates at key &#8220;value&#8221;. Thus, you must also add the <code>data-value</code> attribute to the anchor to store the substring that the button represents. The button gets the following classes: <code>ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline</code>.</li>
+<li>The widget synchronizes the input&#8217;s value to an internal <code>span</code>. This allows it to measure the width of the text, which, in turn, allows it to calculate at every keystroke whether the text typed by the user has enough room on the current line to display without causing the input to scroll horizontally. You must also add such span to your initial markup: <code>&lt;span class="ui-tokentextarea2-input-shadow"&gt;&lt;/span&gt;</code>.</li>
+<li>If the initial value of the input is such that portions of it cannot be converted to a button, then you must set those portions as the initial text for the <code>span</code>.</li>
+</ul>
+<p>The example below illustrates how to create a pre-rendered tokentextarea2 synchronized to a master input with an initial value that can be partially converted to buttons:</p>
+<div class="syntaxhighlighter xml nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+<div class="line n6">6</div>
+<div class="line n7">7</div>
+<div class="line n8">8</div>
+<div class="line n9">9</div>
+<div class="line n10">10</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">form</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-input-text ui-body-inherit ui-corner-all ui-tokentextarea2-master ui-shadow-inset"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">name</span>=<span class="value">"recipients"</span> <span class="attribute">id</span>=<span class="value">"recipients-master"</span> <span class="attribute">data-enhanced</span>=<span class="value">"true"</span> <span class="attribute">data-wrapper-class</span>=<span class="value">"ui-tokentextarea2-master"</span> <span class="attribute">value</span>=<span class="value">"abc@def.com;ghi@j"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-input-text ui-body-inherit ui-corner-all ui-tokentextarea2 ui-shadow-inset"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"ui-btn ui-mini ui-corner-all ui-shadow ui-btn-inline"</span> <span class="attribute">data-value</span>=<span class="value">"abc@def.com"</span>&gt;</span>abc@def.com<span class="tag">&lt;/<span class="title">a</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">data-role</span>=<span class="value">"tokentextarea2"</span> <span class="attribute">data-enhanced</span>=<span class="value">"true"</span> <span class="attribute">data-master</span>=<span class="value">"#recipients-master"</span> <span class="attribute">class</span>=<span class="value">"ui-tokentextarea2-slave"</span> <span class="attribute">value</span>=<span class="value">"ghi@j"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"ui-tokentextarea2-input-shadow"</span>&gt;</span>ghi@j<span class="tag">&lt;/<span class="title">span</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">form</span>&gt;</span></code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div></div>
 <section id="options">
 <header>
 <h2>Options</h2>
