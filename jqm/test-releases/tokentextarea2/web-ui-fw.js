@@ -3263,7 +3263,7 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 				"keyup": "_processInput",
 				"paste": "_handlePaste",
 				"change": "_processInput",
-				"vclick a[href='#']": "_handleButtonClick"
+				"vclick a.ui-tokentextarea2-button": "_handleButtonClick"
 			});
 			this._on( this.window, { "resize": "_adjustWidth" } );
 			this._on( outer, {
@@ -3283,7 +3283,8 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 				.appendTo( outer );
 			this._processInput();
 			outer.addClass( "ui-tokentextarea2" +
-				( ( this.element.prevAll( "a.ui-btn" ).length > 0 ) ? " stretched-input" : "" ) );
+				( ( this.element.prevAll( "a.ui-tokentextarea2-button" ).length > 0 ) ?
+					" stretched-input" : "" ) );
 		}
 	},
 
@@ -3292,7 +3293,7 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 
 		if ( this.inputNeedsWrap ) {
 			if ( options.disabled !== undefined ) {
-				buttons = this.element.prevAll( "a.ui-btn" );
+				buttons = this.element.prevAll( "a.ui-tokentextarea2-button" );
 				if ( options.disabled ) {
 					buttons.attr( "tabindex", -1 );
 				} else {
@@ -3332,7 +3333,7 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 	_button: function( text ) {
 		return $( "<a href='#' " +
 			( this.element.prop( "disabled" ) ? "tabindex='-1' " : "" ) +
-			"class='ui-btn ui-mini ui-corner-all ui-shadow ui-btn-inline'></a>" )
+			"class='ui-tokentextarea2-button ui-btn ui-corner-all ui-shadow ui-btn-inline'></a>" )
 				.text( text )
 				.jqmData( "value", text );
 	},
@@ -3363,7 +3364,9 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 
 		if ( event && event.keyCode === $.ui.keyCode.BACKSPACE &&
 			value === this._inputShadow.text() ) {
-				this._removeButtonGracefully( this.element.prevAll( "a.ui-btn" ).first() );
+				this._removeButtonGracefully( this.element
+					.prevAll( "a.ui-tokentextarea2-button" )
+					.first() );
 		} else {
 			if ( !event ||
 				event.keyCode === $.ui.keyCode.ENTER ||
@@ -3388,7 +3391,8 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 					}
 			}
 			this._inputShadow.text( this.element.val() );
-			this.element.prevAll( "a.ui-btn.ui-btn-active" ).removeClass( "ui-btn-active" );
+			this.element.prevAll( "a.ui-tokentextarea2-button.ui-btn-active" )
+				.removeClass( "ui-btn-active" );
 		}
 
 		this._adjustWidth();
@@ -3414,7 +3418,7 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 		// If the container reports a width of 0, then we assume we're hidden and so we do nothing.
 		if ( containerWidth > 0 ) {
 			input = this.element;
-			buttons = input.prevAll( "a.ui-btn" );
+			buttons = input.prevAll( "a.ui-tokentextarea2-button" );
 			width = 0;
 			if ( buttons.length > 0 ) {
 				buttons.each( function() {
@@ -3467,7 +3471,8 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 			input = this.element;
 
 			if ( arguments.length === 0 ) {
-				return this._textFromButtons( input.prevAll( "a.ui-btn" ).get().reverse() ) +
+				return this._textFromButtons(
+					input.prevAll( "a.ui-tokentextarea2-button" ).get().reverse() ) +
 					input.val();
 			} else {
 				input.val( newText );
@@ -3481,7 +3486,7 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 			destination = this.element;
 
 		if ( arguments.length > 1 ) {
-			buttons = this.element.prevAll( "a.ui-btn" ).get().reverse();
+			buttons = this.element.prevAll( "a.ui-tokentextarea2-button" ).get().reverse();
 			if ( index >= 0 && index < buttons.length ) {
 				destination = $( buttons[ index ] );
 			}
@@ -3492,20 +3497,21 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 
 	add: function( value, index ) {
 		if ( this.inputNeedsWrap ) {
-			this._adjustWidth();
 			this._add( value, index );
+			this._adjustWidth();
 		}
 	},
 
 	length: function() {
-		return ( this.inputNeedsWrap ? this.element.prevAll( "a.ui-btn" ).length : 0 );
+		return ( this.inputNeedsWrap ?
+			this.element.prevAll( "a.ui-tokentextarea2-button" ).length : 0 );
 	},
 
 	remove: function( position ) {
 		var buttons;
 
 		if ( this.inputNeedsWrap ) {
-			buttons = this.element.prevAll( "a.ui-btn" );
+			buttons = this.element.prevAll( "a.ui-tokentextarea2-button" );
 
 			if ( arguments.length > 0 && position >= 0 && position < buttons.length ) {
 				buttons = $( buttons.get().reverse()[ position ] );
@@ -3522,9 +3528,10 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 		if ( this.inputNeedsWrap ) {
 			if ( arguments.length === 0 ) {
 				return this._textFromButtons(
-					this.element.prevAll( "a.ui-btn.ui-btn-active" ).get().reverse() );
+					this.element.prevAll( "a.ui-tokentextarea2-button.ui-btn-active" )
+						.get().reverse() );
 			} else {
-				buttons = this.element.prevAll( "a.ui-btn" ).get().reverse();
+				buttons = this.element.prevAll( "a.ui-tokentextarea2-button" ).get().reverse();
 
 				if ( index >= 0 && index < buttons.length ) {
 					$( buttons[ index ] ).addClass( "ui-btn-active" );
@@ -3541,7 +3548,7 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 	_destroy: function() {
 		if ( this.inputNeedsWrap && !this.options.enhanced ) {
 			this.element.val( this.inputText() );
-			this.element.prevAll( "a.ui-btn" ).remove();
+			this.element.prevAll( "a.ui-tokentextarea2-button" ).remove();
 			this._inputShadow.remove();
 		}
 		return this._superApply( arguments );
@@ -3629,6 +3636,110 @@ $.widget( "mobile.tokentextarea2", $.mobile.tokentextarea2, {
 
 })( jQuery, window, document );
 
+
+
+( function( $, window, document, undefined ) {
+
+$.widget( "mobile.tokentextarea2", $.mobile.tokentextarea2, {
+	options: {
+		description: "+ {0}"
+	},
+
+	_create: function() {
+		this._superApply( arguments );
+
+		if ( this.inputNeedsWrap && this.options.enhanced ) {
+			this._summary = this.widget().children( ".ui-tokentextarea2-summary" );
+		}
+
+		this._on( this.widget(), {
+			"focusin": "_handleFocusIn"
+		});
+	},
+
+	_enhance: function() {
+		this._superApply( arguments );
+		this._summary = $( "<span class='ui-tokentextarea2-summary'></span>" )
+			.prependTo( this.widget() );
+	},
+
+	_handleFocusIn: function() {
+		this.focusIn();
+	},
+
+	focusIn: function() {
+		this.widget().removeClass( "ui-tokentextarea2-grouped" );
+		this._adjustWidth();
+	},
+
+	focusOut: function() {
+		var numberOfButtons = this.element.prevAll( "a.ui-tokentextarea2-button" ).length;
+
+		this._summary
+			.text( numberOfButtons > 0 ?
+				this.options.description.replace( /\{0\}/, numberOfButtons ) :
+				"" );
+		this.widget()
+			.addClass( "ui-tokentextarea2-grouped" )
+			.removeClass( "stretched-input" );
+	}
+});
+
+})( jQuery, window, document );
+
+});
+
+
+( function( $, window, document, undefined ) {
+
+$.widget( "mobile.tokentextarea2", $.mobile.tokentextarea2, {
+	options: {
+		link: null
+	},
+
+	_create: function() {
+		this._superApply( arguments );
+		if ( this.inputNeedsWrap && !this.options.enhanced && this.options.link ) {
+			this._link = this.widget().children( ".ui-input-clear" );
+		}
+	},
+
+	_setLink: function( link ) {
+		if ( this._link ) {
+			this._link.remove();
+			this._link = null;
+		}
+
+		if ( link ) {
+			this._link = $( link )
+				.appendTo( this.widget() )
+				.addClass( "ui-input-clear" );
+		}
+
+		this.widget().toggleClass( "ui-input-has-clear", !!link );
+	},
+
+	_enhance: function() {
+		this._superApply( arguments );
+		if ( this.inputNeedsWrap ) {
+			this._setLink( this.options.link );
+		}
+	},
+
+	_setOptions: function( options ) {
+		if ( this.inputNeedsWrap ) {
+			if ( options.link !== undefined ) {
+				this._setLink( options.link );
+			}
+			return this._superApply( arguments );
+		}
+	}
+
+});
+
+})( jQuery, window, document );
+
+});
 
 
 ( function ( $, window ) {
