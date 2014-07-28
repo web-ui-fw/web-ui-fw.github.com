@@ -78,12 +78,15 @@
 <h3>Options</h3>
 <div><a href="index.html#option-disabled">disabled</a></div>
 <div><a href="index.html#option-enhanced">enhanced</a></div>
+<div><a href="index.html#option-link">link</a></div>
 <div><a href="index.html#option-master">master</a></div>
 </div>
 <div class="quick-nav-section">
 <h3>Methods</h3>
 <div><a href="index.html#method-add">add</a></div>
 <div><a href="index.html#method-destroy">destroy</a></div>
+<div><a href="index.html#method-focusIn">focusIn</a></div>
+<div><a href="index.html#method-focusOut">focusOut</a></div>
 <div><a href="index.html#method-inputText">inputText</a></div>
 <div><a href="index.html#method-length">length</a></div>
 <div><a href="index.html#method-remove">remove</a></div>
@@ -97,9 +100,9 @@
 </section>
 <div class="longdesc" id="entry-longdesc">
 <h2 id="introduction">Token Text Area 2</h2>
-<p>This widget changes a text item to a button. It can be comprised of a number of button widgets. As the user types text, the widget parses the text at each keystroke and creates a button when the user types a character that acts as a delimiter (<code>;</code> or <code>,</code>). A user can add the tokentextarea2 widget to a contact list, email list, or another list. The typical use of this widget is composing a number of contacts or phone numbers in a specific area of the screen.</p>
+<p>This widget changes a text item to a button. It can consist of a number of button widgets. As the user types text, the widget parses the text at each keystroke and creates a button when the user types a character that acts as a delimiter (<code>;</code> or <code>,</code>). A user can add the tokentextarea2 widget to a contact list, email list, or another list. The typical use of this widget is composing a number of contacts or phone numbers in a specific area of the screen.</p>
 <h2 id="structure">Structure</h2>
-<p>The widget derives from the jQuery Mobile <a href="http://api.jquerymobile.com/textinput">textinput</a> widget and works on an <code>input</code> of type text. Buttons are created from its initial value upon instantiation and if any text is left over it is set as the value of the input. To create a tokentextarea2 widget, add an <code>input</code> element to your markup:</p>
+<p>The widget derives from the jQuery Mobile <a href="http://api.jquerymobile.com/textinput">textinput</a> widget. It works on all <code>input</code> elements marked with the attribute <code>data-role="tokentextarea2"</code> except those that are turned into sliders. Buttons are created from its initial value upon instantiation and if any text is left over it is set as the value of the input. To create a tokentextarea2 widget, add an <code>input</code> element to your markup:</p>
 <div class="syntaxhighlighter xml nogutter">
 <table>
 <tbody>
@@ -129,7 +132,7 @@
 <h2 id="synchronization">Synchronizing with another input</h2>
 <p>The basic tokentextarea2 widget does not progressively enhance an input. This means that you have to use different APIs to access the value typed in by the user depending on whether jQuery Mobile considers the browser it is running on to be grade A or grade B, or whether it avoids all enhancement by considering the browser to be grade C. In the case of grade A and grade B browsers, you must use the <a href="index.html#method-inputText">inputText()</a> method to retrieve the correct value from the input, because its <a href="http://api.jquery.com/val/">.val()</a> method does not retrieve any of the buttons.</p>
 <p>jQuery Mobile does not run on browsers that it detects to be grade C &#8211; in most cases these are older browsers. This means that an input marked for enhancement into a tokentextarea2 widget will not be enhanced. It will remain a plain text input. This, in turn, means that you must use the <a href="http://api.jquery.com/val/">.val()</a> method to retrieve the correct value from the input, because the <a href="index.html#method-inputText">inputText()</a> method has not been defined on the element.</p>
-<p>The <a href="index.html#option-master">master</a> option together with the convenience classes <code>ui-tokentextarea2-master</code> and <code>ui-tokentextarea2-slave</code> addresses this discrepancy. To progressively enhance an input into a tokentextarea2, proceed as follows:</p>
+<p>The <a href="index.html#option-master">master</a> option procided by the <code>sync</code> extension, together with the convenience classes <code>ui-tokentextarea2-master</code> and <code>ui-tokentextarea2-slave</code> addresses this discrepancy. To progressively enhance an input into a tokentextarea2, proceed as follows:</p>
 <ol>
 <li>Add two inputs to your markup:
 <ol>
@@ -141,6 +144,10 @@
 <li>Add class <code>ui-tokentextarea2-slave</code> to the second input&#8217;s <code>class</code> attribute: <code>class="ui-tokentextarea2-slave</code>. This will ensure that the second input will not be shown on grade C browsers, but will be shown whenever the tokentextarea2 widget is created.</li>
 </ol>
 <p>The tokentextarea2 demos provide an example of using the <code>master</code> option and the convenience classes.</p>
+<h2 id="grouping">Grouping</h2>
+<p>The <code>grouping</code> extension allows you to display a summary when the widget does not have the focus. It provides the option <code>description</code> which contains a string to be displayed when the widget does not have the focus. The string may contain the pattern <code>{0}</code> which will be replaced by the number of buttons currently present.</p>
+<p>The extension also provides the public method <a href="index.html#method-focusOut">focusOut()</a> for placing the widget into a state where it displays no input and no buttons, but only the summary.</p>
+<p>To restore the widget to its default look, you can call the public method <a href="index.html#method-focusIn">focusIn()</a>. This method is called automatically whenever the widget receives focus.</p>
 <p>		<span></p>
 <h2 id="providing-pre-rendered-markup">Providing pre-rendered markup</h2>
 <p>You can improve the load time of your page by providing the markup that the tokentextarea2 widget would normally create during its initialization.</p>
@@ -150,11 +157,13 @@
 <p>The tokentextarea2 widget has the same structure as the jQuery Mobile <a href="http://api.jquerymobile.com/textinput/#providing-pre-rendered-markup">textinput</a> widget with the following additional elements:</p>
 <ul>
 <li>In addition to the <code>textinput</code> classes, the wrapper also has the class <code>ui-tokentextarea2</code> and <code>stretched-input</code>.</li>
-<li>The initial input value must not contain any substrings that can be turned into buttons. If you wish the widget to initially contain buttons, place an anchor for each button before the input. The widget adds a data item to each anchor it creates at key &#8220;value&#8221;. Thus, you must also add the <code>data-value</code> attribute to the anchor to store the substring that the button represents. The button gets the following classes: <code>ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline</code>.</li>
+<li>The initial input value must not contain any substrings that can be turned into buttons. If you wish the widget to initially contain buttons, place an anchor for each button before the input. The widget adds a data item to each anchor it creates at key &#8220;value&#8221;. Thus, you must also add the <code>data-value</code> attribute to the anchor to store the substring that the button represents. The button gets the following classes: <code>ui-btn ui-corner-all ui-shadow ui-tokentextarea2-button ui-btn-inline</code>.</li>
 <li>The widget synchronizes the input&#8217;s value to an internal <code>span</code>. This allows it to measure the width of the text, which, in turn, allows it to calculate at every keystroke whether the text typed by the user has enough room on the current line to display without causing the input to scroll horizontally. You must also add such span to your initial markup: <code>&lt;span class="ui-tokentextarea2-input-shadow"&gt;&lt;/span&gt;</code>.</li>
 <li>If the initial value of the input is such that portions of it cannot be converted to a button, then you must set those portions as the initial text for the <code>span</code>.</li>
+<li>If your build includes the <code>grouping</code> extension, you must also add a <code>span</code> for the summary.</li>
+<li>If your build includes the <code>link</code> extension and you wish to have a link button, add the class <code>ui-input-has-clear</code> to the wrapper <code>div</code> and create an anchor with the link as the last child of the wrapper. The link must have at least class <code>ui-input-clear</code>. It is recommended that you create a small circular button with only an icon and no text.</li>
 </ul>
-<p>The example below illustrates how to create a pre-rendered tokentextarea2 synchronized to a master input with an initial value that can be partially converted to buttons:</p>
+<p>The example below illustrates how to create a pre-rendered tokentextarea2 synchronized to a master input with an initial value that can be partially converted to buttons, a summary span, and a link button:</p>
 <div class="syntaxhighlighter xml nogutter">
 <table>
 <tbody>
@@ -170,14 +179,18 @@
 <div class="line n8">8</div>
 <div class="line n9">9</div>
 <div class="line n10">10</div>
+<div class="line n11">11</div>
+<div class="line n12">12</div>
 </td>
 <td class="code">
-<pre><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">form</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-input-text ui-body-inherit ui-corner-all ui-tokentextarea2-master ui-shadow-inset"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">name</span>=<span class="value">"recipients"</span> <span class="attribute">id</span>=<span class="value">"recipients-master"</span> <span class="attribute">data-enhanced</span>=<span class="value">"true"</span> <span class="attribute">data-wrapper-class</span>=<span class="value">"ui-tokentextarea2-master"</span> <span class="attribute">value</span>=<span class="value">"abc@def.com;ghi@j"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-input-text ui-body-inherit ui-corner-all ui-tokentextarea2 ui-shadow-inset"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"ui-btn ui-mini ui-corner-all ui-shadow ui-btn-inline"</span> <span class="attribute">data-value</span>=<span class="value">"abc@def.com"</span>&gt;</span>abc@def.com<span class="tag">&lt;/<span class="title">a</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">data-role</span>=<span class="value">"tokentextarea2"</span> <span class="attribute">data-enhanced</span>=<span class="value">"true"</span> <span class="attribute">data-master</span>=<span class="value">"#recipients-master"</span> <span class="attribute">class</span>=<span class="value">"ui-tokentextarea2-slave"</span> <span class="attribute">value</span>=<span class="value">"ghi@j"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"ui-tokentextarea2-input-shadow"</span>&gt;</span>ghi@j<span class="tag">&lt;/<span class="title">span</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">form</span>&gt;</span></code></div></div></pre>
+<pre><div class="container"><div class="line"><code><span class="tag">&lt;<span class="title">form</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-input-text ui-body-inherit ui-corner-all ui-tokentextarea2-master ui-shadow-inset"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">name</span>=<span class="value">"recipients"</span> <span class="attribute">id</span>=<span class="value">"recipients-master"</span> <span class="attribute">data-enhanced</span>=<span class="value">"true"</span> <span class="attribute">data-wrapper-class</span>=<span class="value">"ui-tokentextarea2-master"</span> <span class="attribute">value</span>=<span class="value">"abc@def.com;ghi@j"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-input-text ui-body-inherit ui-corner-all ui-tokentextarea2 ui-input-has-clear ui-shadow-inset"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"ui-tokentextarea2-summary"</span>&gt;</span>+ 1<span class="tag">&lt;/<span class="title">span</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"ui-btn ui-mini ui-corner-all ui-shadow ui-btn-inline"</span> <span class="attribute">data-value</span>=<span class="value">"abc@def.com"</span>&gt;</span>abc@def.com<span class="tag">&lt;/<span class="title">a</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">input</span> <span class="attribute">data-role</span>=<span class="value">"tokentextarea2"</span> <span class="attribute">data-enhanced</span>=<span class="value">"true"</span> <span class="attribute">data-master</span>=<span class="value">"#recipients-master"</span> <span class="attribute">class</span>=<span class="value">"ui-tokentextarea2-slave"</span> <span class="attribute">value</span>=<span class="value">"ghi@j"</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">span</span> <span class="attribute">class</span>=<span class="value">"ui-tokentextarea2-input-shadow"</span>&gt;</span>ghi@j<span class="tag">&lt;/<span class="title">span</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>    <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"#"</span> <span class="attribute">class</span>=<span class="value">"ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-notext ui-input-clear"</span>&gt;</span>Address book<span class="tag">&lt;/<span class="title">a</span>&gt;</span></code></div></div><div class="container"><div class="line"><code>  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></div></div><div class="container"><div class="line"><code><span class="tag">&lt;/<span class="title">form</span>&gt;</span></code></div></div></pre>
 </td>
 </tr>
 </tbody>
 </table>
-</div></div>
+</div>
+<p>		<iframe src="../resources/tokentextarea2/example1.html" style="width:100%;height:90px;border:0px"></iframe>
+  	</div>
 <section id="options">
 <header>
 <h2>Options</h2>
@@ -267,6 +280,61 @@
 </td>
 <td class="code">
 <pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> enhanced = $( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"enhanced"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"enhanced"</span>, <span class="literal">true</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="option-link" class="api-item">
+<h3>link<span class="option-type"><strong>Type: </strong><a href="http://api.jquery.com/Types/#Selector">Selector</a> or <a href="http://api.jquery.com/Types/#Element">Element</a> or <a href="http://api.jquery.com/Types/#jQuery">jQuery</a></span><br />
+</h3>
+<div class="default">
+<strong>Default: </strong><code>null</code>
+</div>
+<div>Indicates which element is to be used as the widget&#8217;s link button. Setting this option to a <code>null</code> value will remove the link button.</p>
+<p>This option is provided by the <code>widgets/tokentextarea2.link</code> extension.</p>
+<p>This option is also exposed as a data attribute: <code>data-link="#id-of-link-button"</code>.</p>
+</p></div>
+<p><strong>Multiple types supported:</strong>
+<ul>
+<li>
+<strong>Selector</strong>: Indicates that the link button is to be retrieved from the DOM and placed inside the tokentextarea2 widget.</li>
+<li>
+<strong>Element</strong>: Provides the element to place inside the tokentextarea2 widget. The class <code>ui-input-clear</code> is added to the element.</li>
+<li>
+<strong>jQuery</strong>: Provides a jQuery collection object containing elements to place inside the tokentextarea2 widget to be used as the link button. The class <code>ui-input-clear</code> is added to the elements in the collection. The widget is designed for a single link button element.</li>
+</ul>
+<p><strong>Code examples:</strong>
+<p>Initialize the tokentextarea2 with the <code>link</code> option specified:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2({ link: #id-of-link-button });</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Get or set the <code>link</code> option, after initialization:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+<div class="line n2">2</div>
+<div class="line n3">3</div>
+<div class="line n4">4</div>
+<div class="line n5">5</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code><span class="comment">// getter</span></code></div></div><div class="container"><div class="line"><code><span class="keyword">var</span> link = $( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"link"</span> );</code></div></div><div class="container"><div class="line"><code> </code></div></div><div class="container"><div class="line"><code><span class="comment">// setter</span></code></div></div><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"option"</span>, <span class="string">"link"</span>, #id-of-link-button );</code></div></div></pre>
 </td>
 </tr>
 </tbody>
@@ -418,6 +486,70 @@
 </td>
 <td class="code">
 <pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"destroy"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-focusIn">
+<div class="api-item">
+<h3>focusIn()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>This method is provided by the <code>widgets/tokentextarea2.grouping</code> extension.</p>
+<p>Restores the default look of the widget. The input and its buttons become visible and the summary is hidden.</p>
+</p></div>
+<ul>
+<li>
+<div class="null-signature">This method does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the focusIn method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"focusIn"</span> );</code></div></div></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="method-focusOut">
+<div class="api-item">
+<h3>focusOut()<span class="returns">Returns: <a href="http://api.jquery.com/Types/#jQuery">jQuery</a> (<a href="http://learn.jquery.com/jquery-ui/widget-factory/widget-method-invocation/">plugin only</a>)</span><br />
+</h3>
+<div>This method is provided by the <code>widgets/tokentextarea2.grouping</code> extension.</p>
+<p>Hides the input and any buttons, and displays the summary.</p>
+</p></div>
+<ul>
+<li>
+<div class="null-signature">This method does not accept any arguments.</div>
+</li>
+</ul>
+<div>
+<strong>Code examples:</strong>
+<p>Invoke the focusOut method:</p>
+<div class="syntaxhighlighter javascript nogutter">
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<div class="line n1">1</div>
+</td>
+<td class="code">
+<pre><div class="container"><div class="line"><code>$( <span class="string">".selector"</span> ).tokentextarea2( <span class="string">"focusOut"</span> );</code></div></div></pre>
 </td>
 </tr>
 </tbody>
