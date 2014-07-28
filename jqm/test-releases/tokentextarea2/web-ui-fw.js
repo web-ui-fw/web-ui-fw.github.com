@@ -3687,7 +3687,6 @@ $.widget( "mobile.tokentextarea2", $.mobile.tokentextarea2, {
 
 })( jQuery, window, document );
 
-});
 
 
 ( function( $, window, document, undefined ) {
@@ -3739,7 +3738,6 @@ $.widget( "mobile.tokentextarea2", $.mobile.tokentextarea2, {
 
 })( jQuery, window, document );
 
-});
 
 
 ( function ( $, window ) {
