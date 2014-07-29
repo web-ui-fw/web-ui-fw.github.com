@@ -292,7 +292,7 @@
 <div class="default">
 <strong>Default: </strong><code>null</code>
 </div>
-<div>Indicates which element is to be used as the widget&#8217;s link button. Setting this option to a <code>null</code> value will remove the link button.</p>
+<div>Indicates which element is to be used as the widget&#8217;s link button. Setting this option to a <code>null</code> value will remove the link button. If an element is specified either by passing in directly a DOM element or a jQuery collection object, or by setting the value of the option to a jQuery selector, then the widget will add the class <code>ui-input-clear</code> to the element and the class <code>ui-input-has-clear</code> to the tokentextarea2 widget&#8217;s wrapper.</p>
 <p>This option is provided by the <code>widgets/tokentextarea2.link</code> extension.</p>
 <p>This option is also exposed as a data attribute: <code>data-link="#id-of-link-button"</code>.</p>
 </p></div>
@@ -301,9 +301,9 @@
 <li>
 <strong>Selector</strong>: Indicates that the link button is to be retrieved from the DOM and placed inside the tokentextarea2 widget.</li>
 <li>
-<strong>Element</strong>: Provides the element to place inside the tokentextarea2 widget. The class <code>ui-input-clear</code> is added to the element.</li>
+<strong>Element</strong>: Provides the element to place inside the tokentextarea2 widget.</li>
 <li>
-<strong>jQuery</strong>: Provides a jQuery collection object containing elements to place inside the tokentextarea2 widget to be used as the link button. The class <code>ui-input-clear</code> is added to the elements in the collection. The widget is designed for a single link button element.</li>
+<strong>jQuery</strong>: Provides a jQuery collection object containing elements to place inside the tokentextarea2 widget to be used as the link button. The widget is designed for a single link button element.</li>
 </ul>
 <p><strong>Code examples:</strong>
 <p>Initialize the tokentextarea2 with the <code>link</code> option specified:</p>
