@@ -132,7 +132,7 @@
 <h2 id="synchronization">Synchronizing with another input</h2>
 <p>The basic tokentextarea2 widget does not progressively enhance an input. This means that you have to use different APIs to access the value typed in by the user depending on whether jQuery Mobile considers the browser it is running on to be grade A or grade B, or whether it avoids all enhancement by considering the browser to be grade C. In the case of grade A and grade B browsers, you must use the <a href="index.html#method-inputText">inputText()</a> method to retrieve the correct value from the input, because its <a href="http://api.jquery.com/val/">.val()</a> method does not retrieve any of the buttons.</p>
 <p>jQuery Mobile does not run on browsers that it detects to be grade C &#8211; in most cases these are older browsers. This means that an input marked for enhancement into a tokentextarea2 widget will not be enhanced. It will remain a plain text input. This, in turn, means that you must use the <a href="http://api.jquery.com/val/">.val()</a> method to retrieve the correct value from the input, because the <a href="index.html#method-inputText">inputText()</a> method has not been defined on the element.</p>
-<p>The <a href="index.html#option-master">master</a> option procided by the <code>sync</code> extension, together with the convenience classes <code>ui-tokentextarea2-master</code> and <code>ui-tokentextarea2-slave</code> addresses this discrepancy. To progressively enhance an input into a tokentextarea2, proceed as follows:</p>
+<p>The <a href="index.html#option-master">master</a> option provided by the <code>sync</code> extension, together with the convenience classes <code>ui-tokentextarea2-master</code> and <code>ui-tokentextarea2-slave</code> addresses this discrepancy. To progressively enhance an input into a tokentextarea2, proceed as follows:</p>
 <ol>
 <li>Add two inputs to your markup:
 <ol>
@@ -148,6 +148,8 @@
 <p>The <code>grouping</code> extension allows you to display a summary when the widget does not have the focus. It provides the option <code>description</code> which contains a string to be displayed when the widget does not have the focus. The string may contain the pattern <code>{0}</code> which will be replaced by the number of buttons currently present.</p>
 <p>The extension also provides the public method <a href="index.html#method-focusOut">focusOut()</a> for placing the widget into a state where it displays no input and no buttons, but only the summary.</p>
 <p>To restore the widget to its default look, you can call the public method <a href="index.html#method-focusIn">focusIn()</a>. This method is called automatically whenever the widget receives focus.</p>
+<h2 id="link">Adding a link button</h2>
+<p>You can specify that an element be added to the tokentextarea2&#8242;s wrapper via the <a href="index.html#option-link">link</a> option. The widget&#8217;s resulting style will be identical to the styling of a <code>textinput</code> widget which has the <code>clearBtn</code> option set to true. Thus, this option is incompatible with the <code>textinput</code> <code>clearBtn</code> option.</p>
 <p>		<span></p>
 <h2 id="providing-pre-rendered-markup">Providing pre-rendered markup</h2>
 <p>You can improve the load time of your page by providing the markup that the tokentextarea2 widget would normally create during its initialization.</p>
@@ -292,7 +294,7 @@
 <div class="default">
 <strong>Default: </strong><code>null</code>
 </div>
-<div>Indicates which element is to be used as the widget&#8217;s link button. Setting this option to a <code>null</code> value will remove the link button. If an element is specified either by passing in directly a DOM element or a jQuery collection object, or by setting the value of the option to a jQuery selector, then the widget will add the class <code>ui-input-clear</code> to the element and the class <code>ui-input-has-clear</code> to the tokentextarea2 widget&#8217;s wrapper.</p>
+<div>Indicates which element is to be used as the widget&#8217;s link button. Setting this option to a <code>null</code> value will remove the link button. If an element is specified either by passing in directly a DOM element or a jQuery collection object, or by setting the value of the option to a jQuery selector, then the widget will add the class <code>ui-input-clear</code> to the element and the class <code>ui-input-has-clear</code> to the tokentextarea2 widget&#8217;s wrapper. The element will be appended to the tokentextarea2&#8242;s wrapper.</p>
 <p>This option is provided by the <code>widgets/tokentextarea2.link</code> extension.</p>
 <p>This option is also exposed as a data attribute: <code>data-link="#id-of-link-button"</code>.</p>
 </p></div>
