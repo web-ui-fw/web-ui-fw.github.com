@@ -3370,6 +3370,7 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 					.first() );
 		} else {
 			if ( !event ||
+				event.type === "change" ||
 				event.keyCode === $.ui.keyCode.ENTER ||
 				event.keyCode === $.ui.keyCode.COMMA ||
 				event.keyCode === 186 || event.keyCode === 59 ) {
@@ -3548,7 +3549,15 @@ $.widget( "mobile.tokentextarea2", $.mobile.textinput, {
 
 	_destroy: function() {
 		if ( this.inputNeedsWrap && !this.options.enhanced ) {
-			this.element.val( this.inputText() );
+			this.element
+				.val( this.inputText() )
+				.css( "width", "" );
+
+			// Remove after testHelper's domEqual is fixed
+			if ( !this.element.attr( "style" ) ) {
+				this.element.removeAttr( "style" );
+			}
+
 			this.element.prevAll( "a.ui-tokentextarea2-button" ).remove();
 			this._inputShadow.remove();
 		}
@@ -3655,7 +3664,7 @@ $.widget( "mobile.tokentextarea2", $.mobile.tokentextarea2, {
 			}
 
 			this._on( this.widget(), {
-				"focusin": "_handleFocusIn"
+				"focusin": "focusIn"
 			});
 		}
 	},
@@ -3665,11 +3674,32 @@ $.widget( "mobile.tokentextarea2", $.mobile.tokentextarea2, {
 		if ( this.inputNeedsWrap ) {
 			this._summary = $( "<span class='ui-tokentextarea2-summary'></span>" )
 				.prependTo( this.widget() );
+			this._updateText();
 		}
 	},
 
-	_handleFocusIn: function() {
-		this.focusIn();
+	_updateText: function() {
+		var numberOfButtons = this.element.prevAll( "a.ui-tokentextarea2-button" ).length;
+
+		if ( this._summary ) {
+			this._summary
+				.text( numberOfButtons > 0 ?
+					this.options.description.replace( /\{0\}/, numberOfButtons ) : "" );
+		}
+	},
+
+	_add: function() {
+		this._superApply( arguments );
+		if ( this.inputNeedsWrap ) {
+			this._updateText();
+		}
+	},
+
+	_remove: function() {
+		this._superApply( arguments );
+		if ( this.inputNeedsWrap ) {
+			this._updateText();
+		}
 	},
 
 	focusIn: function() {
@@ -3680,18 +3710,12 @@ $.widget( "mobile.tokentextarea2", $.mobile.tokentextarea2, {
 	},
 
 	focusOut: function() {
-		var numberOfButtons;
-
 		if ( this.inputNeedsWrap ) {
-			numberOfButtons = this.element.prevAll( "a.ui-tokentextarea2-button" ).length;
-
-			this._summary
-				.text( numberOfButtons > 0 ?
-					this.options.description.replace( /\{0\}/, numberOfButtons ) :
-					"" );
+			this._updateText();
 			this.widget()
 				.addClass( "ui-tokentextarea2-grouped" )
 				.removeClass( "stretched-input" );
+			this.element.blur();
 		}
 	},
 

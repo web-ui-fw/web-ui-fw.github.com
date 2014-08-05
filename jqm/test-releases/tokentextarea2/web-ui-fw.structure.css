@@ -411,6 +411,8 @@ div.ui-tokentextarea-sblock-theme-c {
 	-moz-box-shadow: none;
 	box-shadow: none;
 	background-color: inherit;
+	color: inherit;
+	text-shadow: inherit;
 }
 /* When in grouped mode, display the summary */
 .ui-tokentextarea2.ui-tokentextarea2-grouped > .ui-tokentextarea2-summary {
