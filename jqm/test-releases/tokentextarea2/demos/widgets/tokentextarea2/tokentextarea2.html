@@ -14,6 +14,11 @@
 	<script src="../../_assets/js/index.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
 	<script src="../../../web-ui-fw.js"></script>
+	<script id="grouping-demo-js">
+$( document ).on( "vclick", "#call-focus-out", function() {
+	$( "#grouping-demo" ).tokentextarea2( "focusOut" );
+});
+	</script>
 	<style id="link-option-style">
 .address-book-popup {
 	overflow-y: auto;
@@ -77,6 +82,12 @@ $( document )
 					<input data-role="tokentextarea2" data-master="#to-addresses" class="ui-tokentextarea2-slave">
 				</form>
 			</div>
+
+			<h2>Grouping when not focused</h2>
+			<div data-demo-html="true" data-demo-js="#grouping-demo-js">
+				<p>Click on the summary to show the input and the buttons. Click "Group" to show the summary.</p>
+				<input id="grouping-demo" data-role="tokentextarea2" value="michael@example.com;">
+				<a href="#" id="call-focus-out" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Group</a>
 
 			<h2>Link option</h2>
 			<div data-demo-html="true" data-demo-js="#link-option-script" data-demo-css="#link-option-style">
