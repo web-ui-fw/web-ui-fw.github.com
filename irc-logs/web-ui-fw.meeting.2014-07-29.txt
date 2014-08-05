@@ -1,0 +1,193 @@
+--- Log opened Tue Jul 29 12:54:00 2014
+12:54 -!- Minkyeong [~Minkyeong@121.133.176.4] has joined #web-ui-fw
+12:58 < Changsuk> Hi~ Gabriel.
+12:59 < gabriel_schulhof> Changsuk: Hey!
+12:59 < gabriel_schulhof> All: Hey!
+12:59 < Changsuk> gabriel: Ok, Thanks
+12:59 < Hyunsook> gabriel_schulhof: Oh! I saw your message too late!
+12:59 < Minkyeong> hi all
+12:59 < Hyunsook> gabriel_schulhof: Sorry...
+12:59 < gabriel_schulhof> Hyunsook: NP. Don't worry about it.
+12:59 < Kangsik> Hi.. ^^
+13:00 < Hyunsook> gabriel_schulhof: And...... I was so busy I could die until today.
+13:00 < gabriel_schulhof> Hyunsook: You have plenty of time, because I still have to write integration tests for all the extensions.
+13:00 < Hyunsook> gabriel_schulhof: ... so I couldn't look into your PR. :(
+13:00 < Changsuk> gabriel_schulhof: but I closed my IRC program so I'm sorry that I can't read your reply.
+13:00 < gabriel_schulhof> Changsuk: I haven't replied. I just saw and read your message.
+13:00 < Hyunsook> gabriel_schulhof: I'm so, so sorry.....
+13:00 < gabriel_schulhof> Hyunsook: Don't be. It's OK.
+13:00 < Changsuk> gabriel_schulhof: ah~ I see~
+13:01 < gabriel_schulhof> Changsuk: I agree with you. Let's advertise as soon as we have one widget updated.
+13:01 < Hyunsook> gabriel_schulhof: Thanks.
+13:01 < Changsuk> gabriel_schulhof: then, could you tell us about your thought? :)
+13:02 < gabriel_schulhof> Changsuk: I think you're right. Let's advertise soon with tokentextarea, and then work on the rest of the widgets.
+13:02 < Changsuk> gabriel_schulhof: Ok, But I wrote that routemap widget can't be opened before Wonseop's agreement.
+13:03 < gabriel_schulhof> Changsuk: TBH, the repository is already public. However, we can delay updating the routemap widget until Wonseop says OK.
+13:03 < Changsuk> gabriel_schulhof: I think that you've changed TTA with many lines and you named "TTA2"
+13:04 < gabriel_schulhof> Changsuk: Yes.
+13:04 < Changsuk> gabriel_schulhof:Ok, thanks. I'll ask him. :)
+13:04 < gabriel_schulhof> I didn't want to touch the code for TTA, because I didn't want to break it.
+13:04 < Changsuk> gabriel_schulhof: yes, I think so.
+13:04 < gabriel_schulhof> So that's why I started TTA2.
+13:05 < gabriel_schulhof> The API for TTA2 is slightly different from TTA, so I wanted to talk about some of the changes.
+13:05 < Changsuk> gabriel_schulhof: hmmm... yes. but I think that we can be better to get Hyunsook and Minkoung's "OK".
+13:06 < gabriel_schulhof> Yeah, for sure. That's why I want to discuss things.
+13:06 < Changsuk> gabriel_schulhof: yes....
+13:06 < gabriel_schulhof> I can think of two topics: 1. TTA2 does not include the <label>. 2. TTA2 link option is a selector for a DOM element, not an href.
+13:07 < gabriel_schulhof> Do you think we can talk about these?
+13:07 < Changsuk> gabriel_schulhof: But I think that you'll open TTA2 not TTA. right?
+13:07 < gabriel_schulhof> Changsuk: OK, that's topic https://github.com/jquery/jquery-mobile/issues/3: Do we keep the name TTA2 or can I publish it as TTA?
+13:07 < gabriel_schulhof> Oh, sorry!
+13:08 < gabriel_schulhof> Changsuk: OK, that's topic # 3: Do we keep the name TTA2 or can I publish it as TTA?
+13:08 < gabriel_schulhof> ... or do we give it another name, like tokentextinput?
+13:08 < Changsuk> gabriel_schulhof: hmm... pls give me a minute. I'm thinking about that.
+13:08 < gabriel_schulhof> OK.
+13:10 < gabriel_schulhof> Hyunsook: while Changsuk thinks about that, what do you think about the other two topics? For example, I think TTA does not need to generate the <label>. Let the dev provide the label, just like with all the other jQM widgets.
+13:12 < Changsuk> gabriel_schulhof: Actually, I can suppose that you'll change most widgets with your codes likes TTA2 and advertize them jQM plug-ins page.
+13:12 < Hyunsook> gabriel_schulhof: hmmmm.... it is a difficult problem.
+13:13 < Hyunsook> gabriel_schulhof: ... for me and Minkyeong.
+13:13 < Hyunsook> gabriel_schulhof: For label, I agree.
+13:13 < Minkyeong> gabriel_schulhof, Hyunsook: i agree, too :-)
+13:13 < Changsuk> Minkyeong, Hyunsook: How do you think about Gabriel's suggestion?
+13:14 < gabriel_schulhof> OK. Great!
+13:14 < Changsuk> Hyunsook, Minkyeong, gabriel_schulhof: :)
+13:14 < Hyunsook> gabriel_schulhof: The Lable of TTA was request of Samsung UX Team.
+13:15 < gabriel_schulhof> Hyunsook: I see. Well, I guess we can add an extension that adds the label, if they still want it.
+13:16 < gabriel_schulhof> ... that way, we're not forcing people to use it.
+13:16 < gabriel_schulhof> What do you think about the change to the link option?
+13:17 < gabriel_schulhof> I wanted to avoid generating a button inside the widget, because then we're almost certainly hard-coding the styling for the button.
+13:17 < gabriel_schulhof> Like, what icon should the button have?
+13:17 < gabriel_schulhof> This way, we leave it all up to the dev, and we're avoiding style options.
+13:18 < Changsuk> gabriel_schulhof: I think that Hyunsook and Minkyeong should agree with gabriel_schulhof's suggestion first, then I suggest that we will advertize "TTA" not "TTA2".
+13:18 < gabriel_schulhof> Changsuk: Awesome!
+13:18 < gabriel_schulhof> I agree. Let's make sure we agree on the API first.
+13:19 < Changsuk> gabriel_schulhof: But
+13:19 < Hyunsook> gabriel_schulhof: For link, did you modify it due to the buttonmarkup issue?
+13:19 < gabriel_schulhof> No.
+13:20 < gabriel_schulhof> I modified it because I don't want to force people to use a certain icon, or to use shadow/not use shadow, etc.
+13:20 < Changsuk> gabriel_schulhof: I suggest that we have to change TTA codes then advertize named TTA.
+13:20 < gabriel_schulhof> Changsuk: OK.
+13:20 < gabriel_schulhof> Realize though that I've broken things up into a basic tta widget, and extensions which add options.
+13:20 < gabriel_schulhof> ... and API.
+13:21 < gabriel_schulhof> For example, focusOut()/focusIn() is part of an extension now.
+13:21 < Changsuk> gabriel_schulhof: yes, I know. but actually I want that before you create TTA2, it would be better to ask us.
+13:22 < Changsuk> gabriel_schulhof: but... I havn't heard about TTA2 and you want to advertize that.
+13:22 < gabriel_schulhof> Changsuk: Yeah, I'm sorry. I wanted to have something to show you.
+13:23 < gabriel_schulhof> Changsuk: Nono. I want tta2 to be an example of the things I want to change in TTA.
+13:23 < Changsuk> gabriel_schulhof: so, I think that Minkyeong and Hyunsook are worried about that.
+13:23 < gabriel_schulhof> I want us all to agree on what we will publish.
+13:23 < Hyunsook> gabriel_schulhof: Sorry, now I don't remember well whether TTA is forced people to use a certain icon ..... etc. :/
+13:24 < Changsuk> and they seem not good.
+13:24 < gabriel_schulhof> Hyunsook: https://github.com/web-ui-fw/web-ui-fw/blob/master/js/widgets/tokentextarea.js#L63
+13:24 < Hyunsook> gabriel_schulhof: Maybe... I have become more and more forgetful...
+13:25 < Changsuk> gabriel_schulhof: yes, you've many things to work that and I understand your efforts and thought.
+13:25 < gabriel_schulhof> Changsuk: Don't worry. I'm not going to do anything, publish anything, until we've discussed things in detail.
+13:26 < gabriel_schulhof> The truth is that te link option could remain an href if we had the wdiget's factory's implementation of the "classes" option.
+13:26 < Changsuk> gabriel_schulhof: anyway, when you open TTA2, will you write Hyunsook and Minkyeong's name on the widget's introducing page?
+13:26 < gabriel_schulhof> Changsuk: Of course!
+13:27 < gabriel_schulhof> Changsuk: Our team has produced this widget. Our contributions are recorded in the github repo!
+13:27 < Changsuk> gabriel_schulhof: Thank you~! :)
+13:28 < gabriel_schulhof> I just want to make sure that we can agree on the API before we publish.
+13:28 < Changsuk> gabriel_schulhof: yes, right. but I think that they actually want that their names are wrote on the widget introduction page. :)
+13:28 < gabriel_schulhof> Changsuk: You mean the demo page?
+13:29 < Changsuk> gabriel_schulhof: yes, something like that. :)
+13:29 < gabriel_schulhof> Changsuk: OK.
+13:29 < Changsuk> Hyunsook, Minkyeong: Right?
+13:29 < Changsuk> Hyunsook, Minkyeong: Are you agree?
+13:30 < Hyunsook> Changsuk: I agree.
+13:30 < Minkyeong> Changsuk, gabriel_schulhof: okay. there's no problem, i think.
+13:31 < Minkyeong> Changsuk, gabriel_schulhof: i mean.. i agree :)
+13:32 < Hyunsook> gabriel_schulhof: Ah! I saw the codes for the link. your words is right.
+13:33 < Hyunsook> gabriel_schulhof: I agree to your change codes.
+13:33 -!- Minkyeong [~Minkyeong@121.133.176.4] has quit [Read error: Connection reset by peer]
+13:33 < gabriel_schulhof> Hyunsook: OK.
+13:34 -!- Minkyeong [~Minkyeong@121.133.176.4] has joined #web-ui-fw
+13:34 < Hyunsook> After Minkyeong set up her PC by CentOS, her network is unstabl.
+13:35 < Hyunsook> unstable*
+13:35 < gabriel_schulhof> Don't worry, my network is unstable too :/
+13:35 < Minkyeong> All: I'm sorry my computer has attacked from Cent!
+13:36 < Changsuk> gabriel_schulhof: Thanks for accepting my suggestion and I hope that all members in web-ui-fw will have a chance that their widgets are advertized on the jQM site.
+13:36 < gabriel_schulhof> I'm having a bit of a difficult time figuring out where I should put our names. In jQuery Mobile, our names do not appear in the demos, but we have a file "AUTHORS.txt".
+13:37 < gabriel_schulhof> I suppose in web-ui-fw we could make a demo page with our names.
+13:38 < Changsuk> hmm... sounds are not good... but I can get jQM members' thought. :)
+13:38 < Changsuk> gabriel_schulhof: Can I suggest to you?
+13:38 < gabriel_schulhof> Changsuk: I don't understand. What is not good?
+13:38 < gabriel_schulhof> Changsuk: Yes, please! I need help with this :)
+13:39 < Changsuk> gabriel_schulhof: never mind~ just my thoght. :)
+13:39 < Changsuk> gabriel_schulhof: haha~ Thanks.
+13:39 < gabriel_schulhof> If anybody has any suggestions, I'll gladly accept them :)
+13:40 < gabriel_schulhof> While I think we should work as much as possible the same way as jQM, we /can/ do some things differently. No problem!
+13:41 < Changsuk> gabriel_schulhof: i think that we can introduce our widgets one by one on the advertizement page. so if you or one of memers in our team wants to advertize, could you support him/her?
+13:43 < Changsuk> gabriel_schulhof: I think that actually Hyunsook's members havn't known about advertizement really much. and they want to open their widgets on the page.
+13:44 < gabriel_schulhof> Changsuk: OK. Do you mean that, instead of advertising a single project ("Web UI Framework") we should advertise individual widgets?
+13:44 < gabriel_schulhof> I'm happy to support anyone who wishes to advertise.
+13:44 < Changsuk> gabriel_schulhof: ah... no.
+13:44 < gabriel_schulhof> I was thinking a good place would be to add a link here: http://jquerymobile.com/resources/#Apps
+13:45 < gabriel_schulhof> Like: "Web UI Framework - a set of additional widgets for jQuery Mobile"
+13:45 < Changsuk> gabriel_schulhof: we are one team and I just want that Hyunsook's members just have a chance to advertize their widgets with your support in "Web UI FW" project.
+13:45 < gabriel_schulhof> OK. I understand.
+13:45 < Changsuk> gabriel_schulhof: Yes~ Right. :)
+13:45 < gabriel_schulhof> Absolutely.
+13:46 < gabriel_schulhof> I don't want to pick some widgets and throw away others. I want to advertise all widgets but I don't want to wait until we've updated all widgets.
+13:46 < Changsuk> gabriel_schulhof: Thank you~~ :)
+13:47 < gabriel_schulhof> That's why I'd like to start with a single widget and then move on to another, and another, etc.
+13:48 < gabriel_schulhof> As for the demos, I've filed an issue for updating the intro page: https://github.com/web-ui-fw/web-ui-fw/issues/58
+13:48 < gabriel_schulhof> So, before we publish anything, I want that issue fixed.
+13:49 < Changsuk> gabriel_schulhof: Ok, then when you start to choose another widget, pls let us know and give Hyunsook's team a chance to advertize the widget on the JQM.
+13:49 < gabriel_schulhof> OK.
+13:49 < Changsuk> gabriel_schulhof: Thanks~! You're a great guy.
+13:49 < Hyunsook> gabriel_schulhof: Thanks~
+13:50 < gabriel_schulhof> I'll fix up the demos intro page, I'll make a release containing only TTA, and I'll advertise that on jquerymobile.com/Resources/#Apps
+13:51 < Changsuk> gabriel_schulhof: OK~
+13:51 < Hyunsook> gabriel_schulhof: Ok
+13:51 < Changsuk> Minkyeong: ?
+13:51 < gabriel_schulhof> Actually, I had an idea: I can add a link to the demos front page: https://github.com/web-ui-fw/web-ui-fw/graphs/contributors
+13:52 < gabriel_schulhof> That should show all our names. What do you think?
+13:52 < Changsuk> Ok... but i just wondering about Loading time....
+13:54 < gabriel_schulhof> <div data-role="header"><h2>Demos - Web UI Framework</h2><a href="https://github.com/web-ui-fw/web-ui-fw/graphs/contributors" class="ui-btn ui-corner-all ui-shadow ui-btn-right">Contributors</a></div>
+13:55 < Changsuk> gabriel_schulhof: as you know, it takes some time to show that page so if you can, could you make a simple page or write Original makers' name on the demo page?
+13:55 < gabriel_schulhof> Oh, I see.
+13:55 < gabriel_schulhof> OK.
+13:55 < Changsuk> :)
+13:55 < gabriel_schulhof> However, if we do that, we have to make sure we keep it up-to-date.
+13:55 < Changsuk> gabriel_schulhof: Sure~
+13:56 < Changsuk> gabriel_schulhof, Hyunsook, Minkyeong, Kangsik: I think that all members are keeping that. :)
+13:56 < gabriel_schulhof> I guess we could simply $.ajax( "../AUTHORS.txt" ) and then style it.
+13:56 < gabriel_schulhof> OK.
+13:57 < Changsuk> gabriel_schulhof: yes, that's a good idea. :)
+13:57 < gabriel_schulhof> In that case, one last topic - a funny one: What shall be the version number?
+13:57 < gabriel_schulhof> 0.3.0? 1.0.0?
+13:57 < gabriel_schulhof> 0.2.1?
+13:57 < gabriel_schulhof> :)
+13:57 < gabriel_schulhof> 0.0.1?
+13:58 < gabriel_schulhof> "Web UI Framework 2: The Revenge" :)
+13:58 < gabriel_schulhof> "Web UI Framework 2: The jQuery Mobile Strikes Back"
+13:58 < Changsuk> Hyunsook, Minkyeong: pls suggest or select it. :)
+13:59 < Changsuk> Hyunsook, Minkyeong: gabriel gave us many things... haha~
+13:59 < Hyunsook> gabriel_schulhof, Changsuk: ahmmm.....
+13:59 < Minkyeong> i like "The Revenge".. (lol)
+14:00 < gabriel_schulhof> :)
+14:00 < Hyunsook> gabriel_schulhof: +1
+14:01 < Changsuk> gabriel_schulhof, Hyunsook, Minkyeong: I like "Web UI Framework 2: The jQuery Mobile Strikes Back". :)
+14:01 < Hyunsook> gabriel_schulhof: and.. now web-ui-fw's version is 0.2.0, right?
+14:01 < gabriel_schulhof> Yes, the current version is 0.2.0.
+14:02 < Hyunsook> Changsuk, gabriel_schulhof: Actually, I like two sentences. ^^;
+14:02 < gabriel_schulhof> I'm inclined to go with 0.3.0. What do you think?
+14:05 < gabriel_schulhof> We can add the phantasy name to build/wrap.sstart
+14:05 < gabriel_schulhof> Then the distributed version will have both.
+14:06 < Hyunsook> gabriel_schulhof: hmm... people can/will think that 0.x version number seems poor, I think.
+14:07 < gabriel_schulhof> Hyunsook: OK. We can go with 1.0.0 then.
+14:08 < Hyunsook> Minkyeong, Kangsik, Changsuk: What do you think?
+14:08 < Changsuk> Hyunsook: OK~
+14:09 < Kangsik> Hyunsook: I agree.
+14:09 < Minkyeong> 1.0.0! feels brand-new! I like it :D
+14:09 < gabriel_schulhof> Excellent! Then 1.0.0 it is.
+14:09 < Hyunsook> Good~! ^^
+14:10 < gabriel_schulhof> Alright. This is really good progress! Let's call it a meeting. Have a good week, all, and an even better weekend!
+14:10 < Hyunsook> Have a good week and weekend~!
+14:10 < Minkyeong> yep, see y'all next week :)
+14:11 < Changsuk> All: Thanks and talk to you next week~~~
+14:11 < Changsuk> gabriel_schulhof: Thank you again. :)
+14:12 < gabriel_schulhof> Changsuk: My pleasure!
+14:13 < Kangsik> Have a good week. :-)
+--- Log closed Tue Jul 29 14:14:07 2014

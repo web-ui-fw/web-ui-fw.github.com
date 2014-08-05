@@ -1,0 +1,112 @@
+--- Log opened Tue Aug 05 12:56:54 2014
+12:57 < gabriel_schulhof> Hey!
+12:57 < Minkyeong> hi
+12:57 < Changsuk> gabriel_schulhof: I got your email but I haven't replied to you. I'm sorry.
+12:58 < Hyunsook> Hi~
+12:58 < Kangsik> Hi :-)
+12:58 < gabriel_schulhof> Changsuk: That's OK. I'm still preparing TTA for release.
+12:59 < gabriel_schulhof> I'm writing integration tests for the various extensions.
+12:59 < gabriel_schulhof> This really helps: http://babulina.go-nix.ca:8080/nix/web-ui-fw/_tests/reports/lcov/lcov-report/js/widgets/tokentextarea2.grouping.js.html
+12:59 < Changsuk> gabriel_schulhof: I saw that authors' introducing page.... and It looks mixed up. :)
+12:59 < gabriel_schulhof> Changsuk: Intentionally :)
+13:00 < gabriel_schulhof> Changsuk: You can click on the names and they return to the list.
+13:00 < Hyunsook> gabriel_schulhof: I also saw the link you sent to us.
+13:00 < gabriel_schulhof> Awesome!
+13:01 < Hyunsook> gabriel_schulhof: hmmm... I think it's difficult to decipher each of authors.
+13:01 < Hyunsook> ^^;
+13:01 < gabriel_schulhof> Hmmm ... maybe I should undo the transformation after a while.
+13:02 < gabriel_schulhof> Like ... mix 'em up, and then unmix them after, like, 2 seconds.
+13:02 < Changsuk> haha... gabriel_schulhof seems take Hyunsook's word not mine.
+13:02 < gabriel_schulhof> Changsuk: Oh, I thought you were joking.
+13:03 < Changsuk> gabriel_schulhof: re...a..l...l....y.... ?
+13:03 < Changsuk> gabriel_schulhof: :)
+13:03 < gabriel_schulhof> Changsuk: If you both seriously think that the names are hard to read when they're jumbled like that, then I'll unjumble them after a while.
+13:04 < Changsuk> gabriel_schulhof: Ok~ thank you~
+13:04 < gabriel_schulhof> Changsuk: Yeah, I honestly didn't think you were serious that they're hard to read. I thought you simply wanted to indicate that you had seen the front page. However, it sounds like both you and Hyunsook are serious about the authors list being illegible when it's jumbled.
+13:04 < Hyunsook> gabriel_schulhof: Thanks~!
+13:04 < gabriel_schulhof> So, I'll undo it after a while.
+13:04 < Changsuk> Hyunsook, Minkyeong: I think Gabriel wants for you to look over his codes.
+13:05 < gabriel_schulhof> Changsuk: Yeah, that's not a bad idea.
+13:05 < gabriel_schulhof> I don't think I'll change the code much anymore.
+13:05 < gabriel_schulhof> I'll just keep adding tests.
+13:05 < Changsuk> gabriel_schulhof: haha, thanks for your kind mind. :)
+13:06 < gabriel_schulhof> Hyunsook, Minkyeong: It'd be awesome if you could look over the code.
+13:06 < gabriel_schulhof> There's a pile of commits, but the changes aren't that big.
+13:10 < gabriel_schulhof> I have no other topics for today. I'll try to finish 1.0.0 this week. I'm on vacation next week. Lemme make a quick test release.
+13:10 < Hyunsook> gabriel_schulhof: Sorry but, I need to look over your code. Actually, I don't remember the TTA codes well.
+13:11 < Hyunsook> gabriel_schulhof: ah... vacation.
+13:12 < gabriel_schulhof> Hyunsook: NP. Take your time. It'll take me a while.
+13:13 < gabriel_schulhof> http://web-ui-fw.github.io/jqm/test-releases/tokentextarea2/demos/
+13:13 < gabriel_schulhof> I've updated it to the latest.
+13:14 < Changsuk> gabriel_schulhof: Ok, then If Hyunsook and Minkyeong get any issues on your codes, they will send you it. But if they accept your codes, it can be better for Hyunsook to send you a message.
+13:15 < Changsuk> in this Friday.
+13:15 < Hyunsook> gabriel_schulhof: Ah! I have a question. The Demo page is included TTA demo. will you open the TTA?
+13:16 < gabriel_schulhof> How do you mean "open
+13:16 < gabriel_schulhof> "?
+13:17 < gabriel_schulhof> Changsuk: Actually, let's use the jQM convention.
+13:17 < gabriel_schulhof> Hyunsook, Minkyeong: When you look over the code from https://github.com/web-ui-fw/web-ui-fw/pull/57/ could you please make comments on it right inside the PR?
+13:18 < gabriel_schulhof> Hyunsook, Minkyeong: Also, if you accept the code as it is, could you please comment ":+1:" on the PR?
+13:18 < gabriel_schulhof> That's how we do it in jQM.
+13:18 < gabriel_schulhof> It's a good system, I think.
+13:19 < Hyunsook> gabriel_schulhof: hmmm... the "open" means which advertises the demo page.
+13:19 < Changsuk> gabriel_schulhof: Sounds nice~! OK~
+13:19 < gabriel_schulhof> Hyunsook: Once 1.0.0 is ready, I will open a PR on jquerymobile.com to add a link to http://web-ui-fw.github.com/jqm/latests/demos/
+13:19 < Changsuk> Hyunsook, Minkyeong: Are you agree with gabriel's suggestion?
+13:19 < Hyunsook> gabriel_schulhof: I'm sorry I cannot explain well....
+13:20 < gabriel_schulhof> Hyunsook: I mean http://web-ui-fw.github.com/jqm/latest/demos/
+13:20 < gabriel_schulhof> Hyunsook: Currently, "latest" is a symlink to 0.2.0.
+13:20 < gabriel_schulhof> I will update the symlink to point to 1.0.0
+13:21 < gabriel_schulhof> Our repository is already public, so all of web-ui-fw is "open". However, it is not very well known. I'm hoping that adding a link to jquerymobile.com will make it better known.
+13:21 < Hyunsook> I think TTA is abnormal in the demo page: http://web-ui-fw.github.io/jqm/test-releases/tokentextarea2/demos/
+13:22 < gabriel_schulhof> Hyunsook: What do you mean "abnormal"?
+13:23 < Hyunsook> gabriel_schulhof: You can see it if you add one item in TTA demo. :http://web-ui-fw.github.io/jqm/test-releases/tokentextarea2/demos/widgets/tokentextarea/tokentextarea.html
+13:23 < gabriel_schulhof> Hyunsook: Yes, that's the old TTA. I will replace that with the new TTA before I release 1.0.0.
+13:24 < gabriel_schulhof> IINM, that's what we've agreed upon last week - right?
+13:24 < gabriel_schulhof> Hyunsook: I'm keeping the old code around until the last minute so we can compare the old with the new.
+13:25 < gabriel_schulhof> Hyunsook: The new code is demoed at http://web-ui-fw.github.io/jqm/test-releases/tokentextarea2/demos/widgets/tokentextarea2/tokentextarea2.html
+13:25 < Hyunsook> gabriel_schulhof: Ah~ Ok, I see. It isn't replace it I recheck.
+13:25 < Hyunsook> gabriel_schulhof: OK
+13:25 < gabriel_schulhof> Hyunsook: Right. You wanna look at http://web-ui-fw.github.io/jqm/test-releases/tokentextarea2/demos/widgets/tokentextarea2/tokentextarea2.html
+13:26 < gabriel_schulhof> Hmmm ... maybe I should add a demo for focusIn()/focusOut()
+13:26 < gabriel_schulhof> Yeah, I think I'll add a demo.
+13:29 < Hyunsook> gabriel_schulhof: I think it's better to add a demo.
+13:29 < Changsuk> gabriel_schulhof: I think that Hyunsook is thinking about whether she accept your new TTA2 or will review your codes in detail.
+13:30 < gabriel_schulhof> Changsuk, Hyunsook: I would love to have the new TTA2 code thoroughly reviewed before we release 1.0.0.
+13:31 < Changsuk> Hyunsook, gabriel_schulhof: then, We should not open our widgets right now, Can we take some time for Hyunsook in next week?
+13:31 < Changsuk> gabriel_schulhof: yes, right. I fully understand your mind.
+13:32 < Changsuk> gabriel_schulhof: but Hyunsook seems not decide her mind now....
+13:35 < gabriel_schulhof> Hyunsook: Take your time.
+13:35 < gabriel_schulhof> Hyunsook: When you have comments, please comment on the lines in the diff.
+13:35 < Hyunsook> gabriel_schulhof, Changsuk: I and Minkyeong want to reply to email after I think about it during your vacation. Can we do?
+13:35 < gabriel_schulhof> Hyunsook: When you're ready to accept, please comment ":+1:" on the PR.
+13:35 < gabriel_schulhof> Hyunsook: OK. That's fine too.
+13:36 < gabriel_schulhof> Hyunsook: Then I won't release before vacation.
+13:36 < Hyunsook> gabriel_schulhof: ah~ OK
+13:36 < gabriel_schulhof> Hyunsook: If you have comments specific to the code, it's better to comment on the lines in the PR.
+13:37 < Hyunsook> gabriel_schulhof: OK
+13:38 < Hyunsook> gabriel_schulhof: When will you come back?
+13:38 < gabriel_schulhof> August 18th.
+13:39 < gabriel_schulhof> So, I'm basically out next week.
+13:39 < Hyunsook> ah~ I see.
+13:40 < Hyunsook> gabriel_schulhof: Just relax and have a great vacation. ^^
+13:41 < Kangsik> gabriel_schulhof: Have a good vacation. :-)
+13:43 < gabriel_schulhof> Thanks, all!
+13:43 < Changsuk> gabriel_schulhof, Hyunsook: I think we agree with each other. and I understand gabriel ans Hyunsook's mind.
+13:43 < Hyunsook> gabriel_schulhof: ... and I'm sorry you can release it this week because of me
+13:44 < Changsuk> gabriel_schulhof: When you'll come back, Hyunsook may give you a good word. ;)
+13:44 < gabriel_schulhof> All: I added a grouping demo to http://web-ui-fw.github.io/jqm/test-releases/tokentextarea2/demos/widgets/tokentextarea2/tokentextarea2.html
+13:44 < gabriel_schulhof> Hyunsook: Don't be sorry. It's not because of you.
+13:44 < Changsuk> gabriel_schulhof: Have such a really nice vacation~~!
+13:44 < gabriel_schulhof> Changsuk: Thanks!
+13:44 < gabriel_schulhof> Thanks, all!
+13:45 < gabriel_schulhof> I'll keep working on it this week though, so keep checking the demo and the PR!
+13:45 < Hyunsook> Have a good time~!
+13:45 < gabriel_schulhof> Have a good week/weekend, all! Thanks for your help and support!
+13:45 < Changsuk> gabriel_schulhof: you look like a hard worker and take your health and time~ :)
+13:46 < gabriel_schulhof> Changsuk: Thanks! Will do!
+13:46 < gabriel_schulhof> Aye, aye, sir!
+13:46 < gabriel_schulhof>  :)
+13:47 < Changsuk> gabriel_schulhof: ah... I'm sorry that I mistyped some words... I just suggested for you. :)
+13:47 < Changsuk> gabriel_schulhof: I'm a co-worker. :)
+13:47 < gabriel_schulhof> :)
+--- Log closed Tue Aug 05 14:10:01 2014
